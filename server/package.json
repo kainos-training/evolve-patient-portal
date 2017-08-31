@@ -1,0 +1,13 @@
+{
+  "name": "express-seed",
+  "version": "0.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.15.4",
+    "mysql": "^2.14.1"
+  }
+}
