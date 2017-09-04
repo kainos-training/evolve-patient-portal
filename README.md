@@ -17,7 +17,8 @@ Please create a server/config.json file as follows:
 {
   "user" : "user",
   "password" : "password",
-  "host" :"host",
+  "host" : "localhost",
+  "port" : 8002,
   "database" :"database"
 }
 ```
