@@ -21,15 +21,15 @@ app.set('port', config.port || 8002);
 app.use(cors());
 app.use(bodyParser.json());
 app.use(morgan('dev')); // HTTP request logger middleware.
-app.use(errorHandler());// Error Handler middleware for more verbose errors
+app.use(errorHandler()); // Error Handler middleware for more verbose errors
 
 /**
  * Routes configuration.
  */
 app.get('/testQuery', function(req, res) {
-	db.testQuery( function(rows) {
-		res.send(rows);
-	});
+    db.testQuery(function(rows) {
+        res.send(rows);
+    });
 })
 
 app.listen(8002, function() {
