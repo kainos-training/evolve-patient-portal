@@ -1,13 +1,15 @@
 const express = require('express');
 const publicAuthRoutes = express.Router();
-const authController = require('../controllers/authController');
+const authController = ('./controllers/authController');
 
+//login to account
 publicAuthRoutes.post('/login', function(req, res) {
     return authController.login(req, res);
 });
 
-publicAuthRoutes.post('/signup', function(req, res) {
-    // placeholder for siginup controller
+publicAuthRoutes.post('/register', function(req, res) {
+
 });
+
 
 module.exports = publicAuthRoutes;
