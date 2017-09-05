@@ -1,3 +1,7 @@
+const db = require('../db');
+const bodyParser = require('body-parser');
+
+
 function validateLoginForm(payload) {
     const errors = {};
     let isFormValid = true;
@@ -37,22 +41,25 @@ exports.login = function(req, res) {
         });
     }
 
-    let email = req.email.trim();
-    let password = req.password.trim()
+    let username = req.body.username.trim();
+    let password = req.body.password.trim()
 };
 
 
-function validateSignupForm(payload) {
+
+
+
+function validateSignup(payload) {
     const errors = {};
     let isFormValid = true;
     let message = '';
 
-    if (!payload || typeof payload.username !== 'string') {
+    if (!payload) {
         isFormValid = false;
-        errors.email = 'Please provide a valid email address.';
+        errors.username = 'Please provide a valid email address.';
     }
 
-    if (!payload || typeof payload.password !== 'string') {
+    if (!payload) {
         isFormValid = false;
         errors.password = 'Please provide valid password.';
     }
@@ -62,3 +69,43 @@ function validateSignupForm(payload) {
         errors
     };
 }
+
+exports.createUserAccount = function(req, res) {
+
+    const validationResult = validateSignup(req.body);
+
+    if (!validationResult.success) {
+        return res.status(400).json({
+            success: false,
+            message: validationResult.message,
+            errors: validationResult.errors
+        });
+    }
+    console.log(req.body);
+    console.log(req.body.username.trim());
+    let username = req.body.username.trim();
+    let password = req.body.password.trim();
+    let dateOfBirth = req.body.dateOfBirth.trim();
+    let gender = req.body.gender.trim();
+    let MRIN = req.body.MRIN.trim();
+    let firstName = req.body.firstName.trim();
+    let lastName = req.body.lastName.trim();
+    let phoneNumber = req.body.phoneNumber.trim();
+    let title = req.body.title.trim();
+    let address = req.body.address.trim();
+    let email = req.body.email.trim();
+    let deceased = req.body.deceased.trim();
+    let gpID = req.body.gpID.trim()
+
+    db.query(
+        "INSERT INTO User(username, `password`, dateOfBirth, gender, MRIN, firstName, lastName, phoneNumber, title, address, email, deceased, gpID)" +
+        "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);", [username, password, dateOfBirth, gender, MRIN, firstName, lastName, phoneNumber, title, address, email, deceased, gpID],
+        function(err, rows) {
+            if (err) {
+                console.log(err);
+            } else {
+                console.log(err, rows);
+            }
+
+        });
+};

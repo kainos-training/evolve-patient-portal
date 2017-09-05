@@ -7,7 +7,7 @@ publicAuthRoutes.post('/login', function(req, res) {
 });
 
 publicAuthRoutes.post('/signup', function(req, res) {
-    // placeholder for siginup controller
+    return authController.createUserAccount(req, res);
 });
 
 module.exports = publicAuthRoutes;
