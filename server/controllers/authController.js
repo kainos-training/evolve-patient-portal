@@ -7,7 +7,11 @@ function validateLoginForm(payload) {
 
     if (!payload || typeof payload.username !== 'string') {
         isFormValid = false;
+<<<<<<< HEAD
         errors.username = 'Please provide a valid username.';
+=======
+        errors.username = 'Please provide a valid email address.';
+>>>>>>> 19f210726d7470bee2fa2512ef3b29df654583e2
     }
 
     if (!payload || typeof payload.password !== 'string') {
@@ -66,3 +70,25 @@ exports.login = function(req, res) {
         }
     )
 };
+
+
+function validateSignupForm(payload) {
+    const errors = {};
+    let isFormValid = true;
+    let message = '';
+
+    if (!payload || typeof payload.username !== 'string') {
+        isFormValid = false;
+        errors.email = 'Please provide a valid email address.';
+    }
+
+    if (!payload || typeof payload.password !== 'string') {
+        isFormValid = false;
+        errors.password = 'Please provide valid password.';
+    }
+    return {
+        success: isFormValid,
+        message,
+        errors
+    };
+}
