@@ -41,6 +41,11 @@ input[type=submit] {
     padding: 0;
 }
 
-.forgot-password{
-    padding: 20px 0;
+.callout-message a:link{
+    text-decoration: underline;
+}
+
+.bs-callout-danger, .input-group, .loginPage form h5 {
+    color: #666666;
+    font-family: Helvetica, sans-serif;
 }
