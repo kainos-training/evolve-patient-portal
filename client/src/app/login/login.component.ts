@@ -11,9 +11,11 @@ export class LoginComponent implements OnInit {
 
   user: User;
   invalid: boolean;
+  loggedIn: boolean;
   constructor(private data: DataService) { 
       this.data = data;
       this.invalid = false;
+      this.loggedIn = false;
   }
 
   ngOnInit() {
@@ -24,6 +26,7 @@ export class LoginComponent implements OnInit {
       this.invalid = !this.data.login(this.user);
       if(!this.invalid){
           //redirect to dashboard
+          this.loggedIn = true;
       }
   }
 
