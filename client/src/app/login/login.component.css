@@ -1,0 +1,46 @@
+.loginPage form {
+    background-color: white;
+    padding: 20px;
+}
+
+.loginPage form h5 {
+    margin: 0;
+}
+
+.input-group {
+    margin-top: 20px;
+}
+
+input[type=submit] {
+    margin-top: 20px;
+    background-color: #71CE2E;
+    text-transform: uppercase;
+}
+
+.bs-callout {
+    margin: 20px 0;
+    padding: 15px 30px 15px 15px;
+    border-left: 5px solid #eee;
+}
+
+.bs-callout p {
+    margin-bottom: 0;
+}
+
+.bs-callout span {
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+.bs-callout-danger {
+    background-color: white;
+    border-color: #EC0211;
+}
+
+.callout-message {
+    padding: 0;
+}
+
+.forgot-password{
+    padding: 20px 0;
+}
