@@ -6,9 +6,14 @@ const errorHandler = require('errorhandler');
 const bodyParser = require('body-parser');
 const cors = require('cors');
 const morgan = require('morgan');
-const db = require('./db.js');
-const config = require('./config.json');
+const mysql = require('mysql');
+const config = require('./config');
 // const cookieParser = require('cookie-parser');Might need
+
+/**
+ * Connect to mySQL database server
+ */
+const db = require('./db');
 
 /**
  * Create Express server.
