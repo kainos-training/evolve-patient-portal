@@ -31,8 +31,10 @@ app.use(errorHandler()); // Error Handler middleware for more verbose errors
 
 const publicAuthRoutes = require('./routes/publicAuthRoutes');
 const publicUserRoutes = require('./routes/publicUserRoutes');
+const publicAppointmentRoute = require('./routes/publicAppointmentRoute');
 app.use('/auth', publicAuthRoutes);
-app.use('/users', publicUserRoutes);
+app.use('/user', publicUserRoutes);
+app.use('/appointment', publicAppointmentRoute);
 
 /**
  * Routes configuration.
