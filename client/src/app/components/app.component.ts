@@ -9,9 +9,9 @@ import * as $ from 'jquery';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'Evolve patient portal';
+  title = 'Evolve Patient Portal';
 
-  constructor(){
+  constructor(private data: DataService){
       $(function() {
           console.log('jquery is working');
       });

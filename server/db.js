@@ -1,24 +1,16 @@
-const mysql = require('mysql');
-const config = require('./config.json');
+var mysql = require('mysql');
+const config = require('./config');
 
-const db = mysql.createConnection({
+const database = mysql.createConnection({
     host: config.host,
     user: config.user,
     password: config.password,
     database: config.database
 });
 
-db.connect(function(err) {
+database.connect(function(err) {
     if (err) throw err;
     console.log("Connected to MySQL");
 });
 
-exports.testQuery = function(callback) {
-    db.query(
-        "select * from city limit 10;",
-        function(err, rows) {
-            if (err) throw err;
-            callback(rows);
-        }
-    );
-};
+module.exports = database;

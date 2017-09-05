@@ -1,3 +1,34 @@
-<p>
-  login works!
-</p>
+<header class="jumbotron">
+    <div>
+        <img [src]="evolveLogoPath" alt="Evolve logo" />
+        <h1>Patient Portal</h1>
+    </div>
+    <div class="separator"></div>
+</header>
+
+<main class="loginPage">
+
+    <div *ngIf="this.invalid" class="callout-message col-xs-12">
+        <div class="bs-callout bs-callout-danger">
+            <p><span>Error:</span> Invalid credentials. <a href="#">Lost your password?</a></p>
+        </div>
+    </div>
+
+    <form method="POST" class="col-xs-12">
+        <h5 class="text-center">Sign in to your account</h5>
+
+        <label class="sr-only" for="loginUsername">Username</label>
+        <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+            <div class="input-group-addon"><span class="glyphicon glyphicon-user"></span></div>
+            <input class="form-control" [(ngModel)]="user.username" id="loginUsername" name="loginUsername" placeholder="Username" required />
+        </div>
+
+        <label class="sr-only" for="loginPassword">Password</label>
+        <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+            <div class="input-group-addon"><span class="glyphicon glyphicon-asterisk"></span></div>
+            <input type="password" [(ngModel)]="user.password" class="form-control" id="loginPassword" name="loginPassword" placeholder="Password" required />
+        </div>
+
+        <input type="submit" (click)="login()" class="btn btn-success btn-sm btn-block" value="Sign in" />
+    </form>
+</main>

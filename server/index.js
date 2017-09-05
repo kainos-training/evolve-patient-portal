@@ -6,9 +6,12 @@ const errorHandler = require('errorhandler');
 const bodyParser = require('body-parser');
 const cors = require('cors');
 const morgan = require('morgan');
-const db = require('./db.js');
-const config = require('./config.json');
-// const cookieParser = require('cookie-parser');Might need
+const config = require('./config');
+
+/**
+ * Connect to mySQL database server
+ */
+const db = require('./db');
 
 /**
  * Create Express server.
@@ -21,19 +24,16 @@ const app = express();
 app.set('port', config.port || 8002);
 app.use(cors());
 app.use(bodyParser.json());
-// app.use(cookieParser());
 app.use(morgan('dev')); // HTTP request logger middleware.
 app.use(errorHandler()); // Error Handler middleware for more verbose errors
 
-
 /**
- * Routes configuration.
+ * Express configuration.
  */
-// app.get('/testQuery', function(req, res) {
-//     db.testQuery(function(rows) {
-//         res.send(rows);
-//     });
-// })
+const publicAuthRoutes = require('./routes/publicAuthRoutes');
+const publicAppointmentRoute = require('./routes/publicAppointmentRoute');
+app.use('/auth', publicAuthRoutes);
+app.use('/appointment', publicAppointmentRoute);
 
 app.listen(app.get('port'), function() {
     console.log('Express server listening on port' + " " + app.get('port'));
