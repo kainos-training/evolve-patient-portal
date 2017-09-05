@@ -1,4 +1,6 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { async, ComponentFixture, TestBed, inject } from '@angular/core/testing';
+
+import {DataService} from "../services/data.service";
 
 import { LoginComponent } from './login.component';
 
@@ -8,7 +10,10 @@ describe('LoginComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ LoginComponent ]
+      declarations: [ LoginComponent ],
+      providers: [
+        {provide: DataService }
+    ]
     })
     .compileComponents();
   }));
@@ -22,4 +27,10 @@ describe('LoginComponent', () => {
   it('should be created', () => {
     expect(component).toBeTruthy();
   });
+
+  it('should log in user with correct credentials', inject([DataService], async(() => {
+    let service = TestBed.get(DataService);
+    //fixture.login();
+  })));
+
 });
