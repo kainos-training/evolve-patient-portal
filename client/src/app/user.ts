@@ -2,6 +2,7 @@ export class User {
     userID: number;
     username: string;
     password: string;
+    token: string;
     salt: string;
     dateOfBirth: Date;
     gender: string;

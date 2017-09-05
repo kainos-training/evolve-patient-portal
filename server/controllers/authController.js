@@ -1,6 +1,10 @@
 const db = require('../db');
+<<<<<<< HEAD
 const bodyParser = require('body-parser');
 
+=======
+var utilsJWT = require('../utils/jwt');
+>>>>>>> c3c4048a720fb94383ff24df92c7ede6f7898946
 
 function validateLoginForm(payload) {
     const errors = {};
@@ -9,7 +13,7 @@ function validateLoginForm(payload) {
 
     if (!payload || typeof payload.username !== 'string') {
         isFormValid = false;
-        errors.username = 'Please provide a valid email address.';
+        errors.username = 'Please provide a valid username.';
     }
 
     if (!payload || typeof payload.password !== 'string') {
@@ -42,7 +46,43 @@ exports.login = function(req, res) {
     }
 
     let username = req.body.username.trim();
+<<<<<<< HEAD
     let password = req.body.password.trim()
+=======
+    let candidatePassword = req.body.password.trim();
+
+    db.query(
+        "SELECT password, firstName, lastName FROM User WHERE username=?", [username],
+        function(err, rows) {
+            if (err) {
+                return res.status(400).json({
+                    success: false,
+                    message: "Incorrect email or password"
+                });
+            } else {
+                let user = {
+                    password: rows[0].password,
+                    firstName: rows[0].firstName,
+                    lastName: rows[0].lastName
+                }
+
+                if (candidatePassword == user.password) {
+                    let token = utilsJWT.generateToken(user); // Generate JWT Token
+                    return res.status(200).json({
+                        success: true,
+                        message: 'You have successfully logged in!',
+                        token: token
+                    });
+                } else {
+                    return res.status(400).json({
+                        success: false,
+                        message: "Incorrect email or password"
+                    });
+                }
+            }
+        }
+    )
+>>>>>>> c3c4048a720fb94383ff24df92c7ede6f7898946
 };
 
 
