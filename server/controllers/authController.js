@@ -7,11 +7,7 @@ function validateLoginForm(payload) {
 
     if (!payload || typeof payload.username !== 'string') {
         isFormValid = false;
-<<<<<<< HEAD
         errors.username = 'Please provide a valid username.';
-=======
-        errors.username = 'Please provide a valid email address.';
->>>>>>> 19f210726d7470bee2fa2512ef3b29df654583e2
     }
 
     if (!payload || typeof payload.password !== 'string') {
