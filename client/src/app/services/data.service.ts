@@ -22,7 +22,8 @@ export class DataService {
             headers: new HttpHeaders().set('Content-Type', 'application/x-www-form-urlencoded'),
           };
 
-        let res = this.http.post('/api/login', body, options).subscribe();
+        let res = this.http.post('/api/auth/login', body, options);
+
         console.log(res);
 
         console.log("log in failed");
