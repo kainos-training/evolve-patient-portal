@@ -8,6 +8,7 @@ const cors = require('cors');
 const morgan = require('morgan');
 const db = require('./db.js');
 const config = require('./config.json');
+// const cookieParser = require('cookie-parser');Might need
 
 /**
  * Create Express server.
@@ -20,18 +21,23 @@ const app = express();
 app.set('port', config.port || 8002);
 app.use(cors());
 app.use(bodyParser.json());
+// app.use(cookieParser());
 app.use(morgan('dev')); // HTTP request logger middleware.
 app.use(errorHandler()); // Error Handler middleware for more verbose errors
+
+const publicUserRoutes = require('./routes/publicUserRoutes');
+
+app.use('/publicUserRoutes',publicUserRoutes);
 
 /**
  * Routes configuration.
  */
-app.get('/testQuery', function(req, res) {
-    db.testQuery(function(rows) {
-        res.send(rows);
-    });
-})
+// app.get('/testQuery', function(req, res) {
+//     db.testQuery(function(rows) {
+//         res.send(rows);
+//     });
+// })
 
-app.listen(8002, function() {
-    console.log('Express server listening on port 8002');
+app.listen(app.get('port'), function() {
+    console.log('Express server listening on port' +  " " + app.get('port'));
 });

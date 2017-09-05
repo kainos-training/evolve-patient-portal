@@ -9,15 +9,15 @@ const db = mysql.createConnection({
 });
 
 db.connect(function(err) {
-    if(err) throw err;
+    if (err) throw err;
     console.log("Connected to MySQL");
 });
 
-exports.testQuery = function (callback){
+exports.testQuery = function(callback) {
     db.query(
         "select * from city limit 10;",
         function(err, rows) {
-            if(err) throw err;
+            if (err) throw err;
             callback(rows);
         }
     );
