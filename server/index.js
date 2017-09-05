@@ -38,9 +38,9 @@ app.use(errorHandler()); // Error Handler middleware for more verbose errors
  * Express configuration.
  */
 const publicAuthRoutes = require('./routes/publicAuthRoutes');
-const publicAppointmentRoute = require('./routes/publicAppointmentRoute');
+const publicAppointmentRoutes = require('./routes/publicAppointmentRoutes');
 app.use('/auth', publicAuthRoutes);
-app.use('/appointment', publicAppointmentRoute);
+app.use('/appointment', publicAppointmentRoutes);
 
 app.listen(app.get('port'), function() {
     console.log('Express server listening on port' + " " + app.get('port'));
