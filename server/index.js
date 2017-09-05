@@ -23,7 +23,9 @@ const app = express();
  */
 app.set('port', config.port || 8002);
 app.use(cors());
-app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({
+    extended: false
+})); // for parsing application/x-www-form-urlencoded
 app.use(morgan('dev')); // HTTP request logger middleware.
 app.use(errorHandler()); // Error Handler middleware for more verbose errors
 

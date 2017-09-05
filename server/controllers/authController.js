@@ -1,11 +1,13 @@
+const db = require('../db');
+
 function validateLoginForm(payload) {
     const errors = {};
     let isFormValid = true;
     let message = '';
 
-    if (!payload || typeof payload.email !== 'string' || !validator.isEmail(payload.email)) {
+    if (!payload || typeof payload.username !== 'string') {
         isFormValid = false;
-        errors.email = 'Please provide a valid email address.';
+        errors.username = 'Please provide a valid username.';
     }
 
     if (!payload || typeof payload.password !== 'string') {
@@ -37,6 +39,30 @@ exports.login = function(req, res) {
         });
     }
 
-    let email = req.email.trim();
-    let password = req.password.trim()
+    let username = req.body.username.trim();
+    let candidatePassword = req.body.password.trim();
+
+    db.query(
+        "SELECT password FROM User WHERE username=?", [username],
+        function(err, rows) {
+            if (err) {
+                return res.status(400).json({
+                    success: false,
+                    message: "Incorrect email or password"
+                });
+            } else {
+                let dbPassword = rows[0].password;
+                if (candidatePassword == dbPassword) {
+                    return res.status(200).json({
+                        message: 'You have successfully logged in!',
+                    });
+                } else {
+                    return res.status(400).json({
+                        success: false,
+                        message: "Incorrect email or password"
+                    });
+                }
+            }
+        }
+    )
 };
