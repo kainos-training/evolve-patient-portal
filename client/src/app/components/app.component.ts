@@ -11,7 +11,7 @@ import * as $ from 'jquery';
 export class AppComponent {
   title = 'Evolve patient portal';
 
-  constructor(private data: DataService){
+  constructor(){
       $(function() {
           console.log('jquery is working');
       });
