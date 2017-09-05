@@ -32,6 +32,6 @@ app.get('/testQuery', function(req, res) {
     });
 })
 
-app.listen(8002, function() {
-    console.log('Express server listening on port 8002');
+app.listen(app.get('port'), function() {
+    console.log('Express server listening on port' +  " " + app.get('port'));
 });
