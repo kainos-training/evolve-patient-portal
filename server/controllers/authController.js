@@ -8,9 +8,9 @@ function validateLoginForm(payload) {
         errors.email = 'Please provide a valid email address.';
     }
 
-    if (!payload || typeof payload.password !== 'string' || payload.password.trim().length < 8) {
+    if (!payload || typeof payload.password !== 'string') {
         isFormValid = false;
-        errors.password = 'Password must have at least 8 characters.';
+        errors.password = 'Password must be valid';
     }
 
     if (!isFormValid) {
@@ -31,11 +31,12 @@ exports.login = function(req, res) {
     // Check if request body passed server side validation
     if (!validationResult.success) {
         return res.status(400).json({
-            success: false,
+            success: validationResult.success,
             message: validationResult.message,
             errors: validationResult.errors
         });
-
-
     }
+
+    let email = req.email.trim();
+    let password = req.password.trim()
 };
