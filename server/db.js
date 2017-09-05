@@ -9,7 +9,6 @@ const database = mysql.createConnection({
 });
 
 database.connect(function(err) {
-    console.log("dont be twice");
     if (err) throw err;
     console.log("Connected to MySQL");
 });
