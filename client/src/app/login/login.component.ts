@@ -1,30 +1,33 @@
-import { Component, OnInit } from '@angular/core';
-import { User } from './../user'
-import {DataService} from "../services/data.service";
+import {Component, OnInit} from '@angular/core';
+import {User} from './../user';
+import {DataService} from '../services/data.service';
 
 @Component({
-  selector: 'evolve-login',
-  templateUrl: './login.component.html',
-  styleUrls: ['./login.component.css']
+    selector: 'evolve-login',
+    templateUrl: './login.component.html',
+    styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
 
-  user: User;
-  invalid: boolean;
-  constructor(private data: DataService) { 
-      this.data = data;
-      this.invalid = false;
-  }
+    public evolveLogoPath: String;
+    user: User;
+    invalid: boolean;
 
-  ngOnInit() {
-    this.user = new User;
-  }
+    constructor(private data: DataService) {
+        this.data = data;
+        this.invalid = false;
+        this.evolveLogoPath = 'assets/EvolveLogo.svg';
+    }
 
-  login(){
-      this.invalid = !this.data.login(this.user);
-      if(!this.invalid){
-          //redirect to dashboard
-      }
-  }
+    ngOnInit() {
+        this.user = new User;
+    }
+
+    login() {
+        this.invalid = !this.data.login(this.user);
+        if (!this.invalid) {
+            //redirect to dashboard
+        }
+    }
 
 }
