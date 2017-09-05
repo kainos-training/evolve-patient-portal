@@ -7,6 +7,7 @@ import {DataService} from "./services/data.service";
 import {HttpClientModule} from "@angular/common/http";
 import { LoginComponent } from './login/login.component';
 import { FormsModule } from '@angular/forms';
+import {CookieService} from 'ngx-cookie-service';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,10 @@ import { FormsModule } from '@angular/forms';
     HttpClientModule,
     AlertModule.forRoot()
   ],
-  providers: [DataService],
+  providers: [
+      DataService,
+      CookieService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

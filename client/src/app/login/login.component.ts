@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { User } from './../user';
 import { DataService } from '../services/data.service';
+import {CookieService} from 'ngx-cookie-service';
 
 @Component({
     selector: 'evolve-login',
@@ -14,7 +15,7 @@ export class LoginComponent implements OnInit {
     invalid: boolean;
     loggedIn: boolean;
 
-    constructor(private data: DataService) {
+    constructor(private data: DataService, private cookieService: CookieService) {
         this.data = data;
         this.invalid = false;
         this.loggedIn = false;
@@ -23,6 +24,20 @@ export class LoginComponent implements OnInit {
 
     ngOnInit() {
         this.user = new User;
+        const cookieValue = this.cookieService.get("evolve-cookie");
+        const cookieJSON = JSON.parse(cookieValue);
+
+        if(cookieJSON){
+            if(cookieJSON.username && cookieJSON.token){
+                //    successfully logged in
+                console.log("Successfully logged in using username: >>", cookieJSON.username, "<< and token: >>", cookieJSON.token ,"<<." );
+
+                this.user.userID = cookieJSON.userID;
+                this.user.username = cookieJSON.username;
+                this.user.token = cookieJSON.token;
+                this.loggedIn = true;
+            }
+        }
     }
 
     login() {
@@ -30,6 +45,16 @@ export class LoginComponent implements OnInit {
         if (!this.invalid) {
             //redirect to dashboard
             this.loggedIn = true;
+
+            const cookieJSON = {
+                userID: 12345,
+                username: this.user.username,
+                token: "This is a token test."
+            };
+            // token: this.user.token
+            // userID: this.user.userID,
+
+            this.cookieService.set( "evolve-cookie", JSON.stringify(cookieJSON));
         }
     }
 
