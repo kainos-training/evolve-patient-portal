@@ -4,6 +4,8 @@ import {DataService} from "../services/data.service";
 
 import { LoginComponent } from './login.component';
 
+import { FormsModule } from '@angular/forms';
+
 describe('LoginComponent', () => {
   let component: LoginComponent;
   let fixture: ComponentFixture<LoginComponent>;
@@ -13,6 +15,9 @@ describe('LoginComponent', () => {
       declarations: [ LoginComponent ],
       providers: [
         {provide: DataService }
+    ],
+    imports: [
+        FormsModule
     ]
     })
     .compileComponents();
