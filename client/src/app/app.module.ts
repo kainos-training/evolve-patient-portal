@@ -6,6 +6,7 @@ import {AlertModule} from "ngx-bootstrap";
 import {DataService} from "./services/data.service";
 import {HttpClientModule} from "@angular/common/http";
 import { LoginComponent } from './login/login.component';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -14,6 +15,7 @@ import { LoginComponent } from './login/login.component';
   ],
   imports: [
     BrowserModule,
+    FormsModule,
     HttpClientModule,
     AlertModule.forRoot()
   ],
