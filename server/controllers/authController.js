@@ -1,4 +1,5 @@
 const db = require('../db');
+var utilsJWT = require('../utils/jwt');
 
 function validateLoginForm(payload) {
     const errors = {};
@@ -43,7 +44,7 @@ exports.login = function(req, res) {
     let candidatePassword = req.body.password.trim();
 
     db.query(
-        "SELECT password FROM User WHERE username=?", [username],
+        "SELECT password, firstName, lastName FROM User WHERE username=?", [username],
         function(err, rows) {
             if (err) {
                 return res.status(400).json({
@@ -51,10 +52,18 @@ exports.login = function(req, res) {
                     message: "Incorrect email or password"
                 });
             } else {
-                let dbPassword = rows[0].password;
-                if (candidatePassword == dbPassword) {
+                let user = {
+                    password: rows[0].password,
+                    firstName: rows[0].firstName,
+                    lastName: rows[0].lastName
+                }
+
+                if (candidatePassword == user.password) {
+                    let token = utilsJWT.generateToken(user); // Generate JWT Token
                     return res.status(200).json({
+                        success: true,
                         message: 'You have successfully logged in!',
+                        token: token
                     });
                 } else {
                     return res.status(400).json({
