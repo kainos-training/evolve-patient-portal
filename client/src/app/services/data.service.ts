@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from "@angular/common/http";
+import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { User } from './../user'
 
 @Injectable()
@@ -13,12 +13,18 @@ export class DataService {
         console.log("Logging in...")
         //call method from express server
         //For testing!
-        if(user.username == "username"){
-            if(user.password == "Password"){
-                console.log("log in successful");
-                return true;
-            }
-        }
+
+          const body = {
+              username: user.username,
+              password: user.password,
+          };
+          const options = {
+            headers: new HttpHeaders().set('Content-Type', 'application/x-www-form-urlencoded'),
+          };
+
+        let res = this.http.post('/api/login', body, options).subscribe();
+        console.log(res);
+
         console.log("log in failed");
         return false;
     }
