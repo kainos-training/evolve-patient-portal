@@ -8,4 +8,10 @@ export class DataService {
         console.log(this.http.get('/api/testQuery').subscribe());
     }
 
+    public requestReset(username: string): boolean{
+        //Do a Post to server that checks if username exists, sends email or returns an error
+        alert("In data service requestReset()");
+        return false;
+    }
+
 }
