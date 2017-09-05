@@ -1,10 +1,7 @@
 const db = require('../db');
-<<<<<<< HEAD
 const bodyParser = require('body-parser');
 
-=======
 var utilsJWT = require('../utils/jwt');
->>>>>>> c3c4048a720fb94383ff24df92c7ede6f7898946
 
 function validateLoginForm(payload) {
     const errors = {};
@@ -46,9 +43,6 @@ exports.login = function(req, res) {
     }
 
     let username = req.body.username.trim();
-<<<<<<< HEAD
-    let password = req.body.password.trim()
-=======
     let candidatePassword = req.body.password.trim();
 
     db.query(
@@ -82,7 +76,6 @@ exports.login = function(req, res) {
             }
         }
     )
->>>>>>> c3c4048a720fb94383ff24df92c7ede6f7898946
 };
 
 

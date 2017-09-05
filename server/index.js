@@ -24,13 +24,8 @@ const app = express();
 app.set('port', config.port || 8002);
 app.use(cors());
 app.use(bodyParser.urlencoded({
-<<<<<<< HEAD
     extended: true
 }));
-=======
-    extended: false
-})); // for parsing application/x-www-form-urlencoded
->>>>>>> c3c4048a720fb94383ff24df92c7ede6f7898946
 app.use(morgan('dev')); // HTTP request logger middleware.
 app.use(errorHandler()); // Error Handler middleware for more verbose errors
 
@@ -38,9 +33,9 @@ app.use(errorHandler()); // Error Handler middleware for more verbose errors
  * Express configuration.
  */
 const publicAuthRoutes = require('./routes/publicAuthRoutes');
-const publicAppointmentRoutes = require('./routes/publicAppointmentRoutes');
+const publicAppointmentRoute = require('./routes/publicAppointmentRoute');
 app.use('/auth', publicAuthRoutes);
-app.use('/appointment', publicAppointmentRoutes);
+app.use('/appointment', publicAppointmentRoute);
 
 app.listen(app.get('port'), function() {
     console.log('Express server listening on port' + " " + app.get('port'));
