@@ -27,7 +27,7 @@ app.use(errorHandler()); // Error Handler middleware for more verbose errors
 
 const publicUserRoutes = require('./routes/publicUserRoutes');
 
-app.use('/publicUserRoutes',publicUserRoutes);
+app.use('/publicUserRoutes', publicUserRoutes);
 
 /**
  * Routes configuration.
