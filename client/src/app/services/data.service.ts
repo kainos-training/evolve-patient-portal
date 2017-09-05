@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from "@angular/common/http";
-import { User } from './../user'
+import { User } from './../user';
+import * as $ from 'jquery';
+import { Observable } from 'rxjs/Rx';
 
 @Injectable()
 export class DataService {
@@ -10,23 +12,26 @@ export class DataService {
     }
 
     public login(user: User): boolean {
-        console.log("Logging in...")
         //call method from express server
         //For testing!
 
           const body = {
-              username: user.username,
-              password: user.password,
+              "username": user.username,
+              "password": user.password
           };
           const options = {
             headers: new HttpHeaders().set('Content-Type', 'application/x-www-form-urlencoded'),
           };
 
-        let res = this.http.post('/api/auth/login', body, options);
+            this.http.post('/api/auth/login', $.param(body), options)
+              .subscribe(data => {
+                    console.log("SUCCESS");
+                    return true;
+              }, error => {
+                  console.log(error);
+                  return false;
+              });
 
-        console.log(res);
-
-        console.log("log in failed");
         return false;
     }
 

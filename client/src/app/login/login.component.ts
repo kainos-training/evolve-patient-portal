@@ -25,7 +25,11 @@ export class LoginComponent implements OnInit {
     ngOnInit() {
         this.user = new User;
         const cookieValue = this.cookieService.get("evolve-cookie");
-        const cookieJSON = JSON.parse(cookieValue);
+        var cookieJSON;
+        
+        if(cookieValue){
+            cookieJSON = JSON.parse(cookieValue);            
+        }
 
         if(cookieJSON){
             if(cookieJSON.username && cookieJSON.token){
