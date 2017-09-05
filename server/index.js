@@ -6,7 +6,6 @@ const errorHandler = require('errorhandler');
 const bodyParser = require('body-parser');
 const cors = require('cors');
 const morgan = require('morgan');
-const mysql = require('mysql');
 const config = require('./config');
 // const cookieParser = require('cookie-parser');Might need
 
@@ -30,9 +29,10 @@ app.use(bodyParser.json());
 app.use(morgan('dev')); // HTTP request logger middleware.
 app.use(errorHandler()); // Error Handler middleware for more verbose errors
 
+const publicAuthRoutes = require('./routes/publicAuthRoutes');
 const publicUserRoutes = require('./routes/publicUserRoutes');
-
-app.use('/publicUserRoutes', publicUserRoutes);
+app.use('/auth', publicAuthRoutes);
+app.use('/users', publicUserRoutes);
 
 /**
  * Routes configuration.
