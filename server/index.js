@@ -25,9 +25,6 @@ app.use(bodyParser.json());
 app.use(morgan('dev')); // HTTP request logger middleware.
 app.use(errorHandler()); // Error Handler middleware for more verbose errors
 
-const publicUserRoutes = require('./routes/publicUserRoutes');
-
-app.use('/publicUserRoutes', publicUserRoutes);
 
 /**
  * Routes configuration.
