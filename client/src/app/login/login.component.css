@@ -1,3 +1,28 @@
+header{
+    background-color: #465463;
+    padding: 40px;
+}
+
+header div{
+    text-align: center;
+}
+
+header img{
+    vertical-align: bottom;
+    max-height: 150px;
+}
+
+header div h1{
+    font-weight: 200;
+    letter-spacing: 3px;
+    color: white;
+    display: inline;
+}
+
+header div.separator{
+    border-top: solid 1px white;
+}
+
 .loginPage form {
     background-color: white;
     padding: 20px;
@@ -45,7 +70,7 @@ input[type=submit] {
     text-decoration: underline;
 }
 
-.bs-callout-danger, .input-group, .loginPage form h5 {
+.bs-callout-danger, .input-group, .loginPage form h5, header div span {
     color: #666666;
     font-family: Helvetica, sans-serif;
 }
