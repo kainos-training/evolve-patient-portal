@@ -94,4 +94,14 @@ export class DataService {
             });*/
     }
 
+    public requestReset(thisUsername: string): void{
+        //Do a Post to server that checks if username exists, sends email or returns an error
+        alert("In data service requestReset()");
+        const user = {username: thisUsername};
+        const options = {
+            headers: new HttpHeaders().set('Content-Type', 'application/json'),
+        };
+        this.http.post("/api/user", user, options).subscribe(res =>{console.log(res)});
+    }
+
 }

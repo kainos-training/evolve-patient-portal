@@ -10,12 +10,14 @@ import {CookieService} from 'ngx-cookie-service';
 import {SwitchBoardService} from './services/switch-board.service';
 import { RequestPasswordResetComponent } from './request-password-reset/request-password-reset.component';
 import {RouterModule} from '@angular/router';
+import {SettingNewPasswordComponent} from './setting-new-password/setting-new-password.component';
 
 @NgModule({
     declarations: [
         AppComponent,
         LoginComponent,
         RequestPasswordResetComponent,
+        SettingNewPasswordComponent
     ],
     imports: [
         BrowserModule,

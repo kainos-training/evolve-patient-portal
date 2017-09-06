@@ -6,6 +6,10 @@ This seed project has been created to get you up and running quickly for develop
 
 For coding standards and additional info please see the project wiki :)
 
+### Database
+Run script for creation and insertion of mock data to create a local copy of the database.
+patientPortalDB.sql
+
 ### Prerequisites
 
 ```
