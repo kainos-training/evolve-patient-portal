@@ -17,6 +17,7 @@
     "jsonwebtoken": "^7.4.3",
     "morgan": "^1.8.2",
     "mysql": "^2.14.1",
+    "nodemailer": "^4.1.0",
     "npm-run-all": "^4.1.1",
     "request": "^2.81.0"
   },
