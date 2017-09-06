@@ -15,7 +15,18 @@ db.connect(function(err) {
 
 exports.testQuery = function (callback){
     db.query(
-        "select * from city limit 10;",
+        "select * from user limit 10;",
+        function(err, rows) {
+            if(err) throw err;
+            callback(rows);
+        }
+    );
+};
+
+exports.checkUserValid = function (username, callback){
+    db.query(
+        "SELECT username FROM user WHERE username = ?",
+        [username],
         function(err, rows) {
             if(err) throw err;
             callback(rows);
