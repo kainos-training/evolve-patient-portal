@@ -43,6 +43,7 @@ CREATE TABLE IF NOT EXISTS Medication (
 medicationID int auto_increment not null,
 medicationName varchar(60) not null,
 medicationTypeID int not null,
+resourceURL varchar(200),
 primary key (medicationID),
 foreign key (medicationTypeID) references MedicationType (medicationTypeID)
 );
@@ -132,15 +133,23 @@ VALUES ('jsmith', '$2a$10$YqV/YtnOUd62xFSai8gRseO4nU5otTdyDTD7yWwaVquZfo02O2Uee'
 INSERT INTO MedicationType(medicationType)
 VALUES ('Antibiotics'), ('Mood Stabilizers'), ('Analgesics'), ('Antipyretics');
 
-INSERT INTO Medication(medicationName, medicationTypeID)
-VALUES('Penicillin', 1), ('Amoxicillin', 1), ('Lithium', 2), ('Olanzapine', 2),
-('Paracetamol', 3), ('Morphine', 3), ('Ibuprofen', 4), ('Ketoprofen', 4);
+INSERT INTO Medication(medicationName, medicationTypeID, resourceURL)
+VALUES('Penicillin', 1, 'https://en.wikipedia.org/wiki/Penicillin'), 
+('Amoxicillin', 1, 'https://en.wikipedia.org/wiki/Amoxicillin'), 
+('Lithium', 2, 'https://en.wikipedia.org/wiki/Lithium_(medication)'), 
+('Olanzapine', 2, 'https://en.wikipedia.org/wiki/Olanzapine'),
+('Paracetamol', 3, 'https://en.wikipedia.org/wiki/Paracetamol'), 
+('Morphine', 3, 'https://en.wikipedia.org/wiki/Morphine'), 
+('Ibuprofen', 4, 'https://en.wikipedia.org/wiki/Ibuprofen'), 
+('Ketoprofen', 4, 'https://en.wikipedia.org/wiki/Ketoprofen');
 
 INSERT INTO MedicationUser(userID, medicationID, startDate, endDate, dosage)
-VALUES (1, 3, '2016-06-01', '2019-08-10', '2 tablets, up to 4 times daily'),
-(1, 4, '2016-06-01', '2019-08-10', '2 tablets, up to 4 times daily'), 
-(2, 1, '2017-02-09', '2017-02-27', '2 tablets, twice daily'),
-(3, 2, '2016-09-29', '2016-10-10', 'Once in the morning daily');
+VALUES (1, 3, '2017-06-01', '2019-08-10', '10mg'),
+(1, 3, '2016-06-01', '2017-06-01', '5mg'),
+(1, 3, '2015-06-01', '2016-06-01', '20mg'),
+(1, 4, '2016-06-01', '2019-08-10', '5mg'), 
+(2, 1, '2017-02-09', '2019-02-27', '15mg'),
+(3, 2, '2016-09-29', '2018-10-10', '10mg');
 
 INSERT INTO MedicationUserComment(medicationUserID, commentText)
 VALUES (1, 'Not feeling the benefit after two weeks'), (2, 'Helping to minimise pain but still exists'),
