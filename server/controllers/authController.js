@@ -69,7 +69,7 @@ exports.login = function(req, res) {
                         success: true,
                         message: 'You have successfully logged in!',
                         token: token,
-                        userId: user.userId
+                        userID: user.userId
                     });
                 } else {
                     return res.status(400).json({
