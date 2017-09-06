@@ -7,11 +7,14 @@ import {DataService} from "./services/data.service";
 import {HttpClientModule} from "@angular/common/http";
 import { RequestPasswordResetComponent } from './request-password-reset/request-password-reset.component';
 import {FormsModule} from '@angular/forms';
+import {SettingNewPasswordComponent} from './setting-new-password/setting-new-password.component';
+
 
 @NgModule({
   declarations: [
     AppComponent,
-    RequestPasswordResetComponent
+    RequestPasswordResetComponent,
+    SettingNewPasswordComponent
   ],
   imports: [
     BrowserModule,
