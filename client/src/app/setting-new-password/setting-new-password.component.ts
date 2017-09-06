@@ -14,11 +14,12 @@ export class SettingNewPasswordComponent implements OnInit {
   confirmNewPassword: string;
   hasUpperCase: boolean;
   hasLowerCase: boolean;
-
+  changedPassword: boolean;
 
   constructor(dataService: DataService) { 
     this.invalidPassword = false;
     this.nonMatchingPasswords = false;
+    this.changedPassword = false;
     this.dataService = dataService;
   }
 
@@ -32,7 +33,12 @@ export class SettingNewPasswordComponent implements OnInit {
 
     if(this.newPassword == this.confirmNewPassword) {
       if(this.newPassword.length >= 8 && this.hasUpperCase && this.hasLowerCase) {
-        alert("Your password meets the criteria");
+
+        this.nonMatchingPasswords = false;
+        this.invalidPassword = false;
+        //Code to call the update method
+        alert("New password entered: " + this.newPassword);
+        this.changedPassword = true;
       } else {
         this.nonMatchingPasswords = false;
         this.invalidPassword = true;
@@ -46,7 +52,12 @@ export class SettingNewPasswordComponent implements OnInit {
   cancelChangePassword() : void {
     this.nonMatchingPasswords = false;
     this.invalidPassword = false;
-    alert("I have cancelled changing the password");
+    this.changedPassword = false;
+    this.rerouteToLogin();
     //TODO: Reroute to the log in component 
+  }
+
+  rerouteToLogin() : void {
+    alert("Rerouting to the login component");
   }
 }
