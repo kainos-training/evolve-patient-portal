@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { User } from './../user';
 import { DataService } from '../services/data.service';
-import {CookieService} from 'ngx-cookie-service';
+import { CookieService } from 'ngx-cookie-service';
 
 @Component({
     selector: 'evolve-login',
@@ -12,8 +12,8 @@ export class LoginComponent implements OnInit {
 
     public evolveLogoPath: String;
     user: User;
-    invalid: boolean;
-    loggedIn: boolean;
+    invalid: boolean; //invalid error message flag
+    loggedIn: boolean; //loged in flag
 
     constructor(private data: DataService, private cookieService: CookieService) {
         this.data = data;
@@ -26,7 +26,7 @@ export class LoginComponent implements OnInit {
         this.user = new User;
         const cookieValue = this.cookieService.get("evolve-cookie");
         var cookieJSON;
-        
+
         if(cookieValue){
             cookieJSON = JSON.parse(cookieValue);            
         }
@@ -45,10 +45,10 @@ export class LoginComponent implements OnInit {
     }
 
     login() {
-        this.invalid = !this.data.login(this.user);
-        if (!this.invalid) {
+        this.data.login(this.user); //call data service
+        if (this.loggedIn) {
             //redirect to dashboard
-            this.loggedIn = true;
+            this.invalid = true;
 
             const cookieJSON = {
                 userID: 12345,
