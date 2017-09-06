@@ -30,6 +30,7 @@ function validateLoginForm(payload) {
 }
 
 exports.login = function(req, res) {
+    console.log(req.body);
     // Run request body through server side validation
     const validationResult = validateLoginForm(req.body);
 
@@ -46,7 +47,7 @@ exports.login = function(req, res) {
     let candidatePassword = req.body.password.trim();
 
     db.query(
-        "SELECT password, firstName, lastName FROM User WHERE username=?", [username],
+        "SELECT userID, password, firstName, lastName FROM User WHERE username=?", [username],
         function(err, rows) {
             if (err) {
                 return res.status(400).json({
@@ -55,17 +56,20 @@ exports.login = function(req, res) {
                 });
             } else {
                 let user = {
+                    userId: rows[0].userID,
                     password: rows[0].password,
                     firstName: rows[0].firstName,
                     lastName: rows[0].lastName
                 }
+                console.log(user);
 
                 if (candidatePassword == user.password) {
                     let token = utilsJWT.generateToken(user); // Generate JWT Token
                     return res.status(200).json({
                         success: true,
                         message: 'You have successfully logged in!',
-                        token: token
+                        token: token,
+                        userId: user.userId
                     });
                 } else {
                     return res.status(400).json({
