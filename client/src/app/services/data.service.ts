@@ -10,29 +10,22 @@ export class DataService {
     constructor(private http: HttpClient) {
         console.log(this.http.get('/api/testQuery').subscribe());
     }
-
-    public login(user: User): boolean {
-        //call method from express server
-        //For testing!
-
-          const body = {
-              "username": user.username,
-              "password": user.password
-          };
-          const options = {
+    public login(user: User) {
+        const body = {
+            "username": user.username,
+            "password": user.password
+        };
+        const options = {
             headers: new HttpHeaders().set('Content-Type', 'application/x-www-form-urlencoded'),
-          };
+        };
 
-            this.http.post('/api/auth/login', $.param(body), options)
-              .subscribe(data => {
-                    console.log("SUCCESS");
-                    return true;
-              }, error => {
-                  console.log(error);
-                  return false;
-              });
-
-        return false;
+        this.http.post('/api/auth/login', $.param(body), options)
+            .subscribe(data => {
+                console.log("SUCCESS:", data);
+                return true;
+            }, error => {
+                console.log(error);
+                return false;
+            });
     }
-
 }

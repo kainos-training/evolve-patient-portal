@@ -7,6 +7,8 @@ import { User } from './../User';
 
 import { FormsModule } from '@angular/forms';
 
+import {CookieService} from 'ngx-cookie-service';
+
 describe('LoginComponent', () => {
   let component: LoginComponent;
   let fixture: ComponentFixture<LoginComponent>;
@@ -92,3 +94,4 @@ class MockDataService {
         return false;
     }
 }
+
