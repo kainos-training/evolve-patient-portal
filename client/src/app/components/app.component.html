@@ -1,1 +1,8 @@
-<evolve-login></evolve-login>
+<evolve-login *ngIf="!user.loggedIn" [user]="user"></evolve-login>
+
+<div *ngIf="user.loggedIn">
+    <p>{{user.message}}</p>
+
+    <input type="button" (click)="logout()" value="Log out" />
+</div>
+

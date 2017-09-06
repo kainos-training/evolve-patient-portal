@@ -19,7 +19,8 @@ Please create a server/config.json file as follows:
   "password" : "password",
   "host" : "localhost",
   "port" : 8002,
-  "database" :"database"
+  "database" :"database",
+  "jwtSecret": "jwtSecret"
 }
 ```
 
