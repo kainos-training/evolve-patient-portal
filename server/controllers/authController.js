@@ -51,6 +51,7 @@ exports.login = function(req, res) {
     let username = req.body.username.trim();
     let candidatePassword = req.body.password.trim();
 
+
     db.query(
         "SELECT userID, password, firstName, lastName FROM User WHERE username=?", [username],
         function(err, rows) {
@@ -66,23 +67,28 @@ exports.login = function(req, res) {
                     firstName: rows[0].firstName,
                     lastName: rows[0].lastName
                 }
-                console.log(user);
 
-                if (candidatePassword == user.password) {
-                    // if (bcrypt.compareSync(candidatePassword, password)) {
-                    let token = utilsJWT.generateToken(user); // Generate JWT Token
-                    return res.status(200).json({
-                        success: true,
-                        message: 'You have successfully logged in!',
-                        token: token,
-                        userID: user.userId
-                    });
-                } else {
-                    return res.status(400).json({
-                        success: false,
-                        message: "Incorrect email or password"
-                    });
-                }
+                bcrypt.compare(candidatePassword, user.password, function(err, isMatch) {
+                    if (err) {
+                        return res.status(400).json({
+                            success: false,
+                            message: "Incorrect email or password"
+                        });
+                    } else if (!isMatch) {
+                        return res.status(400).json({
+                            success: false,
+                            message: 'Incorrect email or password!',
+                        });
+                    } else {
+                        let token = utilsJWT.generateToken(user); // Generate JWT Token
+                        return res.status(200).json({
+                            success: true,
+                            message: 'You have successfully logged in!',
+                            token: token,
+                            userID: user.userId
+                        });
+                    }
+                });
             }
         }
     )
@@ -160,18 +166,3 @@ exports.createUserAccount = function(req, res) {
 
         });
 };
-
-
-// bcrypt.genSalt(saltRounds, function(err, salt) {
-//     bcrypt.hash(password, salt, function(err, hash) {
-//         password = hash;
-//         //console.log(password);
-//     });
-// });
-
-
-//     exports.getPassword = function(req, res) {
-//         db.query("SELECT password FROM User WHERE username = ?", [username],
-//             password: rows[0].password;
-//         });
-// };
