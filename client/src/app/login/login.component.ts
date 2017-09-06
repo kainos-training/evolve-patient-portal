@@ -1,7 +1,9 @@
-import { Component, OnInit } from '@angular/core';
-import { User } from './../user';
-import { DataService } from '../services/data.service';
+import {Component, OnInit, OnDestroy, Input} from '@angular/core';
+import {User} from './../user';
+import {DataService} from '../services/data.service';
 import {CookieService} from 'ngx-cookie-service';
+import {Subscription} from 'rxjs/Subscription';
+import {SwitchBoardService} from '../services/switch-board.service';
 
 @Component({
     selector: 'evolve-login',
@@ -11,55 +13,26 @@ import {CookieService} from 'ngx-cookie-service';
 export class LoginComponent implements OnInit {
 
     public evolveLogoPath: String;
-    user: User;
-    invalid: boolean;
-    loggedIn: boolean;
+    @Input() user: User;
+    userSubscription: Subscription;
 
-    constructor(private data: DataService, private cookieService: CookieService) {
-        this.data = data;
-        this.invalid = false;
-        this.loggedIn = false;
+    constructor(private data: DataService, private switchBoard: SwitchBoardService) {
         this.evolveLogoPath = 'assets/EvolveLogo.svg';
     }
 
-    ngOnInit() {
-        this.user = new User;
-        const cookieValue = this.cookieService.get("evolve-cookie");
-        var cookieJSON;
-        
-        if(cookieValue){
-            cookieJSON = JSON.parse(cookieValue);            
-        }
-
-        if(cookieJSON){
-            if(cookieJSON.username && cookieJSON.token){
-                //    successfully logged in
-                console.log("Successfully logged in using username: >>", cookieJSON.username, "<< and token: >>", cookieJSON.token ,"<<." );
-
-                this.user.userID = cookieJSON.userID;
-                this.user.username = cookieJSON.username;
-                this.user.token = cookieJSON.token;
-                this.loggedIn = true;
-            }
-        }
+    ngOnInit(): void {
+        this.userSubscription = this.switchBoard.user$.subscribe((u) => {
+            this.user = u;
+        });
     }
 
     login() {
-        this.invalid = !this.data.login(this.user);
-        if (!this.invalid) {
-            //redirect to dashboard
-            this.loggedIn = true;
+        // function below is async
+        this.data.login(this.user);
+    }
 
-            const cookieJSON = {
-                userID: 12345,
-                username: this.user.username,
-                token: "This is a token test."
-            };
-            // token: this.user.token
-            // userID: this.user.userID,
-
-            this.cookieService.set( "evolve-cookie", JSON.stringify(cookieJSON));
-        }
+    ngOnDestroy(): void {
+        this.userSubscription.unsubscribe();
     }
 
 }

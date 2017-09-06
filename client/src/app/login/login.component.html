@@ -8,7 +8,7 @@
 
 <main class="loginPage">
 
-    <div *ngIf="this.invalid" class="callout-message col-xs-12">
+    <div *ngIf="user.message" class="callout-message col-xs-12">
         <div class="bs-callout bs-callout-danger">
             <p><span>Error:</span> Invalid credentials. <a href="#">Lost your password?</a></p>
         </div>
