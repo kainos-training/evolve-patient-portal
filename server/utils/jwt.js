@@ -1,6 +1,7 @@
 var jwt = require('jsonwebtoken');
 const config = require('../config');
 
+
 module.exports = {
     //Generate Token using secret from process.env.JWT_SECRET
     generateToken: function(user) {

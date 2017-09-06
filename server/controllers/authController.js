@@ -1,7 +1,12 @@
 const db = require('../db');
 const bodyParser = require('body-parser');
-
 var utilsJWT = require('../utils/jwt');
+
+// for encrypting the passord;
+var bcrypt = require('bcrypt');
+//the salt to be used to hash the password
+const saltRounds = 10;
+
 
 function validateLoginForm(payload) {
     const errors = {};
@@ -61,6 +66,7 @@ exports.login = function(req, res) {
                 }
 
                 if (candidatePassword == user.password) {
+                    // if (bcrypt.compareSync(candidatePassword, password)) {
                     let token = utilsJWT.generateToken(user); // Generate JWT Token
                     return res.status(200).json({
                         success: true,
@@ -103,6 +109,7 @@ function validateSignup(payload) {
     };
 }
 
+// Creates an account for a user;
 exports.createUserAccount = function(req, res) {
 
     const validationResult = validateSignup(req.body);
@@ -114,10 +121,17 @@ exports.createUserAccount = function(req, res) {
             errors: validationResult.errors
         });
     }
-    console.log(req.body);
-    console.log(req.body.username.trim());
+
+
     let username = req.body.username.trim();
-    let password = req.body.password.trim();
+    let plainTextPassword = req.body.password.trim();
+
+    //Creates the salt to be used
+    var salt = bcrypt.genSaltSync(saltRounds);
+    //Creates the hash of the plainTextPassword
+    var hash = bcrypt.hashSync(plainTextPassword, salt);
+    let password = hash;
+
     let dateOfBirth = req.body.dateOfBirth.trim();
     let gender = req.body.gender.trim();
     let MRIN = req.body.MRIN.trim();
@@ -142,3 +156,18 @@ exports.createUserAccount = function(req, res) {
 
         });
 };
+
+
+// bcrypt.genSalt(saltRounds, function(err, salt) {
+//     bcrypt.hash(password, salt, function(err, hash) {
+//         password = hash;
+//         //console.log(password);
+//     });
+// });
+
+
+//     exports.getPassword = function(req, res) {
+//         db.query("SELECT password FROM User WHERE username = ?", [username],
+//             password: rows[0].password;
+//         });
+// };
