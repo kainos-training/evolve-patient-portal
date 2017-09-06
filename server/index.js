@@ -7,6 +7,7 @@ const bodyParser = require('body-parser');
 const cors = require('cors');
 const morgan = require('morgan');
 const config = require('./config');
+const emailer = require('./emailer');
 
 /**
  * Connect to mySQL database server
@@ -36,6 +37,7 @@ const publicAuthRoutes = require('./routes/publicAuthRoutes');
 const publicAppointmentRoutes = require('./routes/publicAppointmentRoutes');
 app.use('/auth', publicAuthRoutes);
 app.use('/appointment', publicAppointmentRoutes);
+app.use('/user', publicAuthRoutes);
 
 app.listen(app.get('port'), function() {
     console.log('Express server listening on port' + " " + app.get('port'));

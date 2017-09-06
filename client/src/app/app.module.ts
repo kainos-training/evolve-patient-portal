@@ -8,16 +8,25 @@ import {LoginComponent} from './login/login.component';
 import {FormsModule} from '@angular/forms';
 import {CookieService} from 'ngx-cookie-service';
 import {SwitchBoardService} from './services/switch-board.service';
+import { RequestPasswordResetComponent } from './request-password-reset/request-password-reset.component';
+import {RouterModule} from '@angular/router';
 
 @NgModule({
     declarations: [
         AppComponent,
-        LoginComponent
+        LoginComponent,
+        RequestPasswordResetComponent,
     ],
     imports: [
         BrowserModule,
         FormsModule,
         HttpClientModule,
+        RouterModule.forRoot([
+            {
+              path: 'login',
+              component: LoginComponent
+            }
+          ]),
         AlertModule.forRoot()
     ],
     providers: [

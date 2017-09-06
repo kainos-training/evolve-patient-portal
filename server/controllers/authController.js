@@ -1,5 +1,6 @@
 const db = require('../db');
 const bodyParser = require('body-parser');
+const emailer = require('../emailer');
 var utilsJWT = require('../utils/jwt');
 
 // for encrypting the passord;
@@ -169,4 +170,26 @@ exports.createUserAccount = function(req, res) {
             }
 
         });
+};
+
+exports.requestPasswordReset = function (req, res){
+
+    console.log('Entered');
+    const username = req.body.username;
+    console.log('Id is ' + username);
+    db.query(
+        "SELECT email, CONCAT(firstName, ' ', lastName) AS name FROM User WHERE username = ?",
+        [username],
+        function(err, rows) {
+            if(err) throw err;
+            if(rows.length==1){
+                console.log(rows[0].name);
+                res.send(JSON.parse('{"exists":true}'));
+                emailer.sendNotification('kevinfox@kainos.com','Kevin Fox')
+            }else{
+                console.log("{exists:false}");
+                res.send(JSON.parse('{"exists":false}'));			
+                }
+        }
+    );
 };

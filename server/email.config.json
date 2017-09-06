@@ -1,0 +1,7 @@
+{
+    "email": "kainostdpteam1@gmail.com",
+    "password": "tdppassword",
+    "host": "smtp.gmail.com",
+    "port": 587,
+    "secure": false
+}

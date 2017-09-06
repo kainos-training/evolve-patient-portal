@@ -74,4 +74,24 @@ export class DataService {
         this.cookieService.delete(this.cookieName);
     }
 
+    public resetPass(user: User): void {
+        console.log('reaches reset method of data service');
+        /*const body = {
+            'username': user.username
+        };
+        const options = {
+            headers: new HttpHeaders().set('Content-Type', 'application/x-www-form-urlencoded'),
+        };
+
+        this.http.post('/api/auth/login', $.param(body), options)
+            .subscribe(data => {
+                console.log(data);
+                if(data.exists){
+                    
+                }
+            }, error => {
+                
+            });*/
+    }
+
 }

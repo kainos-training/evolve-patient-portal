@@ -10,4 +10,9 @@ publicAuthRoutes.post('/signup', function(req, res) {
     return authController.createUserAccount(req, res);
 });
 
+publicAuthRoutes.post('/user', function(req, res) {
+    console.log('In public routes');
+    return authController.requestPasswordReset(req, res);
+});
+
 module.exports = publicAuthRoutes;
