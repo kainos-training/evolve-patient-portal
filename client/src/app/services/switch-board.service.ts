@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import {Subject} from 'rxjs/Subject';
-import {User} from '../user';
+import {User} from '../class/user';
 
 @Injectable()
 export class SwitchBoardService {

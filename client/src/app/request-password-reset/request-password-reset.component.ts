@@ -1,10 +1,9 @@
 import { Component, OnInit, Input, OnDestroy } from '@angular/core';
 import { DataService } from '../services/data.service'
-import { Location } from '@angular/common';
-import { User } from '../user';
 import { Subscription } from 'rxjs/Subscription';
 import { SwitchBoardService } from '../services/switch-board.service';
 import { Router } from '@angular/router';
+import {User} from '../class/user';
 
 @Component({
     selector: 'evolve-request-password-reset',

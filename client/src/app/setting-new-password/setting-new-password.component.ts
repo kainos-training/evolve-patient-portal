@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { Location } from '@angular/common';
 import { DataService } from '../services/data.service'
-import { User } from '../User';
 import {ActivatedRoute, ParamMap} from '@angular/router';
 import 'rxjs/add/operator/switchMap';
 import { Router} from '@angular/router';
+import {User} from '../class/user';
 
 @Component({
   selector: 'evolve-setting-new-password',

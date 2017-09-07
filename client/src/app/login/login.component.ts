@@ -1,7 +1,6 @@
 import {Component, OnInit, OnDestroy, Input} from '@angular/core';
 import {User} from '../class/user';
 import {DataService} from '../services/data.service';
-import {CookieService} from 'ngx-cookie-service';
 import {Subscription} from 'rxjs/Subscription';
 import {SwitchBoardService} from '../services/switch-board.service';
 

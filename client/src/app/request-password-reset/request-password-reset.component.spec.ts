@@ -1,5 +1,4 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { User } from '../user';
 import { RequestPasswordResetComponent } from './request-password-reset.component';
 import { LoginComponent } from '../login/login.component';
 import { RouterModule } from '@angular/router';
