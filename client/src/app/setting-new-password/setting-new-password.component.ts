@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { DataService } from '../services/data.service'
+import { User } from '../User';
 
 @Component({
   selector: 'evolve-setting-new-password',
@@ -16,6 +17,7 @@ export class SettingNewPasswordComponent implements OnInit {
   hasLowerCase: boolean;
   changedPassword: boolean;
   evolveLogoPath: string;
+  user: User;
 
   constructor(dataService: DataService) { 
     this.evolveLogoPath = 'assets/EvolveLogo.svg';
@@ -23,6 +25,8 @@ export class SettingNewPasswordComponent implements OnInit {
     this.nonMatchingPasswords = false;
     this.changedPassword = false;
     this.dataService = dataService;
+    this.user = new User();
+    this.user.username = 'jsmith';//hard coded for testing - change to real user when request reset component is complete
   }
 
   ngOnInit() {
@@ -40,6 +44,10 @@ export class SettingNewPasswordComponent implements OnInit {
         this.invalidPassword = false;
         //Code to call the update method
         alert("New password entered: " + this.newPassword);
+        this.user.password = this.newPassword;
+
+        this.dataService.resetPassword(this.user);
+
         this.changedPassword = true;
       } else {
         this.nonMatchingPasswords = false;

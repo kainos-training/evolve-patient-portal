@@ -38,6 +38,26 @@ export class DataService {
             });
     }
 
+    public resetPassword(user: User): void {
+        const body = {
+            'username': user.username,
+            'password': user.password
+        };
+        const options = {
+            headers: new HttpHeaders().set('Content-Type', 'application/x-www-form-urlencoded'),
+        };
+
+        this.http.post('/api/password/reset', $.param(body), options)
+            .subscribe(data => {
+                // saving token, userID and message in the same user object
+                user.username = data['username'];
+                user.message = data['message'];
+            }, error => {
+                user.loggedIn = false;
+                user.message = error["message"];
+            });
+    }
+
     public getUserFromCookie(user: User): void {
         const cookieValue = this.cookieService.get(this.cookieName);
         var cookieJSON;

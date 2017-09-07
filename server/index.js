@@ -31,13 +31,15 @@ app.use(morgan('dev')); // HTTP request logger middleware.
 app.use(errorHandler()); // Error Handler middleware for more verbose errors
 
 /**
- * Express configuration.
+ * Routes configuration.
  */
 const publicAuthRoutes = require('./routes/publicAuthRoutes');
 const publicAppointmentRoutes = require('./routes/publicAppointmentRoutes');
+const publicResetPasswordRoutes = require('./routes/publicResetPasswordRoutes');
 app.use('/auth', publicAuthRoutes);
 app.use('/appointment', publicAppointmentRoutes);
 app.use('/user', publicAuthRoutes);
+app.use('/password', publicResetPasswordRoutes);
 
 app.listen(app.get('port'), function() {
     console.log('Express server listening on port' + " " + app.get('port'));
