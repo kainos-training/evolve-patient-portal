@@ -38,7 +38,6 @@ const publicAppointmentRoutes = require('./routes/publicAppointmentRoutes');
 const publicResetPasswordRoutes = require('./routes/publicResetPasswordRoutes');
 app.use('/auth', publicAuthRoutes);
 app.use('/appointment', publicAppointmentRoutes);
-app.use('/user', publicAuthRoutes);
 app.use('/password', publicResetPasswordRoutes);
 
 app.listen(app.get('port'), function() {

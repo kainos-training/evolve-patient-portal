@@ -47,7 +47,7 @@ export class DataService {
             headers: new HttpHeaders().set('Content-Type', 'application/x-www-form-urlencoded'),
         };
 
-        return this.http.post('/api/auth/getUser', $.param(body), options);
+        return this.http.post('/api/password/getUser', $.param(body), options);
     }
 
     public resetPassword(user: User): void {
@@ -115,7 +115,7 @@ export class DataService {
             headers: new HttpHeaders().set('Content-Type', 'application/x-www-form-urlencoded'),
         };
 
-        this.http.post('/api/auth/user', $.param(body), options)
+        this.http.post('/api/password/user', $.param(body), options)
             .subscribe(data => {
                 this.switchBoard.updateValid(true);
                 this.switchBoard.updateSuccessful(true);
