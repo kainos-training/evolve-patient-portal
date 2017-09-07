@@ -1,10 +1,12 @@
 import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
-import {User} from './../user';
+import {User} from '../class/user';
 import * as $ from 'jquery';
 import {CookieService} from 'ngx-cookie-service';
 import {SwitchBoardService} from './switch-board.service';
 import {Router} from '@angular/router';
+import {Appointment} from '../class/appointment';
+import {AppointmentFurtherInfo} from '../class/appointmentFurtherInfo';
 
 @Injectable()
 export class DataService {
@@ -13,7 +15,8 @@ export class DataService {
     private urlCookie = 'redirect';
     public evolveLogoPath = 'assets/EvolveLogo.svg';
 
-    constructor(private http: HttpClient, private cookieService: CookieService, private switchBoard: SwitchBoardService, private router: Router) { }
+    constructor(private http: HttpClient, private cookieService: CookieService, private switchBoard: SwitchBoardService, private router: Router) {
+    }
 
     public login(user: User): void {
         const body = {
@@ -40,9 +43,9 @@ export class DataService {
             });
     }
 
-    public mapDataToUser(user, data): User{
-        if(data){
-            if(data['userID'] && data['token'] && data['message'] ){
+    public mapDataToUser(user, data): User {
+        if (data) {
+            if (data['userID'] && data['token'] && data['message']) {
                 user.userID = data['userID'];
                 user.token = data['token'];
                 user.loggedIn = true;
@@ -53,10 +56,10 @@ export class DataService {
         return user;
     }
 
-    public mapErrorToUser(user, error): User{
-        if(error){
-            if(error['message']){
-                user.message = error["message"];
+    public mapErrorToUser(user, error): User {
+        if (error) {
+            if (error['message']) {
+                user.message = error['message'];
             }
         }
 
@@ -78,7 +81,7 @@ export class DataService {
                 user.username = cookieJSON.username;
                 user.token = cookieJSON.token;
                 user.loggedIn = true;
-                user.message = "Logged in from cookie data.";
+                user.message = 'Logged in from cookie data.';
             }
         }
 
@@ -96,19 +99,55 @@ export class DataService {
         }
     }
 
-    public removeCookie(): void{
+    public removeCookie(): void {
         this.cookieService.delete(this.cookieName);
     }
 
-    public saveRedirectCookie(url): void{
+    public saveRedirectCookie(url): void {
         this.cookieService.set(this.urlCookie, url);
     }
 
-    public getRedirectCookie(): string{
+    public getRedirectCookie(): string {
         return this.cookieService.get(this.urlCookie);
     }
 
     public removeRedirectCookie(): void {
         this.cookieService.delete(this.urlCookie);
+    }
+
+    public getAllAppointmentsByUserID(userID) {
+        let headers = new Headers({'Content-Type': 'application/json'});
+        const body = {
+            'userID': userID
+        };
+        const options = {
+            headers: new HttpHeaders().set('Content-Type', 'application/json'),
+        };
+        let url = '/api/appointment/getAllAppointmentsByUserID';
+        return this.http.post<Appointment[]>(url, body, options);
+    };
+
+    public getAppointmentInformation(appointmentID) {
+        let headers = new Headers({'Content-Type': 'application/json'});
+        const body = {
+            'appointmentID': appointmentID
+        };
+        const options = {
+            headers: new HttpHeaders().set('Content-Type', 'application/json'),
+        };
+        let url = '/api/appointment/getAppointmentFurtherInfo';
+        return this.http.post<AppointmentFurtherInfo>(url, body, options);
+    }
+
+    public getUserInfoByUserID(userID) {
+        let headers = new Headers({'Content-Type': 'application/json'});
+        const body = {
+            'userID': userID
+        };
+        const options = {
+            headers: new HttpHeaders().set('Content-Type', 'application/json'),
+        };
+        let url = '/api/userInfo/getUserInfoByUserID';
+        return this.http.post<User>(url, body, options);
     }
 }

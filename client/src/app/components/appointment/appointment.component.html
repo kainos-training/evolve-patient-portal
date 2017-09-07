@@ -1,0 +1,62 @@
+<body>
+<div class=" col-xs-12 col-sm-12 col-md-6 col-lg-4">
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h1 id="appointment-header" class="panel-title">Upcoming Appointments</h1>
+        </div>
+        <div class="panel-body" id="information-display">
+            <table class="table table-hover" id="information-table">
+                <tbody>
+                <tr *ngFor="let appointment of appointments">
+                    <td>
+                        <button type="button" class="btn table-btn" (click)="openModal(template,appointment)">
+                            <!-- <strong>{{appointment.userID}}</strong><br> -->
+                            <span class="medium-location-text">{{appointment.type}}: {{appointment.departmentName}}</span><br>
+                            <span class="sml-location-txt">Due: {{appointment.dateOfAppointment | date:'dd/MM/yyyy'}}</span><br>
+                            <span class="sml-location-txt">Time: {{appointment.dateOfAppointment | date:'h:mm a'}}</span><br>
+                        </button>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+</body>
+
+<template #template>
+    <div class="modal-header">
+        <h4 class="modal-title pull-left">Appointment</h4>
+        <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <div class="perscription-header">
+            <p>
+                <img src="/assets/upcomingAppointmentsIcon.png" class="pill-icon-modal"/>
+                <strong>Department: {{focusedAppointment.departmentName}}</strong><br>
+                <span style="padding-left: 70px">{{focusedAppointment.locationAddress}}</span><br>
+                <span style="padding-left: 90px"><strong>Due:</strong> {{focusedAppointment.dateOfAppointment | date: 'dd/MM/yyyy'}}</span><br>
+                <span style="padding-left: 110px"><strong>Time:</strong> {{focusedAppointment.dateOfAppointment | date:'h:mm a'}}</span>
+            </p>
+            <hr>
+        </div>
+        <div class="perscription-form">
+            <form>
+                <div class="form-group">
+                    <label><strong>Clinician Name:</strong></label>
+                    <textarea disabled type="text" class="form-control input-disabled" id="perscription-input" rows="1">{{focusedAppointment.clinicianName}}</textarea>
+                </div>
+                <div class="form-group">
+                    <label><strong>Clinician comments:</strong></label>
+                    <textarea disabled type="text" class="form-control input-disabled" id="comment-input" rows="3">{{focusedAppointment.comment}}</textarea>
+                </div>
+            </form>
+        </div>
+        <div class="map-container">
+            <evolve-map-view [userLocation]="userLocation"
+                          [departmentAddress]="focusedAppointment.locationAddress"></evolve-map-view>
+        </div>
+    </div>
+</template>

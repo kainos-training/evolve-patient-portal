@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
-import {ActivatedRoute, ActivatedRouteSnapshot, CanActivate, NavigationEnd, Router, RouterStateSnapshot} from '@angular/router';
-import {User} from '../user';
+import {ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot} from '@angular/router';
+import {User} from '../class/user';
 import {DataService} from '../services/data.service';
 import {Subscription} from 'rxjs/Subscription';
 import {SwitchBoardService} from '../services/switch-board.service';

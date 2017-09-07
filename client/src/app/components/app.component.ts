@@ -1,9 +1,4 @@
-import {Component, OnInit} from '@angular/core';
-import {DataService} from '../services/data.service';
-import * as $ from 'jquery';
-import {User} from '../user';
-import {SwitchBoardService} from '../services/switch-board.service';
-
+import {Component} from '@angular/core';
 
 @Component({
     selector: 'evolve-root',
@@ -11,11 +6,5 @@ import {SwitchBoardService} from '../services/switch-board.service';
     styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-
-    constructor() {
-        // $(function() {
-        //     console.log('jquery is working');
-        // });
-    }
-
+    constructor() { }
 }

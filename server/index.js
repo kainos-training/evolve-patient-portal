@@ -36,10 +36,14 @@ app.use(errorHandler()); // Error Handler middleware for more verbose errors
 const publicAuthRoutes = require('./routes/publicAuthRoutes');
 const publicAppointmentRoutes = require('./routes/publicAppointmentRoutes');
 const protectedMedicationRoutes = require('./routes/protectedMedicationRoutes');
+const publicUserRoutes = require('./routes/publicUserRoutes');
+const publicUserInfoRoute = require('./routes/publicUserInfoRoute');
+
 app.use('/auth', publicAuthRoutes);
 app.use('/appointment', publicAppointmentRoutes);
 app.use('/medication', protectedMedicationRoutes);
+app.use('/userInfo', publicUserInfoRoute);
+app.use('/user', publicUserRoutes);
 
 var server = app.listen(app.get('port'));
-
 module.exports = server;

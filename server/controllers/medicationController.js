@@ -1,7 +1,6 @@
 const db = require('../db');
 const request = require('request');
 const xml = require("node-xml-lite");
-
 const wikiAPIurl = "https://en.wikipedia.org/w/api.php?action=query&prop=extracts&format=xml&exintro=&titles=";
 
 exports.getListOfMedications = function(req, res) {
@@ -22,7 +21,7 @@ exports.getListOfMedications = function(req, res) {
             }
         });
     }
-}
+};
 
 exports.addMedicationUserComment = function(req, res) {
     const medicationUserID = req.body.medicationUserID;
@@ -49,7 +48,7 @@ exports.addMedicationUserComment = function(req, res) {
             }
         });
     }
-}
+};
 
 exports.getListOfMedicationUserComments = function(req, res) {
     const medicationUserID = req.body.medicationUserID;
@@ -69,7 +68,7 @@ exports.getListOfMedicationUserComments = function(req, res) {
             }
         });
     }
-}
+};
 
 exports.removeMedicationUserComment = function(req, res) {
     const medicationUserCommentID = req.body.medicationUserCommentID;
@@ -91,7 +90,7 @@ exports.removeMedicationUserComment = function(req, res) {
             }
         });
     }
-}
+};
 
 exports.getWikiMedicationDescription = function(req, res) {
     const medicationName = req.body.medicationName;
@@ -115,7 +114,7 @@ exports.getWikiMedicationDescription = function(req, res) {
             res.status(200).send(returnData);
         });
     }
-}
+};
 
 exports.getMedicationHistory = function(req, res) {
     const medicationID = req.body.medicationID;
@@ -136,4 +135,4 @@ exports.getMedicationHistory = function(req, res) {
             }
         });
     }
-}
+};

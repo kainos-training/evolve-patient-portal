@@ -3,7 +3,7 @@ import {DataService} from './data.service';
 import {HttpClientModule} from '@angular/common/http';
 import {CookieService} from 'ngx-cookie-service';
 import {SwitchBoardService} from './switch-board.service';
-import {User} from '../user';
+import {User} from '../class/user';
 import {Router} from '@angular/router';
 
 describe('DataService', () => {

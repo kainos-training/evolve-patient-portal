@@ -1,0 +1,34 @@
+<div class="flex-container">
+    <div class="col-sm-3 col-xs-12 left-item">
+        <div id="menu-button" (click)="toggleMenuState()" class="visible-xs">
+            <div class="menuButtonLine"></div>
+            <div class="menuButtonLine"></div>
+            <div class="menuButtonLine"></div>
+        </div>
+        <img id="evolve-logo" src="assets/evolveLogo.png" alt="evolve-logo">
+        <div class="visible-xs settings-button" (click)="openModal(popup)"></div>
+    </div>
+    <div class="hidden-xs col-sm-9 right-item">
+        <div class="settings-button" (click)="openModal(popup)"></div>
+    </div>
+</div>
+
+<template #popup>
+    <div class="modal-header">
+        <h3 class="modal-title pull-left">Personal Information</h3>
+        <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+        <span aria-hidden="true">&times;</span>
+    </button>
+    <div class="modal-body">
+        <div class="perscription-header">
+            <hr>
+        </div>
+        <button id="settings-submit-button" type="submit" class="btn btn-success btn-sm btn-block evolve-modal-btn">
+            Submit
+        </button>
+    </div>
+</template>

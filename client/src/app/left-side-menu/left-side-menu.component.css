@@ -1,0 +1,202 @@
+/* media queries for text scaling - sizes follow bootstrap 3.3.7 column sizes*/
+/* https://bootstrapdocs.com/v3.3.6/docs/css/#grid */
+
+/* xs < 768 */
+@media screen and (max-width: 767px) {
+
+    #leftSideMenu {
+        margin-left: -100%;
+        position: absolute;
+    }
+
+    #patientNameProfMobile {
+        display: flex;
+    }
+
+    #leftSideMenuHeading {
+        font-size: 30px;
+    }
+
+    .linkItem {
+        font-size: 18px;
+    }
+
+    .linkItem::before {
+        margin-top: 4px;
+        width: 13px;
+        height: 16px;
+    }
+}
+
+/* sm ≥ 768px */
+@media screen and (min-width: 768px) {
+
+    #leftSideMenu {
+        margin-left: 0%;
+    }
+
+    #patientNameProfMobile {
+        display: none;
+    }
+
+    #patientInfoContainerMobile {
+        display: none;
+    }
+
+    #leftSideMenuHeading {
+        font-size: 26px;
+    }
+
+    .linkItem {
+        font-size: 23px;
+    }
+
+    .linkItem::before {
+        margin-top: 6px;
+        width: 17px;
+        height: 21px;
+    }
+}
+
+/* md ≥ 970px */
+@media screen and (min-width: 970px) {
+
+    #leftSideMenuHeading {
+        font-size: 29px;
+    }
+
+    .linkItem {
+        font-size: 23px;
+    }
+
+    .linkItem::before {
+        margin-top: 6px;
+        width: 17px;
+        height: 21px;
+    }
+}
+
+/* lg ≥ 1170px */
+@media screen and (min-width: 1170px) {
+
+    #leftSideMenuHeading {
+        font-size: 36px;
+    }
+
+    .linkItem {
+        font-size: 23px;
+    }
+
+    .linkItem::before {
+        margin-top: 6px;
+        width: 17px;
+        height: 21px;
+    }
+}
+
+#leftSideMenu {
+    height: calc(100vh - 80px);
+    background-color: rgba(42, 46, 58, 100);
+    padding-top: 15px;
+    padding-left: 0px;
+    overflow: scroll;
+    transition: all 400ms ease-in-out;
+    z-index: 999;
+}
+
+#patientNameProfMobile {
+    margin-right: 0;
+    margin-left: 5px;
+    align-items: center;
+}
+
+#patientPicMobile {
+    float: left;
+    background-color: grey;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    flex-grow: 0;
+}
+
+#patientNameMobile {
+    margin-left: 10px;
+    font-size: 20px;
+    color: white;
+    flex-grow: 1;
+}
+
+#patientInfoContainerMobile {
+    margin-left: 15px;
+    margin-top: 10px;
+    margin-bottom: 20px;
+}
+
+.patientInfoText {
+    margin-top: 5px;
+    color: white;
+}
+
+.patientInfoTextTitle {
+    font-weight: bold;
+}
+
+#leftSideMenuHeading {
+    margin-left: 15px;
+    color: white;
+    padding: 0;
+    margin-top: 0;
+}
+
+.linkList {
+    width: 100%;
+    padding: 0;
+    margin: 0;
+}
+
+.linkItem {
+    color: white;
+    cursor: pointer;
+    margin-left: 0;
+    margin-right: 20px;
+    padding-left: 15px;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    box-sizing: border-box;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.25);
+}
+
+.linkItem:hover {
+    background-color: white;
+    color: black;
+}
+
+.linkItem::before {
+    content: "";
+    display: block;
+    background-image: url("../../assets/whitePillIcon.png");
+    background-repeat: no-repeat;
+    background-size: cover;
+    float: left;
+    margin-right: 6px;
+}
+
+.linkItem a:link {
+    color: white;
+}
+
+.linkItem a:visited {
+    color: white;
+}
+
+.linkItem a:hover {
+    color: black;
+}
+
+.debugRed {
+    outline: 1px solid red;
+}
+
+.debugBlue {
+    outline: 1px solid blue;
+}
