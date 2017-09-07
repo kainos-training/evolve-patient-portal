@@ -38,7 +38,7 @@ export class SettingNewPasswordComponent implements OnInit {
   ngOnInit(): void {
     console.log("In ngOnInit in setting-new-password");
     this.route.paramMap
-      .switchMap((params: ParamMap) => this.dataService.getUser(+params.get('id'), this.user))
+      .switchMap((params: ParamMap) => this.dataService.getUser(params.get('id')))
       .subscribe(data => {
         this.user.userID = data['userID'];
         this.user.username = data['username'];

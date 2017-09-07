@@ -183,8 +183,13 @@ exports.requestPasswordReset = function (req, res){
         function(err, rows) {
             if(err) throw err;
             if(rows.length==1){
-                console.log("Rows is: "+ rows[0].name);
-                emailer.sendNotification(rows[0].email,rows[0].name);
+                console.log("database Id is: "+ rows[0].userID);
+
+                var stringUserId = rows[0].userID.toString();
+                var bufferUserId = new Buffer(stringUserId);
+                var base64UserId = bufferUserId.toString('base64').replace(/[=]/g,'~');
+
+                emailer.sendNotification(rows[0].email,rows[0].name, base64UserId);
                 console.log("Sent Email");
                 return res.status(200).json({
                     success: true,
@@ -205,10 +210,22 @@ exports.requestPasswordReset = function (req, res){
 exports.getUser = function (req, res){
     
         console.log('Entered get user');
-        const userID = req.body.userID;
-        console.log('Id is ' + userID);
+        var userID = req.body.userID;
+        console.log('UserId before decryption is ' + userID);
+        var decryptedUserID = userID.replace(/[~]/g,'=');
+        console.log('');
+        console.log('Decrypted user id: ' + decryptedUserID);
+        var buffer = new Buffer(decryptedUserID, 'base64');
+        var realUserID = buffer.toString('ascii');
+
+        var string = "B";
+        var buffer = new Buffer(string, 'base64');
+        var toAscii = buffer.toString('ascii');
+        console.log(string + " encoding to Ascii is " + toAscii);
+
+        console.log('Real userId is ' + realUserID);
         db.query(
-            "SELECT userID, username FROM User WHERE userID=?", [userID],
+            "SELECT userID, username FROM User WHERE userID=?", [realUserID],
             function(err, rows) {
                 if (err) {
                     return res.status(400).json({

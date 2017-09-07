@@ -39,10 +39,9 @@ export class DataService {
             });
     }
 
-    public getUser(userID: number, user: User): Observable<Object> {
-        user.userID = userID;
+    public getUser(userID: string): Observable<Object> {
         const body = {
-            'userID': user.userID
+            'userID': userID
         };
         const options = {
             headers: new HttpHeaders().set('Content-Type', 'application/x-www-form-urlencoded'),
@@ -53,7 +52,7 @@ export class DataService {
 
     public resetPassword(user: User): void {
         const body = {
-            'username': user.username,
+            'userID': user.userID,
             'password': user.password
         };
         const options = {
@@ -63,7 +62,7 @@ export class DataService {
         this.http.post('/api/password/reset', $.param(body), options)
             .subscribe(data => {
                 // saving token, userID and message in the same user object
-                user.username = data['username'];
+                user.userID = data['userID'];
                 user.message = data['message'];
             }, error => {
                 user.loggedIn = false;
@@ -120,8 +119,8 @@ export class DataService {
             .subscribe(data => {
                 this.switchBoard.updateValid(true);
                 this.switchBoard.updateSuccessful(true);
-                user.userID = data['userID'];
-                router.navigate(['/reset', user.userID]);
+                //user.userID = data['userID'];
+                //router.navigate(['/reset', user.userID]);
             }, error => {
                 this.switchBoard.updateValid(false);
                 this.switchBoard.updateSuccessful(false);

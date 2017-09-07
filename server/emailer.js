@@ -3,7 +3,7 @@
 const nodemailer = require('nodemailer');
 const emailConfig = require('./email.config.json');
 
-exports.sendNotification = function(emailAddress, name) {
+exports.sendNotification = function(emailAddress, name, id) {
 
   nodemailer.createTestAccount((err, account) => {
     // create reusable transporter object using the default SMTP transport
@@ -25,7 +25,7 @@ exports.sendNotification = function(emailAddress, name) {
       subject: 'Password Reset for ' + name, // Subject line
       text: 'Click the link to reset your password http://localhost:4200/reset\nIf'+ 
       ' You Did NOT request this password reset please report this To Kainos Immediately', // plain text body
-      html: '<b>Click the link to reset your password <a href="http://localhost:4200/reset">Reset Password</a><br/>'+
+      html: '<b>Click the link to reset your password <a href="http://localhost:4200/reset/' + id + '">Reset Password</a><br/>'+
       'If You Did NOT request this password reset please report this To Kainos Immediately</b>' // html body
     };
 

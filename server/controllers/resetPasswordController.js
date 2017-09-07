@@ -12,8 +12,8 @@ const saltRounds = 10;
 // Update the user's password
 exports.updatePassword = function(req, res) {
 
-        let username = req.body.username.trim();
-        console.log("user: " + username + " is changing password...");
+        let userID = req.body.userID.trim();
+        console.log("user: " + userID + " is changing password...");
         let plainTextPassword = req.body.password.trim();
     
         //Creates the salt to be used
@@ -23,7 +23,7 @@ exports.updatePassword = function(req, res) {
         let password = hash;
     
         db.query(
-            "UPDATE User SET `password` = ? WHERE `username` = ? ", [password, username],
+            "UPDATE User SET `password` = ? WHERE `userID` = ? ", [password, userID],
             function(err, rows) {
                 if (err) {
                     console.log(err);
