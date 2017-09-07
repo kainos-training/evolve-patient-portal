@@ -53,8 +53,6 @@ export class SettingNewPasswordComponent implements OnInit {
         
         this.nonMatchingPasswords = false;
         this.invalidPassword = false;
-        //Code to call the update method
-        alert("New password entered: " + this.newPassword);
         this.user.password = this.newPassword;
 
         this.dataService.resetPassword(this.user);
