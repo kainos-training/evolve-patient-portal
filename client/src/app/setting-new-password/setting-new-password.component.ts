@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import { Location } from '@angular/common';
 import { DataService } from '../services/data.service'
 import { User } from '../User';
+import {ActivatedRoute, ParamMap} from '@angular/router';
+import 'rxjs/add/operator/switchMap';
 
 @Component({
   selector: 'evolve-setting-new-password',
@@ -19,17 +22,29 @@ export class SettingNewPasswordComponent implements OnInit {
   evolveLogoPath: string;
   user: User;
 
-  constructor(dataService: DataService) { 
+  constructor(dataService: DataService, private route: ActivatedRoute, private location: Location) { 
     this.evolveLogoPath = 'assets/EvolveLogo.svg';
     this.invalidPassword = false;
     this.nonMatchingPasswords = false;
     this.changedPassword = false;
     this.dataService = dataService;
     this.user = new User();
-    this.user.username = 'jsmith';//hard coded for testing - change to real user when request reset component is complete
+    //this.user.username = 'jsmith';//hard coded for testing - change to real user when request reset component is complete
   }
 
-  ngOnInit() {
+  ngOnInit(): void {
+    console.log("In ngOnInit in setting-new-password");
+    this.route.paramMap
+      .switchMap((params: ParamMap) => this.dataService.getUser(+params.get('id'), this.user))
+      .subscribe(data => {
+        this.user.userID = data['userID'];
+        this.user.username = data['username'];
+        console.log("Username is " + this.user.username);
+        //this.switchBoard.switchUser(user);
+    }, error => {
+        this.user.loggedIn = false;
+        this.user.message = error["message"];
+    });;
   }
 
   changePasswordNext() : void {

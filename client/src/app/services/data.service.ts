@@ -4,7 +4,8 @@ import {User} from './../user';
 import * as $ from 'jquery';
 import {CookieService} from 'ngx-cookie-service';
 import {SwitchBoardService} from './switch-board.service';
-
+import {Router} from '@angular/router';
+import {Observable} from 'rxjs';
 @Injectable()
 export class DataService {
 
@@ -36,6 +37,18 @@ export class DataService {
                 user.loggedIn = false;
                 user.message = error["message"];
             });
+    }
+
+    public getUser(userID: number, user: User): Observable<Object> {
+        user.userID = userID;
+        const body = {
+            'userID': user.userID
+        };
+        const options = {
+            headers: new HttpHeaders().set('Content-Type', 'application/x-www-form-urlencoded'),
+        };
+
+        return this.http.post('/api/auth/getUser', $.param(body), options);
     }
 
     public resetPassword(user: User): void {
@@ -94,34 +107,25 @@ export class DataService {
         this.cookieService.delete(this.cookieName);
     }
 
-    public resetPass(user: User): void {
+    public requestResetPassword(user: User, router: Router): void {
         console.log('reaches reset method of data service');
-        /*const body = {
+        const body = {
             'username': user.username
         };
         const options = {
             headers: new HttpHeaders().set('Content-Type', 'application/x-www-form-urlencoded'),
         };
 
-        this.http.post('/api/auth/login', $.param(body), options)
+        this.http.post('/api/auth/user', $.param(body), options)
             .subscribe(data => {
-                console.log(data);
-                if(data.exists){
-                    
-                }
+                this.switchBoard.updateValid(true);
+                this.switchBoard.updateSuccessful(true);
+                user.userID = data['userID'];
+                router.navigate(['/reset', user.userID]);
             }, error => {
-                
-            });*/
-    }
-
-    public requestReset(thisUsername: string): void{
-        //Do a Post to server that checks if username exists, sends email or returns an error
-        alert("In data service requestReset()");
-        const user = {username: thisUsername};
-        const options = {
-            headers: new HttpHeaders().set('Content-Type', 'application/json'),
-        };
-        this.http.post("/api/user", user, options).subscribe(res =>{console.log(res)});
+                this.switchBoard.updateValid(false);
+                this.switchBoard.updateSuccessful(false);
+            });
     }
 
 }
