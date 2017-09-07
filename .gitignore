@@ -44,6 +44,8 @@ Thumbs.db
 
 ## Client
 client/node_modules/
+client/package-lock.json
+client/idea/workspace.xml
 
 ## Server
 server/node_modules/

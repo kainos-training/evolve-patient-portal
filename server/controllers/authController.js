@@ -1,13 +1,10 @@
 const db = require('../db');
-const bodyParser = require('body-parser');
-const emailer = require('../emailer');
 var utilsJWT = require('../utils/jwt');
 
 // for encrypting the passord;
 var bcrypt = require('bcrypt');
 //the salt to be used to hash the password
 const saltRounds = 10;
-
 
 function validateLoginForm(payload) {
     const errors = {};
@@ -16,12 +13,12 @@ function validateLoginForm(payload) {
 
     if (!payload || typeof payload.username !== 'string') {
         isFormValid = false;
-        errors.username = 'Please provide a valid username.';
+        errors.username = 'Invalid username or password.';
     }
 
     if (!payload || typeof payload.password !== 'string') {
         isFormValid = false;
-        errors.password = 'Password must be valid';
+        errors.password = 'Invalid usesrname or password';
     }
 
     if (!isFormValid) {
@@ -51,14 +48,13 @@ exports.login = function(req, res) {
     let username = req.body.username.trim();
     let candidatePassword = req.body.password.trim();
 
-
     db.query(
         "SELECT userID, password, firstName, lastName FROM User WHERE username=?", [username],
         function(err, rows) {
             if (err) {
                 return res.status(400).json({
                     success: false,
-                    message: "Incorrect email or password"
+                    message: "Incorrect username or password"
                 });
             } else if (!rows[0]) {
                 return res.status(400).json({
@@ -77,12 +73,12 @@ exports.login = function(req, res) {
                     if (err) {
                         return res.status(400).json({
                             success: false,
-                            message: "Incorrect email or password"
+                            message: "Incorrect username or password"
                         });
                     } else if (!isMatch) {
                         return res.status(400).json({
                             success: false,
-                            message: 'Incorrect email or password!',
+                            message: 'Incorrect username or password!',
                         });
                     } else {
                         let token = utilsJWT.generateToken(user); // Generate JWT Token
@@ -99,21 +95,17 @@ exports.login = function(req, res) {
     )
 };
 
-
-
-
-
 function validateSignup(payload) {
     const errors = {};
     let isFormValid = true;
     let message = '';
 
-    if (!payload) {
+    if (!payload || typeof payload.username !== 'string' || payload.username.trim().length < 1) {
         isFormValid = false;
-        errors.username = 'Please provide a valid email address.';
+        errors.username = 'Please provide a valid username.';
     }
 
-    if (!payload) {
+    if (!payload || typeof payload.password !== 'string' || payload.password.trim().length < 1) {
         isFormValid = false;
         errors.password = 'Please provide valid password.';
     }
@@ -126,7 +118,6 @@ function validateSignup(payload) {
 
 // Creates an account for a user;
 exports.createUserAccount = function(req, res) {
-
     const validationResult = validateSignup(req.body);
 
     if (!validationResult.success) {
@@ -136,7 +127,6 @@ exports.createUserAccount = function(req, res) {
             errors: validationResult.errors
         });
     }
-
 
     let username = req.body.username.trim();
     let plainTextPassword = req.body.password.trim();
@@ -164,9 +154,15 @@ exports.createUserAccount = function(req, res) {
         "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);", [username, password, dateOfBirth, gender, MRIN, firstName, lastName, phoneNumber, title, address, email, deceased, gpID],
         function(err, rows) {
             if (err) {
-                console.log(err);
+                return res.status(400).json({
+                    success: false,
+                    message: "Please provide a valid info"
+                });
             } else {
-                console.log(err, rows);
+                return res.status(200).json({
+                    success: true,
+                    message: "You have successfully registered"
+                });
             }
 
         });

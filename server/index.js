@@ -7,7 +7,6 @@ const bodyParser = require('body-parser');
 const cors = require('cors');
 const morgan = require('morgan');
 const config = require('./config');
-const emailer = require('./emailer');
 
 /**
  * Connect to mySQL database server
@@ -27,19 +26,24 @@ app.use(cors());
 app.use(bodyParser.urlencoded({
     extended: true
 }));
-app.use(morgan('dev')); // HTTP request logger middleware.
+app.use(bodyParser.json());
+//app.use(morgan('dev')); // HTTP request logger middleware.
 app.use(errorHandler()); // Error Handler middleware for more verbose errors
 
 /**
- * Routes configuration.
+ * Express configuration.
  */
 const publicAuthRoutes = require('./routes/publicAuthRoutes');
 const publicAppointmentRoutes = require('./routes/publicAppointmentRoutes');
-const publicResetPasswordRoutes = require('./routes/publicResetPasswordRoutes');
+const protectedMedicationRoutes = require('./routes/protectedMedicationRoutes');
+const publicUserRoutes = require('./routes/publicUserRoutes');
+const publicUserInfoRoute = require('./routes/publicUserInfoRoute');
+
 app.use('/auth', publicAuthRoutes);
 app.use('/appointment', publicAppointmentRoutes);
-app.use('/password', publicResetPasswordRoutes);
+app.use('/medication', protectedMedicationRoutes);
+app.use('/userInfo', publicUserInfoRoute);
+app.use('/user', publicUserRoutes);
 
-app.listen(app.get('port'), function() {
-    console.log('Express server listening on port' + " " + app.get('port'));
-});
+var server = app.listen(app.get('port'));
+module.exports = server;

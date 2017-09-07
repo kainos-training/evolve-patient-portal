@@ -1,0 +1,111 @@
+.panel-default {
+    border-top-width: 5px;
+    border-top-color: #027FBB;
+    margin-top: 10px;
+    margin-left: 10px;
+    margin-right: 10px;
+    height: 400px;
+}
+
+.panel-heading img {
+    height: 25px;
+    width: 25px;
+}
+
+.panel-heading {
+    background: white;
+    font: bold;
+}
+
+.table-btn {
+    background-color: transparent;
+    border: none;
+    width: 100%;
+    text-align: left;
+    outline: none;
+    overflow: hidden;
+}
+
+.pill-icon-modal {
+    height: 25px;
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+.modal-form-input {
+    height: 100px;
+    font-size: 12px;
+    line-height: 14px;
+}
+
+.medium-location-txt {
+    font-size: 14px;
+    font-family: helvetica;
+    font-style: light;
+    color: #666666;
+}
+
+.sml-location-txt {
+    font-size: 11px;
+    font-family: helvetica;
+    font-style: light;
+    color: #666666;
+}
+
+#calender_icon {
+}
+
+#appointment-header {
+    font-size: 24px;
+}
+
+h1 {
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+h1::before {
+    content: "";
+    display: block;
+    background-repeat: no-repeat;
+    margin-top: 0px;
+    margin-left: 20px;
+    margin-right: 10px;
+    margin-bottom: 10px;
+    background-image: url("../../../assets/upcomingAppointmentsIcon.png");
+    width: 25px;
+    height: 26px;
+    float: left;
+    background-size: cover;
+}
+
+.container-fixed {
+    margin: 0 auto;
+    max-width: 500px;
+    min-width: 300px;
+    padding: 0;
+    height: 300px;
+    position: relative;
+}
+
+.input-disabled {
+    background-color: #FFF !important;
+    cursor: default;
+}
+
+.map-container {
+    padding-top: 20px;
+}
+
+#information-display {
+    overflow: auto;
+    max-height: 300px;
+}
+
+.debugRed {
+    outline: 1px solid red;
+}
+
+.debugBlue {
+    outline: 1px solid blue;
+}
