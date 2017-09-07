@@ -4,6 +4,7 @@ import { DataService } from '../services/data.service'
 import { User } from '../User';
 import {ActivatedRoute, ParamMap} from '@angular/router';
 import 'rxjs/add/operator/switchMap';
+import { Router} from '@angular/router';
 
 @Component({
   selector: 'evolve-setting-new-password',
@@ -21,15 +22,17 @@ export class SettingNewPasswordComponent implements OnInit {
   changedPassword: boolean;
   evolveLogoPath: string;
   user: User;
+  noDataEntered: boolean;
 
-  constructor(dataService: DataService, private route: ActivatedRoute, private location: Location) { 
+  constructor(dataService: DataService, private router: Router, private route: ActivatedRoute, private location: Location) { 
     this.evolveLogoPath = 'assets/EvolveLogo.svg';
     this.invalidPassword = false;
     this.nonMatchingPasswords = false;
     this.changedPassword = false;
     this.dataService = dataService;
     this.user = new User();
-    //this.user.username = 'jsmith';//hard coded for testing - change to real user when request reset component is complete
+    this.user.username = 'jsmith';//hard coded for testing - change to real user when request reset component is complete
+    this.noDataEntered = false;
   }
 
   ngOnInit(): void {
@@ -48,17 +51,22 @@ export class SettingNewPasswordComponent implements OnInit {
   }
 
   changePasswordNext() : void {
+
+    if(!this.newPassword) {
+      this.noDataEntered = true;
+    } else {
+      this.noDataEntered = false;
+    }
     
     this.hasUpperCase = !(this.newPassword==this.newPassword.toLowerCase());
     this.hasLowerCase = !(this.newPassword==this.newPassword.toUpperCase());
 
     if(this.newPassword == this.confirmNewPassword) {
+      
       if(this.newPassword.length >= 8 && this.hasUpperCase && this.hasLowerCase) {
-
+        
         this.nonMatchingPasswords = false;
         this.invalidPassword = false;
-        //Code to call the update method
-        alert("New password entered: " + this.newPassword);
         this.user.password = this.newPassword;
 
         this.dataService.resetPassword(this.user);
@@ -83,6 +91,7 @@ export class SettingNewPasswordComponent implements OnInit {
   }
 
   rerouteToLogin() : void {
-    alert("Rerouting to the login component");
+     this.router.navigate(['/login']);
+
   }
 }
