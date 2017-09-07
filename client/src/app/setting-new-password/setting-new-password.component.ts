@@ -31,6 +31,7 @@ export class SettingNewPasswordComponent implements OnInit {
     this.changedPassword = false;
     this.dataService = dataService;
     this.user = new User();
+    //TODO - get username from password reset request email link
     this.user.username = 'jsmith';//hard coded for testing - change to real user when request reset component is complete
     this.noDataEntered = false;
   }
@@ -65,6 +66,8 @@ export class SettingNewPasswordComponent implements OnInit {
       
       if(this.newPassword.length >= 8 && this.hasUpperCase && this.hasLowerCase) {
         
+
+        //Valid password
         this.nonMatchingPasswords = false;
         this.invalidPassword = false;
         this.user.password = this.newPassword;
@@ -73,11 +76,13 @@ export class SettingNewPasswordComponent implements OnInit {
 
         this.changedPassword = true;
       } else {
+          //Invalid password
         this.nonMatchingPasswords = false;
         this.invalidPassword = true;
       }
     }
     else {
+        //Invalid password
       this.nonMatchingPasswords = true;
     }
   }
@@ -87,11 +92,9 @@ export class SettingNewPasswordComponent implements OnInit {
     this.invalidPassword = false;
     this.changedPassword = false;
     this.rerouteToLogin();
-    //TODO: Reroute to the log in component 
   }
 
   rerouteToLogin() : void {
      this.router.navigate(['/login']);
-
   }
 }
