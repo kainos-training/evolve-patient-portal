@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { DataService } from '../services/data.service'
 import { User } from '../User';
+import { Router} from '@angular/router';
 
 @Component({
   selector: 'evolve-setting-new-password',
@@ -18,8 +19,10 @@ export class SettingNewPasswordComponent implements OnInit {
   changedPassword: boolean;
   evolveLogoPath: string;
   user: User;
+  noDataEntered: boolean;
 
-  constructor(dataService: DataService) { 
+  constructor(dataService: DataService, private router: Router) { 
+  
     this.evolveLogoPath = 'assets/EvolveLogo.svg';
     this.invalidPassword = false;
     this.nonMatchingPasswords = false;
@@ -27,19 +30,27 @@ export class SettingNewPasswordComponent implements OnInit {
     this.dataService = dataService;
     this.user = new User();
     this.user.username = 'jsmith';//hard coded for testing - change to real user when request reset component is complete
+    this.noDataEntered = false;
   }
 
   ngOnInit() {
   }
 
   changePasswordNext() : void {
+
+    if(!this.newPassword) {
+      this.noDataEntered = true;
+    } else {
+      this.noDataEntered = false;
+    }
     
     this.hasUpperCase = !(this.newPassword==this.newPassword.toLowerCase());
     this.hasLowerCase = !(this.newPassword==this.newPassword.toUpperCase());
 
     if(this.newPassword == this.confirmNewPassword) {
+      
       if(this.newPassword.length >= 8 && this.hasUpperCase && this.hasLowerCase) {
-
+        
         this.nonMatchingPasswords = false;
         this.invalidPassword = false;
         //Code to call the update method
@@ -68,6 +79,7 @@ export class SettingNewPasswordComponent implements OnInit {
   }
 
   rerouteToLogin() : void {
-    alert("Rerouting to the login component");
+     this.router.navigate(['/login']);
+
   }
 }

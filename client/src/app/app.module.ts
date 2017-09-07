@@ -12,6 +12,7 @@ import { RequestPasswordResetComponent } from './request-password-reset/request-
 import {RouterModule} from '@angular/router';
 import {SettingNewPasswordComponent} from './setting-new-password/setting-new-password.component';
 
+
 @NgModule({
     declarations: [
         AppComponent,
@@ -27,7 +28,16 @@ import {SettingNewPasswordComponent} from './setting-new-password/setting-new-pa
             {
               path: 'login',
               component: LoginComponent
-            }
+            },
+            {
+              path: 'reset',
+              component: SettingNewPasswordComponent
+            },
+            {
+              path: '',
+              redirectTo: '/reset',
+              pathMatch: 'full'
+          }
           ]),
         AlertModule.forRoot()
     ],
