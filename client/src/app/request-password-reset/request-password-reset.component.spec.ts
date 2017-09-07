@@ -1,55 +1,44 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { User } from '../user';
 import { RequestPasswordResetComponent } from './request-password-reset.component';
+import { LoginComponent } from '../login/login.component';
+import { RouterModule } from '@angular/router';
+import { FormsModule } from '@angular/forms';
+import { DataService } from '../services/data.service';
+import { SwitchBoardService } from '../services/switch-board.service';
+import { APP_BASE_HREF } from '@angular/common';
 
 describe('RequestPasswordResetComponent', () => {
-  let component: RequestPasswordResetComponent;
-  let fixture: ComponentFixture<RequestPasswordResetComponent>;
 
-  beforeEach(async(() => {
-    TestBed.configureTestingModule({
-      declarations: [ RequestPasswordResetComponent ]
-    })
-    .compileComponents();
-  }));
+    const mockDataService = {};
+    const mockSwitchboardService = {};
 
-  beforeEach(() => {
-    fixture = TestBed.createComponent(RequestPasswordResetComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
-  });
+    beforeEach(async(() => {
+        TestBed.configureTestingModule({
+            declarations: [
+                RequestPasswordResetComponent,
+                LoginComponent
+            ],
+            imports: [
+                FormsModule,
+                RouterModule.forRoot([{
+                    path: 'login',
+                    component: LoginComponent
+                }
+                ])
+            ],
+            providers: [
+                { provide: DataService, useValue: mockDataService },
+                {provide: SwitchBoardService, useValue: mockSwitchboardService},
+                { provide: APP_BASE_HREF, useValue: '/' }
+            ]
+        })
+            .compileComponents();
+    }));
 
-  it('should be created', () => {
-    expect(component).toBeTruthy();
-  });
-
-  it('valid should be false with wrong email address', () => {
-     const app = fixture.debugElement.componentInstance;
-     app.user.username = "username1";
-     app.onRequestReset();
-     expect(app.valid).toEqual(false);
-  });
-
-  it('should display invalid username message', () => {
-    const app = fixture.debugElement.componentInstance;
-    app.user.username = "username1";
-    app.valid = app.onRequestReset();
-    fixture.detectChanges();
-    expect(app.valid).toEqual(false);
- });
-
- class MockDataService {
-  
-      public login(user: User): boolean {
-          console.log("Requesting Password reset...")
-          //call method from express server
-          //For testing!
-          if(user.username == "kfox"){
-            console.log("Password reset email sent");
-            return true;
-          }
-          console.log("log in failed");
-          return false;
-      }
-  }
+    it('should be created', () => {
+        let fixture = TestBed.createComponent(RequestPasswordResetComponent);
+        let component = fixture.componentInstance;
+        expect(component).toBeTruthy();
+    });
 });

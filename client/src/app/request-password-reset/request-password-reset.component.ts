@@ -31,16 +31,12 @@ export class RequestPasswordResetComponent implements OnInit, OnDestroy {
     }
 
     onRequestReset(): void {
-        console.log('reaches onRequestReset() and Username is: ' + this.user.username);
-        //this.dataService.requestReset(this.username); 
         this.dataService.requestResetPassword(this.user, this.router);
-        //alert("dataService.requestReset returned " + this.successful);
     }
 
     onGoBack(): void {
-        //alert('User clicked cancel');
-        //this.location.back();
     }
+    
     ngOnInit(): void {
         this.validSubscription = this.switchBoard.valid$.subscribe((v) => {
             this.valid = v;

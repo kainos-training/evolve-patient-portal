@@ -31,7 +31,6 @@ export class SettingNewPasswordComponent implements OnInit {
     this.changedPassword = false;
     this.dataService = dataService;
     this.user = new User();
-    //TODO - get username from password reset request email link
     this.noDataEntered = false;
   }
 
@@ -43,7 +42,6 @@ export class SettingNewPasswordComponent implements OnInit {
         this.user.userID = data['userID'];
         this.user.username = data['username'];
         console.log("Username is " + this.user.username);
-        //this.switchBoard.switchUser(user);
     }, error => {
         this.user.loggedIn = false;
         this.user.message = error["message"];
