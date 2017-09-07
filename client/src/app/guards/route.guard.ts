@@ -28,6 +28,7 @@ export class RouteGuard implements CanActivate {
         this.data.getUserFromCookie(this.user);
 
         if (this.user.loggedIn) {
+            this.data.removeRedirectCookie();
             return true;
         } else {
             const url = "/forbidden";

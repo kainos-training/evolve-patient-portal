@@ -15,6 +15,7 @@ export class DataService {
     private cookieName = 'evolve-cookie';
     private urlCookie = 'redirect';
     public evolveLogoPath = 'assets/EvolveLogo.svg';
+    public dashboardURL = '/dashboard';
 
     constructor(private http: HttpClient, private cookieService: CookieService, private switchBoard: SwitchBoardService, private router: Router) {
     }
@@ -35,10 +36,16 @@ export class DataService {
                 this.saveCookie(user.userID, user.username, user.token);
                 // switching between users
                 this.switchBoard.switchUser(user);
-                // redirecting to the previous url
-                this.router.navigateByUrl(this.getRedirectCookie());
+                // redirecting to the previous url or to dashboard as homepage
+                if(this.getRedirectCookie() !== ""){
+                    this.router.navigateByUrl(this.getRedirectCookie());
+                }else{
+                    this.router.navigateByUrl(this.dashboardURL);
+                }
                 // removing the redirect from storage
                 this.removeRedirectCookie();
+                // redirect to dashboard
+
             }, error => {
                 user = this.mapErrorToUser(user, error);
             });
