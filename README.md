@@ -23,7 +23,8 @@ Please create a server/config.json file as follows:
   "password" : "password",
   "host" : "localhost",
   "port" : 8002,
-  "database" :"patientPortal"
+  "database" :"database",
+  "jwtSecret": "jwtSecret"
 }
 ```
 

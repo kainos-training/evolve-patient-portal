@@ -1,0 +1,9 @@
+{
+    "_comment": "This is an example json config file, remove this property and edit the other properties to suit your environment. also rename the file to config.json",
+    "user": "",
+    "password": "",
+    "host": "",
+    "port": ,
+    "database": "",
+    "jwtSecret": ""
+}
