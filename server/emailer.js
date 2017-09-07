@@ -23,10 +23,10 @@ exports.sendNotification = function(emailAddress, name, id) {
       from: '"Evolve Patient" <kainostdp2017@gmail.com>', // sender address
       to: emailAddress, // list of receivers
       subject: 'Password Reset for ' + name, // Subject line
-      text: 'Click the link to reset your password http://localhost:4200/reset\nIf'+ 
+      text: 'Click the following link to reset your password: http://localhost:4200/reset\n\nIf'+ 
       ' You Did NOT request this password reset please report this To Kainos Immediately', // plain text body
-      html: '<b>Click the link to reset your password <a href="http://localhost:4200/reset/' + id + '">Reset Password</a><br/>'+
-      'If You Did NOT request this password reset please report this To Kainos Immediately</b>' // html body
+      html: 'Click the following link to reset your password: <a href="http://localhost:4200/reset/' + id + '">Reset Password</a><br/>'+
+      '<br/><b style="color:red"><u>If You Did NOT</u></b> request this password reset please report this To Kainos Immediately' // html body
     };
 
     // send notification to users email address
