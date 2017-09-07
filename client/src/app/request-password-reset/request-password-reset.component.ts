@@ -20,6 +20,7 @@ export class RequestPasswordResetComponent implements OnInit, OnDestroy {
     user: User;
     validSubscription: Subscription;
     successfulSubscription: Subscription;
+    tickPath: string;
 
 
     constructor(dataService: DataService, private switchBoard: SwitchBoardService, private router: Router) {
@@ -28,6 +29,7 @@ export class RequestPasswordResetComponent implements OnInit, OnDestroy {
         this.successful = false;
         this.dataService = dataService;
         this.evolveLogoPath = 'assets/EvolveLogo.svg';
+        this.tickPath = 'assets/tickInCircle.svg';
     }
 
     onRequestReset(): void {
@@ -36,7 +38,7 @@ export class RequestPasswordResetComponent implements OnInit, OnDestroy {
 
     onGoBack(): void {
     }
-    
+
     ngOnInit(): void {
         this.validSubscription = this.switchBoard.valid$.subscribe((v) => {
             this.valid = v;
