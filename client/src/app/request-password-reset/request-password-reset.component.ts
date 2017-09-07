@@ -20,6 +20,7 @@ export class RequestPasswordResetComponent implements OnInit, OnDestroy {
   user: User;
   validSubscription: Subscription;
   successfulSubscription: Subscription;
+  emailRequested: boolean;
 
   
   constructor(dataService: DataService, private switchBoard: SwitchBoardService, private router: Router) {
@@ -28,13 +29,15 @@ export class RequestPasswordResetComponent implements OnInit, OnDestroy {
     this.successful = false;
     this.dataService = dataService;
     this.evolveLogoPath = 'assets/EvolveLogo.svg';
+    this.emailRequested = false;
   }
 
   onRequestReset(): void
   {
     console.log('reaches onRequestReset() and Username is: ' + this.user.username);
-    //this.dataService.requestReset(this.username);
+    //this.dataService.requestReset(this.username); 
     this.dataService.requestResetPassword(this.user, this.router);
+    this.emailRequested = true;
     //alert("dataService.requestReset returned " + this.successful);
   }
 

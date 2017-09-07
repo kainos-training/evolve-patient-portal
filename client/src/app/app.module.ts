@@ -34,6 +34,10 @@ import {SettingNewPasswordComponent} from './setting-new-password/setting-new-pa
               component: SettingNewPasswordComponent
             },
             {
+                path: 'request-reset',
+                component: RequestPasswordResetComponent
+              },
+            {
               path: '',
               redirectTo: '/reset',
               pathMatch: 'full'

@@ -17,7 +17,7 @@ export class LoginComponent implements OnInit {
     userSubscription: Subscription;
 
     constructor(private data: DataService, private switchBoard: SwitchBoardService) {
-        this.evolveLogoPath = 'assets/EvolveLogo.svg';
+        this.evolveLogoPath = './assets/EvolveLogo.svg';
     }
 
     ngOnInit(): void {

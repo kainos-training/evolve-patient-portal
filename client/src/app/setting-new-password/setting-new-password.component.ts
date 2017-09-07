@@ -25,14 +25,13 @@ export class SettingNewPasswordComponent implements OnInit {
   noDataEntered: boolean;
 
   constructor(dataService: DataService, private router: Router, private route: ActivatedRoute, private location: Location) { 
-    this.evolveLogoPath = 'assets/EvolveLogo.svg';
+    this.evolveLogoPath = './assets/EvolveLogo.svg';
     this.invalidPassword = false;
     this.nonMatchingPasswords = false;
     this.changedPassword = false;
     this.dataService = dataService;
     this.user = new User();
     //TODO - get username from password reset request email link
-    this.user.username = 'jsmith';//hard coded for testing - change to real user when request reset component is complete
     this.noDataEntered = false;
   }
 

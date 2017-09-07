@@ -53,7 +53,7 @@ export class DataService {
 
     public resetPassword(user: User): void {
         const body = {
-            'username': user.username,
+            'userID': user.userID,
             'password': user.password
         };
         const options = {
