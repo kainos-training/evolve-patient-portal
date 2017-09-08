@@ -3,7 +3,8 @@ import { DashboardComponent } from './dashboard.component';
 import {TopBarComponent} from '../top-bar/top-bar.component';
 import {LeftSideMenuComponent} from '../left-side-menu/left-side-menu.component';
 import {MapViewComponent} from '../map-view/map-view.component';
-import {Appointment} from '../class/appointment';
+import { AppointmentComponent } from "../components/appointment/appointment.component";
+import { Marker, NguiMapComponent, DirectionsRenderer } from "@ngui/map/dist";
 
 describe('DashboardComponent', () => {
   let component: DashboardComponent;
@@ -16,15 +17,19 @@ describe('DashboardComponent', () => {
           TopBarComponent,
           LeftSideMenuComponent,
           MapViewComponent,
-          Appointment
+          AppointmentComponent,
+          Marker,
+          DirectionsRenderer,
+          NguiMapComponent
       ]
     })
     .compileComponents();
   }));
 
-  // it('should be created', async () => {
-  //     fixture = TestBed.createComponent(DashboardComponent);
-  //     component = fixture.componentInstance;
-  //     expect(component).toBeTruthy();
-  // });
+  it('should be created', async () => {
+      fixture = TestBed.createComponent(DashboardComponent);
+      component = fixture.componentInstance;
+      expect(component).toBeTruthy();
+  });
 });
+

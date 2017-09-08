@@ -42,7 +42,7 @@ export class AppointmentComponent implements OnInit, OnDestroy {
 
     ngOnInit() {
         // getting the location here helps speed up the map displaying in the map component
-        this.subCenter = this.navigatorGeolocation.getCurrentPosition({'timeout': 5000}).subscribe((location) => {
+        this.subCenter = this.navigatorGeolocation.getCurrentPosition({'timeout': 10000}).subscribe((location) => {
             this.userLocation = location;
         });
     }

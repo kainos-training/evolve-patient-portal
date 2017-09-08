@@ -23,15 +23,16 @@ export class MapViewComponent implements AfterContentInit, OnDestroy {
     private directionsResult: google.maps.DirectionsResult;
     private directionsRendererDirective = new google.maps.DirectionsRenderer();
     private directions: google.maps.DirectionsRequest = {};
+    private userLatLng: google.maps.LatLng;
 
     constructor() {
     }
 
     ngAfterContentInit() {
         if (this.userLocation) {
-            var userLatLng = new google.maps.LatLng(this.userLocation.coords.latitude, this.userLocation.coords.longitude);
-            this.center = userLatLng;
-            this.directions.origin = userLatLng;
+            this.userLatLng = new google.maps.LatLng(this.userLocation.coords.latitude, this.userLocation.coords.longitude);
+            this.center = this.userLatLng;
+            this.directions.origin = this.userLatLng;
             this.directions.destination = this.departmentAddress;
             this.directions.travelMode = google.maps.TravelMode.DRIVING;
         }
