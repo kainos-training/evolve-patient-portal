@@ -7,6 +7,7 @@ import {SwitchBoardService} from './switch-board.service';
 import {Router} from '@angular/router';
 import {Appointment} from '../class/appointment';
 import {AppointmentFurtherInfo} from '../class/appointmentFurtherInfo';
+import {Observable} from 'rxjs/Observable';
 
 @Injectable()
 export class DataService {
@@ -14,6 +15,7 @@ export class DataService {
     private cookieName = 'evolve-cookie';
     private urlCookie = 'redirect';
     public evolveLogoPath = 'assets/EvolveLogo.svg';
+    public dashboardURL = '/dashboard';
 
     constructor(private http: HttpClient, private cookieService: CookieService, private switchBoard: SwitchBoardService, private router: Router) {
     }
@@ -34,13 +36,30 @@ export class DataService {
                 this.saveCookie(user.userID, user.username, user.token);
                 // switching between users
                 this.switchBoard.switchUser(user);
-                // redirecting to the previous url
-                this.router.navigateByUrl(this.getRedirectCookie());
+                // redirecting to the previous url or to dashboard as homepage
+                if(this.getRedirectCookie() !== ""){
+                    this.router.navigateByUrl(this.getRedirectCookie());
+                }else{
+                    this.router.navigateByUrl(this.dashboardURL);
+                }
                 // removing the redirect from storage
                 this.removeRedirectCookie();
+                // redirect to dashboard
+
             }, error => {
                 user = this.mapErrorToUser(user, error);
             });
+    }
+
+    public getUser(userID: string): Observable<Object> {
+        const body = {
+            'userID': userID
+        };
+        const options = {
+            headers: new HttpHeaders().set('Content-Type', 'application/x-www-form-urlencoded'),
+        };
+
+        return this.http.post('/api/password/getUser', $.param(body), options);
     }
 
     public mapDataToUser(user, data): User {
@@ -150,4 +169,47 @@ export class DataService {
         let url = '/api/userInfo/getUserInfoByUserID';
         return this.http.post<User>(url, body, options);
     }
+
+    public requestResetPassword(user: User, router: Router): void {
+        console.log('reaches reset method of data service');
+        const body = {
+            'username': user.username
+        };
+        const options = {
+            headers: new HttpHeaders().set('Content-Type', 'application/x-www-form-urlencoded'),
+        };
+
+        this.http.post('/api/password/user', $.param(body), options)
+            .subscribe(data => {
+                this.switchBoard.updateValid(true);
+                this.switchBoard.updateSuccessful(true);
+                //user.userID = data['userID'];
+                //router.navigate(['/reset', user.userID]);
+            }, error => {
+                this.switchBoard.updateValid(false);
+                this.switchBoard.updateSuccessful(false);
+            });
+    }
+
+    public resetPassword(user: User): void {
+        const body = {
+            'userID': user.userID,
+            'password': user.password
+        };
+        const options = {
+            headers: new HttpHeaders().set('Content-Type', 'application/x-www-form-urlencoded'),
+        };
+
+        this.http.post('/api/password/reset', $.param(body), options)
+            .subscribe(data => {
+                // saving token, userID and message in the same user object
+                user.userID = data['userID'];
+                user.message = data['message'];
+            }, error => {
+                user.loggedIn = false;
+                user.message = error["message"];
+            });
+    }
+
+
 }

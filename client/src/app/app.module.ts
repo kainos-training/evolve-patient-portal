@@ -20,6 +20,8 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {NguiMapModule} from '@ngui/map';
 import {MenuStateService} from './services/menu-state.service';
 import {DashboardComponent} from './dashboard/dashboard.component';
+import {SettingNewPasswordComponent} from './setting-new-password/setting-new-password.component';
+import {RequestPasswordResetComponent} from './request-password-reset/request-password-reset.component';
 
 @NgModule({
     declarations: [
@@ -30,7 +32,9 @@ import {DashboardComponent} from './dashboard/dashboard.component';
         LeftSideMenuComponent,
         MapViewComponent,
         AppointmentComponent,
-        DashboardComponent
+        DashboardComponent,
+        SettingNewPasswordComponent,
+        RequestPasswordResetComponent
     ],
     imports: [
         BrowserModule,

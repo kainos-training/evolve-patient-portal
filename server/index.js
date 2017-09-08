@@ -38,7 +38,9 @@ const publicAppointmentRoutes = require('./routes/publicAppointmentRoutes');
 const protectedMedicationRoutes = require('./routes/protectedMedicationRoutes');
 const publicUserRoutes = require('./routes/publicUserRoutes');
 const publicUserInfoRoute = require('./routes/publicUserInfoRoute');
+const publicResetPasswordRoutes = require('./routes/publicResetPasswordRoutes');
 
+app.use('/password', publicResetPasswordRoutes);
 app.use('/auth', publicAuthRoutes);
 app.use('/appointment', publicAppointmentRoutes);
 app.use('/medication', protectedMedicationRoutes);

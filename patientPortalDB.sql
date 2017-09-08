@@ -14,7 +14,7 @@ primary key (gpID)
 
 CREATE TABLE IF NOT EXISTS `User` (
 userID int auto_increment not null, 
-username varchar(100) not null,
+username varchar(100) not null unique,
 `password` varchar(256) not null,
 dateOfBirth date not null,
 gender enum('Male', 'Female') not null,

@@ -3,17 +3,20 @@ import {DataService} from '../services/data.service';
 import {SwitchBoardService} from '../services/switch-board.service';
 import {LoginComponent} from './login.component';
 import {FormsModule} from '@angular/forms';
+import {Router} from '@angular/router';
 
 describe('LoginComponent', () => {
     const mockDataService = {};
     const mockSwitchboardService = {};
+    const mockRouter = {};
 
     beforeEach(async(() => {
         TestBed.configureTestingModule({
             declarations: [LoginComponent],
             providers: [
                 {provide: DataService, useValue: mockDataService}, //use mock data service object
-                {provide: SwitchBoardService, useValue: mockSwitchboardService}
+                {provide: SwitchBoardService, useValue: mockSwitchboardService},
+                {provide: Router, useValue: mockRouter}
             ],
             imports: [
                 FormsModule
