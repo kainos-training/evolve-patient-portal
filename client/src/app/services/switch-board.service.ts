@@ -1,4 +1,6 @@
 import { Injectable } from '@angular/core';
+import { Medication } from '../Medication';
+import { MedicationComment } from '../MedicationComment';
 import {Subject} from 'rxjs/Subject';
 import {User} from '../class/user';
 
@@ -6,7 +8,7 @@ import {User} from '../class/user';
 export class SwitchBoardService {
 
     constructor() { }
-
+    
     private userWatcher = new Subject<User>();
     public user$ = this.userWatcher.asObservable();
     

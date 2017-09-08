@@ -1,3 +1,30 @@
+/* You can add global styles to this file, and also import other style files */
+.modal-content{
+    border-radius: 2px;
+    margin: 20px;
+}
+
+.modal-body{
+    background-color: #EBF0F4;
+    padding: 20px;
+}
+
+.modal-backdrop {
+   background: linear-gradient(to bottom, rgba(0,0,0,0) 0%,rgba(0,0,0,0.65) 73%,rgba(0,0,0,0.65) 99%);
+}
+
+.evolve-modal-btn{
+    margin-left: 30%;
+    margin-right: 30%;
+    width: 40%;
+}
+
+.input[type="submit"]{
+    background-color: #00CE8B;
+}
+
+.pageBackground {
+}
 .modal-content{
     border-radius: 2px;
 }

@@ -13,7 +13,7 @@ primary key (gpID)
 );
 
 CREATE TABLE IF NOT EXISTS `User` (
-userID int auto_increment not null, 
+userID int auto_increment not null unique, 
 username varchar(100) not null unique,
 `password` varchar(256) not null,
 dateOfBirth date not null,
@@ -126,9 +126,9 @@ VALUES ('Dr. A Cheyne', 'Ormeau Park Surgery', '281 Ormeau Rd, Belfast BT7 3GG, 
 ('Dr. R Kane', 'Springvale Medical Practice', '463 Springfield Rd, Belfast BT12 7DP, UK');
 
 INSERT INTO `User` (username, `password`, dateOfBirth, gender, MRIN, firstName, lastName, phoneNumber, title, address, email, deceased, gpID)
-VALUES ('jsmith', '$2a$10$YqV/YtnOUd62xFSai8gRseO4nU5otTdyDTD7yWwaVquZfo02O2Uee', '1960-01-01', 'Female', '123456789', 'Jane', 'Smith', '07712345678', 'Mrs', '32 Orby Walk, Belfast', 'j.smith@googlemail.com', 'No', 1),
-('smurray', '$2a$10$YqV/YtnOUd62xFSai8gRseO4nU5otTdyDTD7yWwaVquZfo02O2Uee', '1997-08-08', 'Female', '123456890', 'Shannon', 'Murray', '07912345678', 'Mrs', '23 Grace Avenue, Belfast', 's.murray@hotmail.co.uk', 'No', 2),
-('jdaniels', '$2a$10$YqV/YtnOUd62xFSai8gRseO4nU5otTdyDTD7yWwaVquZfo02O2Uee',  '1989-11-09', 'Male', '098765432', 'Jack', 'Daniels', '07745678921', 'Mr', '91 Bangor Road, Newtownards',  'jdaniels@gmail.com', 'No', 3);
+VALUES ('jsmith', '$2a$10$YqV/YtnOUd62xFSai8gRseO4nU5otTdyDTD7yWwaVquZfo02O2Uee', '1960-01-01', 'Female', '123456789', 'Jane', 'Smith', '07712345678', 'Mrs', '32 Orby Walk, Belfast', 's.dorrian@kainos.com', 'No', 1),
+('smurray', '$2a$10$YqV/YtnOUd62xFSai8gRseO4nU5otTdyDTD7yWwaVquZfo02O2Uee', '1997-08-08', 'Female', '123456890', 'Shannon', 'Murray', '07912345678', 'Mrs', '23 Grace Avenue, Belfast', 's.dorrian@kainos.com', 'No', 2),
+('jdaniels', '$2a$10$YqV/YtnOUd62xFSai8gRseO4nU5otTdyDTD7yWwaVquZfo02O2Uee',  '1989-11-09', 'Male', '098765432', 'Jack', 'Daniels', '07745678921', 'Mr', '91 Bangor Road, Newtownards',  's.dorrian@kainos.com', 'No', 3);
 
 INSERT INTO MedicationType(medicationType)
 VALUES ('Antibiotics'), ('Mood Stabilizers'), ('Analgesics'), ('Antipyretics');
@@ -173,7 +173,11 @@ INSERT INTO AppointmentType (`type`)
 VALUES ('Pre-Op Assessment'), ('Emergency Surgery'), ('GP Appointment'), ('Check-up');
 
 INSERT INTO Appointment (userID, locationDepartmentID, clinicianID, dateOfAppointment, `comment`, appointmentTypeID)
-VALUES (1, 3, 3, '2017-07-07', 'Ultrasound performed, pregnancy progressing normally.', 4),
-(3, 4, 2, '2017-11-11', null, 1);
-
+VALUES(1, 3, 3, '2017-07-07', 'Ultrasound performed, pregnancy progressing normally.', 4),
+(3, 4, 2, '2017-11-11 09:00:00', null, 1),
+(1, 3, 3, '2017-07-09 12:00:00', 'Appointment in relation to abdominal crampss,', 3),
+(1, 3, 2, '2017-07-10 13:00:00', 'Checkup after Ultrasound,', 4),
+(1, 1, 1, '2017-09-10 15:00:00', 'INSTRUCTIONS: Do not eat any food 24 hours before surgery.', 1),
+(1, 2, 1, '2017-09-10 11:00:00', 'Foot complaints.', 3),
+(1, 3, 1, '2017-09-10 16:00:00', 'Other food compaints .', 3);
 

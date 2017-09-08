@@ -2,9 +2,9 @@
     border-top-width: 5px;
     border-top-color: #027FBB;
     margin-top: 10px;
-    margin-left: 10px;
-    margin-right: 10px;
+    
     height: 400px;
+   
 }
 
 .panel-heading img {
@@ -33,26 +33,22 @@
 }
 
 .modal-form-input {
-    height: 100px;
-    font-size: 12px;
-    line-height: 14px;
+    font-size: 15px;
+    font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+    color: #666666;
 }
 
-.medium-location-txt {
-    font-size: 14px;
-    font-family: helvetica;
-    font-style: light;
+.medium-location-text {
+    font-size: 15px;
+    font-family: "Helvetica";
+    font-style: bold;
     color: #666666;
 }
 
 .sml-location-txt {
-    font-size: 11px;
-    font-family: helvetica;
-    font-style: light;
+    font-size: 15px;
+    font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
     color: #666666;
-}
-
-#calender_icon {
 }
 
 #appointment-header {
@@ -108,4 +104,9 @@ h1::before {
 
 .debugBlue {
     outline: 1px solid blue;
+}
+code{
+    font-size: 12px;
+    font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+    color: #666666;
 }

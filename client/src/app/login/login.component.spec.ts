@@ -3,6 +3,8 @@ import {DataService} from '../services/data.service';
 import {SwitchBoardService} from '../services/switch-board.service';
 import {LoginComponent} from './login.component';
 import {FormsModule} from '@angular/forms';
+import { ReviewMedicationComponent } from '../review-medication/review-medication.component';
+import { EllipsisPipe } from '../ellipsis.pipe';
 import {Router} from '@angular/router';
 
 describe('LoginComponent', () => {
@@ -12,7 +14,7 @@ describe('LoginComponent', () => {
 
     beforeEach(async(() => {
         TestBed.configureTestingModule({
-            declarations: [LoginComponent],
+            declarations: [LoginComponent, ReviewMedicationComponent, EllipsisPipe],
             providers: [
                 {provide: DataService, useValue: mockDataService}, //use mock data service object
                 {provide: SwitchBoardService, useValue: mockSwitchboardService},

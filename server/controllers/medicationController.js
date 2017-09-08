@@ -109,6 +109,10 @@ exports.getWikiMedicationDescription = function(req, res) {
 
         request(requestOptions, function(err, httpResponse, body) {
             const returnData = {
+                // Note(Dariusz J.): 
+                // xml.parseString.childs[0].... is due to format of how data is pulled from wikipedia API.
+                // We only need one filed therefore we get only necessary data to post to front end => it is easier to handle it on the client side.
+                // For more info, refer to wikipedia API documentation.
                 "description": xml.parseString("<xml>" + body + "</xml>").childs[0].childs[0].childs[0].childs[0].childs[0].childs[0]
             };
             res.status(200).send(returnData);

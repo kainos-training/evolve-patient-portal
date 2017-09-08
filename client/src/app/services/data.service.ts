@@ -1,17 +1,20 @@
-import {Injectable} from '@angular/core';
-import {HttpClient, HttpHeaders} from '@angular/common/http';
-import {User} from '../class/user';
+import { Injectable } from '@angular/core';
+import { HttpClient, HttpHeaders } from "@angular/common/http";
+import { Medication } from '../Medication';
+import { Observable } from 'rxjs/Observable';
+import { MedicationComment } from '../MedicationComment';
+import { MedicationDescription } from '../MedicationDescription';
+import { User } from '../class/user';
 import * as $ from 'jquery';
-import {CookieService} from 'ngx-cookie-service';
-import {SwitchBoardService} from './switch-board.service';
-import {Router} from '@angular/router';
+import { CookieService } from 'ngx-cookie-service';
+import { SwitchBoardService } from './switch-board.service';
+import { Router } from '@angular/router';
 import {Appointment} from '../class/appointment';
 import {AppointmentFurtherInfo} from '../class/appointmentFurtherInfo';
 import {Observable} from 'rxjs/Observable';
 
 @Injectable()
 export class DataService {
-
     private cookieName = 'evolve-cookie';
     private urlCookie = 'redirect';
     public evolveLogoPath = 'assets/EvolveLogo.svg';
@@ -20,6 +23,72 @@ export class DataService {
     constructor(private http: HttpClient, private cookieService: CookieService, private switchBoard: SwitchBoardService, private router: Router) {
     }
 
+    public getMedicationList(userID) {
+        const body = {
+            "userID": userID
+        };
+        const options = {
+            headers: new HttpHeaders().set('Content-Type', 'application/json'),
+        };
+
+        return this.http.post<Medication[]>('api/medication/list', body, options);
+    };
+
+    public getMedicationComments(medicationUserID) {
+        const body = {
+            "medicationUserID": medicationUserID
+        };
+        const options = {
+            headers: new HttpHeaders().set('Content-Type', 'application/json'),
+        };
+
+        return this.http.post<MedicationComment[]>('api/medication/comments/list', body, options);
+    }
+
+    public getMedicationHistory(medicationID, userID) {
+        const body = {
+            "medicationID": medicationID,
+            "userID": userID
+        };
+        const options = {
+            headers: new HttpHeaders().set('Content-Type', 'application/json'),
+        };
+
+        return this.http.post<Medication[]>('api/medication/history', body, options);
+    }
+
+    public removeMedicationComment(medicationUserCommentID) {
+        const body = {
+            "medicationUserCommentID": medicationUserCommentID
+        };
+        const options = {
+            headers: new HttpHeaders().set('Content-Type', 'application/json'),
+        };
+        this.http.post('api/medication/comments/remove', body, options).subscribe();
+    }
+
+    public addMedicationComment(medicationUserID, commentText) {
+        const body = {
+            "medicationUserID": medicationUserID,
+            "commentText": commentText
+        };
+        const options = {
+            headers: new HttpHeaders().set('Content-Type', 'application/json'),
+        };
+        this.http.post('api/medication/comments/add', body, options).subscribe();
+    }
+
+    public getWikiSummary(medName) {
+        const body = {
+            "medicationName": medName
+        };
+        const options = {
+            headers: new HttpHeaders().set('Content-Type', 'application/json')
+        };
+
+        return this.http.post<MedicationDescription>('api/medication/wiki/desc', body, options);
+    }
+    
     public login(user: User): void {
         const body = {
             'username': user.username,
@@ -90,7 +159,7 @@ export class DataService {
         var cookieJSON;
         user.loggedIn = false;
 
-        if (cookieValue) {
+        if(cookieValue) {
             cookieJSON = JSON.parse(cookieValue);
         }
 
@@ -108,7 +177,7 @@ export class DataService {
     }
 
     public saveCookie(userID, username, token): void {
-        if (userID && username && token) {
+        if(userID && username && token) {
             const cookieJSON = {
                 userID: userID,
                 username: username,

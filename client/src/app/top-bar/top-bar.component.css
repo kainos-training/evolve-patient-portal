@@ -89,9 +89,24 @@
     border-radius: 1px;
 }
 
-
+.log-out-button {
+    margin-left: 5px;
+    font-size: 30px;
+    color:white;
+    background: transparent;
+    float: right;
+    margin-top: 25px;
+    border: none;
+    transition: transform 1s ease;  
+    width: 30px;
+    height: 30px;
+    margin-right: 5px;
+    cursor: pointer;    
+}
 
 .settings-button {
+    margin-left: 5px;
+    display:none !important;
     background: transparent;
     background-image: url("../../assets/settings_icon_4.png");
     float: right;

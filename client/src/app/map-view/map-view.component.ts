@@ -1,6 +1,6 @@
-import {Subscription} from 'rxjs/Rx';
-import {NavigatorGeolocation} from '@ngui/map';
-import {AfterContentInit, Component, Input, OnDestroy} from '@angular/core';
+import { Subscription } from 'rxjs/Rx';
+import { NavigatorGeolocation } from '@ngui/map';
+import { AfterContentInit, Component, Input, OnDestroy} from '@angular/core';
 import {} from '@types/googlemaps';
 
 declare var google: any;
