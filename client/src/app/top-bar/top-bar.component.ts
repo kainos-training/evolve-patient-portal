@@ -2,6 +2,8 @@ import {Component, HostListener, TemplateRef} from '@angular/core';
 import {BsModalService} from 'ngx-bootstrap/modal';
 import {BsModalRef} from 'ngx-bootstrap/modal/modal-options.class';
 import {MenuStateService} from '../services/menu-state.service';
+import {DataService} from '../services/data.service';
+import { Router } from '@angular/router';
 
 @Component({
     selector: 'evolve-top-bar',
@@ -19,7 +21,7 @@ export class TopBarComponent {
         this.modalRef = this.modalService.show(template);
     }
 
-    constructor(private pMenuStateService: MenuStateService, private modalService: BsModalService) {
+    constructor(private data: DataService, private router: Router, private pMenuStateService: MenuStateService, private modalService: BsModalService) {
         this.menuStateService = pMenuStateService;
         this.determineMenuState();
     }
@@ -47,5 +49,11 @@ export class TopBarComponent {
     resize(event) {
         this.determineMenuState();
         this.menuStateService.stateString(this.menuState);
+    }
+
+    logout() {
+        this.data.removeCookie();
+        this.data.removeRedirectCookie();
+        this.router.navigate(['/login']);
     }
 }

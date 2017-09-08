@@ -1,17 +1,20 @@
-import {BrowserModule} from '@angular/platform-browser';
-import {NgModule} from '@angular/core';
-import {AppComponent} from './components/app.component';
-import {AlertModule, ModalModule} from 'ngx-bootstrap';
-import {DataService} from './services/data.service';
-import {HttpClientModule} from '@angular/common/http';
-import {LoginComponent} from './login/login.component';
-import {FormsModule} from '@angular/forms';
-import {CookieService} from 'ngx-cookie-service';
-import {SwitchBoardService} from './services/switch-board.service';
-import {routes} from './app.router';
-import {ErrorPageComponent} from './error-page/error-page.component';
-import {RouteGuard} from './guards/route.guard';
-import {SimpleTimer} from 'ng2-simple-timer';
+import { BrowserModule } from '@angular/platform-browser';
+import { NgModule } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import { AppComponent } from './components/app.component';
+import { AlertModule } from "ngx-bootstrap";
+import { DataService } from "./services/data.service";
+import { HttpClientModule } from "@angular/common/http";
+import { ReviewMedicationComponent } from './review-medication/review-medication.component';
+import { SwitchBoardService } from './services/switch-board.service';
+import { ModalModule } from 'ngx-bootstrap/modal';
+import { EllipsisPipe } from './ellipsis.pipe';
+import { LoginComponent } from './login/login.component';
+import { CookieService } from 'ngx-cookie-service';
+import { routes } from './app.router';
+import { ErrorPageComponent } from './error-page/error-page.component';
+import { RouteGuard } from './guards/route.guard';
+import { SimpleTimer } from 'ng2-simple-timer';
 import {TopBarComponent} from './top-bar/top-bar.component';
 import {LeftSideMenuComponent} from './left-side-menu/left-side-menu.component';
 import {MapViewComponent} from './map-view/map-view.component';
@@ -28,6 +31,8 @@ import {RequestPasswordResetComponent} from './request-password-reset/request-pa
         AppComponent,
         LoginComponent,
         ErrorPageComponent,
+        ReviewMedicationComponent,
+        EllipsisPipe,
         TopBarComponent,
         LeftSideMenuComponent,
         MapViewComponent,
@@ -46,7 +51,8 @@ import {RequestPasswordResetComponent} from './request-password-reset/request-pa
         NguiMapModule.forRoot({apiUrl: 'https://maps.google.com/maps/api/js?key=AIzaSyC6v7VVrChAt97hxrsY76i8Xg2mcaQMuE8'}),
         BrowserAnimationsModule
     ],
-    providers: [
+    providers: [DataService,
+        SwitchBoardService,
         DataService,
         CookieService,
         SwitchBoardService,

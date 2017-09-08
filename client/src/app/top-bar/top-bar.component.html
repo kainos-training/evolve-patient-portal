@@ -7,9 +7,11 @@
         </div>
         <img id="evolve-logo" src="assets/evolveLogo.png" alt="evolve-logo">
         <div class="visible-xs settings-button" (click)="openModal(popup)"></div>
+        <p class="visible-xs" (click)=logout()><span class="log-out-button glyphicon glyphicon-log-out"></span></p>   
     </div>
-    <div class="hidden-xs col-sm-9 right-item">
-        <div class="settings-button" (click)="openModal(popup)"></div>
+    <div id="button-list" class="hidden-xs col-sm-9 right-item">
+        <div class="settings-button" style="float:right; display:none !important;" (click)="openModal(popup)"></div>
+        <div (click)=logout()><span class="log-out-button glyphicon glyphicon-log-out"></span></div>   
     </div>
 </div>
 

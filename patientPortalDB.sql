@@ -13,7 +13,7 @@ primary key (gpID)
 );
 
 CREATE TABLE IF NOT EXISTS `User` (
-userID int auto_increment not null, 
+userID int auto_increment not null unique, 
 username varchar(100) not null unique,
 `password` varchar(256) not null,
 dateOfBirth date not null,
@@ -173,7 +173,11 @@ INSERT INTO AppointmentType (`type`)
 VALUES ('Pre-Op Assessment'), ('Emergency Surgery'), ('GP Appointment'), ('Check-up');
 
 INSERT INTO Appointment (userID, locationDepartmentID, clinicianID, dateOfAppointment, `comment`, appointmentTypeID)
-VALUES (1, 3, 3, '2017-07-07', 'Ultrasound performed, pregnancy progressing normally.', 4),
-(3, 4, 2, '2017-11-11', null, 1);
-
+VALUES(1, 3, 3, '2017-07-07', 'Ultrasound performed, pregnancy progressing normally.', 4),
+(3, 4, 2, '2017-11-11 09:00:00', null, 1),
+(1, 3, 3, '2017-07-09 12:00:00', 'Appointment in relation to abdominal crampss,', 3),
+(1, 3, 2, '2017-07-10 13:00:00', 'Checkup after Ultrasound,', 4),
+(1, 1, 1, '2017-09-10 15:00:00', 'INSTRUCTIONS: Do not eat any food 24 hours before surgery.', 1),
+(1, 2, 1, '2017-09-10 11:00:00', 'Foot complaints.', 3),
+(1, 3, 1, '2017-09-10 16:00:00', 'Other food compaints .', 3);
 
