@@ -13,7 +13,6 @@ const saltRounds = 10;
 exports.updatePassword = function(req, res) {
 
         let userID = req.body.userID.trim();
-        console.log("user: " + userID + " is changing password...");
         let plainTextPassword = req.body.password.trim();
     
         //Creates the salt to be used

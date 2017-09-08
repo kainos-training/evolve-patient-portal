@@ -35,7 +35,6 @@ exports.sendNotification = function(emailAddress, name, id) {
       if (error) {
         return console.log(error);
       }
-      console.log('Message sent: %s', info.messageId);
     });
   });
 }

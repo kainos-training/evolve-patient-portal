@@ -8,12 +8,10 @@ publicResetPasswordRoutes.post('/reset', function(req, res) {
 });
 
 publicResetPasswordRoutes.post('/user', function(req, res) {
-    console.log('In user routes');
     return requestPasswordResetController.requestPasswordReset(req, res);
 });
 
 publicResetPasswordRoutes.post('/getUser', function(req, res) {
-    console.log('In get getUser route');
     return requestPasswordResetController.getUser(req, res);
 });
 
