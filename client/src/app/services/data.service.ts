@@ -11,7 +11,6 @@ import { SwitchBoardService } from './switch-board.service';
 import { Router } from '@angular/router';
 import {Appointment} from '../class/appointment';
 import {AppointmentFurtherInfo} from '../class/appointmentFurtherInfo';
-import {Observable} from 'rxjs/Observable';
 
 @Injectable()
 export class DataService {
