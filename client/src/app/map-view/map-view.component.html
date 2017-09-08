@@ -1,8 +1,8 @@
 <div *ngIf="center">
     <!-- map component -->
-    <ngui-map center="userLocationTest" (zoom_changed)="onMapZoomChanged($event)" (center_changed)="onMapCenterChanged($event)">
+    <ngui-map center="userLocation" (zoom_changed)="onMapZoomChanged($event)" (center_changed)="onMapCenterChanged($event)">
         <!-- current user's marker -->
-        <marker (initialized$)="onMarkerInit($event)" label="A"></marker>
+        <marker [position]="userLatLng" (initialized$)="onMarkerInit($event)" label="A"></marker>
         <!-- The destination marker -->
         <marker [position]="departmentAddress" label="B" (initialized$)="onMarkerInit($event)"></marker>
         <!-- directions render and panel -->
