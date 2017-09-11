@@ -65,6 +65,7 @@ medicationUserCommentID int auto_increment not null,
 medicationUserID int not null,
 commentText text not null,
 `timeStamp` timeStamp not null,
+deleted boolean default false not null,
 primary key (medicationUserCommentID),
 foreign key (medicationUserID) references MedicationUser (medicationUserID)
 );
@@ -151,9 +152,9 @@ VALUES (1, 3, '2017-06-01', '2019-08-10', '10mg'),
 (2, 1, '2017-02-09', '2019-02-27', '15mg'),
 (3, 2, '2016-09-29', '2018-10-10', '10mg');
 
-INSERT INTO MedicationUserComment(medicationUserID, commentText)
-VALUES (1, 'Not feeling the benefit after two weeks'), (2, 'Helping to minimise pain but still exists'),
-(3, 'Not helping with pain, possibly need stronger medication'), (4, 'Feeling better mentally');
+INSERT INTO MedicationUserComment(medicationUserID, commentText, deleted)
+VALUES (1, 'Not feeling the benefit after two weeks', false), (2, 'Helping to minimise pain but still exists', false),
+(3, 'Not helping with pain, possibly need stronger medication', false), (4, 'Feeling better mentally', false);
 
 INSERT INTO Clinician (title, firstName, lastName, jobTitle)
 VALUES ('Dr', 'Alex', 'Hyndman', 'Consultant'), ('Dr', 'John', 'Adams', 'Oncologist'), ('Dr', 'Karen', 'Reid', 'Obstetrician');
@@ -177,7 +178,6 @@ VALUES(1, 3, 3, '2017-07-07', 'Ultrasound performed, pregnancy progressing norma
 (3, 4, 2, '2017-11-11 09:00:00', null, 1),
 (1, 3, 3, '2017-07-09 12:00:00', 'Appointment in relation to abdominal crampss,', 3),
 (1, 3, 2, '2017-07-10 13:00:00', 'Checkup after Ultrasound,', 4),
-(1, 1, 1, '2017-09-10 15:00:00', 'INSTRUCTIONS: Do not eat any food 24 hours before surgery.', 1),
-(1, 2, 1, '2017-09-10 11:00:00', 'Foot complaints.', 3),
-(1, 3, 1, '2017-09-10 16:00:00', 'Other food compaints .', 3);
-
+(1, 1, 1, '2017-09-19 15:00:00', 'INSTRUCTIONS: Do not eat any food 24 hours before surgery.', 1),
+(1, 2, 1, '2017-09-12 11:00:00', 'Foot complaints.', 3),
+(1, 3, 1, '2017-09-12 16:00:00', 'Other food compaints .', 3);
