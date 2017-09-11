@@ -1,29 +1,23 @@
 <body>
-  <div class="col-xs-12 col-sm-12 col-md-6 col-lg-4 " id="">
-      <div class="panel panel-default">
-          <div class="panel-heading">
-              <h1 class="panel-title"id="widget-header">
-                  <!--Panel Header-->
-                  <!--Icon is set in the css for widget under <h1::before>-->
-                  Insert title here
-              </h1>
-          </div>
-          <div class="panel-body" id="medicationDetails">
-              <table class="table table-hover">
-                  <tbody>
-                      <!--Table Body-->
-                      <!--Each row content should be encased in a button with the 'table-btn' class-->
-                      <tr>
-                        <td>
-                            <button type="button" class="btn table-btn" (click)="openModal(medication, template)">
+    <div class="col-xs-12 col-sm-12 col-md-6 col-lg-4 " id="">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h1 class="panel-title" id="widget-header">Insert title here</h1>
+            </div>
+            <div class="panel-body" id="medicationDetails">
+                <table class="table table-hover">
+                    <tbody>
+                        <tr>
+                            <td>
+                                <button type="button" class="btn table-btn" (click)="openModal(medication, template)">
                                 <span class="widget-title-txt">title</span><br>
                                 <span class="widget-body-txt">detail</span><br>
                             </button>
-                        </td>
-                    </tr>
-                  </tbody>
-              </table>
-          </div>
-      </div>
-  </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
 </body>

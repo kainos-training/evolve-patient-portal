@@ -1,11 +1,11 @@
 import {ModuleWithProviders} from '@angular/core';
 import {Routes, RouterModule} from '@angular/router';
-import {ErrorPageComponent} from './error-page/error-page.component';
-import {LoginComponent} from './login/login.component';
-import {RouteGuard} from './guards/route.guard';
-import {DashboardComponent} from './dashboard/dashboard.component';
-import {SettingNewPasswordComponent} from './setting-new-password/setting-new-password.component';
-import {RequestPasswordResetComponent} from './request-password-reset/request-password-reset.component';
+import {ErrorPageComponent} from './components/error-page/error-page.component';
+import {LoginComponent} from './components/login/login.component';
+import {RouteGuard} from './services/route.guard';
+import {DashboardComponent} from './components/dashboard/dashboard.component';
+import {SettingNewPasswordComponent} from './components/setting-new-password/setting-new-password.component';
+import {RequestPasswordResetComponent} from './components/request-password-reset/request-password-reset.component';
 
 export const router: Routes = [
     {path: '', redirectTo: 'login', pathMatch: 'full'},
@@ -14,11 +14,6 @@ export const router: Routes = [
     {path: 'dashboard', component: DashboardComponent, canActivate: [RouteGuard]},
     {path: 'reset/:id', component: SettingNewPasswordComponent},
     {path: 'request-reset', component: RequestPasswordResetComponent},
-    {
-        path: 'test',
-        component: ErrorPageComponent,
-        canActivate: [RouteGuard]
-    },
     {path: '**', component: LoginComponent}
 ];
 

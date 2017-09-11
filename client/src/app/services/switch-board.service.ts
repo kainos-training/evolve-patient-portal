@@ -1,17 +1,16 @@
-import { Injectable } from '@angular/core';
-import { Medication } from '../Medication';
-import { MedicationComment } from '../MedicationComment';
+import {Injectable} from '@angular/core';
 import {Subject} from 'rxjs/Subject';
-import {User} from '../class/user';
+import {User} from '../class/User';
 
 @Injectable()
 export class SwitchBoardService {
 
-    constructor() { }
-    
+    constructor() {
+    }
+
     private userWatcher = new Subject<User>();
     public user$ = this.userWatcher.asObservable();
-    
+
     private validWatcher = new Subject<Boolean>();
     public valid$ = this.validWatcher.asObservable();
 
@@ -31,5 +30,4 @@ export class SwitchBoardService {
     public updateSuccessful(successful: Boolean) {
         this.successfulWatcher.next(successful);
     }
-
 }

@@ -4,7 +4,7 @@ import {HttpClientModule} from '@angular/common/http';
 import {AppointmentComponent} from './appointment.component';
 import {MenuStateService} from '../../services/menu-state.service';
 import {DataService} from '../../services/data.service';
-import { MapViewComponent } from "../../map-view/map-view.component";
+import { MapViewComponent } from "../map-view/map-view.component";
 import { Marker, DirectionsRenderer, NguiMapComponent } from "@ngui/map/dist";
 
 describe('AppointmentComponent', () => {
