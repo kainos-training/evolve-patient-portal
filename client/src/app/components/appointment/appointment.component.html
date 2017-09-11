@@ -7,23 +7,22 @@
         <div class="panel-body" id="information-display">
             <table class="table table-hover" id="information-table">
                 <tbody>
-                <tr *ngFor="let appointment of appointments">
-                    <td>
-                        <button type="button" class="btn table-btn" (click)="openModal(template,appointment)">
-                            <!-- <strong>{{appointment.userID}}</strong><br> -->
-                            <span class="medium-location-text">{{appointment.type}}: {{appointment.departmentName}}</span><br>
-                            <span class="sml-location-txt">Due: {{appointment.dateOfAppointment | date:'dd/MM/yyyy'}}</span><br>
-                            <span class="sml-location-txt">Time: {{appointment.dateOfAppointment | date:'h:mm a'}}</span><br>
-                        </button>
-                    </td>
-                </tr>
+                    <tr *ngFor="let appointment of appointments">
+                        <td>
+                            <button type="button" class="btn table-btn" (click)="openModal(template,appointment)">
+                                <span class="medium-location-text">{{appointment.type}}: {{appointment.departmentName}}</span><br>
+                                <span class="sml-location-txt">Due: {{appointment.dateOfAppointment | date:'dd/MM/yyyy'}}</span><br>
+                                <span class="sml-location-txt">Time: {{appointment.dateOfAppointment | date:'h:mm a'}}</span><br>
+                            </button>
+                        </td>
+                    </tr>
                 </tbody>
             </table>
         </div>
     </div>
 </div>
 
-<template #template>
+<ng-template #template>
     <div class="modal-header">
         <h4 class="modal-title pull-left">Appointment</h4>
         <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
@@ -54,8 +53,7 @@
             </form>
         </div>
         <div class="map-container">
-            <evolve-map-view [userLocation]="userLocation"
-                          [departmentAddress]="focusedAppointment.locationAddress"></evolve-map-view>
+            <evolve-map-view [userLocation]="userLocation" [departmentAddress]="focusedAppointment.locationAddress"></evolve-map-view>
         </div>
     </div>
-</template>
+</ng-template>
