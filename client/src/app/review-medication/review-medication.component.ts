@@ -18,6 +18,7 @@ export class ReviewMedicationComponent implements OnInit {
 
     public selectedMedication: Medication;
     public selectedMedicationComments: MedicationComment[];
+    public selectedRemovedMedicationComments: MedicationComment[];
     public selectedMedicationHistory: Medication[]
     public modalRef: BsModalRef;
     public medicationsList: Medication[];
@@ -37,6 +38,10 @@ export class ReviewMedicationComponent implements OnInit {
             res => this.selectedMedicationComments = res,
             err => console.log(err) 
         )
+        this.dataService.getRemovedMedicationComments(this.selectedMedication.medicationUserID).subscribe(
+            res => this.selectedRemovedMedicationComments = res,
+            err => console.log(err) 
+        )
         this.dataService.getMedicationHistory(this.selectedMedication.medicationID, 1).subscribe(
             res => this.selectedMedicationHistory = res,
             err => console.log(err) 
@@ -54,6 +59,11 @@ export class ReviewMedicationComponent implements OnInit {
         this.refreshMedicationComments();
     }
 
+    public reAddComment(medicationUserCommentID) {
+        this.dataService.reAddMedicationComment(medicationUserCommentID);
+        this.refreshMedicationComments();
+    }
+
     public addComment() {
         if(this.newComment != null){
             this.dataService.addMedicationComment(this.selectedMedication.medicationUserID, this.newComment);
@@ -67,6 +77,11 @@ export class ReviewMedicationComponent implements OnInit {
             res => this.selectedMedicationComments = res,
             err => console.log(err) 
         );
+        this.dataService.getRemovedMedicationComments(this.selectedMedication.medicationUserID).subscribe(
+            res => this.selectedRemovedMedicationComments = res,
+            err => console.log(err) 
+        );
+        console.log("refreshing");
     }
 
     public toggleCollapse(){
@@ -81,9 +96,6 @@ export class ReviewMedicationComponent implements OnInit {
             res => this.medicationsList = res,
             err => console.log(err)
         )
-        //let medications = dataService.getMedicationList(1);
-        //this.medications = dataService;
-        //console.log(medications);
     }
 
     ngOnInit() {

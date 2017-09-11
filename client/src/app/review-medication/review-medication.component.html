@@ -71,6 +71,21 @@
                                 </button>
                                 </td>
                             </tr>
+                            <tr *ngFor="let removedMedicationComment of selectedRemovedMedicationComments">
+                                    <td id="removedSideEffectTimeStamp">
+                                        {{removedMedicationComment.timeStamp|date:'dd/MM/yyyy'}}
+                                    </td>
+                                    <td id="removedMedicationComment">
+                                        <li>
+                                            {{removedMedicationComment.commentText}}
+                                        </li>
+                                    </td>
+                                    <td id="medicationButton">
+                                        <button type="button" id="plusButton" (click)="reAddComment(removedMedicationComment.medicationUserCommentID)">
+                                        <img src="assets/Green_Plus_Icon.png">
+                                    </button>
+                                    </td>
+                                </tr>
                         </div>
                         <div class="new-side-effect">
                             <div class="table">

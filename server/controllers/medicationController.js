@@ -70,6 +70,26 @@ exports.getListOfMedicationUserComments = function(req, res) {
     }
 };
 
+exports.getListOfRemovedMedicationUserComments = function(req, res) {
+    const medicationUserID = req.body.medicationUserID;
+
+    if (medicationUserID == null) {
+        res.status(400).json({
+            success: false
+        });
+    } else {
+        db.getRemovedMedicationUserComments(medicationUserID, function(err, rows) {
+            if (err) {
+                res.status(400).json({
+                    success: false
+                });
+            } else {
+                res.status(200).send(rows);
+            }
+        });
+    }
+};
+
 exports.removeMedicationUserComment = function(req, res) {
     const medicationUserCommentID = req.body.medicationUserCommentID;
 
@@ -79,6 +99,28 @@ exports.removeMedicationUserComment = function(req, res) {
         });
     } else {
         db.removeComment(medicationUserCommentID, function(err) {
+            if (err) {
+                res.status(400).json({
+                    success: false
+                });
+            } else {
+                res.status(200).json({
+                    success: true
+                });
+            }
+        });
+    }
+};
+
+exports.reAddMedicationUserComment = function(req, res) {
+    const medicationUserCommentID = req.body.medicationUserCommentID;
+
+    if (medicationUserCommentID == null) {
+        res.status(400).json({
+            success: false
+        });
+    } else {
+        db.reAddComment(medicationUserCommentID, function(err) {
             if (err) {
                 res.status(400).json({
                     success: false
