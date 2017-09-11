@@ -8,7 +8,6 @@ import { MedicationComment } from '../MedicationComment';
 import { MedicationDescription } from '../MedicationDescription';
 import { Sanitizer } from '@angular/core';
 import { SecurityContext } from '@angular/core';
-import { LoginComponent } from '../login/login.component';
 
 @Component({
     selector: 'evolve-review-medication',

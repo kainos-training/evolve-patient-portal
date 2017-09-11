@@ -25,6 +25,7 @@ import {MenuStateService} from './services/menu-state.service';
 import {DashboardComponent} from './dashboard/dashboard.component';
 import {SettingNewPasswordComponent} from './setting-new-password/setting-new-password.component';
 import {RequestPasswordResetComponent} from './request-password-reset/request-password-reset.component';
+import { TemplateComponent } from './components/template/template.component';
 
 @NgModule({
     declarations: [
@@ -39,7 +40,8 @@ import {RequestPasswordResetComponent} from './request-password-reset/request-pa
         AppointmentComponent,
         DashboardComponent,
         SettingNewPasswordComponent,
-        RequestPasswordResetComponent
+        RequestPasswordResetComponent,
+        TemplateComponent
     ],
     imports: [
         BrowserModule,
