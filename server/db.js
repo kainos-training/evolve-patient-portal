@@ -43,7 +43,7 @@ database.getMedicationUserComments = function(medicationUserID, callback) {
 
 database.getUserSideEffects = function(userID, callback) {
     database.query(
-        "SELECT userSideEffectID, userID, sideEffectText, `timeStamp` " +
+        "SELECT userSideEffectID, userID, sideEffectText, `timeStamp`, deleted " +
         "FROM UserSideEffect " +
         "WHERE userID = ?;", [userID],
         function(err, rows) {
@@ -58,6 +58,23 @@ database.removeComment = function(medicationUserCommentID, callback) {
             callback(err);
         });
 };
+
+database.removeSideEffect = function(userSideEffectID, callback) {
+    database.query(
+        "UPDATE UserSideEffect SET deleted = true WHERE userSideEffectID = ?;", [userSideEffectID],
+        function(err) {
+            callback(err);
+        }
+    );
+};
+
+database.addSideEffect = function(userID, commentText, callback) {
+    database.query(
+        "INSERT INTO UserSideEffect (userID, sideEffectText, deleted) VALUES (?, ?, false);", [userID, commentText],
+        function(err) {
+            callback(err);
+        });
+}
 
 database.getMedicationHistory = function(medicationID, userID, callback) {
     database.query(
