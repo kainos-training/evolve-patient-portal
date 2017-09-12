@@ -14,15 +14,10 @@ database.connect(function(err) {
 
 database.getMedications = function(userID, callback) {
     database.query(
-        "SELECT U.userID, " +
-        "M.medicationID, M.medicationName, " +
-        "MT.medicationType, " +
-        "MU.startDate, MU.endDate, MU.dosage, MU.medicationUserID " +
-        "FROM User AS U INNER JOIN MedicationUser AS MU ON U.userID = MU.userID " +
-        "INNER JOIN Medication AS M ON MU.medicationID = M.medicationID " +
-        "INNER JOIN MedicationType AS MT ON MT.medicationTypeID = M.medicationTypeID " +
-        "WHERE U.userID = ? " +
-        "AND MU.endDate >= NOW();", [userID],
+        "SELECT userID, medicationID, medicationName, medicationType, startDate, endDate, dosage " + 
+        "FROM User NATURAL JOIN MedicationUser NATURAL JOIN Medication NATURAL JOIN MedicationType " +
+        "WHERE userID = ? AND endDate >= NOW();", 
+        [userID],
         function(err, rows) {
             callback(err, rows);
         });
