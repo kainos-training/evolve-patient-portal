@@ -83,11 +83,7 @@
 }
 
 #side-effect-input{
-    padding-left: 10px;
     width: 100%;
-    min-width: 300px;
-    max-width: 500px;
-    float: left;
 }
 
 .table td{
@@ -130,7 +126,7 @@
 }
 
 #medicationDetails {
-    max-height: 300px;
+    max-height: 500px;
     overflow: auto;
 }
 
@@ -178,4 +174,12 @@ h1::before {
 
 .prescription:hover {
     cursor: pointer;
+}
+
+.side-effect-item {
+    border-bottom:1px solid #ddd;
+    padding-top: 10px;
+}
+.side-effect-text {
+    font-weight:400;
 }
