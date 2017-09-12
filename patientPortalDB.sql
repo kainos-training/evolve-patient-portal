@@ -120,6 +120,14 @@ foreign key (clinicianID) references Clinician(clinicianID),
 foreign key (appointmentTypeID) references AppointmentType (appointmentTypeID)
 );
 
+CREATE TABLE IF NOT EXISTS LocationMap(
+locationMapID int auto_increment,
+locationID int not null,
+image blob not null,
+primary key (locationMapID),
+foreign key (locationID) references Location(locationID)
+);
+
 INSERT INTO GP (gpFullName, gpPracticeName, gpPracticeAddress)
 VALUES ('Dr. A Cheyne', 'Ormeau Park Surgery', '281 Ormeau Rd, Belfast BT7 3GG, UK'),
 ('Dr. E Glass', 'The Surgery', '1 Church St, Newtownards BT23 4FH'),
@@ -177,7 +185,7 @@ VALUES(1, 3, 3, '2017-07-07', 'Ultrasound performed, pregnancy progressing norma
 (3, 4, 2, '2017-11-11 09:00:00', null, 1),
 (1, 3, 3, '2017-07-09 12:00:00', 'Appointment in relation to abdominal crampss,', 3),
 (1, 3, 2, '2017-07-10 13:00:00', 'Checkup after Ultrasound,', 4),
-(1, 1, 1, '2017-09-10 15:00:00', 'INSTRUCTIONS: Do not eat any food 24 hours before surgery.', 1),
-(1, 2, 1, '2017-09-10 11:00:00', 'Foot complaints.', 3),
-(1, 3, 1, '2017-09-10 16:00:00', 'Other food compaints .', 3);
+(1, 1, 1, '2017-11-10 15:00:00', 'INSTRUCTIONS: Do not eat any food 24 hours before surgery.', 1),
+(1, 2, 1, '2017-12-10 11:00:00', 'Foot complaints.', 3),
+(1, 3, 1, '2017-12-11 16:00:00', 'Other food compaints .', 3);
 

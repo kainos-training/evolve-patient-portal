@@ -6,4 +6,5 @@ export class AppointmentFurtherInfo {
     clinicianName:string;
     comment:string;
     locationAddress:string;
+    image: Blob;
 }
