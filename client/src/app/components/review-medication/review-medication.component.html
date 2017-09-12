@@ -10,7 +10,7 @@
                 <table class="table">
                     <tbody>
                         <tr *ngFor="let medication of medicationsList">
-                            <td>
+                            <td id="borderBelow">
                                 <span class="main-medication-txt">{{medication.medicationName}}</span><br>
                                 <span class="sml-medication-txt">Dosage: {{medication.dosage}}</span><br>
                             </td>
@@ -105,7 +105,7 @@
             <table class="table table-hover">
                 <tbody>
                     <tr *ngFor="let medication of medicationsList">
-                        <td>
+                        <td id="borderBelow">
                             <button type="button" class="btn table-btn" (click)="openModal(medication,template)">
                                 <span class="main-medication-txt">{{medication.medicationName}}</span><br>
                                 <span class="sml-medication-txt">Dosage: {{medication.dosage}}</span><br>
