@@ -77,16 +77,6 @@ export class DataService {
         this.http.post('api/medication/comments/remove', body, options).subscribe();
     }
 
-    public reAddMedicationComment(medicationUserCommentID) {
-        const body = {
-            "medicationUserCommentID": medicationUserCommentID
-        };
-        const options = {
-            headers: new HttpHeaders().set('Content-Type', 'application/json'),
-        };
-        this.http.post('api/medication/comments/reAdd', body, options).subscribe();
-    }
-
     public addMedicationComment(medicationUserID, commentText) {
         const body = {
             'medicationUserID': medicationUserID,

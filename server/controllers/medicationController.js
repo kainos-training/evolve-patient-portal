@@ -112,28 +112,6 @@ exports.removeMedicationUserComment = function(req, res) {
     }
 };
 
-exports.reAddMedicationUserComment = function(req, res) {
-    const medicationUserCommentID = req.body.medicationUserCommentID;
-
-    if (medicationUserCommentID == null) {
-        res.status(400).json({
-            success: false
-        });
-    } else {
-        db.reAddComment(medicationUserCommentID, function(err) {
-            if (err) {
-                res.status(400).json({
-                    success: false
-                });
-            } else {
-                res.status(200).json({
-                    success: true
-                });
-            }
-        });
-    }
-};
-
 exports.getWikiMedicationDescription = function(req, res) {
     const medicationName = req.body.medicationName;
 

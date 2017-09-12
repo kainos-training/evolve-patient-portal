@@ -32,6 +32,24 @@ foreign key (gpID) references GP(gpID),
 primary key (userID)
 );
 
+CREATE TABLE IF NOT EXISTS `Condition`(
+conditionID int auto_increment not null,
+conditionName varchar(60) not null,
+conditionLink varchar(256) not null,
+primary key (conditionID)
+);
+
+CREATE TABLE IF NOT EXISTS UserCondition(
+userConditionID int auto_increment not null,
+userID int not null,
+conditionID int not null,
+startDate date not null,
+endDate date,
+primary key (userConditionID),
+foreign key (userID) references `User`(userID),
+foreign key (conditionID) references `Condition`(conditionID)
+);
+
 CREATE TABLE IF NOT EXISTS MedicationType (
 medicationTypeID int auto_increment not null,
 medicationType varchar(20),
@@ -121,6 +139,16 @@ foreign key (clinicianID) references Clinician(clinicianID),
 foreign key (appointmentTypeID) references AppointmentType (appointmentTypeID)
 );
 
+CREATE TABLE IF NOT EXISTS Task (
+taskID int auto_increment not null,
+taskName varchar(60) not null,
+userID int not null,
+recievedDate date not null,
+dueDate date not null,
+primary key (taskID),
+foreign key (userID) references User (userID)
+);
+
 INSERT INTO GP (gpFullName, gpPracticeName, gpPracticeAddress)
 VALUES ('Dr. A Cheyne', 'Ormeau Park Surgery', '281 Ormeau Rd, Belfast BT7 3GG, UK'),
 ('Dr. E Glass', 'The Surgery', '1 Church St, Newtownards BT23 4FH'),
@@ -181,3 +209,19 @@ VALUES(1, 3, 3, '2017-07-07', 'Ultrasound performed, pregnancy progressing norma
 (1, 1, 1, '2017-09-19 15:00:00', 'INSTRUCTIONS: Do not eat any food 24 hours before surgery.', 1),
 (1, 2, 1, '2017-09-12 11:00:00', 'Foot complaints.', 3),
 (1, 3, 1, '2017-09-12 16:00:00', 'Other food compaints .', 3);
+
+INSERT INTO `Condition` (conditionName, conditionLink) 
+VALUES ("Hip Replacement", "http://www.nhs.uk/Conditions/Hip-replacement/Pages/Introduction.aspx"), 
+("Diabetes", "http://www.nhs.uk/Conditions/Diabetes/Pages/Diabetes.aspx"), 
+("Conjunctivitis", "http://www.nhs.uk/Conditions/Conjunctivitis-infective/Pages/Treatment.aspx"), 
+("Back Pain", "http://www.nhs.uk/conditions/back-pain/Pages/Introduction.aspx");
+
+INSERT INTO UserCondition (userID, conditionID, startDate, endDate) 
+VALUES (1, 4, '2017-07-10', '2017-01-15'),
+(1, 2, '1998-04-03', null),
+(1, 4, '2017-08-03', null);
+
+INSERT INTO Task(taskName, userID, recievedDate, dueDate)
+VALUES('Pre-op questionnaire', 1, '2017-07-10', '2017-10-10'), 
+('Pre-op Assessment: Olanzapine', 1, '2017-06-15', '2017-12-23');
+

@@ -74,6 +74,10 @@
     width: 20px;
 }
 
+.side-effects li {
+    list-style-type: none;
+}
+
 #side-effect-input{
     padding-left: 10px;
     width: 100%;

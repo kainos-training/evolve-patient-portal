@@ -64,14 +64,6 @@ database.removeComment = function(medicationUserCommentID, callback) {
         });
 };
 
-database.reAddComment = function(medicationUserCommentID, callback) {
-    database.query(
-        "UPDATE MedicationUserComment SET deleted = false WHERE medicationUserCommentID = ?;", [medicationUserCommentID],
-        function(err) {
-            callback(err);
-        });
-};
-
 database.getMedicationHistory = function(medicationID, userID, callback) {
     database.query(
         "SELECT * FROM MedicationUser " +

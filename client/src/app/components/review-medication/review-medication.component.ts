@@ -62,11 +62,6 @@ export class ReviewMedicationComponent implements OnInit{
         this.refreshMedicationComments();
     }
 
-    public reAddComment(medicationUserCommentID) {
-        this.dataService.reAddMedicationComment(medicationUserCommentID);
-        this.refreshMedicationComments();
-    }
-
     public addComment() {
         if (this.newComment != null) {
             this.dataService.addMedicationComment(this.selectedMedication.medicationUserID, this.newComment);
