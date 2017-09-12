@@ -1,18 +1,22 @@
 <body>
-    <div class="col-xs-12 col-sm-12 col-md-6 col-lg-4 prescription" (click)="openPrescriptionModal(prescriptionTemplate)" id="">
+    <div class="col-xs-12 col-sm-12 col-md-6 col-lg-4" id="">
         <div class="panel panel-default">
             <div class="panel-heading">
-                <h1 class="panel-title"id="medication-header">Medication Prescriptions
-                    <a class="pull-right"><i class="glyphicon glyphicon-info-sign" aria-hidden="true"></i></a>
+                <h1 class="panel-title"id="medication-header">
+                    Medication Prescriptions
                 </h1>
             </div>
             <div class="panel-body" id="medicationDetails">
-                <table class="table">
+                <table class="table table-hover">
                     <tbody>
                         <tr *ngFor="let medication of medicationsList">
                             <td id="borderBelow">
-                                <span class="main-medication-txt">{{medication.medicationName}}</span><br>
-                                <span class="sml-medication-txt">Dosage: {{medication.dosage}}</span><br>
+                                <button type="button" class="btn table-btn" (click)="openModal(medication,template)">
+                                    <span class="main-medication-txt">Name: {{medication.medicationName}}</span><br>
+                                    <span class="sml-medication-txt">Dosage: {{medication.dosage}}</span><br>
+                                    <span class="sml-medication-txt">Instructions: {{medication.instructions}}</span><br>
+                                    <span class="sml-medication-txt-right">Start Date: {{medication.startDate | date: 'dd/MM/yyyy'}}</span><br>
+                                </button>
                             </td>
                         </tr>
                     </tbody>
@@ -88,110 +92,4 @@
             </div>
         </div>
     </div>
-</ng-template>
-
-<ng-template #prescriptionTemplate>
-    <div *ngIf="state=='prescription'">
-        <div class="med-modal">
-            <div class="modal-header">
-                <h4 class="modal-title pull-left">Prescription Summary</h4>
-                <button type="button" class="close pull-right" (click)="modalRef.hide()">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-        </div>
-        <div class="modal-body">
-            <div id="medicationDetails">
-            <table class="table table-hover">
-                <tbody>
-                    <tr *ngFor="let medication of medicationsList">
-                        <td id="borderBelow">
-                            <button type="button" class="btn table-btn" (click)="openModal(medication,template)">
-                                <span class="main-medication-txt">Name: {{medication.medicationName}}</span><br>
-                                <span class="sml-medication-txt">Dosage: {{medication.dosage}}</span><br>
-                                <span class="sml-medication-txt">Instructions: {{medication.instructions}}</span><br>
-                                <span class="sml-medication-txt-right">Start Date: {{medication.startDate | date: 'dd/MM/yyyy'}}</span><br>
-                            </button>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
-            <!-- Side Effects of all Meds -->
-            <div>
-                <a (click)="this.selectShowSideEffects()">Show Side Effects</a>
-            </div>
-            <div *ngIf="this.showSideEffects"class="side-effects">
-                    <div *ngFor="let sideeffect of userSideEffects" class="row side-effect-item">
-                        <div class="col-xs-2"><label class="side-effect-text" id="sideEffectTimeStamp">{{ sideeffect.timeStamp|date:'dd/MM/yyyy' }}</label></div>
-                        <div class="col-xs-8">
-                            <label class="side-effect-text" [ngClass]="{'strikethrough': sideeffect.deleted}" id="medicationComment">{{ sideeffect.sideEffectText }}</label>
-                        </div>
-                        <div class="col-xs-2" class="" id="medicationButton">
-                            <button type="button" *ngIf="!sideeffect.deleted" id="minusButton" (click)="removeSideEffect(sideeffect.userSideEffectID)">
-                                <img src="assets/red_minus_icon.png">
-                            </button>
-                        </div>
-                    </div>
-                    <br>
-                <div class="new-side-effect">
-                    <div class="row">
-                        <div class="col-xs-10">
-                                <input type="text" class="form-control" id="side-effect-input" [(ngModel)]="newSideEffect" [ngModelOptions]="{standalone: true}" placeholder="New side effect">
-                        </div>
-                        <div class="col-xs-2">
-                                <button type="button" id="plusButton" (click)="addSideEffect()">
-                                <img src="assets/Green_Plus_Icon.png">
-                            </button>
-                        </div>
-                    </div>
-                </div>
-                <div class="clearfix"></div>
-            </div>
-        </div>
-        </div>
-    </div>
-    <div *ngIf="state=='meds'">
-            <div class="med-modal">
-                <div class="modal-header">
-                    <h4 class="modal-title pull-left">Medications</h4>
-                    <button type="button" class="close pull-right" aria-label="Close" (click)="closeMeds()">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-            </div>
-            <div class="modal-body">
-                <div class="perscription-header">
-                    <p>
-                        <span class="sml-medication-txt"><strong>Name:</strong> {{selectedMedication.medicationName}}</span><br>
-                        <span class="sml-medication-txt"><strong>Current Dosage:</strong> {{selectedMedication.dosage}}</span><br>
-                        <span class="sml-medication-txt"><strong>Class:</strong> {{selectedMedication.medicationType}}</span>
-                    </p>
-                    <hr>
-                    <a *ngIf="!showPrescriptionHistory" (click)="displayPrescriptionHistory()"><strong>Show Prescription History</strong></a>
-                    <a *ngIf="showPrescriptionHistory" (click)="displayPrescriptionHistory()"><strong>Hide Prescription History</strong></a>
-                    
-                </div>
-
-                <div *ngIf="showPrescriptionHistory" class="perscription-form">
-                    <form>
-                        <div class="form-group">
-                            <ul *ngFor="let medicationHistoryItem of selectedMedicationHistory">
-                                <li>{{medicationHistoryItem.startDate|date:'dd/MM/yyyy'}} - {{medicationHistoryItem.endDate|date:'dd/MM/yyyy'}} : {{medicationHistoryItem.dosage}}</li>
-                            </ul>
-                        </div>
-                    </form>
-
-                </div>
-                <div class="perscription-form">
-                    <hr>
-                    <form>
-                    <div class="form-group">
-                        <label><strong>{{selectedMedication.medicationName}} details:</strong></label>
-                        <pre *ngIf=this.collapsedDescription&&this.description><code [innerHTML]=this.description.description|ellipsis:200 (click)=toggleCollapse() ></code></pre>
-                        <pre *ngIf=!this.collapsedDescription&&this.description><code [innerHTML]=this.description.description|ellipsis:20000 (click)=toggleCollapse() ></code></pre>
-                    </div>
-                    </form>
-                </div>
-            </div>
-        </div>
 </ng-template>

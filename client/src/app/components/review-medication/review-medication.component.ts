@@ -32,7 +32,6 @@ export class ReviewMedicationComponent implements OnInit{
     public description: MedicationDescription;
     public sanitizer: Sanitizer;
     public collapsedDescription: boolean;
-    public state : string;
     public showPrescriptionHistory: boolean;
     public showSideEffects: boolean;
     public prescriptionText: string;
@@ -40,15 +39,14 @@ export class ReviewMedicationComponent implements OnInit{
     private userSubscription: Subscription;
     private dataService: DataService;
     
-    public openModal(meds: Medication/*, template: TemplateRef<any>*/) {
-        this.state = 'meds';
+    public openModal(meds: Medication, template: TemplateRef<any>) {
 
         this.collapsedDescription = true;
         this.selectedMedication = meds;
         this.showPrescriptionHistory = false;
         this.showSideEffects = false;
         this.prescriptionText = "Show Prescription History";
-        //this.modalRef = this.modalService.show(template);
+        this.modalRef = this.modalService.show(template);
         let description = this.dataService.getWikiSummary(meds.medicationName);
 
         this.dataService.getMedicationComments(this.selectedMedication.medicationUserID).subscribe(
@@ -112,10 +110,6 @@ export class ReviewMedicationComponent implements OnInit{
         this.collapsedDescription = this.collapsedDescription == true ? false : true;
     }
 
-    public closeMeds() {
-        this.state = 'prescription';
-    }
-
     public displayPrescriptionHistory() {
         this.showPrescriptionHistory = !this.showPrescriptionHistory;
     }
@@ -125,7 +119,6 @@ export class ReviewMedicationComponent implements OnInit{
     }
 
     constructor(dataService: DataService, private modalService: BsModalService, private switchboard: SwitchBoardService) {
-        this.state = "prescription";
         this.dataService = dataService;
         this.switchboard.user$.subscribe(usr => this.user = usr);
         this.dataService.getUserFromCookie(this.user);
