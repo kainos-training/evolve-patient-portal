@@ -1,4 +1,4 @@
-import { Component, TemplateRef } from '@angular/core';
+import { Component, TemplateRef, OnInit } from '@angular/core';
 import { DataService } from '../../services/data.service';
 import { Medication } from '../../class/Medication';
 import { BsModalService } from 'ngx-bootstrap/modal';
@@ -11,21 +11,22 @@ import { Sanitizer } from '@angular/core';
 import { SecurityContext } from '@angular/core';
 import {AccordionModule} from 'ngx-bootstrap/accordion';
 
+import { User } from '../../class/User';
+import { SwitchBoardService } from '../../services/switch-board.service';
+import { Subscription } from 'rxjs/Rx';
 
 @Component({
     selector: 'evolve-review-medication',
     templateUrl: './review-medication.component.html',
     styleUrls: ['./review-medication.component.css']
 })
-export class ReviewMedicationComponent {
-
+export class ReviewMedicationComponent implements OnInit{
     public selectedMedication: Medication;
     public selectedMedicationComments: MedicationComment[];
     public selectedMedicationHistory: Medication[];
     public userSideEffects: SideEffect[];
     public modalRef: BsModalRef;
     public medicationsList: Medication[];
-    public dataService: DataService;
     public newComment: string;
     public newSideEffect: String;
     public description: MedicationDescription;
@@ -34,8 +35,13 @@ export class ReviewMedicationComponent {
     public state : string;
     public showPrescriptionHistory: boolean;
     public prescriptionText: string;
+    private user: User = new User();
+    private userSubscription: Subscription;
+    private dataService: DataService;
+    
     public openModal(meds: Medication/*, template: TemplateRef<any>*/) {
         this.state = 'meds';
+
         this.collapsedDescription = true;
         this.selectedMedication = meds;
         this.showPrescriptionHistory = false;
@@ -47,9 +53,11 @@ export class ReviewMedicationComponent {
             res => this.selectedMedicationComments = res
         );
 
-        this.dataService.getMedicationHistory(this.selectedMedication.medicationID, 1).subscribe(
-            res => this.selectedMedicationHistory = res
-        );
+        if(this.user)
+            if(this.user.userID)
+                this.dataService.getMedicationHistory(this.selectedMedication.medicationID, this.user.userID).subscribe(
+                    res => this.selectedMedicationHistory = res
+                );
 
         this.dataService.getWikiSummary(meds.medicationName).subscribe(
             res => { this.description = res; }
@@ -110,16 +118,28 @@ export class ReviewMedicationComponent {
         this.showPrescriptionHistory = !this.showPrescriptionHistory;
     }
 
-    constructor(dataService: DataService, private modalService: BsModalService) {
+    constructor(dataService: DataService, private modalService: BsModalService, private switchboard: SwitchBoardService) {
         this.state = "prescription";
         this.dataService = dataService;
-        var userID = this.dataService.getCookie();
-        dataService.getMedicationList(userID).subscribe(
+        this.switchboard.user$.subscribe(usr => this.user = usr);
+        this.dataService.getUserFromCookie(this.user);
+
+        console.log("User Id in this constructor: " + this.user.userID);
+        dataService.getMedicationList(this.user.userID).subscribe(
             res => this.medicationsList = res
         );
-
-        this.dataService.getUserSideEffects(userID).subscribe(
+        console.log("User Id in this constructor: " + this.user.userID);
+        this.dataService.getUserSideEffects(this.user.userID).subscribe(
             res => { this.userSideEffects = res }
         );
+        console.log("User Id in this constructor: " + this.user.userID);
+    }
+
+    ngOnInit(): void {
+        if(this.user)
+            if(this.user.userID)
+                this.dataService.getMedicationList(this.user.userID).subscribe(
+                    res => this.medicationsList = res
+                )
     }
 }
