@@ -10,6 +10,7 @@ import {EllipsisPipe} from '../../utils/ellipsis.pipe';
 import {ModalModule} from 'ngx-bootstrap/modal';
 import {FormsModule} from '@angular/forms';
 import {BrowserModule} from '@angular/platform-browser';
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 
 describe('DashboardComponent', () => {
     let component: DashboardComponent;
@@ -34,7 +35,8 @@ describe('DashboardComponent', () => {
                 BrowserModule,
                 ModalModule.forRoot(),
                 FormsModule
-            ]
+            ],
+            schemas: [CUSTOM_ELEMENTS_SCHEMA]
         })
             .compileComponents();
     }));
