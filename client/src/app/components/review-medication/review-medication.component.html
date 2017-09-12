@@ -168,7 +168,8 @@
             </table>
             <!-- Side Effects of all Meds -->
             <div>
-                <a (click)="this.selectShowSideEffects()">Show Side Effects</a>
+                <a *ngIf="!this.showSideEffects" (click)="this.selectShowSideEffects()">Show Side Effects</a>
+                <a *ngIf="this.showSideEffects" (click)="this.selectShowSideEffects()">Hide Side Effects</a>
             </div>
             <div *ngIf="this.showSideEffects"class="side-effects">
                     <div *ngFor="let sideeffect of userSideEffects" class="row side-effect-item">
