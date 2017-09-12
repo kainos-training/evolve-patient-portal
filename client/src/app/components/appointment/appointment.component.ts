@@ -45,6 +45,7 @@ export class AppointmentComponent implements OnInit, OnDestroy {
     }
 
     ngOnInit() {
+        this.data.getUserFromCookie(this.user);
         if(this.user)
             if(this.user.userID)
                 this.data.getAllAppointmentsByUserID(this.user.userID).subscribe(
@@ -53,7 +54,9 @@ export class AppointmentComponent implements OnInit, OnDestroy {
     }
 
     ngOnDestroy() {
-        this.userSubscription.unsubscribe();
-        this.subCenter.unsubscribe();
+        if(this.userSubscription)
+            this.userSubscription.unsubscribe();
+        if(this.subCenter)
+            this.subCenter.unsubscribe();
     }
 }
