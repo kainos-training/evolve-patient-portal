@@ -39,11 +39,11 @@ export class RepeatPrescriptionComponent implements OnInit {
     this.renewPrescriptionList.splice(i, 1);
 }
 
-    public myFunc() {
-    alert(this.renewPrescriptionList);
+    public requestPrescription(prescriptionList: Array<Medication>) {
+    alert(prescriptionList[0].medicationUserID + " AND " + prescriptionList[1].medicationUserID);
 }
 
-    public openModal(prescriptionList: Array < Medication >, template: TemplateRef<any>) {
+    public openModal(prescriptionList: Array<Medication>, template: TemplateRef<any>) {
     this.modalRef = this.modalService.show(template);
 
 }
