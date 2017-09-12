@@ -40,8 +40,12 @@ yarn-error.log
 .DS_Store
 Thumbs.db
 
+# Temporary files
+*.swp
 
 # Dependencies
+
+package-lock.json
 
 ## Client
 client/node_modules/
@@ -51,3 +55,4 @@ client/idea/workspace.xml
 ## Server
 server/node_modules/
 server/config.json
+server/package-lock.json
