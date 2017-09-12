@@ -1,0 +1,136 @@
+@media screen and (max-width: 767px) {
+    
+    #evolve-logo {
+        margin-top: 24px;
+        margin-left: 10px;
+        margin-right: 5px;
+        width: 180px;
+        height: 30px;
+    }
+}
+
+@media screen and (min-width: 768px) {
+   
+    #evolve-logo {
+        margin-top: 24px;
+        margin-left: 15px;
+        margin-right: 10px;
+        width: 160px;
+        height: 30px;
+    }
+}
+
+@media screen and (min-width: 970px) {
+    #evolve-logo {
+        margin-top: 24px;
+        margin-left: 15px;
+        margin-right: 10px;
+        width: 200px;
+        height: 35px;
+    }
+}
+
+@media screen and (min-width: 1170px) {
+    #evolve-logo {
+        margin-top: 24px;
+        margin-left: 15px;
+        margin-right: 10px;
+        width: 260px;
+        height: 50px;
+    }
+}
+
+.flex-container {
+    display: -webkit-flex;
+    display: flex;
+    width: 100%;
+}
+
+.left-item {
+    background-color: rgb(6,127,187);
+    height: 80px;
+    margin: 0;
+    padding: 0;
+}
+
+.right-item {
+    display:table;
+    background-color: #00579f;
+    height: 80px;
+    margin: 0px;
+}
+
+#menu-button {  
+    float: left;
+    padding: 0;
+    margin-top: 25px;
+    width: 30px;
+    height: 29px;
+    border: none;
+    margin-left: 5px;
+    margin-right: 15px;
+    display: block;
+    padding-top: 4px;
+    cursor: pointer;
+}
+
+.menuButtonLine {
+    width: 100%;
+    height: 4px;
+    background-color: white;
+    margin-bottom: 4px;
+    border-radius: 1px;
+}
+
+.log-out-button {
+    margin-left: 5px;
+    font-size: 30px;
+    color:white;
+    background: transparent;
+    float: right;
+    margin-top: 25px;
+    border: none;
+    transition: transform 1s ease;  
+    width: 30px;
+    height: 30px;
+    margin-right: 5px;
+    cursor: pointer;    
+}
+
+.settings-button {
+    margin-left: 5px;
+    display:none !important;
+    background: transparent;
+    background-image: url("../../../assets/settings_icon_4.png");
+    float: right;
+    margin-top: 25px;
+    border: none;
+    transition: transform 1s ease;  
+    width: 30px;
+    height: 30px;
+    margin-right: 5px;
+    cursor: pointer;    
+}
+
+.settings-button:hover {
+    transform: rotate(180deg);
+}
+
+#evolve-logo {
+    float: left;
+    border: none;
+}
+
+h4 {
+    color: white;
+    font-family: Helvetica;
+    margin-top: 35px;
+}
+
+.debugRed {
+    outline: 1px solid red;
+}
+
+.debugBlue {
+    outline: 1px solid blue;
+}

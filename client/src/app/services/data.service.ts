@@ -1,16 +1,16 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from "@angular/common/http";
-import { Medication } from '../Medication';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { Medication } from '../class/Medication';
 import { Observable } from 'rxjs/Observable';
-import { MedicationComment } from '../MedicationComment';
-import { MedicationDescription } from '../MedicationDescription';
-import { User } from '../class/user';
+import { MedicationComment } from '../class/MedicationComment';
+import { MedicationDescription } from '../class/MedicationDescription';
 import * as $ from 'jquery';
 import { CookieService } from 'ngx-cookie-service';
 import { SwitchBoardService } from './switch-board.service';
 import { Router } from '@angular/router';
-import {Appointment} from '../class/appointment';
-import {AppointmentFurtherInfo} from '../class/appointmentFurtherInfo';
+import { Appointment } from '../class/Appointment';
+import { AppointmentFurtherInfo } from '../class/AppointmentFurtherInfo';
+import { User } from '../class/User';
 
 @Injectable()
 export class DataService {
@@ -24,7 +24,7 @@ export class DataService {
 
     public getMedicationList(userID) {
         const body = {
-            "userID": userID
+            'userID': userID
         };
         const options = {
             headers: new HttpHeaders().set('Content-Type', 'application/json'),
@@ -35,7 +35,7 @@ export class DataService {
 
     public getMedicationComments(medicationUserID) {
         const body = {
-            "medicationUserID": medicationUserID
+            'medicationUserID': medicationUserID
         };
         const options = {
             headers: new HttpHeaders().set('Content-Type', 'application/json'),
@@ -46,8 +46,8 @@ export class DataService {
 
     public getMedicationHistory(medicationID, userID) {
         const body = {
-            "medicationID": medicationID,
-            "userID": userID
+            'medicationID': medicationID,
+            'userID': userID
         };
         const options = {
             headers: new HttpHeaders().set('Content-Type', 'application/json'),
@@ -58,7 +58,7 @@ export class DataService {
 
     public removeMedicationComment(medicationUserCommentID) {
         const body = {
-            "medicationUserCommentID": medicationUserCommentID
+            'medicationUserCommentID': medicationUserCommentID
         };
         const options = {
             headers: new HttpHeaders().set('Content-Type', 'application/json'),
@@ -68,8 +68,8 @@ export class DataService {
 
     public addMedicationComment(medicationUserID, commentText) {
         const body = {
-            "medicationUserID": medicationUserID,
-            "commentText": commentText
+            'medicationUserID': medicationUserID,
+            'commentText': commentText
         };
         const options = {
             headers: new HttpHeaders().set('Content-Type', 'application/json'),
@@ -79,7 +79,7 @@ export class DataService {
 
     public getWikiSummary(medName) {
         const body = {
-            "medicationName": medName
+            'medicationName': medName
         };
         const options = {
             headers: new HttpHeaders().set('Content-Type', 'application/json')
@@ -87,7 +87,7 @@ export class DataService {
 
         return this.http.post<MedicationDescription>('api/medication/wiki/desc', body, options);
     }
-    
+
     public login(user: User): void {
         const body = {
             'username': user.username,
@@ -100,20 +100,14 @@ export class DataService {
         this.http.post('/api/auth/login', $.param(body), options)
             .subscribe(data => {
                 user = this.mapDataToUser(user, data);
-                // creating a cookie for this user
                 this.saveCookie(user.userID, user.username, user.token);
-                // switching between users
                 this.switchBoard.switchUser(user);
-                // redirecting to the previous url or to dashboard as homepage
-                if(this.getRedirectCookie() !== ""){
+                if (this.getRedirectCookie() !== '') {
                     this.router.navigateByUrl(this.getRedirectCookie());
-                }else{
+                } else {
                     this.router.navigateByUrl(this.dashboardURL);
                 }
-                // removing the redirect from storage
                 this.removeRedirectCookie();
-                // redirect to dashboard
-
             }, error => {
                 user = this.mapErrorToUser(user, error);
             });
@@ -158,7 +152,7 @@ export class DataService {
         var cookieJSON;
         user.loggedIn = false;
 
-        if(cookieValue) {
+        if (cookieValue) {
             cookieJSON = JSON.parse(cookieValue);
         }
 
@@ -176,7 +170,7 @@ export class DataService {
     }
 
     public saveCookie(userID, username, token): void {
-        if(userID && username && token) {
+        if (userID && username && token) {
             const cookieJSON = {
                 userID: userID,
                 username: username,
@@ -203,7 +197,7 @@ export class DataService {
     }
 
     public getAllAppointmentsByUserID(userID) {
-        let headers = new Headers({'Content-Type': 'application/json'});
+        let headers = new Headers({ 'Content-Type': 'application/json' });
         const body = {
             'userID': userID
         };
@@ -215,7 +209,7 @@ export class DataService {
     };
 
     public getAppointmentInformation(appointmentID) {
-        let headers = new Headers({'Content-Type': 'application/json'});
+        let headers = new Headers({ 'Content-Type': 'application/json' });
         const body = {
             'appointmentID': appointmentID
         };
@@ -227,7 +221,7 @@ export class DataService {
     }
 
     public getUserInfoByUserID(userID) {
-        let headers = new Headers({'Content-Type': 'application/json'});
+        let headers = new Headers({ 'Content-Type': 'application/json' });
         const body = {
             'userID': userID
         };
@@ -239,7 +233,6 @@ export class DataService {
     }
 
     public requestResetPassword(user: User, router: Router): void {
-        console.log('reaches reset method of data service');
         const body = {
             'username': user.username
         };
@@ -251,8 +244,6 @@ export class DataService {
             .subscribe(data => {
                 this.switchBoard.updateValid(true);
                 this.switchBoard.updateSuccessful(true);
-                //user.userID = data['userID'];
-                //router.navigate(['/reset', user.userID]);
             }, error => {
                 this.switchBoard.updateValid(false);
                 this.switchBoard.updateSuccessful(false);
@@ -270,14 +261,17 @@ export class DataService {
 
         this.http.post('/api/password/reset', $.param(body), options)
             .subscribe(data => {
-                // saving token, userID and message in the same user object
                 user.userID = data['userID'];
                 user.message = data['message'];
             }, error => {
                 user.loggedIn = false;
-                user.message = error["message"];
+                user.message = error['message'];
             });
     }
 
-
+    logout() {
+        this.removeCookie();
+        this.removeRedirectCookie();
+        this.router.navigate(['/login']);
+    }
 }
