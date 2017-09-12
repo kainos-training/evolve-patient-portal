@@ -107,10 +107,10 @@
                     <tr *ngFor="let medication of medicationsList">
                         <td id="borderBelow">
                             <button type="button" class="btn table-btn" (click)="openModal(medication,template)">
-                                <span class="main-medication-txt">{{medication.medicationName}}</span><br>
+                                <span class="main-medication-txt">Name: {{medication.medicationName}}</span><br>
                                 <span class="sml-medication-txt">Dosage: {{medication.dosage}}</span><br>
                                 <span class="sml-medication-txt">Instructions: {{medication.instructions}}</span><br>
-                                <span class="sml-medication-txt-right">{{medication.startDate | date: 'dd/MM/yyyy'}}</span><br>
+                                <span class="sml-medication-txt-right">Start Date: {{medication.startDate | date: 'dd/MM/yyyy'}}</span><br>
                             </button>
                         </td>
                     </tr>
@@ -125,7 +125,7 @@
                         <div class="col-xs-8">
                             <label class="side-effect-text" [ngClass]="{'strikethrough': sideeffect.deleted}" id="medicationComment">{{ sideeffect.sideEffectText }}</label>
                         </div>
-                        <div class="col-xs-2" class="pull-left" id="medicationButton">
+                        <div class="col-xs-2" class="" id="medicationButton">
                             <button type="button" *ngIf="!sideeffect.deleted" id="minusButton" (click)="removeSideEffect(sideeffect.userSideEffectID)">
                                 <img src="assets/red_minus_icon.png">
                             </button>
@@ -137,7 +137,7 @@
                         <div class="col-xs-10">
                                 <input type="text" class="form-control" id="side-effect-input" [(ngModel)]="newSideEffect" [ngModelOptions]="{standalone: true}" placeholder="New side effect">
                         </div>
-                        <div class="col-xs-2 pull-left">
+                        <div class="col-xs-2">
                                 <button type="button" id="plusButton" (click)="addSideEffect()">
                                 <img src="assets/Green_Plus_Icon.png">
                             </button>

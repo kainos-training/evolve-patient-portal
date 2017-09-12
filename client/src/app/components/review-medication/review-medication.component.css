@@ -91,14 +91,12 @@
 }
 
 #minusButton {
-    float: right;
     border: none;
     background-color: #EBF0F4;
     width: 11%;
 }
 
 #plusButton {
-    float: right;
     border: none;
     background-color: #EBF0F4;
 }
@@ -179,7 +177,17 @@ h1::before {
 .side-effect-item {
     border-bottom:1px solid #ddd;
     padding-top: 10px;
+    padding-bottom:10px;
+    padding-right: 12px;
+    padding-left:12px;
 }
 .side-effect-text {
     font-weight:400;
+}
+
+.new-side-effect{
+    padding-top: 10px;
+    padding-bottom:10px;
+    padding-right: 12px;
+    padding-left:12px;
 }
