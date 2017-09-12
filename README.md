@@ -6,6 +6,10 @@ This seed project has been created to get you up and running quickly for develop
 
 For coding standards and additional info please see the project wiki :)
 
+### Database
+Run script for creation and insertion of mock data to create a local copy of the database.
+patientPortalDB.sql
+
 ### Prerequisites
 
 ```
@@ -19,7 +23,8 @@ Please create a server/config.json file as follows:
   "password" : "password",
   "host" : "localhost",
   "port" : 8002,
-  "database" :"database"
+  "database" :"database",
+  "jwtSecret": "jwtSecret"
 }
 ```
 

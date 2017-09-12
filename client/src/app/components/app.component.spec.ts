@@ -1,32 +1,31 @@
-import { TestBed, async } from '@angular/core/testing';
-
-import { AppComponent } from './app.component';
+import {NO_ERRORS_SCHEMA} from '@angular/core';
+import {CUSTOM_ELEMENTS_SCHEMA} from '@angular/core';
+import {AppComponent} from './app.component';
+import {HttpClientModule} from '@angular/common/http';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 
 describe('AppComponent', () => {
-  beforeEach(async(() => {
-    TestBed.configureTestingModule({
-      declarations: [
-        AppComponent
-      ],
-    }).compileComponents();
-  }));
+    let component: AppComponent;
+    let fixture: ComponentFixture<AppComponent>;
 
-  it('should create the app', async(() => {
-    const fixture = TestBed.createComponent(AppComponent);
-    const app = fixture.debugElement.componentInstance;
-    expect(app).toBeTruthy();
-  }));
+    beforeEach(async(() => {
+        TestBed.configureTestingModule({
+            schemas: [NO_ERRORS_SCHEMA,
+                CUSTOM_ELEMENTS_SCHEMA],
+            declarations: [
+                AppComponent
+            ],
+            imports: [
+                BrowserAnimationsModule,
+                HttpClientModule
+            ]
+        }).compileComponents();
+    }));
 
-  it(`should have as title 'map'`, async(() => {
-    const fixture = TestBed.createComponent(AppComponent);
-    const app = fixture.debugElement.componentInstance;
-    expect(app.title).toEqual('map');
-  }));
-
-  it('should render title in a h1 tag', async(() => {
-    const fixture = TestBed.createComponent(AppComponent);
-    fixture.detectChanges();
-    const compiled = fixture.debugElement.nativeElement;
-    expect(compiled.querySelector('h1').textContent).toContain('Welcome to map!');
-  }));
+    it('should be created', async () => {
+        fixture = TestBed.createComponent(AppComponent);
+        component = fixture.componentInstance;
+        expect(component).toBeTruthy();
+    });
 });

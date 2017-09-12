@@ -1,24 +1,68 @@
-const mysql = require('mysql');
-const config = require('./config.json');
+var mysql = require('mysql');
+const config = require('./config');
 
-const db = mysql.createConnection({
+const database = mysql.createConnection({
     host: config.host,
     user: config.user,
     password: config.password,
     database: config.database
 });
 
-db.connect(function(err) {
-    if(err) throw err;
-    console.log("Connected to MySQL");
+database.connect(function(err) {
+    if (err) throw err;
 });
 
-exports.testQuery = function (callback){
-    db.query(
-        "select * from city limit 10;",
+database.getMedications = function(userID, callback) {
+    database.query(
+        "SELECT U.userID, " +
+        "M.medicationID, M.medicationName, " +
+        "MT.medicationType, " +
+        "MU.startDate, MU.endDate, MU.dosage, MU.medicationUserID " +
+        "FROM User AS U INNER JOIN MedicationUser AS MU ON U.userID = MU.userID " +
+        "INNER JOIN Medication AS M ON MU.medicationID = M.medicationID " +
+        "INNER JOIN MedicationType AS MT ON MT.medicationTypeID = M.medicationTypeID " +
+        "WHERE U.userID = ? " +
+        "AND MU.endDate >= NOW();", [userID],
         function(err, rows) {
-            if(err) throw err;
-            callback(rows);
-        }
-    );
+            callback(err, rows);
+        });
 };
+
+database.insertComment = function(medicationUserID, commentText, callback) {
+    database.query(
+        "INSERT INTO MedicationUserComment (medicationUserID, commentText, timeStamp) VALUES (?, ?, CURRENT_TIMESTAMP);", [medicationUserID, commentText],
+        function(err) {
+            callback(err);
+        });
+}
+
+database.getMedicationUserComments = function(medicationUserID, callback) {
+    database.query(
+        "SELECT medicationUserCommentID, commentText, `timeStamp` " +
+        "FROM MedicationUserComment " +
+        "WHERE medicationUserID = ?;", [medicationUserID],
+        function(err, rows) {
+            callback(err, rows);
+        });
+};
+
+database.removeComment = function(medicationUserCommentID, callback) {
+    database.query(
+        "DELETE FROM MedicationUserComment WHERE medicationUserCommentID = ?;", [medicationUserCommentID],
+        function(err) {
+            callback(err);
+        });
+};
+
+database.getMedicationHistory = function(medicationID, userID, callback) {
+    database.query(
+        "SELECT * FROM MedicationUser " +
+        "WHERE medicationID = ? " +
+        "AND userID = ? " +
+        "AND endDate < NOW();", [medicationID, userID],
+        function(err, rows) {
+            callback(err, rows);
+        });
+};
+
+module.exports = database;

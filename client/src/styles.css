@@ -1,1 +1,184 @@
 /* You can add global styles to this file, and also import other style files */
+.modal-content{
+    border-radius: 2px;
+    margin: 20px;
+}
+
+.modal-body{
+    background-color: #EBF0F4;
+    padding: 20px;
+}
+
+.modal-backdrop {
+   background: linear-gradient(to bottom, rgba(0,0,0,0) 0%,rgba(0,0,0,0.65) 73%,rgba(0,0,0,0.65) 99%);
+}
+
+.evolve-modal-btn{
+    margin-left: 30%;
+    margin-right: 30%;
+    width: 40%;
+}
+
+.input[type="submit"]{
+    background-color: #00CE8B;
+}
+
+.pageBackground {
+}
+.modal-content{
+    border-radius: 2px;
+}
+
+.modal-body{
+    background-color: #EBF0F4;
+}
+
+.modal-backdrop {
+    background: linear-gradient(to bottom, rgba(0,0,0,0) 0%,rgba(0,0,0,0.65) 73%,rgba(0,0,0,0.65) 99%);
+}
+
+.evolve-modal-btn{
+    margin-left: 30%;
+    margin-right: 30%;
+    width: 40%;
+}
+
+.pageBackground {
+    background-color: #EBF0F4;
+}
+header {
+    background-color: #465463 !important;
+    padding: 40px;
+}
+
+header div {
+    text-align: center;
+}
+
+header img {
+    vertical-align: bottom;
+    max-height: 150px;
+    margin: 0 auto;
+}
+
+header div h1 {
+    font-weight: 200;
+    letter-spacing: 3px;
+    color: white !important;
+    display: inline;
+    margin-left: 10px;
+}
+
+header div.separator {
+    border-top: solid 1px white;
+    margin-top: 10px;
+}
+
+.errorPage .callout-message a:link {
+    text-decoration: none;
+}
+
+.loginPage {
+    width: 350px;
+    margin: 0 auto;
+}
+
+.loginPage form {
+    background-color: white;
+    padding: 20px;
+}
+
+.loginPage form h5 {
+    margin: 0;
+}
+
+.input-group {
+    margin-top: 20px;
+}
+
+input[type=submit] {
+    margin-top: 20px;
+    background-color: #00CE8B;
+    text-transform: uppercase;
+}
+
+.bs-callout {
+    margin: 20px 0;
+    padding: 15px 30px 15px 15px;
+    border-left: 5px solid #eee;
+}
+
+.bs-callout p {
+    margin-bottom: 0;
+}
+
+.bs-callout span {
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+.bs-callout-danger {
+    background-color: white;
+    border-color: #EC0211;
+}
+
+.callout-message {
+    padding: 0;
+}
+
+.callout-message a:link {
+    text-decoration: underline;
+    display: block;
+}
+
+.bs-callout-danger, .input-group, .loginPage form h5, header div span {
+    color: #666666 !important;
+    font-family: Helvetica, sans-serif;
+}
+
+@media (max-width: 767px) {
+    header img {
+        height: 4em;
+        display: block;
+    }
+
+    header div h1 {
+        font-size: 2em !important;
+        margin-left: 0;
+    }
+
+    .errorPage h1 {
+        font-size: 30pt;
+    }
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+    header img {
+        height: 6em;
+        display: inline-block;
+    }
+
+    header div h1 {
+        font-size: 3em !important;
+    }
+
+    .errorPage h1 {
+        font-size: 35pt;
+    }
+}
+
+@media (min-width: 992px) {
+    header img {
+        height: 8em;
+        display: inline-block;
+    }
+
+    header div h1 {
+        font-size: 4em !important;
+    }
+
+    .errorPage h1 {
+        font-size: 40pt;
+    }
+
+}
