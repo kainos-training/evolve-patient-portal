@@ -26,11 +26,12 @@ export class ReviewMedicationComponent {
     public description: MedicationDescription;
     public sanitizer: Sanitizer;
     public collapsedDescription: boolean;
-
-    public openModal(meds: Medication, template: TemplateRef<any>) {
+    public state : string;
+    public openModal(meds: Medication/*, template: TemplateRef<any>*/) {
+        this.state = 'meds';
         this.collapsedDescription = true;
         this.selectedMedication = meds;
-        this.modalRef = this.modalService.show(template);
+        //this.modalRef = this.modalService.show(template);
         let description = this.dataService.getWikiSummary(meds.medicationName);
 
         this.dataService.getMedicationComments(this.selectedMedication.medicationUserID).subscribe(
@@ -44,6 +45,10 @@ export class ReviewMedicationComponent {
         this.dataService.getWikiSummary(meds.medicationName).subscribe(
             res => { this.description = res; }
         );
+    }
+
+    public openPrescriptionModal(template: TemplateRef<any>) {
+        this.modalRef = this.modalService.show(template);
     }
 
     public removeComment(medicationUserCommentID) {
@@ -69,9 +74,15 @@ export class ReviewMedicationComponent {
         this.collapsedDescription = this.collapsedDescription == true ? false : true;
     }
 
+    public closeMeds() {
+        this.state = 'prescription';
+    }
+
     constructor(dataService: DataService, private modalService: BsModalService) {
+        this.state = "prescription";
         this.dataService = dataService;
-        dataService.getMedicationList(1).subscribe(
+        var userID = this.dataService.getCookie();
+        dataService.getMedicationList(userID).subscribe(
             res => this.medicationsList = res
         )
     }
