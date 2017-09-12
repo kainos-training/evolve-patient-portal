@@ -1,7 +1,7 @@
 import {NavigatorGeolocation} from '@ngui/map';
 import {Subscription} from 'rxjs/Rx';
 import {AppointmentFurtherInfo} from '../../class/AppointmentFurtherInfo';
-import {Component, EventEmitter, OnDestroy, OnInit, Output, TemplateRef} from '@angular/core';
+import {Component, OnDestroy, OnInit, TemplateRef} from '@angular/core';
 import {BsModalService} from 'ngx-bootstrap/modal';
 import {BsModalRef} from 'ngx-bootstrap/modal/modal-options.class';
 import {Appointment} from '../../class/Appointment';
@@ -24,9 +24,6 @@ export class AppointmentComponent implements OnInit, OnDestroy {
     private modalRef: BsModalRef;
     private user: User = new User();
     private userSubscription: Subscription;
-
-    @Output() open: EventEmitter<any> = new EventEmitter();
-    @Output() close: EventEmitter<any> = new EventEmitter();
 
     constructor(private modalService: BsModalService, private data: DataService, private switchboard: SwitchBoardService) {
         this.userSubscription = this.switchboard.user$.subscribe(user => {
@@ -67,10 +64,5 @@ export class AppointmentComponent implements OnInit, OnDestroy {
 
     private toggle(name): void {
         this.focusedAppointment[name] = !this.focusedAppointment[name];
-        if (this.focusedAppointment[name]) {
-            this.open.emit(null);
-        } else {
-            this.close.emit(null);
-        }
     }
 }
