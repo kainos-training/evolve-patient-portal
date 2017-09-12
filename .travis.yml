@@ -32,10 +32,10 @@ install:
     - cd client
     - npm install
     # Install Backend Dependencies
-    - cd ~
+    - cd ..
     - cd server
     - npm install
-    - cd ~
+    - cd ..
 
 script:
     # Frontend build
@@ -43,7 +43,7 @@ script:
     - ng build
     - karma start karma.conf.js --single-run
     # Backend build
-    - cd ~
+    - cd ..
     - cd server
     - npm start
     
