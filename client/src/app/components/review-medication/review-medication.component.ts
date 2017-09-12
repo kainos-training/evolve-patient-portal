@@ -6,6 +6,7 @@ import { BsModalRef } from 'ngx-bootstrap/modal/modal-options.class';
 import { Observable } from 'rxjs/Observable';
 import { MedicationComment } from '../../class/MedicationComment';
 import { MedicationDescription } from '../../class/MedicationDescription';
+import { SideEffect } from '../../class/SideEffect';
 import { Sanitizer } from '@angular/core';
 import { SecurityContext } from '@angular/core';
 
@@ -18,7 +19,8 @@ export class ReviewMedicationComponent {
 
     public selectedMedication: Medication;
     public selectedMedicationComments: MedicationComment[];
-    public selectedMedicationHistory: Medication[]
+    public selectedMedicationHistory: Medication[];
+    public userSideEffects: SideEffect[];
     public modalRef: BsModalRef;
     public medicationsList: Medication[];
     public dataService: DataService;
@@ -37,6 +39,13 @@ export class ReviewMedicationComponent {
         this.dataService.getMedicationComments(this.selectedMedication.medicationUserID).subscribe(
             res => this.selectedMedicationComments = res
         );
+        
+        var userID = this.dataService.getCookie();
+        this.dataService.getUserSideEffects(userID).subscribe(
+            res => this.userSideEffects = res
+        );
+
+        console.log(this.userSideEffects);
 
         this.dataService.getMedicationHistory(this.selectedMedication.medicationID, 1).subscribe(
             res => this.selectedMedicationHistory = res
@@ -67,6 +76,12 @@ export class ReviewMedicationComponent {
     public refreshMedicationComments() {
         this.dataService.getMedicationComments(this.selectedMedication.medicationUserID).subscribe(
             res => this.selectedMedicationComments = res
+        );
+    }
+
+    public refreshUserSideEffects() {
+        this.dataService.getUserSideEffects(this.dataService.getCookie()).subscribe(
+            res => this.userSideEffects = res
         );
     }
 

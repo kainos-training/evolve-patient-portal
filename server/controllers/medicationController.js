@@ -70,6 +70,28 @@ exports.getListOfMedicationUserComments = function(req, res) {
     }
 };
 
+exports.getUserSideEffects = function(req, res) {
+    const userID = req.body.userID;
+    console.log(userID);
+
+    if (userID == null) {
+        res.status(400).json({
+            success: false
+        });
+    } else {
+        db.getUserSideEffects(userID, function(err, rows) {
+            if (err) {
+                res.status(400).json({
+                    success: false
+                });
+            } else {
+                console.log(rows);
+                res.status(200).send(rows);
+            }
+        });
+    }
+};
+
 exports.removeMedicationUserComment = function(req, res) {
     const medicationUserCommentID = req.body.medicationUserCommentID;
 

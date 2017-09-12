@@ -55,6 +55,7 @@ medicationID int not null,
 startDate date not null,
 endDate date,
 dosage varchar(60) not null,
+instructions varchar(60) not null,
 primary key (medicationUserID),
 foreign key (userID) references `User` (userID),
 foreign key (medicationID) references Medication (medicationID)
@@ -120,7 +121,7 @@ foreign key (clinicianID) references Clinician(clinicianID),
 foreign key (appointmentTypeID) references AppointmentType (appointmentTypeID)
 );
 
-CREATE TABLE IF NOT EXISTS UserSideEffects(
+CREATE TABLE IF NOT EXISTS UserSideEffect(
 	userSideEffectID int auto_increment not null,
     userID int not null,
     sideEffectText text not null,
@@ -152,13 +153,13 @@ VALUES('Penicillin', 1, 'https://en.wikipedia.org/wiki/Penicillin'),
 ('Ibuprofen', 4, 'https://en.wikipedia.org/wiki/Ibuprofen'), 
 ('Ketoprofen', 4, 'https://en.wikipedia.org/wiki/Ketoprofen');
 
-INSERT INTO MedicationUser(userID, medicationID, startDate, endDate, dosage)
-VALUES (1, 3, '2017-06-01', '2019-08-10', '10mg'),
-(1, 3, '2016-06-01', '2017-06-01', '5mg'),
-(1, 3, '2015-06-01', '2016-06-01', '20mg'),
-(1, 4, '2016-06-01', '2019-08-10', '5mg'), 
-(2, 1, '2017-02-09', '2019-02-27', '15mg'),
-(3, 2, '2016-09-29', '2018-10-10', '10mg');
+INSERT INTO MedicationUser(userID, medicationID, startDate, endDate, dosage, instructions)
+VALUES (1, 3, '2017-06-01', '2019-08-10', '10mg', 'Take one tablet twice a day'),
+(1, 3, '2016-06-01', '2017-06-01', '5mg', 'Take two tablets twice a day'),
+(1, 3, '2015-06-01', '2016-06-01', '20mg', 'Take two tablets twice a day'),
+(1, 4, '2016-06-01', '2019-08-10', '5mg', 'Take two tablets twice a day'), 
+(2, 1, '2017-02-09', '2019-02-27', '15mg', 'Take one tablet twice a day'),
+(3, 2, '2016-09-29', '2018-10-10', '10mg', 'Take one tablet twice a day');
 
 INSERT INTO MedicationUserComment(medicationUserID, commentText)
 VALUES (1, 'Not feeling the benefit after two weeks'), (2, 'Helping to minimise pain but still exists'),

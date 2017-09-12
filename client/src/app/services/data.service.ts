@@ -11,6 +11,7 @@ import { Router } from '@angular/router';
 import { Appointment } from '../class/Appointment';
 import { AppointmentFurtherInfo } from '../class/AppointmentFurtherInfo';
 import { User } from '../class/User';
+import { SideEffect } from '../class/SideEffect';
 
 @Injectable()
 export class DataService {
@@ -31,6 +32,17 @@ export class DataService {
         };
 
         return this.http.post<Medication[]>('api/medication/list', body, options);
+    };
+
+    public getUserSideEffects(userID) {
+        const body = {
+            'userID': userID
+        };
+        const options = {
+            headers: new HttpHeaders().set('Content-Type', 'application/x-www-form-urlencoded'),
+        };
+        console.log(body);
+        return this.http.post<SideEffect[]>('api/medication/side-effects', body, options);
     };
 
     public getMedicationComments(medicationUserID) {

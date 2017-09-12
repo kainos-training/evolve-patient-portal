@@ -26,4 +26,9 @@ protectedMedicationRoutes.post('/history', function(req, res) {
     return medicationController.getMedicationHistory(req, res);
 });
 
+protectedMedicationRoutes.post('/side-effects', function(req, res) {
+    console.log("getting side effects");
+    return medicationController.getUserSideEffects(req, res);
+});
+
 module.exports = protectedMedicationRoutes;

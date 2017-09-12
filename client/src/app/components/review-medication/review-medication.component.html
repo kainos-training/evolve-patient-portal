@@ -1,11 +1,13 @@
 <body>
-    <div class="col-xs-12 col-sm-12 col-md-6 col-lg-4 " id="" (click)="openPrescriptionModal(prescriptionTemplate)">
+    <div class="col-xs-12 col-sm-12 col-md-6 col-lg-4 " id="">
         <div class="panel panel-default">
             <div class="panel-heading">
-                <h1 class="panel-title"id="medication-header">Medication Prescriptions</h1>
+                <h1 class="panel-title"id="medication-header">Medication Prescriptions
+                    <a class="pull-right" (click)="openPrescriptionModal(prescriptionTemplate)"><i class="glyphicon glyphicon-info-sign" aria-hidden="true"></i></a>
+                </h1>
             </div>
             <div class="panel-body" id="medicationDetails">
-                <table class="table table-hover">
+                <table class="table">
                     <tbody>
                         <tr *ngFor="let medication of medicationsList">
                             <td>
@@ -32,7 +34,6 @@
         <div class="modal-body">
             <div class="perscription-header">
                 <p>
-                    <img src="/assets/pill.png" class="pill-icon-modal" />
                     <span class="sml-medication-txt"><strong>{{selectedMedication.medicationName}}</strong></span><br>
                     <span class="sml-medication-txt-left">{{selectedMedication.dosage}}</span><br>
                     <span class="sml-medication-class-txt-left"><strong>Class:</strong> {{selectedMedication.medicationType}}</span>
@@ -100,21 +101,55 @@
             </div>
         </div>
         <div class="modal-body">
-            <div class="panel-body" id="medicationDetails"></div>
+            <div class="panel-body" id="medicationDetails">
             <table class="table table-hover">
                 <tbody>
                     <tr *ngFor="let medication of medicationsList">
                         <td>
                             <button type="button" class="btn table-btn" (click)="openModal(medication,template)">
                                 <span class="main-medication-txt">{{medication.medicationName}}</span><br>
-                                <span class="sml-medication-txt">20mg</span><br>
-                                <span class="sml-medication-txt">1 Tablet per day with a meal</span><br>
+                                <span class="sml-medication-txt">Dosage: {{medication.dosage}}</span><br>
+                                <span class="sml-medication-txt">Instructions: {{medication.instructions}}</span><br>
                                 <span class="sml-medication-txt-right">{{medication.startDate | date: 'dd/MM/yyyy'}}</span><br>
                             </button>
                         </td>
                     </tr>
                 </tbody>
             </table>
+            <!-- Side Effects of all Meds -->
+
+            <div class="side-effects">
+                <label><strong>Side Effects:</strong></label>
+                <div class="table table-responsive">
+                    <tr *ngFor="let medicationComment of selectedMedicationComments">
+                        <td id="sideEffectTimeStamp">{{medicationComment.timeStamp|date:'dd/MM/yyyy'}}</td>
+                        <td id="medicationComment">
+                            <li>{{medicationComment.commentText}}</li>
+                        </td>
+                        <td id="medicationButton">
+                            <button type="button" id="minusButton" (click)="removeComment(medicationComment.medicationUserCommentID)">
+                            <img src="assets/red_minus_icon.png">
+                        </button>
+                        </td>
+                    </tr>
+                </div>
+                <div class="new-side-effect">
+                    <div class="table">
+                        <tr>
+                            <td>
+                                <input type="text" class="form-control" id="side-effect-input" [(ngModel)]="newComment" [ngModelOptions]="{standalone: true}" placeholder="Input side effect">
+                            </td>
+                            <td>
+                                <button type="button" id="plusButton" (click)="addComment(medication, template)">
+                                <img src="assets/Green_Plus_Icon.png">
+                            </button>
+                            </td>
+                        </tr>
+                    </div>
+                </div>
+                <div class="clearfix"></div>
+            </div>
+        </div>
         </div>
     </div>
     <div *ngIf="state=='meds'">
