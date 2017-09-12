@@ -75,6 +75,7 @@
     font-size: 15px;
     font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
     color: #666666;
+    padding-bottom: 5px;
 }
 .side-effects img{
     height: 20px;
@@ -164,4 +165,4 @@ h1::before {
     height: 26px;
     background-size: 24px 24px;
 }
-
+ 

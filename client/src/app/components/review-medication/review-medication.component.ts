@@ -8,6 +8,8 @@ import { MedicationComment } from '../../class/MedicationComment';
 import { MedicationDescription } from '../../class/MedicationDescription';
 import { Sanitizer } from '@angular/core';
 import { SecurityContext } from '@angular/core';
+import {AccordionModule} from 'ngx-bootstrap/accordion';
+
 
 @Component({
     selector: 'evolve-review-medication',
@@ -27,10 +29,14 @@ export class ReviewMedicationComponent {
     public sanitizer: Sanitizer;
     public collapsedDescription: boolean;
     public state : string;
+    public showPrescriptionHistory: boolean;
+    public prescriptionText: string;
     public openModal(meds: Medication/*, template: TemplateRef<any>*/) {
         this.state = 'meds';
         this.collapsedDescription = true;
         this.selectedMedication = meds;
+        this.showPrescriptionHistory = false;
+        this.prescriptionText = "Show Prescription History";
         //this.modalRef = this.modalService.show(template);
         let description = this.dataService.getWikiSummary(meds.medicationName);
 
@@ -76,6 +82,10 @@ export class ReviewMedicationComponent {
 
     public closeMeds() {
         this.state = 'prescription';
+    }
+
+    public displayPrescriptionHistory() {
+        this.showPrescriptionHistory = !this.showPrescriptionHistory;
     }
 
     constructor(dataService: DataService, private modalService: BsModalService) {
