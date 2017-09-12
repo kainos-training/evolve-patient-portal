@@ -72,7 +72,7 @@ database.getUserByUsername = (username, cb) => {
             if (err) {
                 cb(err);
             } else {
-                cb(null, rows)
+                cb(null, rows);
             }
         }
     )
@@ -99,7 +99,7 @@ database.insertUserIntoDatabase = (userData, cb) => {
             if (err) {
                 cb(err);
             } else {
-                cb(null, rows)
+                cb(null, rows);
             }
         }
     )
@@ -119,7 +119,7 @@ database.selectAllAppointments = (userID, cb) => {
             if (err) {
                 cb(err);
             } else {
-                cb(null, rows)
+                cb(null, rows);
             }
         }
     )
@@ -140,7 +140,7 @@ database.selectAllAppointmentsExtended = (appointmentID, cb) => {
             if (err) {
                 cb(err);
             } else {
-                cb(null, rows)
+                cb(null, rows);
             }
         }
     )
@@ -153,7 +153,7 @@ database.selectRequestPasswordDetailsByUsername = (username, cb) => {
             if (err) {
                 cb(err);
             } else {
-                cb(null, rows)
+                cb(null, rows);
             }
         }
     )
@@ -166,7 +166,35 @@ database.selectRequestPasswordDetailsByRealUserID = (realUserID, cb) => {
             if (err) {
                 cb(err);
             } else {
-                cb(null, rows)
+                cb(null, rows);
+            }
+        }
+    )
+};
+
+database.updateUserWithNewPasswordByUserID = (password, userID, cb) => {
+    database.query(
+        "UPDATE User SET `password` = ? WHERE `userID` = ? ", [password, userID],
+        function(err, rows) {
+            if (err) {
+                cb(err);
+            } else {
+                cb(null, rows);
+            }
+        }
+    )
+};
+
+database.selectUserInfoByUserID = (userID, cb) => {
+    database.query(
+        "SELECT userID, firstName, lastName, dateOfBirth, phoneNumber, title, gender, MRIN, address, email " +
+        "FROM User " +
+        "WHERE userID = ? ", [userID],
+        function(err, rows) {
+            if (err) {
+                cb(err);
+            } else {
+                cb(null, rows);
             }
         }
     )
