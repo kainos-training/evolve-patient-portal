@@ -57,7 +57,6 @@
         </div>
         <div class="local-map-container">
             <input type="submit" (click)="toggle($event)" class="btn btn-success btn-sm btn-block" value="{{!!isLocalMapVisible ? 'Collapse' : 'Expand'}} local map" />
-            <h4 [hidden]="!isLocalMapVisible">Local map here</h4>
             <img [hidden]="!isLocalMapVisible" src="http://www.belfasttrust.hscni.net/images/RoyalVictoriaHospital_SitePlan_72dpi.jpg" />
         </div>
     </div>
