@@ -2,7 +2,7 @@
 .panel-default{
     border-top-width: 5px;
     border-top-color: #027FBB;
-    min-height: 400px;
+    /*min-height: 400px;*/
     margin-top: 10px;
 }
 .panel-heading img{

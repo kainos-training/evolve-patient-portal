@@ -27,7 +27,7 @@ import { SettingNewPasswordComponent } from './components/setting-new-password/s
 import { RequestPasswordResetComponent } from './components/request-password-reset/request-password-reset.component';
 import { TemplateComponent } from './components/template/template.component';
 import { RepeatPrescriptionComponent } from './components/repeat-prescription/repeat-prescription.component';
-
+import { ToolTipModule } from 'angular2-tooltip'
 @NgModule({
     declarations: [
         AppComponent,
@@ -52,7 +52,8 @@ import { RepeatPrescriptionComponent } from './components/repeat-prescription/re
         AlertModule.forRoot(),
         ModalModule.forRoot(),
         NguiMapModule.forRoot({ apiUrl: 'https://maps.google.com/maps/api/js?key=AIzaSyC6v7VVrChAt97hxrsY76i8Xg2mcaQMuE8' }),
-        BrowserAnimationsModule
+        BrowserAnimationsModule, 
+        ToolTipModule
     ],
     providers: [
         DataService,

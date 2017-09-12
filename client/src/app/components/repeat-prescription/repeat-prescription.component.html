@@ -1,2 +1,62 @@
 <evolve-top-bar></evolve-top-bar>
 <evolve-left-side-menu></evolve-left-side-menu>
+<div id="widgetContainer" class="col-sm-9">
+<body>
+    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 " id="">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h1 class="panel-title" id="widget-header">Your current prescriptions</h1>
+            </div>
+            <div class="panel-body" id="medicationDetails">
+                <table class="table table-hover">
+                    <tbody>
+                        <tr *ngFor="let prescription of prescriptionList">
+                            <td>
+                                <span class="widget-title-txt">Name: {{prescription.medicationName}}</span><br>
+                            </td>
+                            <td>
+                                <span class="widget-body-txt">Dosage: {{prescription.dosage}}</span><br>
+                            </td>
+                            <td>
+                                <span class="widget-title-txt">Expires: {{prescription.endDate | date}}</span><br>
+                            </td>
+                            <td>
+                                <button class="btn btn-success" (click)="addToList(prescription)" tooltip content="You can request multiple repeat prescriptions">Repeat Prescription</button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 " id="">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h1 class="panel-title" id="widget-header">Prescriptions for request</h1>
+                </div>
+                <div class="panel-body" id="medicationDetails">
+                    <table class="table table-hover">
+                        <tbody>
+                            <tr *ngFor="let selectedPres of renewPrescriptionList">
+                                <td>
+                                    <span class="widget-title-txt">Name: {{selectedPres.medicationName}}</span><br>
+                                </td>
+                                <td>
+                                    <span class="widget-body-txt">Dosage: {{selectedPres.dosage}}</span><br>
+                                </td>
+                                <td>
+                                    <span class="widget-title-txt">Expires: {{selectedPres.endDate | date}}</span><br>
+                                </td>
+                                <td>
+                                    <button class="btn btn-danger" (click)="removeFromList(selectedPres)">Remove</button>
+                                </td>
+                            </tr>
+                        </tbody>
+                        <!--<button type="button" class="btn table-btn" (click)="openModal(medication, template)">-->
+                    </table>
+                </div>
+            </div>
+        </div>
+</body>
+</div>
