@@ -120,6 +120,15 @@ foreign key (clinicianID) references Clinician(clinicianID),
 foreign key (appointmentTypeID) references AppointmentType (appointmentTypeID)
 );
 
+CREATE TABLE IF NOT EXISTS UserSideEffects(
+	userSideEffectID int auto_increment not null,
+    userID int not null,
+    sideEffectText text not null,
+    `timeStamp` timeStamp not null,
+    primary key(userSideEffectID),
+    foreign key (userID) references User(userID)
+);
+
 INSERT INTO GP (gpFullName, gpPracticeName, gpPracticeAddress)
 VALUES ('Dr. A Cheyne', 'Ormeau Park Surgery', '281 Ormeau Rd, Belfast BT7 3GG, UK'),
 ('Dr. E Glass', 'The Surgery', '1 Church St, Newtownards BT23 4FH'),
