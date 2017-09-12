@@ -125,3 +125,15 @@ input[data-expanded="true"] {
 input.btn.btn-block:last-of-type {
     margin-top: 20px;
 }
+
+input[data-expanded="true"], input[data-expanded="false"],
+input[data-expanded="true"]:visited, input[data-expanded="false"]:visited {
+    background-color: rgba(0, 50, 0, 0.80);
+}
+
+input[data-expanded="true"]:hover, input[data-expanded="false"]:hover,
+input[data-expanded="true"]:focus, input[data-expanded="false"]:focus,
+input[data-expanded="true"]:active, input[data-expanded="false"]:active {
+    background-color: rgba(0, 50, 0, 0.70);
+    outline: none;
+}
