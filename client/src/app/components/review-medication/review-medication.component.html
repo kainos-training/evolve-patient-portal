@@ -164,57 +164,34 @@
             <div class="modal-body">
                 <div class="perscription-header">
                     <p>
-                        <img src="/assets/pill.png" class="pill-icon-modal" />
-                        <span class="sml-medication-txt"><strong>{{selectedMedication.medicationName}}</strong></span><br>
-                        <span class="sml-medication-txt-left">{{selectedMedication.dosage}}</span><br>
-                        <span class="sml-medication-class-txt-left"><strong>Class:</strong> {{selectedMedication.medicationType}}</span>
+                        <span class="sml-medication-txt"><strong>Name:</strong> {{selectedMedication.medicationName}}</span><br>
+                        <span class="sml-medication-txt"><strong>Current Dosage:</strong> {{selectedMedication.dosage}}</span><br>
+                        <span class="sml-medication-txt"><strong>Class:</strong> {{selectedMedication.medicationType}}</span>
                     </p>
                     <hr>
+                    <a *ngIf="!showPrescriptionHistory" (click)="displayPrescriptionHistory()"><strong>Show Prescription History</strong></a>
+                    <a *ngIf="showPrescriptionHistory" (click)="displayPrescriptionHistory()"><strong>Hide Prescription History</strong></a>
+                    
                 </div>
-                <div class="perscription-form">
+
+                <div *ngIf="showPrescriptionHistory" class="perscription-form">
                     <form>
                         <div class="form-group">
-                            <label><strong>Prescription changes :</strong></label>
                             <ul *ngFor="let medicationHistoryItem of selectedMedicationHistory">
                                 <li>{{medicationHistoryItem.startDate|date:'dd/MM/yyyy'}} - {{medicationHistoryItem.endDate|date:'dd/MM/yyyy'}} : {{medicationHistoryItem.dosage}}</li>
                             </ul>
                         </div>
-                        <div class="side-effects">
-                            <label><strong>Side Effects:</strong></label>
-                            <div class="table table-responsive">
-                                <tr *ngFor="let medicationComment of selectedMedicationComments">
-                                    <td id="sideEffectTimeStamp">{{medicationComment.timeStamp|date:'dd/MM/yyyy'}}</td>
-                                    <td id="medicationComment">
-                                        <li>{{medicationComment.commentText}}</li>
-                                    </td>
-                                    <td id="medicationButton">
-                                        <button type="button" id="minusButton" (click)="removeComment(medicationComment.medicationUserCommentID)">
-                                        <img src="assets/red_minus_icon.png">
-                                    </button>
-                                    </td>
-                                </tr>
-                            </div>
-                            <div class="new-side-effect">
-                                <div class="table">
-                                    <tr>
-                                        <td>
-                                            <input type="text" class="form-control" id="side-effect-input" [(ngModel)]="newComment" [ngModelOptions]="{standalone: true}" placeholder="Input side effect">
-                                        </td>
-                                        <td>
-                                            <button type="button" id="plusButton" (click)="addComment(medication, template)">
-                                            <img src="assets/Green_Plus_Icon.png">
-                                        </button>
-                                        </td>
-                                    </tr>
-                                </div>
-                            </div>
-                            <div class="clearfix"></div>
-                        </div>
-                        <div class="form-group">
-                            <label><strong>{{selectedMedication.medicationName}} details:</strong></label>
-                            <pre *ngIf=this.collapsedDescription&&this.description><code [innerHTML]=this.description.description|ellipsis:200 (click)=toggleCollapse() ></code></pre>
-                            <pre *ngIf=!this.collapsedDescription&&this.description><code [innerHTML]=this.description.description|ellipsis:20000 (click)=toggleCollapse() ></code></pre>
-                        </div>
+                    </form>
+
+                </div>
+                <div class="perscription-form">
+                    <hr>
+                    <form>
+                    <div class="form-group">
+                        <label><strong>{{selectedMedication.medicationName}} details:</strong></label>
+                        <pre *ngIf=this.collapsedDescription&&this.description><code [innerHTML]=this.description.description|ellipsis:200 (click)=toggleCollapse() ></code></pre>
+                        <pre *ngIf=!this.collapsedDescription&&this.description><code [innerHTML]=this.description.description|ellipsis:20000 (click)=toggleCollapse() ></code></pre>
+                    </div>
                     </form>
                 </div>
             </div>
