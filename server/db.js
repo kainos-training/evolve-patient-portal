@@ -75,4 +75,31 @@ database.getMedicationHistory = function(medicationID, userID, callback) {
         });
 };
 
+database.updatePrescribedDate = function(medicationUserID, callback) {
+    database.query(
+        "UPDATE medicationUser " +
+        "SET prescribedDate  = curdate() " +
+        "WHERE medicationUserID = ?;", [medicationUserID],
+        function(err) {
+            callback(err);
+        });
+};
+
+database.getRepeatedMedication = function(userID, callback) {
+    database.query(
+        "SELECT U.userID, " +
+        "M.medicationID, M.medicationName, " +
+        "MT.medicationType, " +
+        "MU.startDate, MU.endDate, MU.dosage, MU.medicationUserID " +
+        "FROM User AS U INNER JOIN MedicationUser AS MU ON U.userID = MU.userID " +
+        "INNER JOIN Medication AS M ON MU.medicationID = M.medicationID " +
+        "INNER JOIN MedicationType AS MT ON MT.medicationTypeID = M.medicationTypeID " +
+        "WHERE U.userID = ? " +
+        "AND MU.endDate >= NOW() " +
+        "AND MU.repeated = TRUE;", [userID],
+        function(err, rows) {
+            callback(err, rows);
+        });
+};
+
 module.exports = database;
