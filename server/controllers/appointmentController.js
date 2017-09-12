@@ -33,7 +33,6 @@ exports.getAppointmentFurtherInfo = function(req, res) {
         "JOIN Department ON Department.departmentID = LocationDepartment.departmentID " +
         "JOIN Clinician ON Clinician.clinicianID = Appointment.clinicianID " +
         "JOIN Location ON Location.locationID = LocationDepartment.locationID " +
-        "LEFT OUTER JOIN LocationMap ON Location.locationID = LocationMap.locationMapID " +
         "WHERE Appointment.appointmentID = ?; ",
         [appointmentID],
         function(err, rows) {

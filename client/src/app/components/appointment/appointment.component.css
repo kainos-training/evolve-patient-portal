@@ -128,12 +128,12 @@ input.btn.btn-block:last-of-type {
 
 input[data-expanded="true"], input[data-expanded="false"],
 input[data-expanded="true"]:visited, input[data-expanded="false"]:visited {
-    background-color: rgba(0, 50, 0, 0.80);
+    background-color: #00579f;
 }
 
 input[data-expanded="true"]:hover, input[data-expanded="false"]:hover,
 input[data-expanded="true"]:focus, input[data-expanded="false"]:focus,
 input[data-expanded="true"]:active, input[data-expanded="false"]:active {
-    background-color: rgba(0, 50, 0, 0.70);
+    background-color: #067fbb;
     outline: none;
 }
