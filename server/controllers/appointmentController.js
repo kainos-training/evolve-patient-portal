@@ -25,7 +25,7 @@ exports.getAllAppointmentsByUserID = function(req, res) {
 exports.getAppointmentFurtherInfo = function(req, res) {
     let appointmentID = req.body.appointmentID;
     db.query(
-        "SELECT Department.departmentName, Appointment.dateOfAppointment, AppointmentType.`type`, `User`.userID, LocationMap.image, " +
+        "SELECT Department.departmentName, Appointment.dateOfAppointment, AppointmentType.`type`, `User`.userID, Department.departmentID, Location.locationID, " +
         "CONCAT (Clinician.title, ' ' ,Clinician.firstName, ' ', Clinician.lastName) AS clinicianName, Appointment.comment, Location.locationAddress " +
         "FROM `User` JOIN Appointment on `User`.userID = Appointment.userID " +
         "JOIN AppointmentType on AppointmentType.appointmentTypeID = Appointment.appointmentTypeID " +

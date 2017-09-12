@@ -24,6 +24,7 @@ export class AppointmentComponent implements OnInit, OnDestroy {
     private modalRef: BsModalRef;
     private user: User = new User();
     private userSubscription: Subscription;
+    private mapPath: string;
 
     isLocalMapVisible: boolean = true;
     @Output() open: EventEmitter<any> = new EventEmitter();
@@ -43,6 +44,7 @@ export class AppointmentComponent implements OnInit, OnDestroy {
         this.data.getAppointmentInformation(appointment.appointmentID).subscribe(
             res => {
                 this.focusedAppointment = res[0];
+                this.mapPath = '../assets/hospitals/' + this.focusedAppointment.locationID + '/' + this.focusedAppointment.departmentID;
                 this.modalRef = this.modalService.show(template);
             }
         );

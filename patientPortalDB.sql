@@ -120,14 +120,6 @@ foreign key (clinicianID) references Clinician(clinicianID),
 foreign key (appointmentTypeID) references AppointmentType (appointmentTypeID)
 );
 
-CREATE TABLE IF NOT EXISTS LocationMap(
-locationMapID int auto_increment,
-locationID int not null,
-image blob not null,
-primary key (locationMapID),
-foreign key (locationID) references Location(locationID)
-);
-
 INSERT INTO GP (gpFullName, gpPracticeName, gpPracticeAddress)
 VALUES ('Dr. A Cheyne', 'Ormeau Park Surgery', '281 Ormeau Rd, Belfast BT7 3GG, UK'),
 ('Dr. E Glass', 'The Surgery', '1 Church St, Newtownards BT23 4FH'),

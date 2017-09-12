@@ -57,7 +57,7 @@
         </div>
         <div class="local-map-container">
             <input type="submit" (click)="toggle($event)" class="btn btn-success btn-sm btn-block" value="{{!!isLocalMapVisible ? 'Collapse' : 'Expand'}} local map" />
-            <img [hidden]="!isLocalMapVisible" src="http://www.belfasttrust.hscni.net/images/RoyalVictoriaHospital_SitePlan_72dpi.jpg" />
+            <img [hidden]="!isLocalMapVisible" width="100%" [src]="mapPath" />
         </div>
     </div>
 </ng-template>
