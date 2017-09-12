@@ -25,7 +25,6 @@ export class AppointmentComponent implements OnInit, OnDestroy {
     private user: User = new User();
     private userSubscription: Subscription;
 
-    isLocalMapVisible: boolean = true;
     @Output() open: EventEmitter<any> = new EventEmitter();
     @Output() close: EventEmitter<any> = new EventEmitter();
 
@@ -44,6 +43,8 @@ export class AppointmentComponent implements OnInit, OnDestroy {
             res => {
                 this.focusedAppointment = res[0];
                 this.modalRef = this.modalService.show(template);
+                this.focusedAppointment.showLocalMap = false;
+                this.focusedAppointment.showGoogleMap = false;
             }
         );
     }
@@ -64,10 +65,9 @@ export class AppointmentComponent implements OnInit, OnDestroy {
             this.subCenter.unsubscribe();
     }
 
-    private toggle($event): void {
-        // console.log($event.path[1]);
-        this.isLocalMapVisible = !this.isLocalMapVisible;
-        if (this.isLocalMapVisible) {
+    private toggle(name): void {
+        this.focusedAppointment[name] = !this.focusedAppointment[name];
+        if (this.focusedAppointment[name]) {
             this.open.emit(null);
         } else {
             this.close.emit(null);

@@ -52,12 +52,13 @@
                 </div>
             </form>
         </div>
+        <input type="submit" [attr.data-expanded]="focusedAppointment.showGoogleMap" (click)="toggle('showGoogleMap')" class="btn btn-success btn-sm btn-block" value="{{!!focusedAppointment.showGoogleMap ? 'Collapse' : 'Expand'}} Google map" />
         <div class="map-container">
-            <evolve-map-view [userLocation]="userLocation" [departmentAddress]="focusedAppointment.locationAddress"></evolve-map-view>
+            <evolve-map-view [userLocation]="userLocation" [hidden]="!focusedAppointment.showGoogleMap" [departmentAddress]="focusedAppointment.locationAddress"></evolve-map-view>
         </div>
         <div class="local-map-container">
-            <input type="submit" (click)="toggle($event)" class="btn btn-success btn-sm btn-block" value="{{!!isLocalMapVisible ? 'Collapse' : 'Expand'}} local map" />
-            <img [hidden]="!isLocalMapVisible" src="http://www.belfasttrust.hscni.net/images/RoyalVictoriaHospital_SitePlan_72dpi.jpg" />
+            <input type="submit" data-expanded="ggg" [attr.data-expanded]="focusedAppointment.showLocalMap" (click)="toggle('showLocalMap')" class="btn btn-success btn-sm btn-block" value="{{!!focusedAppointment.showLocalMap ? 'Collapse' : 'Expand'}} hospital map" />
+            <img [hidden]="!focusedAppointment.showLocalMap" src="http://www.belfasttrust.hscni.net/images/RoyalVictoriaHospital_SitePlan_72dpi.jpg" />
         </div>
     </div>
 </ng-template>
