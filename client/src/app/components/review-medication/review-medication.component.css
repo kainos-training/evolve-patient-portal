@@ -169,3 +169,7 @@ h1::before {
     text-decoration: line-through;
   }
 
+#borderBelow{
+    border-top: none;
+    border-bottom: 1px solid #ddd;
+}
