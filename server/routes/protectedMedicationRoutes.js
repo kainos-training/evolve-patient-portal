@@ -26,4 +26,16 @@ protectedMedicationRoutes.post('/history', function(req, res) {
     return medicationController.getMedicationHistory(req, res);
 });
 
+protectedMedicationRoutes.post('/side-effects', function(req, res) {
+    return medicationController.getUserSideEffects(req, res);
+});
+
+protectedMedicationRoutes.post('/side-effects/remove', function(req, res) {
+    return medicationController.removeUserSideEffect(req, res);
+});
+
+protectedMedicationRoutes.post('/side-effects/add', function(req, res) {
+    return medicationController.addUserSideEffect(req, res);
+});
+
 module.exports = protectedMedicationRoutes;

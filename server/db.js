@@ -14,7 +14,7 @@ database.connect(function(err) {
 
 database.getMedications = function(userID, callback) {
     database.query(
-        "SELECT userID, medicationID, medicationName, medicationType, startDate, endDate, dosage " + 
+        "SELECT userID, medicationID, medicationName, medicationType, startDate, endDate, dosage, instructions " + 
         "FROM User NATURAL JOIN MedicationUser NATURAL JOIN Medication NATURAL JOIN MedicationType " +
         "WHERE userID = ? AND endDate >= NOW();", 
         [userID],
@@ -41,6 +41,16 @@ database.getMedicationUserComments = function(medicationUserID, callback) {
         });
 };
 
+database.getUserSideEffects = function(userID, callback) {
+    database.query(
+        "SELECT userSideEffectID, userID, sideEffectText, `timeStamp`, deleted " +
+        "FROM UserSideEffect " +
+        "WHERE userID = ?;", [userID],
+        function(err, rows) {
+            callback(err, rows);
+        });
+};
+
 database.removeComment = function(medicationUserCommentID, callback) {
     database.query(
         "DELETE FROM MedicationUserComment WHERE medicationUserCommentID = ?;", [medicationUserCommentID],
@@ -48,6 +58,23 @@ database.removeComment = function(medicationUserCommentID, callback) {
             callback(err);
         });
 };
+
+database.removeSideEffect = function(userSideEffectID, callback) {
+    database.query(
+        "UPDATE UserSideEffect SET deleted = true WHERE userSideEffectID = ?;", [userSideEffectID],
+        function(err) {
+            callback(err);
+        }
+    );
+};
+
+database.addSideEffect = function(userID, commentText, callback) {
+    database.query(
+        "INSERT INTO UserSideEffect (userID, sideEffectText, deleted) VALUES (?, ?, false);", [userID, commentText],
+        function(err) {
+            callback(err);
+        });
+}
 
 database.getMedicationHistory = function(medicationID, userID, callback) {
     database.query(

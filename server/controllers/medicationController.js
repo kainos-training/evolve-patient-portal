@@ -70,6 +70,26 @@ exports.getListOfMedicationUserComments = function(req, res) {
     }
 };
 
+exports.getUserSideEffects = function(req, res) {
+    const userID = req.body.userID;
+
+    if (userID == null) {
+        res.status(400).json({
+            success: false
+        });
+    } else {
+        db.getUserSideEffects(userID, function(err, rows) {
+            if (err) {
+                res.status(400).json({
+                    success: false
+                });
+            } else {
+                res.status(200).send(rows);
+            }
+        });
+    }
+};
+
 exports.removeMedicationUserComment = function(req, res) {
     const medicationUserCommentID = req.body.medicationUserCommentID;
 
@@ -79,6 +99,55 @@ exports.removeMedicationUserComment = function(req, res) {
         });
     } else {
         db.removeComment(medicationUserCommentID, function(err) {
+            if (err) {
+                res.status(400).json({
+                    success: false
+                });
+            } else {
+                res.status(200).json({
+                    success: true
+                });
+            }
+        });
+    }
+};
+
+exports.removeUserSideEffect = function(req, res){
+    const userSideEffectID = req.body.userSideEffectID;
+    
+        if (userSideEffectID == null) {
+            res.status(400).json({
+                success: false
+            });
+        } else {
+            db.removeSideEffect(userSideEffectID, function(err) {
+                if (err) {
+                    res.status(400).json({
+                        success: false
+                    });
+                } else {
+                    res.status(200).json({
+                        success: true
+                    });
+                }
+            });
+        }
+};
+
+exports.addUserSideEffect = function(req, res) {
+    const userID = req.body.userID;
+    const commentText = req.body.commentText;
+
+    if (userID == null) {
+        res.status(400).json({
+            success: false
+        });
+    } else if (commentText == null) {
+        res.status(400).json({
+            success: false
+        });
+    } else {
+        db.addSideEffect(userID, commentText, function(err) {
             if (err) {
                 res.status(400).json({
                     success: false

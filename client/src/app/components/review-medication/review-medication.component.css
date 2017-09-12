@@ -166,3 +166,12 @@ h1::before {
     background-size: 24px 24px;
 }
  
+
+.strikethrough {
+    text-decoration: line-through;
+  }
+
+#borderBelow{
+    border-top: none;
+    border-bottom: 1px solid #ddd;
+}
