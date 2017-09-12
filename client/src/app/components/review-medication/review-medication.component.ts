@@ -34,6 +34,7 @@ export class ReviewMedicationComponent implements OnInit{
     public collapsedDescription: boolean;
     public state : string;
     public showPrescriptionHistory: boolean;
+    public showSideEffects: boolean;
     public prescriptionText: string;
     private user: User = new User();
     private userSubscription: Subscription;
@@ -45,6 +46,7 @@ export class ReviewMedicationComponent implements OnInit{
         this.collapsedDescription = true;
         this.selectedMedication = meds;
         this.showPrescriptionHistory = false;
+        this.showSideEffects = false;
         this.prescriptionText = "Show Prescription History";
         //this.modalRef = this.modalService.show(template);
         let description = this.dataService.getWikiSummary(meds.medicationName);
@@ -116,6 +118,10 @@ export class ReviewMedicationComponent implements OnInit{
 
     public displayPrescriptionHistory() {
         this.showPrescriptionHistory = !this.showPrescriptionHistory;
+    }
+
+    public selectShowSideEffects() {
+        this.showSideEffects = !this.showSideEffects;
     }
 
     constructor(dataService: DataService, private modalService: BsModalService, private switchboard: SwitchBoardService) {
