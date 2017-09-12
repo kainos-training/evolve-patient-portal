@@ -111,7 +111,7 @@ code {
 }
 
 .local-map-container img {
-    max-width: 100%;
+    width: 100%;
 }
 
 input[data-expanded="false"] {
