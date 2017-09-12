@@ -110,3 +110,11 @@ code{
     font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
     color: #666666;
 }
+
+.local-map-container{
+    overflow: hidden;
+}
+
+.local-map-container img{
+    max-width: 100%;
+}
