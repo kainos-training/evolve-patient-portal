@@ -126,6 +126,7 @@ CREATE TABLE IF NOT EXISTS UserSideEffect(
     userID int not null,
     sideEffectText text not null,
     `timeStamp` timeStamp not null,
+    deleted boolean not null,
     primary key(userSideEffectID),
     foreign key (userID) references User(userID)
 );
@@ -191,3 +192,6 @@ VALUES(1, 3, 3, '2017-07-07', 'Ultrasound performed, pregnancy progressing norma
 (1, 2, 1, '2017-09-10 11:00:00', 'Foot complaints.', 3),
 (1, 3, 1, '2017-09-10 16:00:00', 'Other food compaints .', 3);
 
+INSERT INTO UserSideEffect (userID, sideEffectText, deleted)
+VALUES (1, 'I get a sore head after I take my meds in the morning', false),
+(1, 'I feel drowsy since I started lithium', false);

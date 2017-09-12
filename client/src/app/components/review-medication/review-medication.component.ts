@@ -25,6 +25,7 @@ export class ReviewMedicationComponent {
     public medicationsList: Medication[];
     public dataService: DataService;
     public newComment: string;
+    public newSideEffect: String;
     public description: MedicationDescription;
     public sanitizer: Sanitizer;
     public collapsedDescription: boolean;
@@ -39,13 +40,6 @@ export class ReviewMedicationComponent {
         this.dataService.getMedicationComments(this.selectedMedication.medicationUserID).subscribe(
             res => this.selectedMedicationComments = res
         );
-        
-        var userID = this.dataService.getCookie();
-        this.dataService.getUserSideEffects(userID).subscribe(
-            res => this.userSideEffects = res
-        );
-
-        console.log(this.userSideEffects);
 
         this.dataService.getMedicationHistory(this.selectedMedication.medicationID, 1).subscribe(
             res => this.selectedMedicationHistory = res
@@ -65,11 +59,24 @@ export class ReviewMedicationComponent {
         this.refreshMedicationComments();
     }
 
+    public removeSideEffect(userSideEffectID) {
+        this.dataService.removeUserSideEffect(userSideEffectID);
+        this.refreshUserSideEffects();
+    }
+
     public addComment() {
         if (this.newComment != null) {
             this.dataService.addMedicationComment(this.selectedMedication.medicationUserID, this.newComment);
             this.refreshMedicationComments();
             this.newComment = null;
+        }
+    }
+
+    public addSideEffect() {
+        if (this.newSideEffect != null) {
+            this.dataService.addUserSideEffect(this.dataService.getCookie(), this.newSideEffect);
+            this.refreshUserSideEffects();
+            this.newSideEffect = null;
         }
     }
 
@@ -99,6 +106,10 @@ export class ReviewMedicationComponent {
         var userID = this.dataService.getCookie();
         dataService.getMedicationList(userID).subscribe(
             res => this.medicationsList = res
-        )
+        );
+
+        this.dataService.getUserSideEffects(userID).subscribe(
+            res => { this.userSideEffects = res }
+        );
     }
 }
