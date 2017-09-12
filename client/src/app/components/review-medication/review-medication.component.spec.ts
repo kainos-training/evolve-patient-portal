@@ -1,28 +1,29 @@
-import {BrowserModule} from '@angular/platform-browser';
-import {CUSTOM_ELEMENTS_SCHEMA} from '@angular/core';
-import {FormsModule} from '@angular/forms';
-import {AlertModule} from 'ngx-bootstrap';
-import {DataService} from '../../services/data.service';
-import {HttpClientModule, HttpClient, HttpHandler} from '@angular/common/http';
-import {ReviewMedicationComponent} from './review-medication.component';
-import {SwitchBoardService} from '../../services/switch-board.service';
-import {ModalModule} from 'ngx-bootstrap/modal';
-import {EllipsisPipe} from '../../utils/ellipsis.pipe';
-import {LoginComponent} from '../login/login.component';
-import {CookieService} from 'ngx-cookie-service';
-import {routes} from '../../app.router';
-import {ErrorPageComponent} from '../error-page/error-page.component';
-import {RouteGuard} from '../../services/route.guard';
-import {TopBarComponent} from '../top-bar/top-bar.component';
-import {LeftSideMenuComponent} from '../left-side-menu/left-side-menu.component';
-import {AppointmentComponent} from '../appointment/appointment.component';
-import {DashboardComponent} from '../dashboard/dashboard.component';
-import {Medication} from '../../class/Medication';
-import {async, ComponentFixture, TestBed} from '@angular/core/testing';
-import {BsModalService} from 'ngx-bootstrap/modal';
-import {SettingNewPasswordComponent} from '../setting-new-password/setting-new-password.component';
-import {RequestPasswordResetComponent} from '../request-password-reset/request-password-reset.component';
-import {APP_BASE_HREF} from '@angular/common';
+import { BrowserModule } from '@angular/platform-browser';
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import { AlertModule } from 'ngx-bootstrap';
+import { DataService } from '../../services/data.service';
+import { HttpClientModule, HttpClient, HttpHandler } from '@angular/common/http';
+import { ReviewMedicationComponent } from './review-medication.component';
+import { SwitchBoardService } from '../../services/switch-board.service';
+import { ModalModule } from 'ngx-bootstrap/modal';
+import { EllipsisPipe } from '../../utils/ellipsis.pipe';
+import { LoginComponent } from '../login/login.component';
+import { CookieService } from 'ngx-cookie-service';
+import { routes } from '../../app.router';
+import { ErrorPageComponent } from '../error-page/error-page.component';
+import { RouteGuard } from '../../services/route.guard';
+import { TopBarComponent } from '../top-bar/top-bar.component';
+import { LeftSideMenuComponent } from '../left-side-menu/left-side-menu.component';
+import { AppointmentComponent } from '../appointment/appointment.component';
+import { DashboardComponent } from '../dashboard/dashboard.component';
+import { Medication } from '../../class/Medication';
+import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { BsModalService } from 'ngx-bootstrap/modal';
+import { SettingNewPasswordComponent } from '../setting-new-password/setting-new-password.component';
+import { RequestPasswordResetComponent } from '../request-password-reset/request-password-reset.component';
+import { APP_BASE_HREF } from '@angular/common';
+import { RepeatPrescriptionComponent } from '../repeat-prescription/repeat-prescription.component';
 
 export class MockDataService {
     getMedicationList(userID: number) {
@@ -44,8 +45,8 @@ describe('ReviewMedicationComponent', () => {
     beforeEach(async(() => {
         mockDataService = new MockDataService();
         TestBed.configureTestingModule({
-            declarations: [ReviewMedicationComponent, EllipsisPipe, LoginComponent, ErrorPageComponent, DashboardComponent, LeftSideMenuComponent, TopBarComponent, AppointmentComponent, SettingNewPasswordComponent, RequestPasswordResetComponent],
-            providers: [DataService, HttpClient, HttpHandler, HttpClientModule, BsModalService, CookieService, SwitchBoardService, RouteGuard, {provide: APP_BASE_HREF, useValue: '/'}],
+            declarations: [ReviewMedicationComponent, EllipsisPipe, LoginComponent, ErrorPageComponent, DashboardComponent, LeftSideMenuComponent, TopBarComponent, AppointmentComponent, SettingNewPasswordComponent, RequestPasswordResetComponent, RepeatPrescriptionComponent],
+            providers: [DataService, HttpClient, HttpHandler, HttpClientModule, BsModalService, CookieService, SwitchBoardService, RouteGuard, { provide: APP_BASE_HREF, useValue: '/' }],
             imports: [
                 routes,
                 ModalModule.forRoot(),
@@ -61,7 +62,7 @@ describe('ReviewMedicationComponent', () => {
         TestBed.overrideComponent(ReviewMedicationComponent, {
             set: {
                 providers: [
-                    {provide: DataService, useClass: MockDataService}
+                    { provide: DataService, useClass: MockDataService }
                 ]
             }
         });
