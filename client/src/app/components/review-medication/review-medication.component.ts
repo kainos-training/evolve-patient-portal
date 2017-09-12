@@ -20,6 +20,7 @@ import { Subscription } from 'rxjs/Rx';
 export class ReviewMedicationComponent implements OnInit{
     public selectedMedication: Medication;
     public selectedMedicationComments: MedicationComment[];
+    public selectedRemovedMedicationComments: MedicationComment[];
     public selectedMedicationHistory: Medication[]
     public modalRef: BsModalRef;
     public medicationsList: Medication[];
@@ -37,8 +38,13 @@ export class ReviewMedicationComponent implements OnInit{
         let description = this.dataService.getWikiSummary(meds.medicationName);
 
         this.dataService.getMedicationComments(this.selectedMedication.medicationUserID).subscribe(
-            res => this.selectedMedicationComments = res
-        );
+            res => this.selectedMedicationComments = res,
+            err => console.log(err) 
+        )
+        this.dataService.getRemovedMedicationComments(this.selectedMedication.medicationUserID).subscribe(
+            res => this.selectedRemovedMedicationComments = res,
+            err => console.log(err) 
+        )
 
         if(this.user)
             if(this.user.userID)
@@ -68,6 +74,11 @@ export class ReviewMedicationComponent implements OnInit{
         this.dataService.getMedicationComments(this.selectedMedication.medicationUserID).subscribe(
             res => this.selectedMedicationComments = res
         );
+        this.dataService.getRemovedMedicationComments(this.selectedMedication.medicationUserID).subscribe(
+            res => this.selectedRemovedMedicationComments = res,
+            err => console.log(err) 
+        );
+        console.log("refreshing");
     }
 
     public toggleCollapse() {

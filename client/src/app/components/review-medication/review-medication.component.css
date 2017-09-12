@@ -74,6 +74,10 @@
     width: 20px;
 }
 
+.side-effects li {
+    list-style-type: none;
+}
+
 #side-effect-input{
     padding-left: 10px;
     width: 100%;
@@ -108,6 +112,19 @@
 #sideEffectTimeStamp {
     width: 20%;
     column-width: 10px;
+}
+
+#removedMedicationComment{
+    word-wrap: break-word;
+    width: 600%;
+    float: left;
+    text-decoration: line-through;
+}
+
+#removedSideEffectTimeStamp {
+    width: 20%;
+    column-width: 10px;
+    text-decoration: line-through;    
 }
 
 #medicationComponent {

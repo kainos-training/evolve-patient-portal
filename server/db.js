@@ -40,7 +40,17 @@ database.getMedicationUserComments = function(medicationUserID, callback) {
     database.query(
         "SELECT medicationUserCommentID, commentText, `timeStamp` " +
         "FROM MedicationUserComment " +
-        "WHERE medicationUserID = ?;", [medicationUserID],
+        "WHERE medicationUserID = ? AND deleted = false;", [medicationUserID],
+        function(err, rows) {
+            callback(err, rows);
+        });
+};
+
+database.getRemovedMedicationUserComments = function(medicationUserID, callback) {
+    database.query(
+        "SELECT medicationUserCommentID, commentText, `timeStamp` " +
+        "FROM MedicationUserComment " +
+        "WHERE medicationUserID = ? AND deleted = true;", [medicationUserID],
         function(err, rows) {
             callback(err, rows);
         });
@@ -48,7 +58,7 @@ database.getMedicationUserComments = function(medicationUserID, callback) {
 
 database.removeComment = function(medicationUserCommentID, callback) {
     database.query(
-        "DELETE FROM MedicationUserComment WHERE medicationUserCommentID = ?;", [medicationUserCommentID],
+        "UPDATE MedicationUserComment SET deleted = true WHERE medicationUserCommentID = ?;", [medicationUserCommentID],
         function(err) {
             callback(err);
         });
