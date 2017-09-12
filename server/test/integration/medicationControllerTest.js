@@ -7,7 +7,7 @@ var assert = chai.assert;
 describe('Medication Endpoints', function() {
     var app;
     beforeEach(function() {
-        app = require('../index');
+        app = require('../../index');
     });
     afterEach(function() {
         app.close();
