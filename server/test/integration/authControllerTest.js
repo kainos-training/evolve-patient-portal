@@ -1,6 +1,5 @@
 const request = require('supertest');
 const chai = require('chai');
-const rewire = require('rewire');
 
 let should = chai.should();
 let assert = chai.assert;
@@ -9,7 +8,7 @@ describe('Patient Portal Webservice', function() {
     describe('POST /auth/login', function() {
         var app;
         beforeEach(function() {
-            app = require('../index');
+            app = require('../../index');
         });
         afterEach(function() {
             app.close();
@@ -123,48 +122,6 @@ describe('Patient Portal Webservice', function() {
                 .send('deceased=No')
                 .send('gpID=2')
                 .expect(400, done);
-        });
-    });
-
-    describe('Validate Login Form Function', function() {
-        var app = rewire('../controllers/authController');
-        validateLoginForm = app.__get__('validateLoginForm');
-
-        it('should return true if valid username and password passed', function(done) {
-            let reqBody = {
-                username: "jsmith",
-                password: "password"
-            }
-
-            let isFormValid = validateLoginForm(reqBody).success;
-            assert.isTrue(isFormValid, done());
-        });
-        it('should return false if invalid username passed', function(done) {
-            let reqBody = {
-                username: 123,
-                password: "password"
-            }
-
-            let isFormValid = validateLoginForm(reqBody).success;
-            assert.isFalse(isFormValid, done());
-        });
-        it('should return false if invalid password passed', function(done) {
-            let reqBody = {
-                username: "jsmith",
-                password: 123
-            }
-
-            let isFormValid = validateLoginForm(reqBody).success;
-            assert.isFalse(isFormValid, done());
-        });
-        it('should return false if invalid username and password passed', function(done) {
-            let reqBody = {
-                username: 123,
-                password: 123
-            }
-
-            let isFormValid = validateLoginForm(reqBody).success;
-            assert.isFalse(isFormValid, done());
         });
     });
 });
