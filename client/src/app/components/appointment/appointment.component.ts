@@ -1,7 +1,7 @@
 import {NavigatorGeolocation} from '@ngui/map';
 import {Subscription} from 'rxjs/Rx';
 import {AppointmentFurtherInfo} from '../../class/AppointmentFurtherInfo';
-import {Component, EventEmitter, OnDestroy, OnInit, Output, TemplateRef} from '@angular/core';
+import {Component, OnDestroy, OnInit, TemplateRef} from '@angular/core';
 import {BsModalService} from 'ngx-bootstrap/modal';
 import {BsModalRef} from 'ngx-bootstrap/modal/modal-options.class';
 import {Appointment} from '../../class/Appointment';
@@ -26,10 +26,6 @@ export class AppointmentComponent implements OnInit, OnDestroy {
     private userSubscription: Subscription;
     private mapPath: string;
 
-    isLocalMapVisible: boolean = true;
-    @Output() open: EventEmitter<any> = new EventEmitter();
-    @Output() close: EventEmitter<any> = new EventEmitter();
-
     constructor(private modalService: BsModalService, private data: DataService, private switchboard: SwitchBoardService) {
         this.userSubscription = this.switchboard.user$.subscribe(user => {
             this.user = user;
@@ -46,6 +42,8 @@ export class AppointmentComponent implements OnInit, OnDestroy {
                 this.focusedAppointment = res[0];
                 this.mapPath = '../assets/hospitals/' + this.focusedAppointment.locationID + '/' + this.focusedAppointment.departmentID;
                 this.modalRef = this.modalService.show(template);
+                this.focusedAppointment.showLocalMap = false;
+                this.focusedAppointment.showGoogleMap = false;
             }
         );
     }
@@ -66,13 +64,7 @@ export class AppointmentComponent implements OnInit, OnDestroy {
             this.subCenter.unsubscribe();
     }
 
-    private toggle($event): void {
-        // console.log($event.path[1]);
-        this.isLocalMapVisible = !this.isLocalMapVisible;
-        if (this.isLocalMapVisible) {
-            this.open.emit(null);
-        } else {
-            this.close.emit(null);
-        }
+    private toggle(name): void {
+        this.focusedAppointment[name] = !this.focusedAppointment[name];
     }
 }

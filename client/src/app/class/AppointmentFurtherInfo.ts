@@ -8,4 +8,6 @@ export class AppointmentFurtherInfo {
     clinicianName:string;
     comment:string;
     locationAddress:string;
+    showLocalMap: boolean;
+    showGoogleMap: boolean;
 }
