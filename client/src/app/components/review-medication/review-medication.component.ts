@@ -41,10 +41,10 @@ export class ReviewMedicationComponent implements OnInit{
         );
 
         if(this.user)
-        if(this.user.userID)
-            this.dataService.getMedicationHistory(this.selectedMedication.medicationID, this.user.userID).subscribe(
-                res => this.selectedMedicationHistory = res
-            );
+            if(this.user.userID)
+                this.dataService.getMedicationHistory(this.selectedMedication.medicationID, this.user.userID).subscribe(
+                    res => this.selectedMedicationHistory = res
+                );
 
         this.dataService.getWikiSummary(meds.medicationName).subscribe(
             res => { this.description = res; }
