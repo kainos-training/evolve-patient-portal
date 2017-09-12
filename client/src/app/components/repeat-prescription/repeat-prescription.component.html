@@ -1,36 +1,37 @@
 <evolve-top-bar></evolve-top-bar>
 <evolve-left-side-menu></evolve-left-side-menu>
 <div id="widgetContainer" class="col-sm-9">
-<body>
-    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 " id="">
-        <div class="panel panel-default">
-            <div class="panel-heading">
-                <h1 class="panel-title" id="widget-header">Your current prescriptions</h1>
-            </div>
-            <div class="panel-body" id="medicationDetails">
-                <table class="table table-hover">
-                    <tbody>
-                        <tr *ngFor="let prescription of prescriptionList">
-                            <td>
-                                <span class="widget-title-txt">Name: {{prescription.medicationName}}</span><br>
-                            </td>
-                            <td>
-                                <span class="widget-body-txt">Dosage: {{prescription.dosage}}</span><br>
-                            </td>
-                            <td>
-                                <span class="widget-title-txt">Expires: {{prescription.endDate | date}}</span><br>
-                            </td>
-                            <td>
-                                <button class="btn btn-success" (click)="addToList(prescription)" tooltip content="You can request multiple repeat prescriptions">Repeat Prescription</button>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
+
+    <body>
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 " id="">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h1 class="panel-title" id="widget-header">Your current prescriptions</h1>
+                </div>
+                <div class="panel-body" id="medicationDetails">
+                    <table class="table table-hover">
+                        <tbody>
+                            <tr *ngFor="let prescription of prescriptionList">
+                                <td>
+                                    <span class="widget-title-txt">Name: {{prescription.medicationName}}</span><br>
+                                </td>
+                                <td>
+                                    <span class="widget-body-txt">Dosage: {{prescription.dosage}}</span><br>
+                                </td>
+                                <td>
+                                    <span class="widget-title-txt">Expires: {{prescription.endDate | date}}</span><br>
+                                </td>
+                                <td>
+                                    <button class="btn btn-success" (click)="addToList(prescription)" tooltip content="You can request multiple repeat prescriptions">Repeat Prescription</button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
-    </div>
 
-    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 " id="">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 " id="">
             <div class="panel panel-default">
                 <div class="panel-heading">
                     <h1 class="panel-title" id="widget-header">Prescriptions for request</h1>
@@ -53,10 +54,32 @@
                                 </td>
                             </tr>
                         </tbody>
-                        <!--<button type="button" class="btn table-btn" (click)="openModal(medication, template)">-->
                     </table>
+                    <button class="btn btn-primary" (click)="openModal(selectedPres, template)">Confirm Prescription</button>
                 </div>
             </div>
         </div>
-</body>
+    </body>
+    <ng-template #template>
+        <div>
+            <div class="med-modal">
+                <div class="modal-header">
+                    <h4 class="modal-title pull-left">Repeat Prescriptions</h4>
+                    <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+            </div>
+            <div class="modal-body">
+                <div class="perscription-header">
+                    <p *ngFor="let finalPrescriptionList of renewPrescriptionList">{{finalPrescriptionList.medicationName}}
+                    </p>
+                    <hr>
+                </div>
+                <div class="perscription-form">
+                </div>
+            </div>
+        </div>
+    </ng-template>
+
 </div>
