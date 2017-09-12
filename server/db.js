@@ -146,4 +146,30 @@ database.selectAllAppointmentsExtended = (appointmentID, cb) => {
     )
 };
 
+database.selectRequestPasswordDetailsByUsername = (username, cb) => {
+    database.query(
+        "SELECT email, CONCAT(firstName, ' ', lastName) AS name, userID FROM User WHERE username = ?", [username],
+        function(err, rows) {
+            if (err) {
+                cb(err);
+            } else {
+                cb(null, rows)
+            }
+        }
+    )
+};
+
+database.selectRequestPasswordDetailsByRealUserID = (realUserID, cb) => {
+    database.query(
+        "SELECT userID, username FROM User WHERE userID=?", [realUserID],
+        function(err, rows) {
+            if (err) {
+                cb(err);
+            } else {
+                cb(null, rows)
+            }
+        }
+    )
+};
+
 module.exports = database;
