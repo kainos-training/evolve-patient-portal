@@ -28,11 +28,16 @@ export class MockDataService {
     getMedicationList(userID: number) {
         let toReturn: Array<Medication> = [];
         if (userID == 1) {
-            toReturn.push(new Medication(1, 'Mood Stabilizer', new Date(2017, 2, 12), new Date(2017, 3, 12), 'Take 1 daily'));
-            toReturn.push(new Medication(1, 'Antibiotics', new Date(2017, 3, 13), new Date(2017, 4, 11), 'Take 2 daily'));
+            //constructor(medicationUserID: number, medicationType: String, startDate: Date, endDate : Date, dosage : String, instructions: String)
+            var m = new Medication(1, 'Antibiotics', new Date(2017, 3, 13), new Date(2017, 4, 11), 'Take 2 daily', 'Be Careful');
+            console.log("dosage is "+m.dosage);
+            toReturn.push(new Medication(1, 'Mood Stabilizer', new Date(2017, 2, 12), new Date(2017, 3, 12), 'Take 1 daily','Be Very Careful'));
+            toReturn.push(m);
         }
         return toReturn;
     }
+
+    
 }
 
 describe('ReviewMedicationComponent', () => {
