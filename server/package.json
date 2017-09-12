@@ -4,9 +4,10 @@
   "main": "index.js",
   "scripts": {
     "start": "npm run intTest -s && npm run build -s",
-    "build": "concurrently 'nodemon index.js' 'npm run unitTest'",
+    "build": "concurrently 'nodemon index.js' 'npm run unitTestWatch'",
     "intTest": "echo 'Starting Integration Tests\n' && mocha -R spec test/* && echo 'Finished Integration Tests\n'",
-    "unitTest": "mocha -R spec test/unit --watch"
+    "unitTestWatch": "mocha -R spec test/unit --watch",
+    "unitTest": "mocha -R spec test/unit"
   },
   "license": "MIT",
   "dependencies": {

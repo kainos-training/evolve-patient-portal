@@ -45,5 +45,5 @@ script:
     # Backend build
     - cd ..
     - cd server
-    - npm start
+    - npm run intTest -s && npm run unitTest -s,
     
