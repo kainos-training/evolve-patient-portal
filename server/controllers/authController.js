@@ -48,51 +48,48 @@ exports.login = function(req, res) {
     let username = req.body.username.trim();
     let candidatePassword = req.body.password.trim();
 
-    db.query(
-        "SELECT userID, password, firstName, lastName FROM User WHERE username=?", [username],
-        function(err, rows) {
-            if (err) {
-                return res.status(400).json({
-                    success: false,
-                    message: "Incorrect username or password"
-                });
-            } else if (!rows[0]) {
-                return res.status(400).json({
-                    success: false,
-                    message: "No account associated with that username"
-                });
-            } else {
-                let user = {
-                    userId: rows[0].userID,
-                    password: rows[0].password,
-                    firstName: rows[0].firstName,
-                    lastName: rows[0].lastName
-                }
-
-                bcrypt.compare(candidatePassword, user.password, function(err, isMatch) {
-                    if (err) {
-                        return res.status(400).json({
-                            success: false,
-                            message: "Incorrect username or password"
-                        });
-                    } else if (!isMatch) {
-                        return res.status(400).json({
-                            success: false,
-                            message: 'Incorrect username or password!',
-                        });
-                    } else {
-                        let token = utilsJWT.generateToken(user); // Generate JWT Token
-                        return res.status(200).json({
-                            success: true,
-                            message: 'You have successfully logged in!',
-                            token: token,
-                            userID: user.userId
-                        });
-                    }
-                });
+    db.getUserByUsername(username, (err, rows) => {
+        if (err) {
+            return res.status(400).json({
+                success: false,
+                message: "Incorrect username or password"
+            });
+        } else if (!rows[0]) {
+            return res.status(400).json({
+                success: false,
+                message: "No account associated with that username"
+            });
+        } else {
+            let user = {
+                userId: rows[0].userID,
+                password: rows[0].password,
+                firstName: rows[0].firstName,
+                lastName: rows[0].lastName
             }
+
+            bcrypt.compare(candidatePassword, user.password, function(err, isMatch) {
+                if (err) {
+                    return res.status(400).json({
+                        success: false,
+                        message: "Incorrect username or password"
+                    });
+                } else if (!isMatch) {
+                    return res.status(400).json({
+                        success: false,
+                        message: 'Incorrect username or password!',
+                    });
+                } else {
+                    let token = utilsJWT.generateToken(user); // Generate JWT Token
+                    return res.status(200).json({
+                        success: true,
+                        message: 'You have successfully logged in!',
+                        token: token,
+                        userID: user.userId
+                    });
+                }
+            });
         }
-    )
+    })
 };
 
 function validateSignup(payload) {
@@ -128,42 +125,39 @@ exports.createUserAccount = function(req, res) {
         });
     }
 
-    let username = req.body.username.trim();
     let plainTextPassword = req.body.password.trim();
-
-    //Creates the salt to be used
+    // Creates the salt to be used
     var salt = bcrypt.genSaltSync(saltRounds);
-    //Creates the hash of the plainTextPassword
+    // Creates the hash of the plainTextPassword
     var hash = bcrypt.hashSync(plainTextPassword, salt);
     let password = hash;
 
-    let dateOfBirth = req.body.dateOfBirth.trim();
-    let gender = req.body.gender.trim();
-    let MRIN = req.body.MRIN.trim();
-    let firstName = req.body.firstName.trim();
-    let lastName = req.body.lastName.trim();
-    let phoneNumber = req.body.phoneNumber.trim();
-    let title = req.body.title.trim();
-    let address = req.body.address.trim();
-    let email = req.body.email.trim();
-    let deceased = req.body.deceased.trim();
-    let gpID = req.body.gpID.trim()
+    let newUserData = {
+        username: req.body.username.trim(),
+        dateOfBirth: req.body.dateOfBirth.trim(),
+        gender: req.body.gender.trim(),
+        MRIN: req.body.MRIN.trim(),
+        firstName: req.body.firstName.trim(),
+        lastName: req.body.lastName.trim(),
+        phoneNumber: req.body.phoneNumber.trim(),
+        title: req.body.title.trim(),
+        address: req.body.address.trim(),
+        email: req.body.email.trim(),
+        deceased: req.body.deceased.trim(),
+        gpID: req.body.gpID.trim()
+    };
 
-    db.query(
-        "INSERT INTO User(username, `password`, dateOfBirth, gender, MRIN, firstName, lastName, phoneNumber, title, address, email, deceased, gpID)" +
-        "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);", [username, password, dateOfBirth, gender, MRIN, firstName, lastName, phoneNumber, title, address, email, deceased, gpID],
-        function(err, rows) {
-            if (err) {
-                return res.status(400).json({
-                    success: false,
-                    message: "Please provide a valid info"
-                });
-            } else {
-                return res.status(200).json({
-                    success: true,
-                    message: "You have successfully registered"
-                });
-            }
-
-        });
+    db.insertUserIntoDatabase(newUserData, (err, rows) => {
+        if (err) {
+            return res.status(400).json({
+                success: false,
+                message: "Please provide a valid info"
+            });
+        } else {
+            return res.status(200).json({
+                success: true,
+                message: "You have successfully registered"
+            });
+        }
+    });
 };

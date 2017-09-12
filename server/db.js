@@ -65,4 +65,44 @@ database.getMedicationHistory = function(medicationID, userID, callback) {
         });
 };
 
+database.getUserByUsername = (username, cb) => {
+    database.query(
+        "SELECT userID, password, firstName, lastName FROM User WHERE username=?", [username],
+        function(err, rows) {
+            if (err) {
+                cb(err);
+            } else {
+                cb(null, rows)
+            }
+        }
+    )
+}
+
+database.insertUserIntoDatabase = (userData, cb) => {
+    database.query(
+        "INSERT INTO User(username, `password`, dateOfBirth, gender, MRIN, firstName, lastName, phoneNumber, title, address, email, deceased, gpID)" +
+        "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);", [userData.username,
+            userData.password,
+            userData.dateOfBirth,
+            userData.gender,
+            userData.MRIN,
+            userData.firstName,
+            userData.lastName,
+            userData.phoneNumber,
+            userData.title,
+            userData.address,
+            userData.email,
+            userData.deceased,
+            userData.gpID
+        ],
+        function(err, rows) {
+            if (err) {
+                cb(err);
+            } else {
+                cb(null, rows)
+            }
+        }
+    )
+}
+
 module.exports = database;
