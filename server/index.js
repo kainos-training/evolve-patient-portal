@@ -31,7 +31,7 @@ app.use(bodyParser.json());
 app.use(errorHandler()); // Error Handler middleware for more verbose errors
 
 /**
- * Express configuration.
+ * Routes configuration.
  */
 const publicAuthRoutes = require('./routes/publicAuthRoutes');
 const publicAppointmentRoutes = require('./routes/publicAppointmentRoutes');

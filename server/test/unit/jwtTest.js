@@ -1,4 +1,4 @@
-let utilsJWT = require('../utils/jwt');
+let utilsJWT = require('../../utils/jwt');
 let chai = require('chai');
 var expect = chai.expect;
 var assert = chai.assert;
