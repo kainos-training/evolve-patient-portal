@@ -1,11 +1,12 @@
 var mysql = require('mysql');
-const config = require('./config');
+// call dotenv.config here aswell as index.js because some unit tests enter here directly without accessing index.js
+var dotenv = require('dotenv').config();
 
 const database = mysql.createConnection({
-    host: config.host,
-    user: config.user,
-    password: config.password,
-    database: config.database
+    host: process.env.MYSQL_HOST,
+    user: process.env.MYSQL_USER,
+    password: process.env.MYSQL_PASSWORD,
+    database: process.env.DATABASENAME
 });
 
 database.connect(function(err) {
