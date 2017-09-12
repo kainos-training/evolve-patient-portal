@@ -117,9 +117,10 @@
                 </tbody>
             </table>
             <!-- Side Effects of all Meds -->
-
-            <div class="side-effects">
-                <label>Side Effects:</label>
+            <div>
+                <a (click)="this.selectShowSideEffects()">Show Side Effects</a>
+            </div>
+            <div *ngIf="this.showSideEffects"class="side-effects">
                     <div *ngFor="let sideeffect of userSideEffects" class="row side-effect-item">
                         <div class="col-xs-2"><label class="side-effect-text" id="sideEffectTimeStamp">{{ sideeffect.timeStamp|date:'dd/MM/yyyy' }}</label></div>
                         <div class="col-xs-8">
