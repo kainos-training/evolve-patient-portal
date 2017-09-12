@@ -26,7 +26,7 @@ import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { SettingNewPasswordComponent } from './components/setting-new-password/setting-new-password.component';
 import { RequestPasswordResetComponent } from './components/request-password-reset/request-password-reset.component';
 import { TemplateComponent } from './components/template/template.component';
-import { RepeatPrescriptionComponent } from './repeat-prescription/repeat-prescription.component';
+import { RepeatPrescriptionComponent } from './components/repeat-prescription/repeat-prescription.component';
 
 @NgModule({
     declarations: [

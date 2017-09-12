@@ -179,7 +179,13 @@ export class DataService {
             this.cookieService.set(this.cookieName, JSON.stringify(cookieJSON));
         }
     }
-
+    
+    public getCookie(): string {
+        const cookieJSON = JSON.parse(this.cookieService.get(this.cookieName));
+        var userID = cookieJSON.userID;
+        return userID;
+    }
+    
     public removeCookie(): void {
         this.cookieService.delete(this.cookieName);
     }

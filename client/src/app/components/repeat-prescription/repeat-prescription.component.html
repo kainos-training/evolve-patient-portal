@@ -1,3 +1,23 @@
-<p>
-  repeat-prescription works!
-</p>
+<body>
+    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 " id="">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h1 class="panel-title" id="widget-header">Renew Your Prescriptions</h1>
+            </div>
+            <div class="panel-body" id="medicationDetails">
+                <table class="table table-hover">
+                    <tbody>
+                        <tr *ngFor="let prescription of prescriptionList">
+                            <td>
+                                <button type="button" class="btn table-btn" (click)="openModal(medication, template)">
+                                <span class="widget-title-txt">Dosage: {{prescription.medicationName}}</span><br>
+                                <span class="widget-body-txt">Dosage: {{prescription.dosage}}</span><br>
+                            </button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</body>
