@@ -6,7 +6,7 @@
                     Medication Prescriptions
                 </h1>
             </div>
-            <div style="overflow: hidden;" class="panel-body" id="medicationDetails">
+            <div class="panel-body" id="medicationDetails">
                 <table class="table table-hover">
                     <tbody>
                         <tr *ngFor="let medication of medicationsList" class="prescription-item" (click)="openModal(medication,template)" >
