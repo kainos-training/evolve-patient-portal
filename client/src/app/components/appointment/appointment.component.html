@@ -57,7 +57,7 @@
             <evolve-map-view [userLocation]="userLocation" [hidden]="!focusedAppointment.showGoogleMap" [departmentAddress]="focusedAppointment.locationAddress"></evolve-map-view>
         </div>
         <div class="local-map-container" *ngIf="mapPath">
-            <input type="submit" data-expanded="ggg" [attr.data-expanded]="focusedAppointment.showLocalMap" (click)="toggle('showLocalMap')" class="btn btn-success btn-sm btn-block" value="{{!!focusedAppointment.showLocalMap ? 'Collapse' : 'Expand'}} hospital map" />
+            <input type="submit" [attr.data-expanded]="focusedAppointment.showLocalMap" (click)="toggle('showLocalMap')" class="btn btn-success btn-sm btn-block" value="{{!!focusedAppointment.showLocalMap ? 'Collapse' : 'Expand'}} hospital map" />
             <img [hidden]="!focusedAppointment.showLocalMap" [src]=mapPath />
         </div>
     </div>
