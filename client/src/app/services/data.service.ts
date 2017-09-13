@@ -55,6 +55,17 @@ export class DataService {
         return this.http.post<MedicationComment[]>('api/medication/comments/list', body, options);
     }
 
+    public getRemovedMedicationComments(medicationUserID) {
+        const body = {
+            "medicationUserID": medicationUserID
+        };
+        const options = {
+            headers: new HttpHeaders().set('Content-Type', 'application/json'),
+        };
+
+        return this.http.post<MedicationComment[]>('api/medication/comments/removedList', body, options);
+    }
+
     public getMedicationHistory(medicationID, userID) {
         const body = {
             'medicationID': medicationID,

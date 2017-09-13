@@ -14,6 +14,10 @@ protectedMedicationRoutes.post('/comments/list', function(req, res) {
     return medicationController.getListOfMedicationUserComments(req, res);
 });
 
+protectedMedicationRoutes.post('/comments/removedList', function(req, res) {
+    return medicationController.getListOfRemovedMedicationUserComments(req, res);
+});
+
 protectedMedicationRoutes.post('/comments/remove', function(req, res) {
     return medicationController.removeMedicationUserComment(req, res);
 });

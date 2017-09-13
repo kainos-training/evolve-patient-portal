@@ -1,6 +1,4 @@
 var jwt = require('jsonwebtoken');
-const config = require('../config');
-
 
 module.exports = {
     //Generate Token using secret from process.env.JWT_SECRET
@@ -11,7 +9,7 @@ module.exports = {
         };
 
         let token;
-        return token = jwt.sign(payload, config.jwtSecret, {
+        return token = jwt.sign(payload, process.env.JWT_SECRET, {
             expiresIn: 60 * 60 * 24 // expires in 24 hours
         });
     },
@@ -23,7 +21,7 @@ module.exports = {
 
         if (token) {
             // verifies secret and checks exp
-            jwt.verify(token, config.jwtSecret, function(err, decoded) {
+            jwt.verify(token, process.env.JWT_SECRET, function(err, decoded) {
                 if (err) {
                     return res.json({
                         success: false,
