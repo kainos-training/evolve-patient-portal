@@ -16,6 +16,9 @@ export class RepeatPrescriptionComponent implements OnInit {
     public prescriptionList: Medication[];
     public renewPrescriptionList: Medication[];
     public modalRef: BsModalRef;
+    public collectionType = {
+        status: null
+    };
 
     constructor(dataService: DataService, private modalService: BsModalService) {
         this.renewPrescriptionList = new Array();
@@ -26,27 +29,27 @@ export class RepeatPrescriptionComponent implements OnInit {
     }
 
     public addToList(medication: Medication) {
-        if (this.renewPrescriptionList.length > 0 && this.renewPrescriptionList.find(p => p.medicationName == medication.medicationName)) 
-        {
+        if (this.renewPrescriptionList.length > 0 && this.renewPrescriptionList.find(p => p.medicationName == medication.medicationName)) {
             alert("ALREADY REQUESTED!");
         } else {
             this.renewPrescriptionList.push(medication);
-        } 
-}
+        }
+    }
 
     public removeFromList(medication: Medication) {
-    var i = this.renewPrescriptionList.indexOf(medication);
-    this.renewPrescriptionList.splice(i, 1);
-}
+        var i = this.renewPrescriptionList.indexOf(medication);
+        this.renewPrescriptionList.splice(i, 1);
+    }
 
     public requestPrescription(prescriptionList: Array<Medication>) {
-    alert(prescriptionList[0].medicationUserID + " AND " + prescriptionList[1].medicationUserID);
-}
+        console.log(this.collectionType.status);
+        alert(prescriptionList[0].medicationUserID + " " + this.collectionType.status);
+    }
 
     public openModal(prescriptionList: Array<Medication>, template: TemplateRef<any>) {
-    this.modalRef = this.modalService.show(template);
+        this.modalRef = this.modalService.show(template);
 
-}
+    }
 
     ngOnInit() {
     }

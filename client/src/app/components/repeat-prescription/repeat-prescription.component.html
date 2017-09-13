@@ -22,7 +22,7 @@
                                     <span class="widget-title-txt">Expires: {{prescription.endDate | date}}</span><br>
                                 </td>
                                 <td>
-                                    <button class="btn btn-success" (click)="addToList(prescription)" tooltip content="You can request multiple repeat prescriptions">Repeat Prescription</button>
+                                    <button class="btn btn-success" (click)="addToList(prescription)">Repeat Prescription</button> <!-- tooltip content="You can request multiple repeat prescriptions"-->
                                 </td>
                             </tr>
                         </tbody>
@@ -82,15 +82,14 @@
                     <form>
                         <div class="form-group">
                             <form class="form">
-                                <input type="radio" name="delivery-choice" value="home"> Home delivery
-                                <input type="radio" name="delivery-choice" value="pharmacy"> Local Pharmacy
+                                <input type="radio" name="delivery" [(ngModel)]="collectionType.status" value="home">Home Delivery<br>
+                                <input type="radio" name="delivery" [(ngModel)]="collectionType.status" value="pharmacy">Local Pharmacy
                             </form>
                         </div>
-                        <button type="submit" class="btn btn-success" (click)="requestPrescription(renewPrescriptionList)">Request Prescription</button>
+                        <button type="submit" class="btn btn-success" (click)="requestPrescription(renewPrescriptionList, value)">Request Prescription</button>
                     </form>
                 </div>
             </div>
         </div>
     </ng-template>
-
 </div>
