@@ -13,7 +13,7 @@ primary key (gpID)
 );
 
 CREATE TABLE IF NOT EXISTS `User` (
-userID int auto_increment not null unique, 
+userID int auto_increment not null unique,
 username varchar(100) not null unique,
 `password` varchar(256) not null,
 dateOfBirth date not null,
@@ -68,18 +68,20 @@ foreign key (medicationTypeID) references MedicationType (medicationTypeID)
 
 CREATE TABLE IF NOT EXISTS MedicationUser (
 medicationUserID int auto_increment not null,
-userID int not null, 
+userID int not null,
 medicationID int not null,
 startDate date not null,
 endDate date,
 dosage varchar(60) not null,
+prescribedDate date not null,
+repeated bool not null,
 primary key (medicationUserID),
 foreign key (userID) references `User` (userID),
 foreign key (medicationID) references Medication (medicationID)
 );
 
 CREATE TABLE IF NOT EXISTS MedicationUserComment (
-medicationUserCommentID int auto_increment not null, 
+medicationUserCommentID int auto_increment not null,
 medicationUserID int not null,
 commentText text not null,
 `timeStamp` timeStamp not null,
@@ -163,22 +165,22 @@ INSERT INTO MedicationType(medicationType)
 VALUES ('Antibiotics'), ('Mood Stabilizers'), ('Analgesics'), ('Antipyretics');
 
 INSERT INTO Medication(medicationName, medicationTypeID, resourceURL)
-VALUES('Penicillin', 1, 'https://en.wikipedia.org/wiki/Penicillin'), 
-('Amoxicillin', 1, 'https://en.wikipedia.org/wiki/Amoxicillin'), 
-('Lithium', 2, 'https://en.wikipedia.org/wiki/Lithium_(medication)'), 
+VALUES('Penicillin', 1, 'https://en.wikipedia.org/wiki/Penicillin'),
+('Amoxicillin', 1, 'https://en.wikipedia.org/wiki/Amoxicillin'),
+('Lithium', 2, 'https://en.wikipedia.org/wiki/Lithium_(medication)'),
 ('Olanzapine', 2, 'https://en.wikipedia.org/wiki/Olanzapine'),
-('Paracetamol', 3, 'https://en.wikipedia.org/wiki/Paracetamol'), 
-('Morphine', 3, 'https://en.wikipedia.org/wiki/Morphine'), 
-('Ibuprofen', 4, 'https://en.wikipedia.org/wiki/Ibuprofen'), 
+('Paracetamol', 3, 'https://en.wikipedia.org/wiki/Paracetamol'),
+('Morphine', 3, 'https://en.wikipedia.org/wiki/Morphine'),
+('Ibuprofen', 4, 'https://en.wikipedia.org/wiki/Ibuprofen'),
 ('Ketoprofen', 4, 'https://en.wikipedia.org/wiki/Ketoprofen');
 
-INSERT INTO MedicationUser(userID, medicationID, startDate, endDate, dosage)
-VALUES (1, 3, '2017-06-01', '2019-08-10', '10mg'),
-(1, 3, '2016-06-01', '2017-06-01', '5mg'),
-(1, 3, '2015-06-01', '2016-06-01', '20mg'),
-(1, 4, '2016-06-01', '2019-08-10', '5mg'), 
-(2, 1, '2017-02-09', '2019-02-27', '15mg'),
-(3, 2, '2016-09-29', '2018-10-10', '10mg');
+INSERT INTO MedicationUser(userID, medicationID, startDate, endDate, dosage,prescribedDate,repeated)
+VALUES (1, 3, '2017-06-01', '2019-08-10', '10mg', '2017-09-01',TRUE),
+(1, 3, '2016-06-01', '2017-06-01', '5mg', '2017-04-01',TRUE),
+(1, 3, '2015-06-01', '2016-06-01', '20mg','2016-04-01',TRUE),
+(1, 4, '2016-06-01', '2019-08-10', '5mg','2017-09-01',FALSE),
+(2, 1, '2017-02-09', '2019-02-27', '15mg','2017-09-01',TRUE),
+(3, 2, '2016-09-29', '2018-10-10', '10mg','2017-09-01',TRUE);
 
 INSERT INTO MedicationUserComment(medicationUserID, commentText, deleted)
 VALUES (1, 'Not feeling the benefit after two weeks', false), (2, 'Helping to minimise pain but still exists', false),
@@ -188,7 +190,7 @@ INSERT INTO Clinician (title, firstName, lastName, jobTitle)
 VALUES ('Dr', 'Alex', 'Hyndman', 'Consultant'), ('Dr', 'John', 'Adams', 'Oncologist'), ('Dr', 'Karen', 'Reid', 'Obstetrician');
 
 INSERT INTO Location (locationAddress)
-VALUES ('Royal Victoria Hospital, 274 Grosvenor Rd, Belfast, BT12 6BA'), 
+VALUES ('Royal Victoria Hospital, 274 Grosvenor Rd, Belfast, BT12 6BA'),
 ('Mater Hospital, 45-54 Crumlin Rd, Belfast, BT14 6AB'),
 ('Belfast City Hospital, Lisburn Rd, Belfast, BT9 7AB');
 
@@ -210,17 +212,17 @@ VALUES(1, 3, 3, (NOW() + INTERVAL 2 DAY), 'Ultrasound to be performed to ensure 
 (1, 2, 1, (NOW() + INTERVAL 4 DAY), 'Foot complaints.', 3),
 (1, 3, 1, (NOW() - INTERVAL 62 DAY), 'Other food complaints .', 3);
 
-INSERT INTO `Condition` (conditionName, conditionLink) 
-VALUES ("Hip Replacement", "http://www.nhs.uk/Conditions/Hip-replacement/Pages/Introduction.aspx"), 
-("Diabetes", "http://www.nhs.uk/Conditions/Diabetes/Pages/Diabetes.aspx"), 
-("Conjunctivitis", "http://www.nhs.uk/Conditions/Conjunctivitis-infective/Pages/Treatment.aspx"), 
+INSERT INTO `Condition` (conditionName, conditionLink)
+VALUES ("Hip Replacement", "http://www.nhs.uk/Conditions/Hip-replacement/Pages/Introduction.aspx"),
+("Diabetes", "http://www.nhs.uk/Conditions/Diabetes/Pages/Diabetes.aspx"),
+("Conjunctivitis", "http://www.nhs.uk/Conditions/Conjunctivitis-infective/Pages/Treatment.aspx"),
 ("Back Pain", "http://www.nhs.uk/conditions/back-pain/Pages/Introduction.aspx");
 
-INSERT INTO UserCondition (userID, conditionID, startDate, endDate) 
+INSERT INTO UserCondition (userID, conditionID, startDate, endDate)
 VALUES (1, 4, '2017-07-10', '2017-01-15'),
 (1, 2, '1998-04-03', null),
 (1, 4, '2017-08-03', null);
 
 INSERT INTO Task(taskName, userID, recievedDate, dueDate)
-VALUES('Pre-op questionnaire', 1, NOW(), (NOW() + INTERVAL 12 DAY)), 
+VALUES('Pre-op questionnaire', 1, NOW(), (NOW() + INTERVAL 12 DAY)),
 ('Pre-op Assessment: Olanzapine', 1, (NOW() - INTERVAL 12 DAY), (NOW() - INTERVAL 2 DAY));
