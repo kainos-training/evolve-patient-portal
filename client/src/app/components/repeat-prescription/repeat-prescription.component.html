@@ -22,7 +22,7 @@
                                     <span class="widget-title-txt">Expires: {{prescription.endDate | date}}</span><br>
                                 </td>
                                 <td>
-                                    <button class="btn btn-success" (click)="addToList(prescription)" tooltip content="You can request multiple repeat prescriptions">Repeat Prescription</button>
+                                    <button class="btn btn-success" (click)="addToList(prescription)">Repeat Prescription</button> <!-- tooltip content="You can request multiple repeat prescriptions"-->
                                 </td>
                             </tr>
                         </tbody>
@@ -72,14 +72,24 @@
             </div>
             <div class="modal-body">
                 <div class="perscription-header">
-                    <p *ngFor="let finalPrescriptionList of renewPrescriptionList">{{finalPrescriptionList.medicationName}}
-                    </p>
+                    <p>You have chosen to repeat the following prescription(s).</p>
+                    <li *ngFor="let finalPrescriptionList of renewPrescriptionList">{{finalPrescriptionList.medicationName}}
+                    </li>
                     <hr>
                 </div>
                 <div class="perscription-form">
+                    <p>Please select which method of delivery you wish to use:</p>
+                    <form>
+                        <div class="form-group">
+                            <form class="form">
+                                <input type="radio" name="delivery" [(ngModel)]="collectionType.status" value="home">Home Delivery<br>
+                                <input type="radio" name="delivery" [(ngModel)]="collectionType.status" value="pharmacy">Local Pharmacy
+                            </form>
+                        </div>
+                        <button type="submit" class="btn btn-success" (click)="requestPrescription(renewPrescriptionList, value)">Request Prescription</button>
+                    </form>
                 </div>
             </div>
         </div>
     </ng-template>
-
 </div>

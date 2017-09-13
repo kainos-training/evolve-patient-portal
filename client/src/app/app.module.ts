@@ -27,7 +27,8 @@ import { SettingNewPasswordComponent } from './components/setting-new-password/s
 import { RequestPasswordResetComponent } from './components/request-password-reset/request-password-reset.component';
 import { TemplateComponent } from './components/template/template.component';
 import { RepeatPrescriptionComponent } from './components/repeat-prescription/repeat-prescription.component';
-import { ToolTipModule } from 'angular2-tooltip'
+import { ToolTipModule } from 'angular2-tooltip';
+
 @NgModule({
     declarations: [
         AppComponent,

@@ -202,13 +202,13 @@ INSERT INTO AppointmentType (`type`)
 VALUES ('Pre-Op Assessment'), ('Emergency Surgery'), ('GP Appointment'), ('Check-up');
 
 INSERT INTO Appointment (userID, locationDepartmentID, clinicianID, dateOfAppointment, `comment`, appointmentTypeID)
-VALUES(1, 3, 3, '2017-07-07', 'Ultrasound performed, pregnancy progressing normally.', 4),
-(3, 4, 2, '2017-11-11 09:00:00', null, 1),
-(1, 3, 3, '2017-07-09 12:00:00', 'Appointment in relation to abdominal crampss,', 3),
-(1, 3, 2, '2017-07-10 13:00:00', 'Checkup after Ultrasound,', 4),
-(1, 1, 1, '2017-09-19 15:00:00', 'INSTRUCTIONS: Do not eat any food 24 hours before surgery.', 1),
-(1, 2, 1, '2017-09-12 11:00:00', 'Foot complaints.', 3),
-(1, 3, 1, '2017-09-12 16:00:00', 'Other food compaints .', 3);
+VALUES(1, 3, 3, (NOW() + INTERVAL 2 DAY), 'Ultrasound to be performed to ensure pregnancy is progressing normally.', 4),
+(3, 4, 2, (NOW() + INTERVAL 12 DAY), null, 1),
+(1, 3, 3, (NOW() - INTERVAL 20 DAY), 'Appointment in relation to abdominal cramps', 3),
+(1, 3, 2, (NOW() + INTERVAL 30 DAY), 'Checkup after Ultrasound,', 4),
+(1, 1, 1, (NOW() - INTERVAL 4 DAY), 'INSTRUCTIONS: Do not eat any food 24 hours before surgery.', 1),
+(1, 2, 1, (NOW() + INTERVAL 4 DAY), 'Foot complaints.', 3),
+(1, 3, 1, (NOW() - INTERVAL 62 DAY), 'Other food complaints .', 3);
 
 INSERT INTO `Condition` (conditionName, conditionLink) 
 VALUES ("Hip Replacement", "http://www.nhs.uk/Conditions/Hip-replacement/Pages/Introduction.aspx"), 
@@ -222,6 +222,5 @@ VALUES (1, 4, '2017-07-10', '2017-01-15'),
 (1, 4, '2017-08-03', null);
 
 INSERT INTO Task(taskName, userID, recievedDate, dueDate)
-VALUES('Pre-op questionnaire', 1, '2017-07-10', '2017-10-10'), 
-('Pre-op Assessment: Olanzapine', 1, '2017-06-15', '2017-12-23');
-
+VALUES('Pre-op questionnaire', 1, NOW(), (NOW() + INTERVAL 12 DAY)), 
+('Pre-op Assessment: Olanzapine', 1, (NOW() - INTERVAL 12 DAY), (NOW() - INTERVAL 2 DAY));
