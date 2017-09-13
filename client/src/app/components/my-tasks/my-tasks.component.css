@@ -1,17 +1,8 @@
-
 .panel-default{
     border-top-width: 5px;
     border-top-color: #027FBB;
     min-height: 400px;
     margin-top: 10px;
-}
-.panel-heading img{
-    height: 25px;
-    width: 25px;
-}
-.panel-heading{
-    background: white;
-    font: bold;
 }
 
 .panel-body{
@@ -21,16 +12,32 @@
     overflow: auto;
 }
 
+.panel-heading img{
+    height: 25px;
+    width: 25px;
+}
+
+.panel-heading{
+    background: white;
+    font: bold;
+}
+
 .table-btn{
     background-color: transparent;
     border: none;
-    border-radius: 1px;
-    width: 100%;
+    width: inherit;
     text-align: left;
     outline: none;
-    overflow: hidden;
     margin: 0;
     white-space: normal;
+}
+
+.wrapped-button{
+    width: 100%;
+    overflow: hidden;
+    white-space: nowrap;
+    display: block;
+    text-overflow: ellipsis;
 }
 
 .widget-body-txt{
@@ -39,15 +46,15 @@
     color: #666666;
 }
 
+table{
+    table-layout: fixed
+}
+
 .widget-title-txt{
     font-size: 15px;
     font-family: "Helvetica";
     font-style: bold;
     color: #666666;
-}
-
-table{
-    table-layout: fixed
 }
 
 h1 {
@@ -71,6 +78,15 @@ h1::before {
     background-size: 24px 24px;
 }
 
+#oneline-title{
+    font-size: 24px; 
+    padding-bottom: 25px;
+}
+
 #widget-header{
     font-size: 24px; 
+}
+
+#summaryText{
+    font-size: 13px;
 }

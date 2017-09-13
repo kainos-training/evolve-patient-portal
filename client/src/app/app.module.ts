@@ -1,3 +1,4 @@
+
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
@@ -28,6 +29,7 @@ import { RequestPasswordResetComponent } from './components/request-password-res
 import { TemplateComponent } from './components/template/template.component';
 import { RepeatPrescriptionComponent } from './components/repeat-prescription/repeat-prescription.component';
 import { ToolTipModule } from 'angular2-tooltip';
+import { MyTasksComponent } from './components/my-tasks/my-tasks.component';
 
 @NgModule({
     declarations: [
@@ -43,7 +45,8 @@ import { ToolTipModule } from 'angular2-tooltip';
         SettingNewPasswordComponent,
         TopBarComponent,
         EllipsisPipe,
-        RepeatPrescriptionComponent
+        RepeatPrescriptionComponent,
+        MyTasksComponent
     ],
     imports: [
         BrowserModule,

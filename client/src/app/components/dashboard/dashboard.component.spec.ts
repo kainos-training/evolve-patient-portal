@@ -1,16 +1,17 @@
-import {async, ComponentFixture, TestBed} from '@angular/core/testing';
-import {DashboardComponent} from './dashboard.component';
-import {TopBarComponent} from '../top-bar/top-bar.component';
-import {LeftSideMenuComponent} from '../left-side-menu/left-side-menu.component';
-import {MapViewComponent} from '../map-view/map-view.component';
-import {AppointmentComponent} from '../appointment/appointment.component';
-import {Marker, NguiMapComponent, DirectionsRenderer} from '@ngui/map/dist';
-import {ReviewMedicationComponent} from '../review-medication/review-medication.component';
-import {EllipsisPipe} from '../../utils/ellipsis.pipe';
-import {ModalModule} from 'ngx-bootstrap/modal';
-import {FormsModule} from '@angular/forms';
-import {BrowserModule} from '@angular/platform-browser';
+import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { DashboardComponent } from './dashboard.component';
+import { TopBarComponent } from '../top-bar/top-bar.component';
+import { LeftSideMenuComponent } from '../left-side-menu/left-side-menu.component';
+import { MapViewComponent } from '../map-view/map-view.component';
+import { AppointmentComponent } from '../appointment/appointment.component';
+import { Marker, NguiMapComponent, DirectionsRenderer } from '@ngui/map/dist';
+import { ReviewMedicationComponent } from '../review-medication/review-medication.component';
+import { EllipsisPipe } from '../../utils/ellipsis.pipe';
+import { ModalModule } from 'ngx-bootstrap/modal';
+import { FormsModule } from '@angular/forms';
+import { BrowserModule } from '@angular/platform-browser';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import { MyTasksComponent } from '../my-tasks/my-tasks.component';
 
 describe('DashboardComponent', () => {
     let component: DashboardComponent;
@@ -28,7 +29,8 @@ describe('DashboardComponent', () => {
                 ReviewMedicationComponent,
                 Marker,
                 DirectionsRenderer,
-                NguiMapComponent
+                NguiMapComponent,
+                MyTasksComponent
             ],
             providers: [],
             imports: [
