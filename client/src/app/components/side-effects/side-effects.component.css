@@ -37,6 +37,11 @@
     line-height: 14px;
 } 
 
+#oneline-title{
+    font-size: 24px;
+    padding-bottom: 25px;
+}
+
 .sml-medication-txt{
     font-size: 15px;
     font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
