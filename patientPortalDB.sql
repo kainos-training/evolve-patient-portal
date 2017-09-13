@@ -66,6 +66,17 @@ primary key (medicationID),
 foreign key (medicationTypeID) references MedicationType (medicationTypeID)
 );
 
+CREATE TABLE IF NOT EXISTS Task (
+taskID int auto_increment not null,
+taskName varchar(60) not null,
+userID int not null,
+taskSummary varchar(100) not null,
+recievedDate datetime not null,
+dueDate datetime not null,
+primary key (taskID),
+foreign key (userID) references User (userID)
+);
+
 CREATE TABLE IF NOT EXISTS MedicationUser (
 medicationUserID int auto_increment not null,
 userID int not null, 
@@ -238,9 +249,11 @@ VALUES ("Hip Replacement", "http://www.nhs.uk/Conditions/Hip-replacement/Pages/I
 
 INSERT INTO UserCondition (userID, conditionID, startDate, endDate) 
 VALUES (1, 4, '2017-07-10', '2017-01-15'),
+(1, 3, '2016-11-10', '2017-07-20'),
 (1, 2, '1998-04-03', null),
 (1, 4, '2017-08-03', null);
 
-INSERT INTO Task(taskName, userID, recievedDate, dueDate)
-VALUES('Pre-op questionnaire', 1, NOW(), (NOW() + INTERVAL 12 DAY)), 
-('Pre-op Assessment: Olanzapine', 1, (NOW() - INTERVAL 12 DAY), (NOW() - INTERVAL 2 DAY));
+INSERT INTO Task(taskName, userID, taskSummary, recievedDate, dueDate)
+VALUES('Pre-op questionnaire', 1, 'Questionnaire to be filled out before surgery. Includes allergies and general health questions.', (NOW() - INTERVAL 4 DAY), (NOW() + INTERVAL 18 DAY)), 
+('Pre-op Assessment: Olanzapine', 1, 'Form used to assess your suitibility for Olanzapine which will be used post surgery.', (NOW() - INTERVAL 12 DAY), (NOW() - INTERVAL 2 DAY)),
+('Pre-op Assessment: Paracetamol', 1, 'Form used to assess your suitibility for Paracetamol which will be used post surgery.', NOW(), (NOW() + INTERVAL 12 DAY));

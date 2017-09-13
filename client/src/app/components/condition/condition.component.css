@@ -5,20 +5,20 @@
     min-height: 400px;
     margin-top: 10px;
 }
+
+#details{
+    overflow: auto;
+    max-height: 220px;
+}
+
 .panel-heading img{
     height: 25px;
     width: 25px;
 }
+
 .panel-heading{
     background: white;
     font: bold;
-}
-
-.panel-body{
-    width:100%;
-    height: 100%;
-    max-height: 300px;
-    overflow: auto;
 }
 
 .table-btn{
@@ -30,7 +30,6 @@
     outline: none;
     overflow: hidden;
     margin: 0;
-    white-space: normal;
 }
 
 .widget-body-txt{
@@ -46,8 +45,8 @@
     color: #666666;
 }
 
-table{
-    table-layout: fixed
+.table td{
+    width: 400px;
 }
 
 h1 {
@@ -65,7 +64,7 @@ h1::before {
     width: 25px;
     height: 26px;
     float: left;
-    background-image: url("../../../assets/pill.png");
+    background-image: url("../../../assets/condition.png");
     width: 25px;
     height: 26px;
     background-size: 24px 24px;
@@ -73,4 +72,37 @@ h1::before {
 
 #widget-header{
     font-size: 24px; 
+}
+
+#oneline-title{
+    font-size: 24px;
+    padding-bottom: 25px;
+}
+
+.btn.sharp {
+    border-radius:0;
+  }
+
+.btn-group{
+    width: 100%;
+    border: none;
+    margin-bottom: 15px;
+}
+
+.btn-primary {
+    width: 49%;
+    color: #fff;
+    background-color:#067fbb;
+    border-color: #067fbb; 
+}
+
+.btn-primary:focus{
+    background-color: #00579f;
+    outline: none !important;
+}
+
+.btn-primary:hover, .btn-primary:active, .btn-primary.active {
+    color: #fff;
+    background-color: #00579f;
+    border-color: #00579f; 
 }

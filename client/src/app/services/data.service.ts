@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Medication } from '../class/Medication';
+import { Task } from '../class/Task';
 import { Observable } from 'rxjs/Observable';
 import { MedicationComment } from '../class/MedicationComment';
 import { MedicationDescription } from '../class/MedicationDescription';
@@ -12,6 +13,7 @@ import { Appointment } from '../class/Appointment';
 import { AppointmentFurtherInfo } from '../class/AppointmentFurtherInfo';
 import { User } from '../class/User';
 import { SideEffect } from '../class/SideEffect';
+import { Condition } from '../class/Condition';
 
 @Injectable()
 export class DataService {
@@ -32,6 +34,20 @@ export class DataService {
         };
 
         return this.http.post<Medication[]>('api/medication/list', body, options);
+    };
+
+    public getTaskList(userID) {
+        const body = {
+            "userID": userID
+        };
+        const options = {
+            headers: new HttpHeaders().set('Content-Type', 'application/json'),
+        };
+         var tmp = this.http.post<Task[]>('api/task/list', body, options);
+         var str;
+         tmp.subscribe(blah => str = blah[0].taskName);
+        console.log(str);
+         return tmp;
     };
 
     public getUserSideEffects(userID) {
@@ -279,6 +295,30 @@ export class DataService {
         };
         let url = '/api/userInfo/getUserInfoByUserID';
         return this.http.post<User>(url, body, options);
+    }
+
+    public getCurrentConditions(userID) {
+        let headers = new Headers({ 'Content-Type': 'application/json' });
+        const body = {
+            'userID': userID
+        };
+        const options = {
+            headers: new HttpHeaders().set('Content-Type', 'application/json'),
+        };
+        let url = '/api/condition/current';
+        return this.http.post<Condition[]>(url, body, options);
+    }
+
+    public getPreviousConditions(userID) {
+        let headers = new Headers({ 'Content-Type': 'application/json' });
+        const body = {
+            'userID': userID
+        };
+        const options = {
+            headers: new HttpHeaders().set('Content-Type', 'application/json'),
+        };
+        let url = '/api/condition/previous';
+        return this.http.post<Condition[]>(url, body, options);
     }
 
     public requestResetPassword(user: User, router: Router): void {

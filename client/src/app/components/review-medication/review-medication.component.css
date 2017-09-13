@@ -77,43 +77,20 @@
     color: #666666;
     padding-bottom: 5px;
 }
-.side-effects img{
-    height: 20px;
-    width: 20px;
-}
 
 .side-effects li {
     list-style-type: none;
-}
-
-#side-effect-input{
-    width: 100%;
 }
 
 .table td{
     width: 400px;
 }
 
-#minusButton {
-    border: none;
-    background-color: #EBF0F4;
-    width: 11%;
-}
-
-#plusButton {
-    border: none;
-    background-color: #EBF0F4;
-}
 
 #medicationComment{
     word-wrap: break-word;
     width: 600%;
     float: left; 
-}
-
-#sideEffectTimeStamp {
-    width: 20%;
-    column-width: 10px;
 }
 
 #removedMedicationComment{
@@ -123,11 +100,6 @@
     text-decoration: line-through;
 }
 
-#removedSideEffectTimeStamp {
-    width: 20%;
-    column-width: 10px;
-    text-decoration: line-through;    
-}
 
 #medicationComponent {
     position: relative;
@@ -177,11 +149,6 @@ h1::before {
     background-size: 24px 24px;
 }
  
-
-.strikethrough {
-    text-decoration: line-through;
-  }
-
 #borderBelow {
     border-top: none;
     border-bottom: 1px solid #ddd;
@@ -193,24 +160,6 @@ h1::before {
 
 a {
     cursor: pointer;
-}
-
-.side-effect-item {
-    border-bottom:1px solid #ddd;
-    padding-top: 10px;
-    padding-bottom:10px;
-    padding-right: 12px;
-    padding-left:12px;
-}
-.side-effect-text {
-    font-weight:400;
-}
-
-.new-side-effect{
-    padding-top: 10px;
-    padding-bottom:10px;
-    padding-right: 12px;
-    padding-left:12px;
 }
 
 a:hover, pre:hover{

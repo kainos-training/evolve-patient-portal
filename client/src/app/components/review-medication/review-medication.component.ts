@@ -23,18 +23,14 @@ export class ReviewMedicationComponent implements OnInit, OnDestroy {
     public selectedMedication: Medication;
     public selectedMedicationComments: MedicationComment[];
     public selectedMedicationHistory: Medication[];
-    public userSideEffects: SideEffect[];
     public selectedRemovedMedicationComments: MedicationComment[];
     public modalRef: BsModalRef;
     public medicationsList: Medication[];
     public newComment: string;
-    public newSideEffect: String;
     public description: MedicationDescription;
     public sanitizer: Sanitizer;
     public collapsedDescription: boolean;
     public showPrescriptionHistory: boolean;
-    public showSideEffects: boolean;
-    public prescriptionText: string;
     private user: User = new User();
     private userSubscription: Subscription;
     private dataService: DataService;
@@ -44,8 +40,7 @@ export class ReviewMedicationComponent implements OnInit, OnDestroy {
         this.collapsedDescription = true;
         this.selectedMedication = meds;
         this.showPrescriptionHistory = false;
-        this.showSideEffects = false;
-        this.prescriptionText = "Show Prescription History";
+
         this.modalRef = this.modalService.show(template);
         let description = this.dataService.getWikiSummary(meds.medicationName);
 
@@ -75,58 +70,12 @@ export class ReviewMedicationComponent implements OnInit, OnDestroy {
         this.modalRef = this.modalService.show(template);
     }
 
-    public removeComment(medicationUserCommentID) {
-        this.dataService.removeMedicationComment(medicationUserCommentID);
-        this.refreshMedicationComments();
-    }
-
-    public removeSideEffect(userSideEffectID) {
-        this.dataService.removeUserSideEffect(userSideEffectID);
-        this.refreshUserSideEffects();
-    }
-
-    public addComment() {
-        if (this.newComment != null) {
-            this.dataService.addMedicationComment(this.selectedMedication.medicationUserID, this.newComment);
-            this.refreshMedicationComments();
-            this.newComment = null;
-        }
-    }
-
-    public addSideEffect() {
-        if (this.newSideEffect != null) {
-            this.dataService.addUserSideEffect(this.dataService.getCookie(), this.newSideEffect);
-            this.refreshUserSideEffects();
-            this.newSideEffect = null;
-        }
-    }
-
-    public refreshMedicationComments() {
-        this.dataService.getMedicationComments(this.selectedMedication.medicationUserID).subscribe(
-            res => this.selectedMedicationComments = res
-        );
-        this.dataService.getRemovedMedicationComments(this.selectedMedication.medicationUserID).subscribe(
-            res => this.selectedRemovedMedicationComments = res,
-            err => console.log(err)
-        );
-    }
-
-    public refreshUserSideEffects() {
-        this.dataService.getUserSideEffects(this.dataService.getCookie()).subscribe(
-            res => this.userSideEffects = res
-        );
-    }
-
     public toggleCollapse() {
         this.collapsedDescription = this.collapsedDescription == true ? false : true;
     }
 
     public displayPrescriptionHistory() {
         this.showPrescriptionHistory = !this.showPrescriptionHistory;
-    }
-
-    public selectShowSideEffects() {
-        this.showSideEffects = !this.showSideEffects;
     }
 
     constructor(dataService: DataService, private modalService: BsModalService, private switchboard: SwitchBoardService) {
@@ -138,10 +87,7 @@ export class ReviewMedicationComponent implements OnInit, OnDestroy {
         dataService.getMedicationList(this.user.userID).subscribe(
             res => this.medicationsList = res
         );
-        console.log("User Id in this constructor: " + this.user.userID);
-        this.dataService.getUserSideEffects(this.user.userID).subscribe(
-            res => { this.userSideEffects = res }
-        );
+
         console.log("User Id in this constructor: " + this.user.userID);
     }
 

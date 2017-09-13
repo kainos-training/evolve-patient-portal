@@ -27,6 +27,9 @@ import {SettingNewPasswordComponent} from './components/setting-new-password/set
 import {RequestPasswordResetComponent} from './components/request-password-reset/request-password-reset.component';
 import {TemplateComponent} from './components/template/template.component';
 import { SideEffectsComponent } from './components/side-effects/side-effects.component';
+import { ConditionComponent } from './components/condition/condition.component';
+import { TooltipModule } from 'ngx-bootstrap/tooltip';
+import { MyTasksComponent } from './components/my-tasks/my-tasks.component';
 
 @NgModule({
     declarations: [
@@ -42,7 +45,9 @@ import { SideEffectsComponent } from './components/side-effects/side-effects.com
         SettingNewPasswordComponent,
         TopBarComponent,
         EllipsisPipe,
-        SideEffectsComponent
+        SideEffectsComponent,
+        ConditionComponent,
+        MyTasksComponent
     ],
     imports: [
         BrowserModule,
@@ -52,7 +57,8 @@ import { SideEffectsComponent } from './components/side-effects/side-effects.com
         AlertModule.forRoot(),
         ModalModule.forRoot(),
         NguiMapModule.forRoot({apiUrl: 'https://maps.google.com/maps/api/js?key=AIzaSyC6v7VVrChAt97hxrsY76i8Xg2mcaQMuE8'}),
-        BrowserAnimationsModule
+        BrowserAnimationsModule,
+        TooltipModule.forRoot()
     ],
     providers: [
         DataService,
