@@ -210,6 +210,8 @@ database.selectUserInfoByUserID = (userID, cb) => {
             }
         }
     )
+}
+
 database.getCurrentConditions = function(userID, callback) {
     database.query(
         "SELECT UC.userID, UC.conditionID, UC.userConditionID, UC.startDate, UC.endDate, " +

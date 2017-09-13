@@ -1,6 +1,10 @@
 const express = require('express');
 const protectedMedicationRoutes = express.Router();
 const medicationController = require('../controllers/medicationController');
+const jwtUtils = require('../utils/jwt');
+
+// Binding JWT verify middleware to protected routes
+protectedMedicationRoutes.use(jwtUtils.verifyToken);
 
 protectedMedicationRoutes.post('/list', function(req, res) {
     return medicationController.getListOfMedications(req, res);
