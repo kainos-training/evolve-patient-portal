@@ -15,7 +15,7 @@ database.connect(function(err) {
 
 database.getMedications = function(userID, callback) {
     database.query(
-        "SELECT userID, medicationID, medicationName, medicationType, startDate, endDate, dosage, instructions " + 
+        "SELECT userID, medicationID, medicationName, medicationType, startDate, endDate, dosage, instructions, prescribedDate, repeated " + 
         "FROM User NATURAL JOIN MedicationUser NATURAL JOIN Medication NATURAL JOIN MedicationType " +
         "WHERE userID = ? AND endDate >= NOW();", 
         [userID],
@@ -56,7 +56,7 @@ database.getUserSideEffects = function(userID, callback) {
     database.query(
         "SELECT userSideEffectID, userID, sideEffectText, `timeStamp`, deleted " +
         "FROM UserSideEffect " +
-        "WHERE userID = ?;", [userID],
+        "WHERE userID = ? order by `timestamp` desc;", [userID],
         function(err, rows) {
             callback(err, rows);
         });
