@@ -26,6 +26,7 @@ import {DashboardComponent} from './components/dashboard/dashboard.component';
 import {SettingNewPasswordComponent} from './components/setting-new-password/setting-new-password.component';
 import {RequestPasswordResetComponent} from './components/request-password-reset/request-password-reset.component';
 import {TemplateComponent} from './components/template/template.component';
+import { SideEffectsComponent } from './components/side-effects/side-effects.component';
 
 @NgModule({
     declarations: [
@@ -40,7 +41,8 @@ import {TemplateComponent} from './components/template/template.component';
         ReviewMedicationComponent,
         SettingNewPasswordComponent,
         TopBarComponent,
-        EllipsisPipe
+        EllipsisPipe,
+        SideEffectsComponent
     ],
     imports: [
         BrowserModule,
