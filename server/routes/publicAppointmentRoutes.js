@@ -10,4 +10,8 @@ publicAppointmentRoutes.post('/getAppointmentFurtherInfo',function(req,res){
     return appointmentController.getAppointmentFurtherInfo(req,res);
 });
 
+publicAppointmentRoutes.post('/getUserClinicians', function(req, res){
+    return appointmentController.getUserClinicians(req, res);
+});
+
 module.exports = publicAppointmentRoutes;

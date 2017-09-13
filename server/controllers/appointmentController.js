@@ -44,3 +44,24 @@ exports.getAppointmentFurtherInfo = function(req, res) {
         }
     )
 };
+
+exports.getUserClinicians = function(req, res) {
+    const userID = req.body.userID;
+
+    if (userID == null) {
+        res.status(400).json({
+            success: false
+        });
+    } else {
+        db.getUserClinicians(userID, function(err, rows) {
+            if (err) {
+                console.log(err);
+                res.status(400).json({
+                    success: false
+                });
+            } else {
+                res.status(200).send(rows);
+            }
+        });
+    }
+};

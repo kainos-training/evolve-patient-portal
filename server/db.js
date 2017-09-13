@@ -114,4 +114,15 @@ database.getTaskList = function(userID, callback) {
         });
 };
 
+database.getUserClinicians = function(userID, callback) {
+    database.query(
+        "SELECT c.clinicianID, c.title, c.firstName, c.lastName, c.jobTitle, c.email " +
+        "FROM Clinician AS c JOIN UserClinician AS uc ON c.clinicianID = uc.clinicianID " +
+        "WHERE uc.userID = ?;",
+        [userID],
+        function(err, rows) {
+            callback(err, rows);
+        });
+};
+
 module.exports = database;

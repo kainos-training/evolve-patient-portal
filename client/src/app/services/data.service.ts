@@ -13,6 +13,7 @@ import { Appointment } from '../class/Appointment';
 import { AppointmentFurtherInfo } from '../class/AppointmentFurtherInfo';
 import { User } from '../class/User';
 import { Condition } from '../class/Condition';
+import { Clinician } from '../class/Clinician';
 
 @Injectable()
 export class DataService {
@@ -281,6 +282,18 @@ export class DataService {
         };
         let url = '/api/condition/previous';
         return this.http.post<Condition[]>(url, body, options);
+    }
+
+    public getUserClinicians(userID) {
+        let headers = new Headers({ 'Content-Type': 'application/json' });
+        const body = {
+            'userID': userID
+        };
+        const options = {
+            headers: new HttpHeaders().set('Content-Type', 'application/json'),
+        };
+        let url = '/api/condition/previous';
+        return this.http.post<Clinician[]>(url, body, options);
     }
 
     public requestResetPassword(user: User, router: Router): void {
