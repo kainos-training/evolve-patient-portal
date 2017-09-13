@@ -13,6 +13,7 @@ import { Observable } from 'rxjs/Observable';
 })
 export class RepeatPrescriptionComponent implements OnInit {
 
+    public userID: String;
     public dataService: DataService;
     public prescriptionList: Medication[];
     public confirmedPrescriptionList: number[];
@@ -55,9 +56,7 @@ export class RepeatPrescriptionComponent implements OnInit {
             alert(prescriptionList[i].medicationUserID + " " + this.collectionType.status);
             this.confirmedPrescriptionList.push(prescriptionList[i].medicationUserID);
         }
-        console.log("Preparing request...")
         this.dataService.updatePrescriptionDate(this.confirmedPrescriptionList, this.deliveryType);
-        console.log("Request sent with payload: " + this.confirmedPrescriptionList + " \nStatus: " + this.deliveryType)
     }
 
     public openModal(prescriptionList: Array<Medication>, template: TemplateRef<any>) {
@@ -65,8 +64,10 @@ export class RepeatPrescriptionComponent implements OnInit {
     }
 
     ngOnInit() {
-        this.dataService.getRepeatedMedication(1).subscribe(
+        this.userID = this.dataService.getCookie();
+        this.dataService.getRepeatedMedication(this.userID).subscribe(
             res => this.prescriptionList = res
         );
+
     }
 }
