@@ -31,21 +31,15 @@ install:
     # Install Frontend Dependencies
     - npm install -g angular-cli
     - npm install -g karma
-    - cd client
-    - npm install
-    - ng build
+    - npm install ./client
+    - ng build ./client
     # Install Backend Dependencies
-    - cd ..
-    - cd server
-    - npm install
-    - cd ..
+    - npm install ./server
 
 script:
     # Frontend build
-    - cd client
-    - karma start karma.conf.js --single-run
+    - karma start ./client/karma.conf.js --single-run
     # Backend build
-    - cd ..
     - cd server
-    - npm run intTest -s && npm run unitTest -s,
+    - npm run intTest ./server -s && npm run unitTest -s,
     
