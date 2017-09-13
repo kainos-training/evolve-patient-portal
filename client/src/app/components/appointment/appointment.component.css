@@ -22,6 +22,7 @@
     text-align: left;
     outline: none;
     overflow: hidden;
+    text-overflow: none;
 }
 
 .pill-icon-modal {

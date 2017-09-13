@@ -11,6 +11,7 @@ const database = mysql.createConnection({
 
 database.connect(function(err) {
     if (err) throw err;
+    console.log("connected to mysql")
 });
 
 database.getMedications = function(userID, callback) {
@@ -71,6 +72,17 @@ database.getMedicationHistory = function(medicationID, userID, callback) {
         "WHERE medicationID = ? " +
         "AND userID = ? " +
         "AND endDate < NOW();", [medicationID, userID],
+        function(err, rows) {
+            callback(err, rows);
+        });
+};
+
+database.getTaskList = function(userID, callback) {
+    database.query(
+        "SELECT taskName, taskSummary, recievedDate, dueDate FROM Task " +
+        "WHERE userID = ? " +
+        "AND dueDate > NOW() " +
+        "ORDER BY dueDate;" , [userID],
         function(err, rows) {
             callback(err, rows);
         });

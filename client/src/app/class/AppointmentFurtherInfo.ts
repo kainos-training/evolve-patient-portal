@@ -1,9 +1,9 @@
-export class AppointmentFurtherInfo {
+export class AppointmentFurtherInfo {    
+    locationID: string;
     departmentName:string;
     dateOfAppointment:Date;
     appointmentType:string;
     userID:string;
-    locationID:string;
     departmentID:string;
     clinicianName:string;
     comment:string;
