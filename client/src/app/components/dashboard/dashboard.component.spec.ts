@@ -10,6 +10,8 @@ import {EllipsisPipe} from '../../utils/ellipsis.pipe';
 import {ModalModule} from 'ngx-bootstrap/modal';
 import {FormsModule} from '@angular/forms';
 import {BrowserModule} from '@angular/platform-browser';
+import {ConditionComponent} from '../condition/condition.component';
+import {TooltipModule} from 'ngx-bootstrap/tooltip';
 import {MyTasksComponent} from '../my-tasks/my-tasks.component';
 
 describe('DashboardComponent', () => {
@@ -29,13 +31,15 @@ describe('DashboardComponent', () => {
                 Marker,
                 DirectionsRenderer,
                 NguiMapComponent,
+                ConditionComponent,
                 MyTasksComponent
             ],
             providers: [],
             imports: [
                 BrowserModule,
                 ModalModule.forRoot(),
-                FormsModule
+                FormsModule,
+                TooltipModule.forRoot()
             ]
         })
             .compileComponents();

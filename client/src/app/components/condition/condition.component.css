@@ -1,0 +1,108 @@
+
+.panel-default{
+    border-top-width: 5px;
+    border-top-color: #027FBB;
+    min-height: 400px;
+    margin-top: 10px;
+}
+
+#details{
+    overflow: auto;
+    max-height: 220px;
+}
+
+.panel-heading img{
+    height: 25px;
+    width: 25px;
+}
+
+.panel-heading{
+    background: white;
+    font: bold;
+}
+
+.table-btn{
+    background-color: transparent;
+    border: none;
+    border-radius: 1px;
+    width: 100%;
+    text-align: left;
+    outline: none;
+    overflow: hidden;
+    margin: 0;
+}
+
+.widget-body-txt{
+    font-size: 15px;
+    font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+    color: #666666;
+}
+
+.widget-title-txt{
+    font-size: 15px;
+    font-family: "Helvetica";
+    font-style: bold;
+    color: #666666;
+}
+
+.table td{
+    width: 400px;
+}
+
+h1 {
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+h1::before {
+    content: "";
+    display: block;
+    background-repeat: no-repeat;
+    margin-top: 0px;
+    margin-right: 10px;
+    margin-bottom: 10px;
+    width: 25px;
+    height: 26px;
+    float: left;
+    background-image: url("../../../assets/condition.png");
+    width: 25px;
+    height: 26px;
+    background-size: 24px 24px;
+}
+
+#widget-header{
+    font-size: 24px; 
+}
+
+#oneline-title{
+    font-size: 24px;
+    padding-bottom: 25px;
+}
+
+.btn.sharp {
+    border-radius:0;
+  }
+
+.btn-group{
+    width: 100%;
+    border: none;
+    margin-bottom: 15px;
+}
+
+.btn-primary {
+    width: 49%;
+    color: #fff;
+    background-color:#067fbb;
+    border-color: #067fbb; 
+}
+
+.btn-primary:focus{
+    background-color: #00579f;
+    outline: none !important;
+}
+
+.btn-primary:hover, .btn-primary:active, .btn-primary.active {
+    color: #fff;
+    background-color: #00579f;
+    border-color: #00579f; 
+}
