@@ -36,6 +36,10 @@
     font-size: 12px;
     line-height: 14px;
 } 
+.btn.sharp {
+    border-radius:0;
+    border-bottom: 15px;
+  }
 
 .sml-medication-txt{
     font-size: 15px;
