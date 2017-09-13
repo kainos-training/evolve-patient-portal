@@ -216,3 +216,7 @@ a {
 a:hover, pre:hover{
     cursor: pointer;
 }
+
+.prescription-item {
+    cursor:pointer;
+}

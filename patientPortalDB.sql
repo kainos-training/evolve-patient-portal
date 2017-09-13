@@ -184,7 +184,7 @@ VALUES('Penicillin', 1, 'https://en.wikipedia.org/wiki/Penicillin'),
 ('Ketoprofen', 4, 'https://en.wikipedia.org/wiki/Ketoprofen');
 
 INSERT INTO MedicationUser(userID, medicationID, startDate, endDate, dosage, instructions)
-VALUES (1, 3, '2017-06-01', '2019-08-10', '10mg', 'Take one tablet twice a day'),
+VALUES (1, 3, '2017-06-01', '2019-08-10', '10mg', 'Take one tablet twice a day, after meals'),
 (1, 3, '2016-06-01', '2017-06-01', '5mg', 'Take two tablets twice a day'),
 (1, 3, '2015-06-01', '2016-06-01', '20mg', 'Take two tablets twice a day'),
 (1, 4, '2016-06-01', '2019-08-10', '5mg', 'Take two tablets twice a day'), 
