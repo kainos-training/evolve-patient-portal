@@ -218,7 +218,7 @@ VALUES ("Hip Replacement", "http://www.nhs.uk/Conditions/Hip-replacement/Pages/I
 ("Back Pain", "http://www.nhs.uk/conditions/back-pain/Pages/Introduction.aspx");
 
 INSERT INTO UserCondition (userID, conditionID, startDate, endDate) 
-VALUES (1, 4, '2017-07-10', '2017-01-15'),
+VALUES (1, 4, '2017-01-10', '2017-07-15'),
 (1, 3, '2016-11-10', '2017-07-20'),
 (1, 2, '1998-04-03', null),
 (1, 4, '2017-08-03', null);
