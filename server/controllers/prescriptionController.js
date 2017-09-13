@@ -4,7 +4,6 @@ const request = require('request');
 exports.updatePrescriptionDate = function(req, res) {
     const medicationUserIDs = req.body.medicationUserIDs;
     const deliveryStatus = req.body.deliveryStatus;
-    console.log(medicationUserIDs);
     if (medicationUserIDs == null || deliveryStatus == null) {
         res.status(400).json({
             success: false
