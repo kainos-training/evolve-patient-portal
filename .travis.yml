@@ -29,8 +29,11 @@ before_install:
   
 install:
     # Install Frontend Dependencies
+    - npm install -g angular-cli
+    - npm install -g karma
     - cd client
     - npm install
+    - ng build
     # Install Backend Dependencies
     - cd ..
     - cd server
@@ -40,7 +43,6 @@ install:
 script:
     # Frontend build
     - cd client
-    - ng build
     - karma start karma.conf.js --single-run
     # Backend build
     - cd ..
