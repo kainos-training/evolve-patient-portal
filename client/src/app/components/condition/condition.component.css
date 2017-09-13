@@ -106,3 +106,9 @@ h1::before {
     background-color: #00579f;
     border-color: #00579f; 
 }
+
+.btn-primary.selected {
+    color: #fff;
+    background-color: #00579f;
+    border-color: #00579f; 
+}
