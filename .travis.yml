@@ -38,7 +38,9 @@ install:
 
 script:
     # Frontend build
-    - karma start ./client/karma.conf.js --single-run
+    - cd client
+    - npm run ci
+    - cd ..
     # Backend build
     - cd server
     - npm run intTest -s && npm run unitTest -s
