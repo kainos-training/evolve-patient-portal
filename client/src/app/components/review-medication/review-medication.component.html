@@ -10,7 +10,7 @@
                 <table class="table table-hover">
                     <tbody>
                         <tr *ngFor="let medication of medicationsList" class="prescription-item" (click)="openModal(medication,template)" >
-                            <td id="borderBelow">
+                            <td id="">
                                 <span class="main-medication-txt">Name: {{medication.medicationName}}</span><br>
                                 <span class="sml-medication-txt">Dosage: {{medication.dosage}}</span><br>
                                 <span class="sml-medication-txt">Instructions: {{medication.instructions}}</span><br><br>
