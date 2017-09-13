@@ -168,39 +168,7 @@
                         </tr>
                     </tbody>
                 </table>
-                <!-- Side Effects of all Meds -->
-                <div>
-                    <a *ngIf="!this.showSideEffects" (click)="this.selectShowSideEffects()">Show Side Effects</a>
-                    <a *ngIf="this.showSideEffects" (click)="this.selectShowSideEffects()">Hide Side Effects</a>
-                </div>
-                <div *ngIf="this.showSideEffects" class="side-effects">
-                    <div *ngFor="let sideeffect of userSideEffects" class="row side-effect-item">
-                        <div class="col-xs-2"><label class="side-effect-text" id="sideEffectTimeStamp">{{ sideeffect.timeStamp|date:'dd/MM/yyyy' }}</label></div>
-                        <div class="col-xs-8">
-                            <label class="side-effect-text" [ngClass]="{'strikethrough': sideeffect.deleted}" id="medicationComment">{{ sideeffect.sideEffectText }}</label>
-                        </div>
-                        <div class="col-xs-2" class="" id="medicationButton">
-                            <button type="button" *ngIf="!sideeffect.deleted" id="minusButton" (click)="removeSideEffect(sideeffect.userSideEffectID)">
-                                <img src="assets/red_minus_icon.png">
-                            </button>
-                        </div>
-                    </div>
-                    <br>
-                    <div class="new-side-effect">
-                        <div class="row">
-                            <div class="col-xs-10">
-                                <input type="text" class="form-control" id="side-effect-input" [(ngModel)]="newSideEffect" [ngModelOptions]="{standalone: true}"
-                                    placeholder="New side effect">
-                            </div>
-                            <div class="col-xs-2">
-                                <button type="button" id="plusButton" (click)="addSideEffect()">
-                                <img src="assets/Green_Plus_Icon.png">
-                            </button>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="clearfix"></div>
-                </div>
+            
             </div>
         </div>
     </div>
