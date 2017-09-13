@@ -6,6 +6,7 @@ import {MenuStateService} from '../../services/menu-state.service';
 import {DataService} from '../../services/data.service';
 import { MapViewComponent } from "../map-view/map-view.component";
 import { Marker, DirectionsRenderer, NguiMapComponent } from "@ngui/map/dist";
+import {log} from 'util';
 
 describe('AppointmentComponent', () => {
     let component: AppointmentComponent;
@@ -38,5 +39,21 @@ describe('AppointmentComponent', () => {
         fixture = TestBed.createComponent(AppointmentComponent);
         component = fixture.componentInstance;
         expect(component).toBeTruthy();
+    });
+
+    it('should toggle from false to true', async () => {
+        fixture = TestBed.createComponent(AppointmentComponent);
+        component = fixture.componentInstance;
+        this.focusedAppointment["FalseInput"] = false;
+        this.toggle("FalseInput");
+        expect(this.focusedAppointment["FalseInput"]).toBeTruthy();
+    });
+
+    it('should toggle from true to false', async () => {
+        fixture = TestBed.createComponent(AppointmentComponent);
+        component = fixture.componentInstance;
+        this.focusedAppointment["TrueInput"] = true;
+        this.toggle("TrueInput");
+        expect(this.focusedAppointment["TrueInput"]).toBeFalsy();
     });
 });

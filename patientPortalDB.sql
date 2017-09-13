@@ -66,6 +66,17 @@ primary key (medicationID),
 foreign key (medicationTypeID) references MedicationType (medicationTypeID)
 );
 
+CREATE TABLE IF NOT EXISTS Task (
+taskID int auto_increment not null,
+taskName varchar(60) not null,
+userID int not null,
+taskSummary varchar(100) not null,
+recievedDate date not null,
+dueDate date not null,
+primary key (taskID),
+foreign key (userID) references User (userID)
+);
+
 CREATE TABLE IF NOT EXISTS MedicationUser (
 medicationUserID int auto_increment not null,
 userID int not null, 
@@ -202,13 +213,13 @@ INSERT INTO AppointmentType (`type`)
 VALUES ('Pre-Op Assessment'), ('Emergency Surgery'), ('GP Appointment'), ('Check-up');
 
 INSERT INTO Appointment (userID, locationDepartmentID, clinicianID, dateOfAppointment, `comment`, appointmentTypeID)
-VALUES(1, 3, 3, '2017-07-07', 'Ultrasound performed, pregnancy progressing normally.', 4),
-(3, 4, 2, '2017-11-11 09:00:00', null, 1),
-(1, 3, 3, '2017-07-09 12:00:00', 'Appointment in relation to abdominal crampss,', 3),
-(1, 3, 2, '2017-07-10 13:00:00', 'Checkup after Ultrasound,', 4),
-(1, 1, 1, '2017-09-19 15:00:00', 'INSTRUCTIONS: Do not eat any food 24 hours before surgery.', 1),
-(1, 2, 1, '2017-09-12 11:00:00', 'Foot complaints.', 3),
-(1, 3, 1, '2017-09-12 16:00:00', 'Other food compaints .', 3);
+VALUES(1, 3, 3, (NOW() + INTERVAL 2 DAY), 'Ultrasound to be performed to ensure pregnancy is progressing normally.', 4),
+(3, 4, 2, (NOW() + INTERVAL 12 DAY), null, 1),
+(1, 3, 3, (NOW() - INTERVAL 20 DAY), 'Appointment in relation to abdominal cramps', 3),
+(1, 3, 2, (NOW() + INTERVAL 30 DAY), 'Checkup after Ultrasound,', 4),
+(1, 1, 1, (NOW() - INTERVAL 4 DAY), 'INSTRUCTIONS: Do not eat any food 24 hours before surgery.', 1),
+(1, 2, 1, (NOW() + INTERVAL 4 DAY), 'Foot complaints.', 3),
+(1, 3, 1, (NOW() - INTERVAL 62 DAY), 'Other food complaints .', 3);
 
 INSERT INTO `Condition` (conditionName, conditionLink) 
 VALUES ("Hip Replacement", "http://www.nhs.uk/Conditions/Hip-replacement/Pages/Introduction.aspx"), 
@@ -221,7 +232,7 @@ VALUES (1, 4, '2017-07-10', '2017-01-15'),
 (1, 2, '1998-04-03', null),
 (1, 4, '2017-08-03', null);
 
-INSERT INTO Task(taskName, userID, recievedDate, dueDate)
-VALUES('Pre-op questionnaire', 1, '2017-07-10', '2017-10-10'), 
-('Pre-op Assessment: Olanzapine', 1, '2017-06-15', '2017-12-23');
-
+INSERT INTO Task(taskName, userID, taskSummary, recievedDate, dueDate)
+VALUES('Pre-op questionnaire', 1, 'Questionnaire to be filled out before surgery. Includes allergies and general health questions.', '2017-07-10', '2017-10-10'), 
+('Pre-op Assessment: Olanzapine', 1, 'Form used to assess your suitibility for Olanzapine which will be used post surgery.', '2017-06-15', '2017-12-23'),
+('Pre-op Assessment: Paracetamol', 1, 'Form used to assess your suitibility for Paracetamol which will be used post surgery.', NOW(), (NOW() + INTERVAL 12 DAY));

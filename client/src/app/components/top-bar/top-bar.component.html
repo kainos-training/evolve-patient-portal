@@ -1,5 +1,5 @@
 <div class="flex-container">
-    <div class="col-sm-3 col-xs-12 left-item">
+    <div class="col-sm-3 col-xs-12 col-md-3 col-lg-2 left-item">
         <div id="menu-button" (click)="toggleMenuState()" class="visible-xs">
             <div class="menuButtonLine"></div>
             <div class="menuButtonLine"></div>
@@ -9,7 +9,7 @@
         <div class="visible-xs settings-button" (click)="openModal(popup)"></div>
         <p class="visible-xs" (click)=this.data.logout()><span class="log-out-button glyphicon glyphicon-log-out"></span></p>
     </div>
-    <div id="button-list" class="hidden-xs col-sm-9 right-item">
+    <div id="button-list" class="hidden-xs col-sm-9 col-md-9 col-lg-10 right-item">
         <div class="settings-button" style="float:right; display:none !important;" (click)="openModal(popup)"></div>
         <div (click)=this.data.logout()><span class="log-out-button glyphicon glyphicon-log-out"></span></div>
     </div>

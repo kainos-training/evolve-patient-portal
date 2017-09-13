@@ -2,9 +2,7 @@
     border-top-width: 5px;
     border-top-color: #027FBB;
     margin-top: 10px;
-    
     height: 400px;
-   
 }
 
 .panel-heading img {
@@ -24,6 +22,7 @@
     text-align: left;
     outline: none;
     overflow: hidden;
+    text-overflow: none;
 }
 
 .pill-icon-modal {
@@ -89,10 +88,6 @@ h1::before {
     cursor: default;
 }
 
-.map-container {
-    padding-top: 20px;
-}
-
 #information-display {
     overflow: auto;
     max-height: 300px;
@@ -105,8 +100,41 @@ h1::before {
 .debugBlue {
     outline: 1px solid blue;
 }
-code{
+
+code {
     font-size: 12px;
     font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
     color: #666666;
+}
+
+.local-map-container {
+    overflow: hidden;
+}
+
+.local-map-container img {
+    width: 100%;
+}
+
+input[data-expanded="false"] {
+    margin: 0;
+}
+
+input[data-expanded="true"] {
+    margin: 20px 0;
+}
+
+input.btn.btn-block:last-of-type {
+    margin-top: 20px;
+}
+
+input[data-expanded="true"], input[data-expanded="false"],
+input[data-expanded="true"]:visited, input[data-expanded="false"]:visited {
+    background-color: #00579f;
+}
+
+input[data-expanded="true"]:hover, input[data-expanded="false"]:hover,
+input[data-expanded="true"]:focus, input[data-expanded="false"]:focus,
+input[data-expanded="true"]:active, input[data-expanded="false"]:active {
+    background-color: #067fbb;
+    outline: none;
 }
