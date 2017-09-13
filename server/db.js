@@ -83,8 +83,7 @@ database.getCurrentConditions = function(userID, callback) {
         "C.conditionName, C.conditionLink " +
         "FROM UserCondition AS UC INNER JOIN `Condition` AS C ON UC.conditionID = C.conditionID " +
         "WHERE UC.userID = ? " +
-        "AND UC.endDate > NOW() " +
-        "OR UC.endDate IS NULL;",
+        "AND UC.endDate IS NULL;",
         [userID],
         function(err, rows) {
             callback(err, rows);
