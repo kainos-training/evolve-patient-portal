@@ -15,7 +15,6 @@ exports.getListOfTasks = function(req, res) {
                     success: false
                 });
             } else {
-                console.log(rows);
                 res.status(200).send(rows);
             }
         });
