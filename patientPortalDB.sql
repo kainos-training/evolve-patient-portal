@@ -228,14 +228,9 @@ VALUES (1, 4, '2017-07-10', '2017-01-15'),
 INSERT INTO Task(taskName, userID, recievedDate, dueDate)
 VALUES('Pre-op questionnaire', 1, NOW(), (NOW() + INTERVAL 12 DAY)),
 ('Pre-op Assessment: Olanzapine', 1, (NOW() - INTERVAL 12 DAY), (NOW() - INTERVAL 2 DAY));
-INSERT INTO Task(taskName, userID, taskSummary, recievedDate, dueDate)
-<<<<<<< HEAD
-VALUES('Pre-op questionnaire', 1, 'Questionnaire to be filled out before surgery. Includes allergies and general health questions.', '2017-07-10', '2017-10-10'), 
-('Pre-op Assessment: Olanzapine', 1, 'Form used to assess your suitibility for Olanzapine which will be used post surgery.', '2017-06-15', '2017-12-23'),
-('Pre-op Assessment: Paracetamol', 1, 'Form used to assess your suitibility for Paracetamol which will be used post surgery.', NOW(), (NOW() + INTERVAL 12 DAY));
 
-=======
+INSERT INTO Task(taskName, userID, taskSummary, recievedDate, dueDate)
 VALUES('Pre-op questionnaire', 1, 'Questionnaire to be filled out before surgery. Includes allergies and general health questions.', (NOW() - INTERVAL 4 DAY), (NOW() + INTERVAL 18 DAY)), 
 ('Pre-op Assessment: Olanzapine', 1, 'Form used to assess your suitibility for Olanzapine which will be used post surgery.', (NOW() - INTERVAL 12 DAY), (NOW() - INTERVAL 2 DAY)),
 ('Pre-op Assessment: Paracetamol', 1, 'Form used to assess your suitibility for Paracetamol which will be used post surgery.', NOW(), (NOW() + INTERVAL 12 DAY));
->>>>>>> de001e37ef87d7d00f5fb99ef333368cd7fda219
+
