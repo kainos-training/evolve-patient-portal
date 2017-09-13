@@ -38,14 +38,11 @@ export class DataService {
             'userID': userID
         };
         const  options = {
-            header: new HttpHeaders().set('Content-Type','application/json'),
+            headers: new HttpHeaders().set('Content-Type','application/json'),
         };
         return this.http.post<Medication[]>('api/prescription/repeatedMedication',body,options);
     };
 
-    // public updatePrescriptionDate(medicationUserID){
-    //     const body
-    // }
 
     public getMedicationComments(medicationUserID) {
         const body = {
