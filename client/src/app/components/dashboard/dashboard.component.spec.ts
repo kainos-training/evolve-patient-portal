@@ -10,6 +10,8 @@ import {EllipsisPipe} from '../../utils/ellipsis.pipe';
 import {ModalModule} from 'ngx-bootstrap/modal';
 import {FormsModule} from '@angular/forms';
 import {BrowserModule} from '@angular/platform-browser';
+import {MyTasksComponent} from '../my-tasks/my-tasks.component';
+import {SideEffectsComponent} from '../side-effects/side-effects.component';
 
 describe('DashboardComponent', () => {
     let component: DashboardComponent;
@@ -27,7 +29,9 @@ describe('DashboardComponent', () => {
                 ReviewMedicationComponent,
                 Marker,
                 DirectionsRenderer,
-                NguiMapComponent
+                NguiMapComponent,
+                MyTasksComponent,
+                SideEffectsComponent
             ],
             providers: [],
             imports: [
