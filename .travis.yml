@@ -29,11 +29,8 @@ before_install:
   
 install:
     # Install Frontend Dependencies
-    - npm install -g angular-cli
-    - npm install -g karma
     - cd client
     - npm install
-    - ng build
     # Install Backend Dependencies
     - cd ..
     - cd server
@@ -47,5 +44,5 @@ script:
     # Backend build
     - cd ..
     - cd server
-    - npm run intTest -s && npm run unitTest -s,
+    - npm run intTest -s && npm run unitTest -s
     
