@@ -15,8 +15,10 @@ export class RepeatPrescriptionComponent implements OnInit {
 
     public dataService: DataService;
     public prescriptionList: Medication[];
+    public confirmedPrescriptionList: number[];
     public renewPrescriptionList: Medication[];
     public modalRef: BsModalRef;
+    public deliveryType: boolean;
     public collectionType = {
         status: null
     };
@@ -24,7 +26,8 @@ export class RepeatPrescriptionComponent implements OnInit {
     constructor(dataService: DataService, private modalService: BsModalService) {
         this.renewPrescriptionList = new Array();
         this.dataService = dataService;
-        
+        this.confirmedPrescriptionList = new Array();
+        this.deliveryType = false;
     }
 
     public addToList(medication: Medication) {
@@ -42,12 +45,23 @@ export class RepeatPrescriptionComponent implements OnInit {
 
     public requestPrescription(prescriptionList: Array<Medication>) {
         console.log(this.collectionType.status);
-        alert(prescriptionList[0].medicationUserID + " " + this.collectionType.status);
+        if(this.collectionType.status == "true") {
+            this.deliveryType = true;
+        } else {
+            this.deliveryType = false;
+        }
+
+        for (var i = 0; i < this.prescriptionList.length; i++) {
+            alert(prescriptionList[i].medicationUserID + " " + this.collectionType.status);
+            this.confirmedPrescriptionList.push(prescriptionList[i].medicationUserID);
+        }
+        console.log("Preparing request...")
+        this.dataService.updatePrescriptionDate(this.confirmedPrescriptionList, this.deliveryType);
+        console.log("Request sent with payload: " + this.confirmedPrescriptionList + " \nStatus: " + this.deliveryType)
     }
 
     public openModal(prescriptionList: Array<Medication>, template: TemplateRef<any>) {
         this.modalRef = this.modalService.show(template);
-
     }
 
     ngOnInit() {
