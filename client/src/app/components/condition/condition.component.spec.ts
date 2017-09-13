@@ -27,6 +27,7 @@ import { Marker, NguiMapComponent, DirectionsRenderer } from '@ngui/map/dist';
 import { APP_BASE_HREF } from '@angular/common';
 import { TooltipModule } from 'ngx-bootstrap/tooltip';
 import { MyTasksComponent } from '../my-tasks/my-tasks.component';
+import { SideEffectsComponent } from '../side-effects/side-effects.component';
 
 export class MockDataService {
     getCurrentConditions(userID: number) {
@@ -79,7 +80,8 @@ describe('ConditionComponent', () => {
                 Marker,
                 DirectionsRenderer,
                 NguiMapComponent,
-                MyTasksComponent
+                MyTasksComponent,
+                SideEffectsComponent
             ],
             providers: [
                 DataService,
