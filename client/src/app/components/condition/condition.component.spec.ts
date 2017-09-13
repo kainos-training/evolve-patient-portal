@@ -1,0 +1,180 @@
+import { async, ComponentFixture, TestBed, inject } from '@angular/core/testing';
+import { ConditionComponent } from './condition.component';
+import { Component, OnInit } from '@angular/core';
+import { Condition } from '../../class/Condition';
+import { User } from '../../class/User';
+import { SwitchBoardService } from '../../services/switch-board.service';
+import { Subscription } from 'rxjs/Rx';
+import { DataService } from '../../services/data.service';
+import { HttpClientModule, HttpClient, HttpHandler } from '@angular/common/http';
+import { CookieService } from 'ngx-cookie-service';
+import { routes } from '../../app.router';
+import { ModalModule } from 'ngx-bootstrap/modal';
+import { FormsModule } from '@angular/forms';
+import { BrowserModule } from '@angular/platform-browser';
+import { LoginComponent } from '../login/login.component';
+import { ErrorPageComponent } from '../error-page/error-page.component';
+import { DashboardComponent } from '../dashboard/dashboard.component';
+import { TopBarComponent } from '../top-bar/top-bar.component';
+import { LeftSideMenuComponent } from '../left-side-menu/left-side-menu.component';
+import { AppointmentComponent } from '../appointment/appointment.component';
+import { SettingNewPasswordComponent } from '../setting-new-password/setting-new-password.component';
+import { RequestPasswordResetComponent } from '../request-password-reset/request-password-reset.component';
+import { ReviewMedicationComponent } from '../review-medication/review-medication.component';
+import { MapViewComponent } from '../map-view/map-view.component';
+import { EllipsisPipe } from '../../utils/ellipsis.pipe';
+import { Marker, NguiMapComponent, DirectionsRenderer } from '@ngui/map/dist';
+import { APP_BASE_HREF } from '@angular/common';
+import { TooltipModule } from 'ngx-bootstrap/tooltip';
+import { MyTasksComponent } from '../my-tasks/my-tasks.component';
+import { RepeatPrescriptionComponent } from '../repeat-prescription/repeat-prescription.component';
+
+export class MockDataService {
+    getCurrentConditions(userID: number) {
+        let toReturn: Array<Condition> = [];
+        if (userID == 1) {
+            toReturn.push(new Condition(2, 2, 1, "Diabetes", "http://www.nhs.uk/Conditions/Diabetes/Pages/Diabetes.aspx", new Date(1998, 4, 3), null));
+            toReturn.push(new Condition(3, 4, 1, "Back Pain", "http://www.nhs.uk/conditions/back-pain/Pages/Introduction.aspx", new Date(2017, 8, 3), null));
+        }
+        return toReturn;
+    }
+    getPreviousConditions(userID: number) {
+        let toReturn: Array<Condition> = [];
+        if (userID == 1) {
+            toReturn.push(new Condition(1, 4, 1, "Back Pain", "http://www.nhs.uk/conditions/back-pain/Pages/Introduction.aspx", new Date(2017, 7, 10), new Date(2017, 1, 15)));
+        }
+        return toReturn;
+    }
+    getCurrentConditionsInvalid(userID: number) {
+        let toReturn: Array<Condition> = [];
+        if (userID == 1) {
+            toReturn.push(new Condition(2, 2, 1, "Diabetes", "http://www.nhs.uk/Conditions/Diabetes/Pages/Diabetes.aspx", new Date(1998, 13, 3), null));
+            toReturn.push(new Condition(3, 4, 1, "Back Pain", "http://www.nhs.uk/conditions/back-pain/Pages/Introduction.aspx", new Date(2017, 8, 3), null));
+        }
+        return toReturn;
+    }
+}
+
+describe('ConditionComponent', () => {
+    let component: ConditionComponent;
+    let fixture: ComponentFixture<ConditionComponent>;
+    let mockDataService: MockDataService;
+    let condition: Condition;
+
+    beforeEach(async(() => {
+        mockDataService = new MockDataService();
+        TestBed.configureTestingModule({
+            declarations: [
+                ConditionComponent,
+                LoginComponent,
+                ErrorPageComponent,
+                DashboardComponent,
+                TopBarComponent,
+                LeftSideMenuComponent,
+                AppointmentComponent,
+                SettingNewPasswordComponent,
+                RequestPasswordResetComponent,
+                ReviewMedicationComponent,
+                MapViewComponent,
+                EllipsisPipe,
+                Marker,
+                DirectionsRenderer,
+                NguiMapComponent,
+                MyTasksComponent,
+                RepeatPrescriptionComponent
+            ],
+            providers: [
+                DataService,
+                HttpClient,
+                HttpHandler,
+                HttpClientModule,
+                CookieService,
+                SwitchBoardService,
+                { provide: APP_BASE_HREF, useValue: '/' }
+            ],
+            imports: [
+                routes,
+                BrowserModule,
+                ModalModule.forRoot(),
+                FormsModule,
+                TooltipModule.forRoot()
+            ]
+        })
+            .compileComponents();
+    }));
+
+    it('should be created', async () => {
+        fixture = TestBed.createComponent(ConditionComponent);
+        component = fixture.componentInstance;
+        expect(component).toBeTruthy();
+    });
+
+    it('should have a defined data service', async () => {
+        fixture = TestBed.createComponent(ConditionComponent);
+        component = fixture.componentInstance;
+        expect(mockDataService).toBeDefined();
+    });
+
+    it('should return 0 if the userID is not recognisable in getCurrentConditions. [UserID: 0]', async () => {
+        fixture = TestBed.createComponent(ConditionComponent);
+        component = fixture.componentInstance;
+        let serviceResult = mockDataService.getCurrentConditions(0);
+        expect(serviceResult.length).toBe(0);
+    });
+
+    it('should return 0 if the userID is not recognisable in getpreviousConditions. [UserID: 0]', async () => {
+        fixture = TestBed.createComponent(ConditionComponent);
+        component = fixture.componentInstance;
+        let serviceResult = mockDataService.getPreviousConditions(0);
+        expect(serviceResult.length).toBe(0);
+    });
+
+    it('should return 0 if the userID is not recognisable in getCurrentConditions. [UserID: -0]', async () => {
+        fixture = TestBed.createComponent(ConditionComponent);
+        component = fixture.componentInstance;
+        let serviceResult = mockDataService.getCurrentConditions(0);
+        expect(serviceResult.length).toBe(0);
+    });
+
+    it('should return 0 if the userID is not recognisable in getpreviousConditions. [UserID: -0]', async () => {
+        fixture = TestBed.createComponent(ConditionComponent);
+        component = fixture.componentInstance;
+        let serviceResult = mockDataService.getPreviousConditions(-0);
+        expect(serviceResult.length).toBe(0);
+    });
+
+    it('should return a result set containing Diabetes in getCurrentConditions. [UserID: 1]', async () => {
+        fixture = TestBed.createComponent(ConditionComponent);
+        component = fixture.componentInstance;
+        let serviceResult = JSON.stringify(mockDataService.getCurrentConditions(1));
+        let status = serviceResult.includes('Diabetes');
+        expect(serviceResult.includes('Diabetes')).toBeTruthy();
+    });
+
+    it('should return a result set containing Back Pain in getPreviousConditions. [UserID: 1]', async () => {
+        fixture = TestBed.createComponent(ConditionComponent);
+        component = fixture.componentInstance;
+        let serviceResult = JSON.stringify(mockDataService.getCurrentConditions(1));
+        let status = serviceResult.includes('Back Pain');
+        expect(serviceResult.includes('Back Pain')).toBeTruthy();
+    });
+
+    it('should open the nhs page on Diabetes when the diabetes condition is clicked calling onNavigate.', async () => {
+        fixture = TestBed.createComponent(ConditionComponent);
+        component = fixture.componentInstance;
+        let condition = new Condition(2, 2, 1, "Diabetes", "http://www.nhs.uk/Conditions/Diabetes/Pages/Diabetes.aspx", new Date(1998, 4, 3), null);
+        component.onNavigate(condition);
+        expect(window.open).toHaveBeenCalled();
+        expect(window.open).toHaveBeenCalledWith("http://www.nhs.uk/Conditions/Diabetes/Pages/Diabetes.aspx");
+    });
+
+    it('should open a not found page if the clicked condition doesnt have a valid url when calling onNavigate', async () => {
+        fixture = TestBed.createComponent(ConditionComponent);
+        component = fixture.componentInstance;
+        let condition = new Condition(2, 2, 1, "Diabetes", "notalink", new Date(1998, 4, 3), null);
+        component.onNavigate(condition);
+        expect(window.open).toHaveBeenCalled();
+        expect(window.open).toHaveBeenCalledWith("http://localhost:9876/notalink");
+    });
+
+});

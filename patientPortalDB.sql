@@ -71,8 +71,8 @@ taskID int auto_increment not null,
 taskName varchar(60) not null,
 userID int not null,
 taskSummary varchar(100) not null,
-recievedDate date not null,
-dueDate date not null,
+recievedDate datetime not null,
+dueDate datetime not null,
 primary key (taskID),
 foreign key (userID) references User (userID)
 );
@@ -152,16 +152,6 @@ foreign key (clinicianID) references Clinician(clinicianID),
 foreign key (appointmentTypeID) references AppointmentType (appointmentTypeID)
 );
 
-CREATE TABLE IF NOT EXISTS Task (
-taskID int auto_increment not null,
-taskName varchar(60) not null,
-userID int not null,
-recievedDate date not null,
-dueDate date not null,
-primary key (taskID),
-foreign key (userID) references User (userID)
-);
-
 INSERT INTO GP (gpFullName, gpPracticeName, gpPracticeAddress)
 VALUES ('Dr. A Cheyne', 'Ormeau Park Surgery', '281 Ormeau Rd, Belfast BT7 3GG, UK'),
 ('Dr. E Glass', 'The Surgery', '1 Church St, Newtownards BT23 4FH'),
@@ -231,6 +221,7 @@ VALUES ("Hip Replacement", "http://www.nhs.uk/Conditions/Hip-replacement/Pages/I
 
 INSERT INTO UserCondition (userID, conditionID, startDate, endDate)
 VALUES (1, 4, '2017-07-10', '2017-01-15'),
+(1, 3, '2016-11-10', '2017-07-20'),
 (1, 2, '1998-04-03', null),
 (1, 4, '2017-08-03', null);
 
@@ -238,7 +229,13 @@ INSERT INTO Task(taskName, userID, recievedDate, dueDate)
 VALUES('Pre-op questionnaire', 1, NOW(), (NOW() + INTERVAL 12 DAY)),
 ('Pre-op Assessment: Olanzapine', 1, (NOW() - INTERVAL 12 DAY), (NOW() - INTERVAL 2 DAY));
 INSERT INTO Task(taskName, userID, taskSummary, recievedDate, dueDate)
+<<<<<<< HEAD
 VALUES('Pre-op questionnaire', 1, 'Questionnaire to be filled out before surgery. Includes allergies and general health questions.', '2017-07-10', '2017-10-10'), 
 ('Pre-op Assessment: Olanzapine', 1, 'Form used to assess your suitibility for Olanzapine which will be used post surgery.', '2017-06-15', '2017-12-23'),
 ('Pre-op Assessment: Paracetamol', 1, 'Form used to assess your suitibility for Paracetamol which will be used post surgery.', NOW(), (NOW() + INTERVAL 12 DAY));
 
+=======
+VALUES('Pre-op questionnaire', 1, 'Questionnaire to be filled out before surgery. Includes allergies and general health questions.', (NOW() - INTERVAL 4 DAY), (NOW() + INTERVAL 18 DAY)), 
+('Pre-op Assessment: Olanzapine', 1, 'Form used to assess your suitibility for Olanzapine which will be used post surgery.', (NOW() - INTERVAL 12 DAY), (NOW() - INTERVAL 2 DAY)),
+('Pre-op Assessment: Paracetamol', 1, 'Form used to assess your suitibility for Paracetamol which will be used post surgery.', NOW(), (NOW() + INTERVAL 12 DAY));
+>>>>>>> de001e37ef87d7d00f5fb99ef333368cd7fda219

@@ -1,3 +1,4 @@
+
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { DashboardComponent } from './dashboard.component';
 import { TopBarComponent } from '../top-bar/top-bar.component';
@@ -12,6 +13,8 @@ import { FormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { MyTasksComponent } from '../my-tasks/my-tasks.component';
+import {ConditionComponent} from '../condition/condition.component';
+import {TooltipModule} from 'ngx-bootstrap/tooltip';
 
 describe('DashboardComponent', () => {
     let component: DashboardComponent;
@@ -30,13 +33,15 @@ describe('DashboardComponent', () => {
                 Marker,
                 DirectionsRenderer,
                 NguiMapComponent,
+                ConditionComponent,
                 MyTasksComponent
             ],
             providers: [],
             imports: [
                 BrowserModule,
                 ModalModule.forRoot(),
-                FormsModule
+                FormsModule,
+                TooltipModule.forRoot()
             ],
             schemas: [CUSTOM_ELEMENTS_SCHEMA]
         })

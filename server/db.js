@@ -103,6 +103,34 @@ database.getRepeatedMedication = function(userID, callback) {
             callback(err, rows);
         });
     };
+
+database.getCurrentConditions = function(userID, callback) {
+    database.query(
+        "SELECT UC.userID, UC.conditionID, UC.userConditionID, UC.startDate, UC.endDate, " +
+        "C.conditionName, C.conditionLink " +
+        "FROM UserCondition AS UC INNER JOIN `Condition` AS C ON UC.conditionID = C.conditionID " +
+        "WHERE UC.userID = ? " +
+        "AND UC.endDate > NOW() " +
+        "OR UC.endDate IS NULL;",
+        [userID],
+        function(err, rows) {
+            callback(err, rows);
+        });
+};
+
+database.getPreviousConditions = function(userID, callback) {
+    database.query(
+        "SELECT UC.userID, UC.conditionID, UC.userConditionID, UC.startDate, UC.endDate, " +
+        "C.conditionName, C.conditionLink " +
+        "FROM UserCondition AS UC INNER JOIN `Condition` AS C ON UC.conditionID = C.conditionID " +
+        "WHERE UC.userID = ? " +
+        "AND UC.endDate < NOW();",
+        [userID],
+        function(err, rows) {
+            callback(err, rows);
+        });
+};
+
 database.getTaskList = function(userID, callback) {
     database.query(
         "SELECT taskName, taskSummary, recievedDate, dueDate FROM Task " +

@@ -1,0 +1,44 @@
+<body>
+    <div class="col-xs-12 col-sm-12 col-md-6 col-lg-4 " id="">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h1 class="panel-title" id="oneline-title">Conditions</h1>
+            </div>
+            <div class="panel-body" id="buttonDetails">
+                <div class="btn-group" data-toggle="buttons">
+                    <label class="btn btn-primary sharp" type="button" id="currentButton" tabindex="1" (click)="current = true">
+                            Current
+                        </label>
+                    <label class="btn btn-primary sharp" type="button" id="pastButton" tabindex="2" (click)="current = false">
+                            Past
+                        </label>
+                </div>
+                <div id="details">
+
+                    <table class="table table-hover">
+                        <tbody *ngIf="current">
+                            <tr *ngFor="let currentCondition of currentConditions">
+                                <td>
+                                    <button type="button" class="btn table-btn" (click)="onNavigate(currentCondition)" [tooltip]="'Click here for more information about ' + currentCondition.conditionName">
+                                    <span class="widget-title-txt">{{currentCondition.conditionName}}</span><br>
+                                    <span class="widget-body-txt">{{currentCondition.startDate|date:'dd/MM/yyyy'}} - Ongoing</span><br>
+                                </button>
+                                </td>
+                            </tr>
+                        </tbody>
+                        <tbody *ngIf="!current">
+                            <tr *ngFor="let previousCondition of previousConditions">
+                                <td>
+                                    <button type="button" class="btn table-btn" (click)="onNavigate(previousCondition)" [tooltip]="'Click here for more information about ' + previousCondition.conditionName">
+                                    <span class="widget-title-txt">{{previousCondition.conditionName}}</span><br>
+                                    <span class="widget-body-txt">{{previousCondition.startDate|date:'dd/MM/yyyy'}} - {{previousCondition.endDate|date:'dd/MM/yyyy'}}</span><br>
+                                </button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
