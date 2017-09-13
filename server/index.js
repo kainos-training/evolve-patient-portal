@@ -45,6 +45,7 @@ const protectedMedicationRoutes = require('./routes/protectedMedicationRoutes');
 const publicUserRoutes = require('./routes/publicUserRoutes');
 const publicUserInfoRoute = require('./routes/publicUserInfoRoute');
 const publicResetPasswordRoutes = require('./routes/publicResetPasswordRoutes');
+const protectedConditionRoutes = require('./routes/protectedConditionRoutes')
 const publicTaskRoutes = require('./routes/publicTaskRoutes');
 
 app.use('/password', publicResetPasswordRoutes);
@@ -53,6 +54,7 @@ app.use('/appointment', publicAppointmentRoutes);
 app.use('/medication', protectedMedicationRoutes);
 app.use('/userInfo', publicUserInfoRoute);
 app.use('/user', publicUserRoutes);
+app.use('/condition', protectedConditionRoutes);
 app.use('/task', publicTaskRoutes);
 
 var server = app.listen(app.get('port'));
