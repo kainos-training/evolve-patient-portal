@@ -7,6 +7,7 @@ export class Medication {
     endDate : Date;
     dosage : String;
 
+
     constructor(medicationUserID: number, medicationType: String, startDate: Date, endDate : Date, dosage : String) {
         this.medicationUserID = medicationUserID,
         this.medicationType = medicationType,

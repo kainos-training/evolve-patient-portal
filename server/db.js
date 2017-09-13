@@ -77,11 +77,11 @@ database.getMedicationHistory = function(medicationID, userID, callback) {
         });
 };
 
-database.updatePrescribedDate = function(medicationUserID, callback) {
+database.updatePrescribedDate = function(medicationUserID, deliveryStatus, callback) {
     database.query(
         "UPDATE medicationUser " +
-        "SET prescribedDate  = curdate() " +
-        "WHERE medicationUserID = ?;", [medicationUserID],
+        "SET prescribedDate  = curdate(), delivery = (?)", [deliveryStatus], +
+        "WHERE medicationUserID in (?);", [medicationUserID],
         function(err) {
             callback(err);
         });
@@ -102,7 +102,7 @@ database.getRepeatedMedication = function(userID, callback) {
         function(err, rows) {
             callback(err, rows);
         });
-    };
+};
 
 database.getCurrentConditions = function(userID, callback) {
     database.query(
@@ -111,8 +111,7 @@ database.getCurrentConditions = function(userID, callback) {
         "FROM UserCondition AS UC INNER JOIN `Condition` AS C ON UC.conditionID = C.conditionID " +
         "WHERE UC.userID = ? " +
         "AND UC.endDate > NOW() " +
-        "OR UC.endDate IS NULL;",
-        [userID],
+        "OR UC.endDate IS NULL;", [userID],
         function(err, rows) {
             callback(err, rows);
         });
@@ -124,19 +123,20 @@ database.getPreviousConditions = function(userID, callback) {
         "C.conditionName, C.conditionLink " +
         "FROM UserCondition AS UC INNER JOIN `Condition` AS C ON UC.conditionID = C.conditionID " +
         "WHERE UC.userID = ? " +
-        "AND UC.endDate < NOW();",
-        [userID],
+        "AND UC.endDate < NOW();", [userID],
         function(err, rows) {
             callback(err, rows);
         });
 };
+
+
 
 database.getTaskList = function(userID, callback) {
     database.query(
         "SELECT taskName, taskSummary, recievedDate, dueDate FROM Task " +
         "WHERE userID = ? " +
         "AND dueDate > NOW() " +
-        "ORDER BY dueDate;" , [userID],
+        "ORDER BY dueDate;", [userID],
         function(err, rows) {
             callback(err, rows);
         });

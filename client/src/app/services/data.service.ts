@@ -45,6 +45,23 @@ export class DataService {
         return this.http.post<Medication[]>('api/prescription/repeatedMedication',body,options);
     };
 
+    public updatePrescriptionDate(medicationUserIDs : number[], deliveryStatus: boolean){
+        const body = {
+            medicationUserIDs: '',
+            deliveryStatus: deliveryStatus
+            //var medicationUserID: var[] = medicationUserID;
+        };
+        console.log(body);
+        for(var i = 0; i < medicationUserIDs.length; i++) {
+            body.medicationUserIDs += medicationUserIDs[i] + ',';
+        }
+        body.medicationUserIDs = body.medicationUserIDs.substring(0, body.medicationUserIDs.length-1);
+        const options = {
+            headers: new HttpHeaders().set('Content-Type', 'application/json'),
+        };
+        return this.http.post<Medication[]>('/prescription/updatePrescribedDate',body,options);
+    };
+
     public getTaskList(userID) {
         const body = {
             "userID": userID

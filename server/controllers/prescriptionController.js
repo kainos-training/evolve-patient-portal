@@ -2,14 +2,15 @@ const db = require('../db');
 const request = require('request');
 
 exports.updatePrescriptionDate = function(req, res) {
-    const medicationUserID = req.body.medicationUserID.trim();
-
-    if (medicationUserID == null) {
+    const medicationUserIDs = req.body.medicationUserIDs;
+    const deliveryStatus = req.body.deliveryStatus;
+    console.log(medicationUserIDs);
+    if (medicationUserIDs == null || deliveryStatus == null) {
         res.status(400).json({
             success: false
         });
     } else {
-        db.updatePrescribedDate(medicationUserID, function(err) {
+        db.updatePrescribedDate(medicationUserIDs, deliveryStatus, function(err) {
             if (err) {
                 res.status(400).json({
                     success: false
@@ -18,11 +19,11 @@ exports.updatePrescriptionDate = function(req, res) {
                 res.status(200).json({
                     success: true
                 });
-
             }
         });
     }
 };
+
 
 exports.repeatedMedication = function(req, res) {
     const userID = req.body.userID
