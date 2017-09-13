@@ -52,8 +52,13 @@
                 </div>
             </form>
         </div>
-        <div class="map-container">
-            <evolve-map-view [userLocation]="userLocation" [departmentAddress]="focusedAppointment.locationAddress"></evolve-map-view>
+        <input type="submit" *ngIf="userLocation" [attr.data-expanded]="focusedAppointment.showGoogleMap" (click)="toggle('showGoogleMap')" class="btn btn-success btn-sm btn-block" value="{{!!focusedAppointment.showGoogleMap ? 'Collapse' : 'Expand'}} Google map" />
+        <div class="map-container" *ngIf="userLocation">
+            <evolve-map-view [userLocation]="userLocation" [hidden]="!focusedAppointment.showGoogleMap" [departmentAddress]="focusedAppointment.locationAddress"></evolve-map-view>
+        </div>
+        <div class="local-map-container" *ngIf="mapPath">
+            <input type="submit" [attr.data-expanded]="focusedAppointment.showLocalMap" (click)="toggle('showLocalMap')" class="btn btn-success btn-sm btn-block" value="{{!!focusedAppointment.showLocalMap ? 'Collapse' : 'Expand'}} hospital map" />
+            <img [hidden]="!focusedAppointment.showLocalMap" [src]=mapPath />
         </div>
     </div>
 </ng-template>

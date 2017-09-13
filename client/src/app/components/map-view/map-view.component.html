@@ -1,8 +1,8 @@
 <div *ngIf="center">
-    <ngui-map center="userLocation" (zoom_changed)="onMapZoomChanged($event)" (center_changed)="onMapCenterChanged($event)">
-        <marker [position]="userLatLng" (initialized$)="onMarkerInit($event)" label="A"></marker>
-        <marker [position]="departmentAddress" label="B" (initialized$)="onMarkerInit($event)"></marker>
-        <directions-renderer [suppressMarkers]="true" [draggable]="true" panel="#directionsPanel" (directions_changed)="directionsChanged()" [directions-request]="directions"></directions-renderer>
+    <ngui-map center="userLocation">
+        <marker [position]="userLatLng" label="A"></marker>
+        <marker [position]="departmentAddress" label="B"></marker>
+        <directions-renderer [suppressMarkers]="true" [draggable]="true" panel="#directionsPanel" [directions-request]="directions"></directions-renderer>
         <div *ngIf="false" id="directionsPanel"></div>
     </ngui-map>
 </div>
