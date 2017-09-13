@@ -38,10 +38,11 @@ describe('RepeatPrescriptionComponent', () => {
     beforeEach(() => {
         fixture = TestBed.createComponent(RepeatPrescriptionComponent);
         component = fixture.componentInstance;
-        fixture.detectChanges();
     });
 
-    // it('should be created', () => {
-    //     expect(component).toBeTruthy();
-    // });
+    it('should be created', () => {
+        fixture = TestBed.createComponent(RepeatPrescriptionComponent);
+        component = fixture.componentInstance;
+        expect(component).toBeTruthy();
+    });
 });

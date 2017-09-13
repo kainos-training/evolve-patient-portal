@@ -4,6 +4,7 @@ import { Medication } from '../../class/Medication';
 import { ToolTipModule } from 'angular2-tooltip';
 import { BsModalService } from 'ngx-bootstrap/modal';
 import { BsModalRef } from 'ngx-bootstrap/modal/modal-options.class';
+import { Observable } from 'rxjs/Observable';
 
 @Component({
     selector: 'evolve-repeat-prescription',
@@ -23,9 +24,7 @@ export class RepeatPrescriptionComponent implements OnInit {
     constructor(dataService: DataService, private modalService: BsModalService) {
         this.renewPrescriptionList = new Array();
         this.dataService = dataService;
-        this.dataService.getRepeatedMedication(1).subscribe(
-            res => this.prescriptionList = res
-        );
+        
     }
 
     public addToList(medication: Medication) {
@@ -52,5 +51,8 @@ export class RepeatPrescriptionComponent implements OnInit {
     }
 
     ngOnInit() {
+        this.dataService.getRepeatedMedication(1).subscribe(
+            res => this.prescriptionList = res
+        );
     }
 }
