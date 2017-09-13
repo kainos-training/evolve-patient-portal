@@ -101,11 +101,21 @@ foreign key (medicationUserID) references MedicationUser (medicationUserID)
 
 CREATE TABLE IF NOT EXISTS Clinician (
 clinicianID int auto_increment not null,
-title enum('Mr', 'Mrs', 'Miss', 'Ms', 'Dr') default 'Dr',
+title enum('Mr', 'Mrs', 'Miss', 'Ms', 'Dr'),
 firstName varchar(60) not null,
 lastName varchar(60) not null,
 jobTitle varchar(30) not null,
+email varchar(100) not null,
 primary key (clinicianID)
+);
+
+CREATE TABLE IF NOT EXISTS UserClinician (
+userClinicianID int auto_increment not null,
+userID int not null,
+clinicianID int not null,
+primary key (userClinicianID),
+foreign key (userID) references `User` (userID),
+foreign key (clinicianID) references Clinician(clinicianID)
 );
 
 CREATE TABLE IF NOT EXISTS Location (
@@ -150,6 +160,15 @@ foreign key (clinicianID) references Clinician(clinicianID),
 foreign key (appointmentTypeID) references AppointmentType (appointmentTypeID)
 );
 
+CREATE TABLE IF NOT EXISTS AppointmentQuery (
+appointmentQueryID int auto_increment not null,
+appointmentID int not null,
+querySubject varchar(100) not null,
+queryText varchar(350) not null,
+primary key (appointmentQueryID),
+foreign key (appointmentID) references Appointment(appointmentID)
+);
+
 INSERT INTO GP (gpFullName, gpPracticeName, gpPracticeAddress)
 VALUES ('Dr. A Cheyne', 'Ormeau Park Surgery', '281 Ormeau Rd, Belfast BT7 3GG, UK'),
 ('Dr. E Glass', 'The Surgery', '1 Church St, Newtownards BT23 4FH'),
@@ -185,8 +204,16 @@ INSERT INTO MedicationUserComment(medicationUserID, commentText, deleted)
 VALUES (1, 'Not feeling the benefit after two weeks', false), (2, 'Helping to minimise pain but still exists', false),
 (3, 'Not helping with pain, possibly need stronger medication', false), (4, 'Feeling better mentally', false);
 
-INSERT INTO Clinician (title, firstName, lastName, jobTitle)
-VALUES ('Dr', 'Alex', 'Hyndman', 'Consultant'), ('Dr', 'John', 'Adams', 'Oncologist'), ('Dr', 'Karen', 'Reid', 'Obstetrician');
+INSERT INTO Clinician (title, firstName, lastName, jobTitle, email)
+VALUES ('Dr', 'Alex', 'Hyndman', 'Consultant', 'a.hyndman@hospital.com'), 
+('Dr', 'John', 'Adams', 'Oncologist', 'j.adams@hospital.com'), 
+('Dr', 'Karen', 'Reid', 'Obstetrician', 'k.reid@hospital.com'),
+('Dr', 'Sally', 'Jones', 'Consultant', 's.jones@hospital.com'),
+('Dr', 'Ian', 'Stokes', 'Clinical Nurse Specialist', 'i.stokes@hospital.com'),
+(NULL, 'Clinic', 'Administration', 'Admin team', 'c.administration@hospital.com');
+
+INSERT INTO UserClinician (userID, clinicianID)
+VALUES (1, 4), (1, 5), (1,6);
 
 INSERT INTO Location (locationAddress)
 VALUES ('Royal Victoria Hospital, 274 Grosvenor Rd, Belfast, BT12 6BA'), 
@@ -227,3 +254,7 @@ INSERT INTO Task(taskName, userID, taskSummary, recievedDate, dueDate)
 VALUES('Pre-op questionnaire', 1, 'Questionnaire to be filled out before surgery. Includes allergies and general health questions.', (NOW() - INTERVAL 4 DAY), (NOW() + INTERVAL 18 DAY)), 
 ('Pre-op Assessment: Olanzapine', 1, 'Form used to assess your suitibility for Olanzapine which will be used post surgery.', (NOW() - INTERVAL 12 DAY), (NOW() - INTERVAL 2 DAY)),
 ('Pre-op Assessment: Paracetamol', 1, 'Form used to assess your suitibility for Paracetamol which will be used post surgery.', NOW(), (NOW() + INTERVAL 12 DAY));
+
+INSERT INTO AppointmentQuery(appointmentID, querySubject, queryText)
+VALUES (1, 'Pre-appointment instructions', 'Do I need to fast before coming to this appointment?');
+
