@@ -1,26 +1,25 @@
-import { Component, TemplateRef, OnInit } from '@angular/core';
-import { DataService } from '../../services/data.service';
-import { Medication } from '../../class/Medication';
-import { BsModalService } from 'ngx-bootstrap/modal';
-import { BsModalRef } from 'ngx-bootstrap/modal/modal-options.class';
-import { Observable } from 'rxjs/Observable';
-import { MedicationComment } from '../../class/MedicationComment';
-import { MedicationDescription } from '../../class/MedicationDescription';
-import { Sanitizer } from '@angular/core';
-import { SecurityContext } from '@angular/core';
-import { User } from '../../class/User';
-import { SwitchBoardService } from '../../services/switch-board.service';
-import { Subscription } from 'rxjs/Rx';
+import {Component, TemplateRef, OnInit, OnDestroy} from '@angular/core';
+import {DataService} from '../../services/data.service';
+import {Medication} from '../../class/Medication';
+import {BsModalService} from 'ngx-bootstrap/modal';
+import {BsModalRef} from 'ngx-bootstrap/modal/modal-options.class';
+import {MedicationComment} from '../../class/MedicationComment';
+import {MedicationDescription} from '../../class/MedicationDescription';
+import {Sanitizer} from '@angular/core';
+import {User} from '../../class/User';
+import {SwitchBoardService} from '../../services/switch-board.service';
+import {Subscription} from 'rxjs/Rx';
 
 @Component({
     selector: 'evolve-review-medication',
     templateUrl: './review-medication.component.html',
     styleUrls: ['./review-medication.component.css']
 })
-export class ReviewMedicationComponent implements OnInit{
+export class ReviewMedicationComponent implements OnInit, OnDestroy {
     public selectedMedication: Medication;
     public selectedMedicationComments: MedicationComment[];
-    public selectedMedicationHistory: Medication[]
+    public selectedRemovedMedicationComments: MedicationComment[];
+    public selectedMedicationHistory: Medication[];
     public modalRef: BsModalRef;
     public medicationsList: Medication[];
     public newComment: string;
@@ -37,17 +36,24 @@ export class ReviewMedicationComponent implements OnInit{
         let description = this.dataService.getWikiSummary(meds.medicationName);
 
         this.dataService.getMedicationComments(this.selectedMedication.medicationUserID).subscribe(
-            res => this.selectedMedicationComments = res
+            res => this.selectedMedicationComments = res,
+            err => console.log(err)
+        );
+        this.dataService.getRemovedMedicationComments(this.selectedMedication.medicationUserID).subscribe(
+            res => this.selectedRemovedMedicationComments = res,
+            err => console.log(err)
         );
 
-        if(this.user)
-            if(this.user.userID)
+        if (this.user)
+            if (this.user.userID)
                 this.dataService.getMedicationHistory(this.selectedMedication.medicationID, this.user.userID).subscribe(
                     res => this.selectedMedicationHistory = res
                 );
 
         this.dataService.getWikiSummary(meds.medicationName).subscribe(
-            res => { this.description = res; }
+            res => {
+                this.description = res;
+            }
         );
     }
 
@@ -68,6 +74,10 @@ export class ReviewMedicationComponent implements OnInit{
         this.dataService.getMedicationComments(this.selectedMedication.medicationUserID).subscribe(
             res => this.selectedMedicationComments = res
         );
+        this.dataService.getRemovedMedicationComments(this.selectedMedication.medicationUserID).subscribe(
+            res => this.selectedRemovedMedicationComments = res,
+            err => console.log(err)
+        );
     }
 
     public toggleCollapse() {
@@ -75,15 +85,23 @@ export class ReviewMedicationComponent implements OnInit{
     }
 
     constructor(private dataService: DataService, private modalService: BsModalService, private switchboard: SwitchBoardService) {
-        this.switchboard.user$.subscribe(usr => this.user = usr);
+        this.userSubscription = this.switchboard.user$.subscribe(user => {
+            this.user = user;
+        });
         this.dataService.getUserFromCookie(this.user);
     }
 
     ngOnInit(): void {
-        if(this.user)
-            if(this.user.userID)
+        if (this.user)
+            if (this.user.userID)
                 this.dataService.getMedicationList(this.user.userID).subscribe(
                     res => this.medicationsList = res
-                )
+                );
+    }
+
+    ngOnDestroy(): void {
+        if (this.userSubscription) {
+            this.userSubscription.unsubscribe();
+        }
     }
 }

@@ -14,7 +14,7 @@
     }
 
     .linkItem {
-        font-size: 18px;
+        font-size: 15pt;
     }
 
     .linkItem::before {
@@ -43,7 +43,7 @@
     }
 
     .linkItem {
-        font-size: 23px;
+        font-size: 15pt;
     }
 
     .linkItem::before {
@@ -60,7 +60,7 @@
     }
 
     .linkItem {
-        font-size: 23px;
+        font-size: 16pt;
     }
 
     .linkItem::before {
@@ -77,7 +77,7 @@
     }
 
     .linkItem {
-        font-size: 23px;
+        font-size: 17pt;
     }
 
     .linkItem::before {
@@ -142,7 +142,7 @@
 }
 
 .linkList {
-    width: 100%;
+    width: 107%;
     padding: 0;
     margin: 0;
 }
@@ -151,12 +151,10 @@
     color: white;
     cursor: pointer;
     margin-left: 0;
-    margin-right: 20px;
     padding-left: 15px;
     padding-top: 15px;
     padding-bottom: 15px;
     box-sizing: border-box;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.25);
 }
 
 .linkItem:hover {
@@ -165,9 +163,7 @@
 }
 
 .linkItem::before {
-    content: "";
     display: block;
-    background-image: url("../../../assets/whitePillIcon.png");
     background-repeat: no-repeat;
     background-size: cover;
     float: left;

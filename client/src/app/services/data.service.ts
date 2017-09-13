@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Medication } from '../class/Medication';
+import { Task } from '../class/Task';
 import { Observable } from 'rxjs/Observable';
 import { MedicationComment } from '../class/MedicationComment';
 import { MedicationDescription } from '../class/MedicationDescription';
@@ -33,6 +34,20 @@ export class DataService {
         return this.http.post<Medication[]>('api/medication/list', body, options);
     };
 
+    public getTaskList(userID) {
+        const body = {
+            "userID": userID
+        };
+        const options = {
+            headers: new HttpHeaders().set('Content-Type', 'application/json'),
+        };
+         var tmp = this.http.post<Task[]>('api/task/list', body, options);
+         var str;
+         tmp.subscribe(blah => str = blah[0].taskName);
+        console.log(str);
+         return tmp;
+    };
+
     public getMedicationComments(medicationUserID) {
         const body = {
             'medicationUserID': medicationUserID
@@ -42,6 +57,17 @@ export class DataService {
         };
 
         return this.http.post<MedicationComment[]>('api/medication/comments/list', body, options);
+    }
+
+    public getRemovedMedicationComments(medicationUserID) {
+        const body = {
+            "medicationUserID": medicationUserID
+        };
+        const options = {
+            headers: new HttpHeaders().set('Content-Type', 'application/json'),
+        };
+
+        return this.http.post<MedicationComment[]>('api/medication/comments/removedList', body, options);
     }
 
     public getMedicationHistory(medicationID, userID) {

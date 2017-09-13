@@ -119,6 +119,9 @@
 #evolve-logo {
     float: left;
     border: none;
+    width: 200px;
+    height: 40px;
+    position: absolute;
 }
 
 h4 {
