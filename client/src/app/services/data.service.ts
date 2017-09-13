@@ -33,6 +33,20 @@ export class DataService {
         return this.http.post<Medication[]>('api/medication/list', body, options);
     };
 
+    public getRepeatedMedication(userID){
+        const body = {
+            'userID': userID
+        };
+        const  options = {
+            header: new HttpHeaders().set('Content-Type','application/json'),
+        };
+        return this.http.post<Medication[]>('api/prescription/repeatedMedication',body,options);
+    };
+
+    // public updatePrescriptionDate(medicationUserID){
+    //     const body
+    // }
+
     public getMedicationComments(medicationUserID) {
         const body = {
             'medicationUserID': medicationUserID
@@ -190,13 +204,13 @@ export class DataService {
             this.cookieService.set(this.cookieName, JSON.stringify(cookieJSON));
         }
     }
-    
+
     public getCookie(): string {
         const cookieJSON = JSON.parse(this.cookieService.get(this.cookieName));
         var userID = cookieJSON.userID;
         return userID;
     }
-    
+
     public removeCookie(): void {
         this.cookieService.delete(this.cookieName);
     }

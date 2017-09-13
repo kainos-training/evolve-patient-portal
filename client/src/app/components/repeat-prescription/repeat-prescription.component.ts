@@ -20,18 +20,18 @@ export class RepeatPrescriptionComponent implements OnInit {
     constructor(dataService: DataService, private modalService: BsModalService) {
         this.renewPrescriptionList = new Array();
         this.dataService = dataService;
-        this.dataService.getMedicationList(1).subscribe(
+        this.dataService.getRepeatedMedication(1).subscribe(
             res => this.prescriptionList = res
         );
     }
 
     public addToList(medication: Medication) {
-        if (this.renewPrescriptionList.length > 0 && this.renewPrescriptionList.find(p => p.medicationName == medication.medicationName)) 
+        if (this.renewPrescriptionList.length > 0 && this.renewPrescriptionList.find(p => p.medicationName == medication.medicationName))
         {
             alert("ALREADY REQUESTED!");
         } else {
             this.renewPrescriptionList.push(medication);
-        } 
+        }
 }
 
     public removeFromList(medication: Medication) {
@@ -51,4 +51,3 @@ export class RepeatPrescriptionComponent implements OnInit {
     ngOnInit() {
     }
 }
-

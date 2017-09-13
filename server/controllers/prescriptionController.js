@@ -25,8 +25,7 @@ exports.updatePrescriptionDate = function(req, res) {
 };
 
 exports.repeatedMedication = function(req, res) {
-    const userID = req.params.userID;
-    console.log(req.params.userID);
+    const userID = req.body.userID
     if (userID == null) {
         res.status(400).json({
             success: false

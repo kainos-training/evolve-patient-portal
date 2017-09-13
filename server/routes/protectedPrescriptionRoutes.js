@@ -6,7 +6,7 @@ protectedPrescriptionRoutes.post('/updatePrescribedDate', function(req, res) {
     return prescriptionController.updatePrescriptionDate(req, res);
 });
 
-protectedPrescriptionRoutes.get('/repeatedMedication/:userID', function(req, res) {
+protectedPrescriptionRoutes.post('/repeatedMedication', function(req, res) {
     return prescriptionController.repeatedMedication(req, res);
 });
 
