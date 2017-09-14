@@ -1,4 +1,5 @@
 
+import { Component, OnDestroy, OnInit, TemplateRef } from '@angular/core';
 import { DataService } from '../../services/data.service';
 import { Medication } from '../../class/Medication';
 import { BsModalService } from 'ngx-bootstrap/modal';
@@ -7,19 +8,20 @@ import { Observable } from 'rxjs/Observable';
 import { MedicationComment } from '../../class/MedicationComment';
 import { MedicationDescription } from '../../class/MedicationDescription';
 import { Sanitizer } from '@angular/core';
-import { SecurityContext } from '@angular/core';
 import { RepeatPrescriptionComponent } from  '../repeat-prescription/repeat-prescription.component';
 import { User } from '../../class/User';
 import { SwitchBoardService } from '../../services/switch-board.service';
 import { Subscription } from 'rxjs/Rx';
-import {Component, TemplateRef, OnInit, OnDestroy} from '@angular/core';
-
+import { SecurityContext, SimpleChanges, Input } from '@angular/core';
 @Component({
     selector: 'evolve-review-medication',
     templateUrl: './review-medication.component.html',
     styleUrls: ['./review-medication.component.css']
 })
 export class ReviewMedicationComponent implements OnInit, OnDestroy {
+
+    @Input() dependantID;
+
     public selectedMedication: Medication;
     public selectedMedicationComments: MedicationComment[];
     public selectedRemovedMedicationComments: MedicationComment[];
@@ -32,13 +34,16 @@ export class ReviewMedicationComponent implements OnInit, OnDestroy {
     public collapsedDescription: boolean;
     private user: User = new User();
     private userSubscription: Subscription;
+    private subCenter: Subscription;
 
     public openModal(meds: Medication, template: TemplateRef<any>) {
         this.collapsedDescription = true;
         this.selectedMedication = meds;
         this.modalRef = this.modalService.show(template);
         let description = this.dataService.getWikiSummary(meds.medicationName);
-
+        
+        const id = this.dependantID || this.user.userID; 
+        
         this.dataService.getMedicationComments(this.selectedMedication.medicationUserID).subscribe(
             res => this.selectedMedicationComments = res,
             err => console.log(err)
@@ -48,11 +53,14 @@ export class ReviewMedicationComponent implements OnInit, OnDestroy {
             err => console.log(err)
         );
 
-        if (this.user)
-            if (this.user.userID)
-                this.dataService.getMedicationHistory(this.selectedMedication.medicationID, this.user.userID).subscribe(
-                    res => this.selectedMedicationHistory = res
+        if(this.user) {
+            if(this.user.userID) {
+                this.dataService.getMedicationHistory(this.selectedMedication.medicationID, id).subscribe(
+                    res => this.selectedMedicationHistory = res,
+                    err => console.log(err)
                 );
+            }
+        }
 
         this.dataService.getWikiSummary(meds.medicationName).subscribe(
             res => {
@@ -95,12 +103,25 @@ export class ReviewMedicationComponent implements OnInit, OnDestroy {
         this.dataService.getUserFromCookie(this.user);
     }
 
-    ngOnInit(): void {
-        if (this.user)
-            if (this.user.userID)
-                this.dataService.getMedicationList(this.user.userID).subscribe(
-                    res => this.medicationsList = res
-                );
+    ngOnInit() {
+        this.getMedicationsForUser();
+    }
+
+    getMedicationsForUser() {
+        this.dataService.getUserFromCookie(this.user);
+        if(this.user) {
+            // uses dependantID if available, else defaults to logged in use ID
+            const id = this.dependantID || this.user.userID; 
+
+            // get the data from the component
+            this.dataService.getMedicationList(id).subscribe(
+                res => this.medicationsList = res
+            );
+        }
+    }
+
+    ngOnChanges(changes: SimpleChanges) {
+        this.getMedicationsForUser();
     }
 
     ngOnDestroy(): void {

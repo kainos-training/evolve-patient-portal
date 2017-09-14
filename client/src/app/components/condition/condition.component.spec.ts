@@ -1,3 +1,4 @@
+
 import { async, ComponentFixture, TestBed, inject } from '@angular/core/testing';
 import { ConditionComponent } from './condition.component';
 import { Component, OnInit } from '@angular/core';
@@ -28,6 +29,9 @@ import { APP_BASE_HREF } from '@angular/common';
 import { TooltipModule } from 'ngx-bootstrap/tooltip';
 import { MyTasksComponent } from '../my-tasks/my-tasks.component';
 import { RepeatPrescriptionComponent } from '../repeat-prescription/repeat-prescription.component';
+import {SecondaryInfoHeaderComponent} from '../secondary-info-header/secondary-info-header.component';
+import {PersonalInfoHeaderComponent} from '../personal-info-header/personal-info-header.component';
+import {DependantViewComponent} from '../dependant-view/dependant-view.component';
 
 export class MockDataService {
     getCurrentConditions(userID: number) {
@@ -81,7 +85,11 @@ describe('ConditionComponent', () => {
                 DirectionsRenderer,
                 NguiMapComponent,
                 MyTasksComponent,
-                RepeatPrescriptionComponent
+                RepeatPrescriptionComponent,
+                PersonalInfoHeaderComponent,
+                SecondaryInfoHeaderComponent,
+                DependantViewComponent,
+                ConditionComponent
             ],
             providers: [
                 DataService,

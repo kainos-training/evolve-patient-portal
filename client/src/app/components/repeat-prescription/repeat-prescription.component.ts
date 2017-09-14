@@ -20,6 +20,7 @@ export class RepeatPrescriptionComponent implements OnInit {
     public renewPrescriptionList: Medication[];
     public modalRef: BsModalRef;
     public deliveryType: boolean;
+    public warning: boolean;
     public collectionType = {
         status: null
     };
@@ -29,11 +30,13 @@ export class RepeatPrescriptionComponent implements OnInit {
         this.dataService = dataService;
         this.confirmedPrescriptionList = new Array();
         this.deliveryType = false;
+        this.warning = false;
     }
 
     public addToList(medication: Medication) {
         if (this.renewPrescriptionList.length > 0 && this.renewPrescriptionList.find(p => p.medicationName == medication.medicationName)) {
-            alert("ALREADY REQUESTED!");
+            //alert("ALREADY REQUESTED!");
+            this.warning = true;
         } else {
             this.renewPrescriptionList.push(medication);
         }
@@ -63,6 +66,9 @@ export class RepeatPrescriptionComponent implements OnInit {
         this.modalRef = this.modalService.show(template);
     }
 
+    public closeAlert() {
+        this.warning = false;
+    }
     ngOnInit() {
         this.userID = this.dataService.getCookie();
         this.dataService.getRepeatedMedication(this.userID).subscribe(

@@ -6,10 +6,10 @@
             </div>
             <div class="panel-body" id="buttonDetails">
                 <div class="btn-group" data-toggle="buttons">
-                    <label class="btn btn-primary sharp" type="button" id="currentButton" tabindex="1" (click)="current = true">
+                    <label class="btn btn-primary sharp" type="button" id="currentButton" tabindex="1" (click)="current = true" [ngClass]="{ 'selected': current == true }">
                             Current
                         </label>
-                    <label class="btn btn-primary sharp" type="button" id="pastButton" tabindex="2" (click)="current = false">
+                    <label class="btn btn-primary sharp" type="button" id="pastButton" tabindex="2" (click)="current = false" [ngClass]="{ 'selected': current == false }">
                             Past
                         </label>
                 </div>

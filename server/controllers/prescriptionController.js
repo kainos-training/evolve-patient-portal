@@ -10,6 +10,7 @@ exports.updatePrescriptionDate = function(req, res) {
         });
     } else {
         db.updatePrescribedDate(medicationUserIDs, deliveryStatus, function(err) {
+            console.log(medicationUserIDs);
             if (err) {
                 res.status(400).json({
                     success: false
