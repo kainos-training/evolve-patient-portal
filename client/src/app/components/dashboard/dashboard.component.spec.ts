@@ -1,3 +1,4 @@
+import { TimelineComponent } from "../timeline/timeline.component";
 import { SecondaryInfoHeaderComponent } from '../secondary-info-header/secondary-info-header.component';
 import { NavigationOption, NavigationOptionEnum } from '../../app.globals';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -25,6 +26,7 @@ import { ConditionComponent } from '../condition/condition.component';
 import { TooltipModule } from 'ngx-bootstrap/tooltip';
 import { MyTasksComponent } from '../my-tasks/my-tasks.component';
 import { DependantViewComponent } from '../dependant-view/dependant-view.component';
+import { SideEffectsComponent } from '../side-effects/side-effects.component';
 
 describe('DashboardComponent', () => {
     let component: DashboardComponent;
@@ -45,6 +47,10 @@ describe('DashboardComponent', () => {
                 Marker,
                 DirectionsRenderer,
                 NguiMapComponent,
+                TimelineComponent,
+                ConditionComponent,
+                MyTasksComponent,
+                SideEffectsComponent,
                 DependantViewComponent,
                 PersonalInfoHeaderComponent,
                 SecondaryInfoHeaderComponent,

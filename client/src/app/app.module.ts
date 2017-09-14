@@ -1,3 +1,4 @@
+import { SideEffectsComponent } from './components/side-effects/side-effects.component';
 import { DependantViewComponent } from './components/dependant-view/dependant-view.component';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
@@ -33,6 +34,8 @@ import { ReviewMedicationComponent } from './components/review-medication/review
 import { ConditionComponent } from './components/condition/condition.component';
 import { TooltipModule } from 'ngx-bootstrap/tooltip';
 import { MyTasksComponent } from './components/my-tasks/my-tasks.component';
+import { QuestionnaireComponent } from './components/questionnaire/questionnaire.component';
+import { TimelineComponent } from './components/timeline/timeline.component';
 
 @NgModule({
     declarations: [
@@ -48,11 +51,15 @@ import { MyTasksComponent } from './components/my-tasks/my-tasks.component';
         SettingNewPasswordComponent,
         TopBarComponent,
         EllipsisPipe,
+        QuestionnaireComponent,
+        TimelineComponent,
+        ConditionComponent,
+        SideEffectsComponent,
+        ConditionComponent,
+        MyTasksComponent,
         PersonalInfoHeaderComponent,
         SecondaryInfoHeaderComponent,
-        DependantViewComponent,
-        MyTasksComponent,
-        ConditionComponent
+        DependantViewComponent
     ],
     imports: [
         BrowserModule,

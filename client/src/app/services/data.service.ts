@@ -12,7 +12,10 @@ import { Router } from '@angular/router';
 import { Appointment } from '../class/Appointment';
 import { AppointmentFurtherInfo } from '../class/AppointmentFurtherInfo';
 import { User } from '../class/User';
+import { TimelineAppointment } from "../class/TimelineAppointment";
+import { SideEffect } from '../class/SideEffect';
 import { Condition } from '../class/Condition';
+import { AppointmentCount } from '../class/AppointmentCount';
 
 @Injectable()
 export class DataService {
@@ -28,6 +31,42 @@ export class DataService {
         var token = this.getTokenFromCookie();
         return headers.append('x-access-token', token );
     }
+
+    public getTimelineAppointments(userID,intervalBefore,intervalAfter){
+        const body = {
+            'userID' : userID,
+            'intervalBefore' : intervalBefore,
+            'intervalAfter' : intervalAfter
+        };
+        const options = {
+            headers: new HttpHeaders().set('Content-Type', 'application/json'),
+        };
+
+        return this.http.post<TimelineAppointment[]>('api/timeline/getTimelineAppointments', body, options);
+    }
+
+    public countTimelineAppointmentFuture(appCount, userID){
+        const body = {
+            'appCount':appCount,
+            'userID':userID
+             };
+        const options = {
+            headers: new HttpHeaders().set('Content-Type', 'application/json'),
+        };
+        return this.http.post<AppointmentCount>('api/timeline/countTimelineAppointmentsFuture', body, options);
+    }    
+
+    public countTimelineAppointmentPrevious(appCount,userID){
+        const body = {
+            'appCount':appCount,
+            'userID':userID
+             };
+        const options = {
+            headers: new HttpHeaders().set('Content-Type', 'application/json'),
+        };
+
+        return this.http.post<AppointmentCount>('api/timeline/countTimelineAppointmentsPrevious', body, options);
+    } 
 
     public getMedicationList(userID) {
         const body = {
@@ -54,10 +93,19 @@ export class DataService {
          var tmp = this.http.post<Task[]>('api/task/list', body, options);
          var str;
          tmp.subscribe(blah => str = blah[0].taskName);
-        console.log(str);
          return tmp;
     };
-    
+
+    public getUserSideEffects(userID) {
+        const body = {
+            'userID': userID
+        };
+        const options = {
+            headers: new HttpHeaders().set('Content-Type', 'application/json'),
+        };
+        return this.http.post<SideEffect[]>('api/medication/side-effects', body, options);
+    };
+
     public getMedicationComments(medicationUserID) {
         const body = {
             'medicationUserID': medicationUserID
@@ -118,7 +166,17 @@ export class DataService {
         
         this.http.post('api/medication/comments/remove', body, options).subscribe();
     }
-    
+
+    public removeUserSideEffect(userSideEffectID) {
+        const body = {
+            'userSideEffectID': userSideEffectID
+        };
+        const options = {
+            headers: new HttpHeaders().set('Content-Type', 'application/json'),
+        };
+        this.http.post('api/medication/side-effects/remove', body, options).subscribe();
+    }
+
     public addMedicationComment(medicationUserID, commentText) {
         const body = {
             'medicationUserID': medicationUserID,
@@ -134,7 +192,29 @@ export class DataService {
         
         this.http.post('api/medication/comments/add', body, options).subscribe();
     }
-    
+
+    public addUserSideEffect(userID, commentText){
+        const body = {
+            'userID': userID,
+            'commentText': commentText
+        };
+        const options = {
+            headers: new HttpHeaders().set('Content-Type', 'application/json'),
+        };
+        this.http.post('api/medication/side-effects/add', body, options).subscribe();
+    }
+
+    public addQuestionnaireAnswer(taskID, answer) {
+        const body = {
+            'taskID': taskID,
+            'answer': JSON.stringify(answer)
+        }
+        const options = {
+            headers: new HttpHeaders().set('Content-Type', 'application/json'),
+        };
+        this.http.post('api/task/answer', body, options).subscribe();
+    }
+
     public getWikiSummary(medName) {
         const body = {
             'medicationName': medName
@@ -254,6 +334,12 @@ export class DataService {
             };
             this.cookieService.set(this.cookieName, JSON.stringify(cookieJSON));
         }
+    }
+
+    public getCookie(): string {
+        const cookieJSON = JSON.parse(this.cookieService.get(this.cookieName));
+        var userID = cookieJSON.userID;
+        return userID;
     }
 
     public removeCookie(): void {
