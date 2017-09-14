@@ -1,16 +1,2 @@
-<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?libraries=places&sensor=false"></script>
-
-<script type="text/javascript">
-    function initialize() {
-        var input = document.getElementById('searchTextField');
-        var options = {
-            types: ['establishment'],
-        };
-
-        autocomplete = new google.maps.places.Autocomplete(input, options);
-    }
-    google.maps.event.addDomListener(window, 'load', initialize);
-
-</script>
-<label>Enter in your local pharmacy for delivery: <br /></label>
-<input id="searchTextField" type="text" size="50" placeholder="Enter a pharmacy">
+<label>Enter in your local pharmacy for delivery: <br></label>
+<input id="searchTextField" type="text" size="50" placeholder="Enter a pharmacy" (input)="onInputChange($event)">
