@@ -25,6 +25,7 @@ import {RequestPasswordResetComponent} from '../request-password-reset/request-p
 import {APP_BASE_HREF} from '@angular/common';
 import {User} from '../../class/User';
 import { BsModalRef } from 'ngx-bootstrap/modal/modal-options.class';
+import { NgModel } from '@angular/forms';
 
 export class MockDataService {
     getMedicationList(userID: number) {

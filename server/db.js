@@ -105,8 +105,7 @@ database.getCurrentConditions = function(userID, callback) {
         "C.conditionName, C.conditionLink " +
         "FROM UserCondition AS UC INNER JOIN `Condition` AS C ON UC.conditionID = C.conditionID " +
         "WHERE UC.userID = ? " +
-        "AND UC.endDate IS NULL;",
-        [userID],
+        "AND UC.endDate IS NULL;", [userID],
         function(err, rows) {
             callback(err, rows);
         });
@@ -118,8 +117,7 @@ database.getPreviousConditions = function(userID, callback) {
         "C.conditionName, C.conditionLink " +
         "FROM UserCondition AS UC INNER JOIN `Condition` AS C ON UC.conditionID = C.conditionID " +
         "WHERE UC.userID = ? " +
-        "AND UC.endDate < NOW();",
-        [userID],
+        "AND UC.endDate < NOW();", [userID],
         function(err, rows) {
             callback(err, rows);
         });
@@ -130,7 +128,7 @@ database.getTaskList = function(userID, callback) {
         "SELECT taskName, taskSummary, recievedDate, dueDate FROM Task " +
         "WHERE userID = ? " +
         "AND dueDate > NOW() " +
-        "ORDER BY dueDate;" , [userID],
+        "ORDER BY dueDate;", [userID],
         function(err, rows) {
             callback(err, rows);
         });

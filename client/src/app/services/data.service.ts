@@ -294,7 +294,19 @@ export class DataService {
             headers: new HttpHeaders().set('Content-Type', 'application/json'),
         };
         let url = '/api/userInfo/getUserInfoByUserID';
-        return this.http.post<User>(url, body, options);
+        return this.http.post<User[]>(url, body, options);
+    }
+
+    public getAllUserDependants(userID){
+        let headers = new Headers({ 'Content-Type': 'application/json' });
+        const body = {
+            'userID': userID
+        };
+        const options = {
+            headers: new HttpHeaders().set('Content-Type', 'application/json'),
+        };
+        let url = '/api/dependants/getAllDependants';
+        return this.http.post<User[]>(url, body, options);
     }
 
     public getCurrentConditions(userID) {
