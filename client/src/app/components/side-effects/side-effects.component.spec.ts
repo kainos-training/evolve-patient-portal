@@ -25,6 +25,7 @@ import { RequestPasswordResetComponent } from '../request-password-reset/request
 import { APP_BASE_HREF } from '@angular/common';
 import { User } from '../../class/User';
 import { BsModalRef } from 'ngx-bootstrap/modal/modal-options.class';
+import { RepeatPrescriptionComponent } from '../repeat-prescription/repeat-prescription.component';
 
 export class MockDataService {
     userSideEffects: Array<SideEffect>;
@@ -75,7 +76,8 @@ describe('SideEffectsComponent', () => {
                 ErrorPageComponent,
                 DashboardComponent,
                 SettingNewPasswordComponent,
-                RequestPasswordResetComponent],
+                RequestPasswordResetComponent,
+                RepeatPrescriptionComponent],
             providers: [
                 DataService,
                 HttpClientModule,

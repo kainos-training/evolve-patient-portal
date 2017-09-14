@@ -46,6 +46,7 @@ const publicUserRoutes = require('./routes/publicUserRoutes');
 const publicUserInfoRoute = require('./routes/publicUserInfoRoute');
 const publicResetPasswordRoutes = require('./routes/publicResetPasswordRoutes');
 const protectedPrescriptionRoutes = require('./routes/protectedPrescriptionRoutes');
+const protectedTimelineRoutes = require('./routes/protectedTimelineRoutes');
 const publicDependantRoutes = require('./routes/publicDependantRoutes');
 const protectedConditionRoutes = require('./routes/protectedConditionRoutes')
 const publicTaskRoutes = require('./routes/publicTaskRoutes');
@@ -57,6 +58,7 @@ app.use('/medication', protectedMedicationRoutes);
 app.use('/userInfo', publicUserInfoRoute);
 app.use('/user', publicUserRoutes);
 app.use('/prescription', protectedPrescriptionRoutes);
+app.use('/timeline',protectedTimelineRoutes);
 app.use('/dependants', publicDependantRoutes);
 app.use('/condition', protectedConditionRoutes);
 app.use('/task', publicTaskRoutes);

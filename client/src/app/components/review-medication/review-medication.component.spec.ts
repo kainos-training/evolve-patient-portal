@@ -70,8 +70,23 @@ describe('ReviewMedicationComponent', () => {
     beforeEach(async(() => {
         mockDataService = new MockDataService();
         TestBed.configureTestingModule({
-            declarations: [ReviewMedicationComponent, EllipsisPipe, LoginComponent, ErrorPageComponent, DashboardComponent, LeftSideMenuComponent, TopBarComponent, AppointmentComponent, SettingNewPasswordComponent, RequestPasswordResetComponent, RepeatPrescriptionComponent],
-            providers: [DataService, HttpClient, HttpHandler, HttpClientModule, BsModalService, CookieService, SwitchBoardService, RouteGuard, { provide: APP_BASE_HREF, useValue: '/' }],
+            declarations: [
+                ReviewMedicationComponent,
+                EllipsisPipe,
+                LoginComponent,
+                ErrorPageComponent,
+                DashboardComponent,
+                SettingNewPasswordComponent,
+                RequestPasswordResetComponent,
+                RepeatPrescriptionComponent],
+            providers: [
+                DataService,
+                HttpClientModule,
+                BsModalService,
+                CookieService,
+                SwitchBoardService,
+                RouteGuard,
+                {provide: APP_BASE_HREF, useValue: '/'}],
             imports: [
                 routes,
                 ModalModule.forRoot(),

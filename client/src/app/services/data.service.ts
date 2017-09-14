@@ -12,9 +12,11 @@ import { Router } from '@angular/router';
 import { Appointment } from '../class/Appointment';
 import { AppointmentFurtherInfo } from '../class/AppointmentFurtherInfo';
 import { User } from '../class/User';
+import { TimelineAppointment } from "../class/TimelineAppointment";
 import { SideEffect } from '../class/SideEffect';
 import { Condition } from '../class/Condition';
 import { Pharmacy } from '../class/Pharmacy';
+import { AppointmentCount } from '../class/AppointmentCount';
 
 @Injectable()
 export class DataService {
@@ -25,6 +27,42 @@ export class DataService {
 
     constructor(private http: HttpClient, private cookieService: CookieService, private switchBoard: SwitchBoardService, private router: Router) {
     }
+
+    public getTimelineAppointments(userID,intervalBefore,intervalAfter){
+        const body = {
+            'userID' : userID,
+            'intervalBefore' : intervalBefore,
+            'intervalAfter' : intervalAfter
+        };
+        const options = {
+            headers: new HttpHeaders().set('Content-Type', 'application/json'),
+        };
+
+        return this.http.post<TimelineAppointment[]>('api/timeline/getTimelineAppointments', body, options);
+    }
+
+    public countTimelineAppointmentFuture(appCount, userID){
+        const body = {
+            'appCount':appCount,
+            'userID':userID
+             };
+        const options = {
+            headers: new HttpHeaders().set('Content-Type', 'application/json'),
+        };
+        return this.http.post<AppointmentCount>('api/timeline/countTimelineAppointmentsFuture', body, options);
+    }    
+
+    public countTimelineAppointmentPrevious(appCount,userID){
+        const body = {
+            'appCount':appCount,
+            'userID':userID
+             };
+        const options = {
+            headers: new HttpHeaders().set('Content-Type', 'application/json'),
+        };
+
+        return this.http.post<AppointmentCount>('api/timeline/countTimelineAppointmentsPrevious', body, options);
+    } 
 
     public getMedicationList(userID) {
         const body = {
@@ -61,6 +99,7 @@ export class DataService {
         const options = {
             headers: new HttpHeaders().set('Content-Type', 'application/json'),
         };
+        console.log(body);
         return this.http.post('api/prescription/updatePrescribedDate', body, options).subscribe();
     };
 

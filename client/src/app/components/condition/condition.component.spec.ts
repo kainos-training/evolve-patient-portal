@@ -29,10 +29,11 @@ import { APP_BASE_HREF } from '@angular/common';
 import { TooltipModule } from 'ngx-bootstrap/tooltip';
 import { MyTasksComponent } from '../my-tasks/my-tasks.component';
 import { RepeatPrescriptionComponent } from '../repeat-prescription/repeat-prescription.component';
+import { TimelineComponent } from '../timeline/timeline.component';
 import {SecondaryInfoHeaderComponent} from '../secondary-info-header/secondary-info-header.component';
 import {PersonalInfoHeaderComponent} from '../personal-info-header/personal-info-header.component';
 import {DependantViewComponent} from '../dependant-view/dependant-view.component';
-import { SideEffectsComponent } from './components/side-effects/side-effects.component';
+import { SideEffectsComponent } from '../side-effects/side-effects.component';
 
 export class MockDataService {
     getCurrentConditions(userID: number) {
@@ -87,11 +88,13 @@ describe('ConditionComponent', () => {
                 NguiMapComponent,
                 MyTasksComponent,
                 RepeatPrescriptionComponent,
+                TimelineComponent,
                 SideEffectsComponent,
                 PersonalInfoHeaderComponent,
                 SecondaryInfoHeaderComponent,
                 DependantViewComponent,
                 ConditionComponent
+
             ],
             providers: [
                 DataService,

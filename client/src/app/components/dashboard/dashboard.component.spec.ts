@@ -1,4 +1,5 @@
 
+import { TimelineComponent } from "../timeline/timeline.component";
 import { SecondaryInfoHeaderComponent } from '../secondary-info-header/secondary-info-header.component';
 import { NavigationOption, NavigationOptionEnum } from '../../app.globals';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -48,6 +49,8 @@ describe('DashboardComponent', () => {
                 Marker,
                 DirectionsRenderer,
                 NguiMapComponent,
+                TimelineComponent,
+                ConditionComponent,
                 MyTasksComponent,
                 SideEffectsComponent,
                 DependantViewComponent,

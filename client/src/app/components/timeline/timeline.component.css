@@ -1,0 +1,206 @@
+.panel-default{
+    border-top-width: 5px;
+    border-top-color: #027FBB;
+    margin-top: 10px;
+}
+
+.panel-heading img{
+    height: 25px;
+    width: 25px;
+}
+
+.panel-heading{
+    background: white;
+    font: bold;
+}
+
+.panel-title {
+    font-size: 24px; 
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.panel-title::before {
+    content: "";
+    display: block;
+    background-repeat: no-repeat;
+    margin-top: 0px;
+    margin-right: 10px;
+    margin-bottom: 10px;
+    width: 30px;
+    height: 30px;
+    float: left;
+    background-image: url("../../../assets/timeline-icon.png");
+    background-size: 100%;
+}
+
+#timeline-container {
+    max-height: 756px;
+    min-height: 326px;
+    overflow: scroll;
+}
+
+.timeline-year-header {
+    width: 100%;
+    cursor: pointer;
+    font-size: 20px;
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+    margin-top: 10px;
+    color: rgb(102,102,102);
+}
+
+.timeline-year-header:hover {
+    background-color: rgb(221,221,221);
+}
+
+.timeline-year-header::before {
+    content: "";
+    display: block;
+    float: left;
+    border-radius: 50%;
+    margin-left: 5px;
+    margin-right: 10px;
+    width: 25px;
+    height: 25px;
+    background-color: rgb(132	193	222	);
+    /* safari and chrome compatibility */
+    background: rgb(132,193,222);
+}
+
+.timeline-month-header {
+    padding-left: 10px;
+    margin-left: 35px;
+    margin-right: 15px;
+    font-size: 20px;
+    border-top: 1px solid rgb(221,221,221);
+    border-left: 1px solid rgb(221,221,221);
+    border-right: 1px solid rgb(221,221,221);   
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    height: 30px;
+    color: rgb(102,102,102);    
+}
+
+.timeline-month-header::before {
+    content: "";
+    display: block;
+    float: left;
+    margin-left: -30px;
+    width: 3px;
+    height: 30px;
+    background-color: rgb(132,193,222);
+    /* safari and chrome compatibility */
+    background: rgb(132,193,222);
+}
+
+.timeline-month-header::after {
+    content: "";
+    display: block;
+    float: left;
+    margin-left: -25px;
+    margin-top: 5px;
+    border-top: 10px solid transparent;
+    border-bottom: 10px solid transparent; 
+    border-right: 15px solid rgb(221,221,221);;
+}
+
+.timeline-appointment-container {
+    padding-left: 2px;
+    margin-left: 35px;
+    margin-right: 15px;
+    border-top: 1px solid rgb(221,221,221);
+    border-left: 1px solid rgb(221,221,221);
+    border-right: 1px solid rgb(221,221,221); 
+    height: 50px;
+}
+
+.append-bottom-border {
+    border-bottom: 1px solid rgb(221,221,221);
+    border-bottom-left-radius: 10px;   
+    border-bottom-right-radius: 10px;   
+}
+
+.month-spacer {
+    height: 15px;
+    margin-left: 38px;
+    margin-right: 15px;
+}
+
+.month-spacer::before {
+    content:"";
+    display: block;
+    float: left;
+    margin-left: -22px;
+    width: 3px;
+    height: 16px;
+    background-color: rgb(132	193	222	);
+    /* safari and chrome compatibility */
+    background: rgb(132,193,222);
+}
+
+.timeline-appointment-container::before {
+    content: "";
+    display: block;
+    float: left;
+    margin-left: -22px;
+    width: 3px;
+    height: 50px;
+    background-color: rgb(132	193	222	);
+    /* safari and chrome compatibility */
+    background: rgb(132,193,222);
+}    
+
+.timeline-appointment-header {
+    white-space: nowrap;
+    margin-left: 5px;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    font-size: 16px;
+    color: rgb(102,102,102);  
+}
+
+.timeline-appointment-date {
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    font-size: 15px;
+    color: rgb(102,102,102);    
+}
+
+.timeline-appointment-date::before {
+    margin-left: 14px;
+    content: "Due: ";
+}    
+
+.collapsed-year {
+    display: none;
+}
+
+.load-more-button {
+    text-align: center;
+    background-color: rgb(221,221,221); 
+    cursor:pointer; 
+}
+
+.load-more-button:hover {
+    text-align: center;
+    background-color: rgb(6,127,187	);
+}
+
+.debugRed {
+    outline: 1px solid red;
+}
+
+.debugBlue {
+    outline: 1px solid blue;
+}
+
+.debugGreen {
+    outline: 1px solid green;
+}
+
+debugCyan {
+    outline: 1px solid cyan;    
+}

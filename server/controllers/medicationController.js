@@ -74,26 +74,27 @@ exports.getListOfMedicationUserComments = function(req, res) {
     }
 };
 
-exports.getUserSideEffects = function(req, res) {
-    const userID = req.body.userID;
+exports.getListOfRemovedMedicationUserComments = function(req, res) {
+    exports.getUserSideEffects = function(req, res) {
+        const userID = req.body.userID;
 
-    if (userID == null) {
-        res.status(400).json({
-            success: false
-        });
-    } else {
-        db.getUserSideEffects(userID, function(err, rows) {
-            if (err) {
-                res.status(400).json({
-                    success: false
-                });
-            } else {
-                res.status(200).send(rows);
-            }
-        });
+        if (userID == null) {
+            res.status(400).json({
+                success: false
+            });
+        } else {
+            db.getUserSideEffects(userID, function(err, rows) {
+                if (err) {
+                    res.status(400).json({
+                        success: false
+                    });
+                } else {
+                    res.status(200).send(rows);
+                }
+            });
+        }
     }
 };
-
 exports.getListOfRemovedMedicationUserComments = function(req, res) {
     const medicationUserID = req.body.medicationUserID;
     if (medicationUserID == null) {
