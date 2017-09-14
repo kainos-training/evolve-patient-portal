@@ -64,6 +64,7 @@ export class RepeatPrescriptionComponent implements OnInit {
             this.confirmedPrescriptionList.push(prescriptionList[i].medicationUserID);
         }
         this.dataService.updatePrescriptionDate(this.confirmedPrescriptionList, this.deliveryType);
+        this.modalRef.hide();
     }
 
     public openModal(prescriptionList: Array<Medication>, template: TemplateRef<any>) {
