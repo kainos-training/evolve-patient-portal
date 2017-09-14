@@ -7,17 +7,16 @@
                 </h1>
             </div>
             <div class="panel-body" id="medicationDetails">
-                    <button type="button" class="btn btn-success btn-block sharp" id="orderRepeatButton">Order Repeat Prescriptions</button>
-               <br>
+                <button type="button" class="btn btn-success btn-block sharp" id="orderRepeatButton">Order Repeat Prescriptions</button>
+                <br>
                 <table class="table table-hover">
                     <tbody>
-                        <tr *ngFor="let medication of medicationsList" class="prescription-item" (click)="openModal(medication,template)" >
+                        <tr *ngFor="let medication of medicationsList" class="prescription-item" (click)="openModal(medication,template)">
                             <td id="">
                                 <span class="main-medication-txt">Name: {{medication.medicationName}}</span><br>
                                 <span class="sml-medication-txt">Dosage: {{medication.dosage}}</span><br>
                                 <span class="sml-medication-txt">Instructions: {{medication.instructions}}</span><br><br>
                                 <span class="sml-medication-txt-right">Last Issued: {{medication.prescribedDate | date: 'dd/MM/yyyy'}}</span><br>
-
                             </td>
                         </tr>
                     </tbody>
@@ -44,24 +43,22 @@
                     <span class="sml-medication-txt"><strong>Class:</strong> {{selectedMedication.medicationType}}</span>
                 </p>
                 <br>
-                
-
             </div>
             <div *ngIf="this.selectedMedicationHistory?.length > 0">
-            <a *ngIf="!showPrescriptionHistory" (click)="displayPrescriptionHistory()"><strong>Show Prescription History</strong></a>
-            <a *ngIf="showPrescriptionHistory" (click)="displayPrescriptionHistory()"><strong>Hide Prescription History</strong></a>
-            <div *ngIf="showPrescriptionHistory" class="perscription-form">
-                <form>
-                    <div class="form-group">
-                        <ul *ngFor="let medicationHistoryItem of selectedMedicationHistory">
-                            <li>{{medicationHistoryItem.startDate|date:'dd/MM/yyyy'}} - {{medicationHistoryItem.endDate|date:'dd/MM/yyyy'}}
-                                : {{medicationHistoryItem.dosage}}</li>
-                        </ul>
-                    </div>
-                </form>
+                <a *ngIf="!showPrescriptionHistory" (click)="displayPrescriptionHistory()"><strong>Show Prescription History</strong></a>
+                <a *ngIf="showPrescriptionHistory" (click)="displayPrescriptionHistory()"><strong>Hide Prescription History</strong></a>
+                <div *ngIf="showPrescriptionHistory" class="perscription-form">
+                    <form>
+                        <div class="form-group">
+                            <ul *ngFor="let medicationHistoryItem of selectedMedicationHistory">
+                                <li>{{medicationHistoryItem.startDate|date:'dd/MM/yyyy'}} - {{medicationHistoryItem.endDate|date:'dd/MM/yyyy'}}
+                                    : {{medicationHistoryItem.dosage}}</li>
+                            </ul>
+                        </div>
+                    </form>
+                </div>
             </div>
-            </div>
-<br>
+            <br>
             <div class="perscription-form">
                 <form>
                     <div class="form-group">

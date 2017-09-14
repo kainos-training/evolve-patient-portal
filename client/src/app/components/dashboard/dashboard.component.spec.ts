@@ -25,7 +25,7 @@ import { ConditionComponent } from '../condition/condition.component';
 import { TooltipModule } from 'ngx-bootstrap/tooltip';
 import { MyTasksComponent } from '../my-tasks/my-tasks.component';
 import { DependantViewComponent } from '../dependant-view/dependant-view.component';
-import {SideEffectsComponent} from '../side-effects/side-effects.component';
+import { SideEffectsComponent } from '../side-effects/side-effects.component';
 
 describe('DashboardComponent', () => {
     let component: DashboardComponent;

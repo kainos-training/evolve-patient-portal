@@ -2,13 +2,14 @@
     border-top-width: 5px;
     border-top-color: #027FBB;
     min-height: 400px;
-    margin-top: 10px;
-    
+    margin-top: 10px;   
 }
+
 .panel-heading img{
     height: 25px;
     width: 25px;
 }
+
 .panel-heading{
     background: white;
     font: bold;
@@ -90,6 +91,7 @@
     color: #666666;
     padding-bottom: 5px;
 }
+
 .side-effects img{
     height: 20px;
     width: 20px;
@@ -147,7 +149,6 @@
     text-decoration: line-through;    
 }
 
-
 #sideEffectDetails {
     height: 400px;
     overflow: auto;
@@ -184,7 +185,6 @@ h1::before {
     height: 26px;
     background-size: 24px 24px;
 }
- 
 
 .strikethrough {
     text-decoration: line-through;

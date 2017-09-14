@@ -9,10 +9,10 @@ import { MedicationDescription } from '../../class/MedicationDescription';
 import { SideEffect } from '../../class/SideEffect';
 import { Sanitizer } from '@angular/core';
 import { SecurityContext } from '@angular/core';
-import {AccordionModule} from 'ngx-bootstrap/accordion';
 import { User } from '../../class/User';
 import { SwitchBoardService } from '../../services/switch-board.service';
 import { Subscription } from 'rxjs/Rx';
+
 @Component({
   selector: 'evolve-side-effects',
   templateUrl: './side-effects.component.html',
@@ -49,7 +49,6 @@ export class SideEffectsComponent implements OnInit {
     this.showSideEffects = !this.showSideEffects;
   }
 
-
   constructor(dataService: DataService, private modalService: BsModalService, private switchboard: SwitchBoardService) {
       console.log("Constructor started");
     this.dataService = dataService;
@@ -57,7 +56,8 @@ export class SideEffectsComponent implements OnInit {
     this.dataService.getUserFromCookie(this.user);
 
     console.log("Constructor Ended");
-}
+  }
+
   ngOnInit() {
     this.dataService.getUserSideEffects(this.user.userID).subscribe(
         res => { this.userSideEffects = res }

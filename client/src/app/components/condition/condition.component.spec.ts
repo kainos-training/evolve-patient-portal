@@ -163,22 +163,22 @@ describe('ConditionComponent', () => {
         expect(serviceResult.includes('Back Pain')).toBeTruthy();
     });
 
-    // it('should open the nhs page on Diabetes when the diabetes condition is clicked calling onNavigate.', async () => {
-    //     fixture = TestBed.createComponent(ConditionComponent);
-    //     component = fixture.componentInstance;
-    //     let condition = new Condition(2, 2, 1, "Diabetes", "http://www.nhs.uk/Conditions/Diabetes/Pages/Diabetes.aspx", new Date(1998, 4, 3), null);
-    //     component.onNavigate(condition);
-    //     expect(window.open).toHaveBeenCalled();
-    //     expect(window.open).toHaveBeenCalledWith("http://www.nhs.uk/Conditions/Diabetes/Pages/Diabetes.aspx");
-    // });
+    it('should open the nhs page on Diabetes when the diabetes condition is clicked calling onNavigate.', async () => {
+        fixture = TestBed.createComponent(ConditionComponent);
+        component = fixture.componentInstance;
+        let condition = new Condition(2, 2, 1, "Diabetes", "http://www.nhs.uk/Conditions/Diabetes/Pages/Diabetes.aspx", new Date(1998, 4, 3), null);
+        component.onNavigate(condition);
+        expect(window.open).toHaveBeenCalled();
+        expect(window.open).toHaveBeenCalledWith("http://www.nhs.uk/Conditions/Diabetes/Pages/Diabetes.aspx");
+    });
 
-    // it('should open a not found page if the clicked condition doesnt have a valid url when calling onNavigate', async () => {
-    //     fixture = TestBed.createComponent(ConditionComponent);
-    //     component = fixture.componentInstance;
-    //     let condition = new Condition(2, 2, 1, "Diabetes", "notalink", new Date(1998, 4, 3), null);
-    //     component.onNavigate(condition);
-    //     expect(window.open).toHaveBeenCalled();
-    //     expect(window.open).toHaveBeenCalledWith("http://localhost:9876/notalink");
-    // });
-
+    it('should open a not found page if the clicked condition doesnt have a valid url when calling onNavigate', async () => {
+        fixture = TestBed.createComponent(ConditionComponent);
+        component = fixture.componentInstance;
+        let condition = new Condition(2, 2, 1, "Diabetes", "notalink", new Date(1998, 4, 3), null);
+        component.onNavigate(condition);
+        expect(window.open).toHaveBeenCalled();
+        expect(window.open).toHaveBeenCalledWith("http://localhost:9876/notalink");
+    });
+    
 });

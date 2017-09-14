@@ -13,7 +13,6 @@ import { SecurityContext, SimpleChanges, Input } from '@angular/core';
 import { User } from '../../class/User';
 import { SideEffect } from '../../class/SideEffect';
 
-
 @Component({
     selector: 'evolve-review-medication',
     templateUrl: './review-medication.component.html',
@@ -38,7 +37,6 @@ export class ReviewMedicationComponent implements OnInit, OnDestroy {
     private userSubscription: Subscription;
     private dataService: DataService;
     public prescriptionHistoryExists: boolean;
-    
     private subCenter: Subscription;
 
     public openModal(meds: Medication, template: TemplateRef<any>) {
@@ -46,10 +44,8 @@ export class ReviewMedicationComponent implements OnInit, OnDestroy {
         this.collapsedDescription = true;
         this.selectedMedication = meds;
         this.showPrescriptionHistory = false;
-
         this.modalRef = this.modalService.show(template);
         let description = this.dataService.getWikiSummary(meds.medicationName);
-        
         const id = this.dependantID || this.user.userID; 
         
         this.dataService.getMedicationComments(this.selectedMedication.medicationUserID).subscribe(
