@@ -79,9 +79,9 @@ database.getMedicationHistory = function(medicationID, userID, callback) {
 
 database.updatePrescribedDate = function(medicationUserID, deliveryStatus, callback) {
     database.query(
-        "UPDATE medicationUser " +
-        "SET prescribedDate = curdate(), delivery = (?) " +
-        "WHERE medicationUserID in (?);", [deliveryStatus, medicationUserID],
+        'UPDATE medicationUser ' +
+        'SET prescribedDate = curdate(), delivery = ? ' +
+        'WHERE medicationUserID in ' + medicationUserID + '; ', [deliveryStatus],
         function(err) {
             callback(err);
         });

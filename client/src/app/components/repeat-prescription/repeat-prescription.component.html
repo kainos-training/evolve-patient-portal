@@ -22,7 +22,7 @@
                                     <span class="widget-title-txt">Expires: {{prescription.endDate | date}}</span><br>
                                 </td>
                                 <td>
-                                    <button class="btn btn-success" (click)="addToList(prescription)">Repeat Prescription</button> 
+                                    <button class="btn btn-success" (click)="addToList(prescription)">Repeat Prescription</button>
                                 </td>
                             </tr>
                         </tbody>
@@ -72,18 +72,20 @@
             </div>
             <div class="modal-body">
                 <div class="perscription-header">
-                    <p>You have chosen to repeat the following prescription(s).</p>
+                    <label><strong>You have chosen to repeat the following prescription(s).</strong></label>
                     <li *ngFor="let finalPrescriptionList of renewPrescriptionList">{{finalPrescriptionList.medicationName}}
                     </li>
                     <hr>
                 </div>
                 <div class="perscription-form">
-                    <p>Please select which method of delivery you wish to use:</p>
+                    <label><strong>Please select which method of delivery you wish to use:</strong></label>
                     <form>
                         <div class="form-group">
                             <form class="form">
-                                <input type="radio" name="delivery" [(ngModel)]="collectionType.status" value="true">Home Delivery<br>
-                                <input type="radio" name="delivery" [(ngModel)]="collectionType.status" value="false">Local Pharmacy
+                                <input type="radio" name="delivery" [(ngModel)]="collectionType.status" value="true"> Home
+                                Delivery &nbsp;&nbsp;&nbsp;&nbsp;
+                                <input type="radio" name="delivery" [(ngModel)]="collectionType.status" value="false"> Local
+                                Pharmacy
                             </form>
                         </div>
                         <button type="submit" class="btn btn-success" (click)="requestPrescription(renewPrescriptionList)">Request Prescription</button>

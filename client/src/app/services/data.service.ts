@@ -50,10 +50,12 @@ export class DataService {
             deliveryStatus: deliveryStatus
         };
         console.log(body.deliveryStatus);
+        body.medicationUserIDs = '(';
         for (var i = 0; i < medicationUserIDs.length; i++) {
             body.medicationUserIDs += medicationUserIDs[i] + ',';
         }
         body.medicationUserIDs = body.medicationUserIDs.substring(0, body.medicationUserIDs.length - 1);
+        body.medicationUserIDs += ')';
         const options = {
             headers: new HttpHeaders().set('Content-Type', 'application/json'),
         };

@@ -32,6 +32,8 @@ import { ToolTipModule } from 'angular2-tooltip';
 import { ConditionComponent } from './components/condition/condition.component';
 import { TooltipModule } from 'ngx-bootstrap/tooltip';
 import { MyTasksComponent } from './components/my-tasks/my-tasks.component';
+import { AgmCoreModule } from '@agm/core';
+
 
 @NgModule({
     declarations: [
@@ -63,7 +65,9 @@ import { MyTasksComponent } from './components/my-tasks/my-tasks.component';
         ToolTipModule,
         NguiMapModule.forRoot({apiUrl: 'https://maps.google.com/maps/api/js?key=AIzaSyC6v7VVrChAt97hxrsY76i8Xg2mcaQMuE8'}),
         BrowserAnimationsModule,
-        TooltipModule.forRoot()
+        TooltipModule.forRoot(),
+        AgmCoreModule.forRoot()
+      
     ],
     providers: [
         DataService,
