@@ -39,6 +39,7 @@ export class MapViewComponent implements AfterContentInit, OnDestroy {
         if (this.subCenter) {
             this.subCenter.unsubscribe();
         }
+        console.log("CHEESE");
     }
 
     onMapClick(event) {
