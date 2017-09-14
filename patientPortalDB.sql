@@ -276,10 +276,6 @@ VALUES (1, 4, '2017-01-10', '2017-07-15'),
 (7, 1, '2017-09-09', null),
 (7, 4, '2017-08-11', '2017-09-01');
 
-INSERT INTO Task(taskName, userID, recievedDate, dueDate)
-VALUES('Pre-op questionnaire', 1, NOW(), (NOW() + INTERVAL 12 DAY)),
-('Pre-op Assessment: Olanzapine', 1, (NOW() - INTERVAL 12 DAY), (NOW() - INTERVAL 2 DAY));
-
 INSERT INTO Task(taskName, userID, taskSummary, recievedDate, dueDate)
 VALUES('Pre-op questionnaire', 1, 'Questionnaire to be filled out before surgery. Includes allergies and general health questions.', (NOW() - INTERVAL 4 DAY), (NOW() + INTERVAL 18 DAY)),
 ('Pre-op Assessment: Olanzapine', 1, 'Form used to assess your suitibility for Olanzapine which will be used post surgery.', (NOW() - INTERVAL 12 DAY), (NOW() - INTERVAL 2 DAY)),
