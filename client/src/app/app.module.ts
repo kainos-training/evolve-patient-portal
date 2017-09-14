@@ -38,6 +38,7 @@ import { ConditionComponent } from './components/condition/condition.component';
 import { TooltipModule } from 'ngx-bootstrap/tooltip';
 import { MyTasksComponent } from './components/my-tasks/my-tasks.component';
 import { AgmCoreModule } from '@agm/core';
+import { QuestionnaireComponent } from './components/questionnaire/questionnaire.component';
 import { TimelineComponent } from './components/timeline/timeline.component';
 
 @NgModule({
@@ -55,6 +56,7 @@ import { TimelineComponent } from './components/timeline/timeline.component';
         TopBarComponent,
         EllipsisPipe,
         RepeatPrescriptionComponent,
+        QuestionnaireComponent,
         TimelineComponent,
         ConditionComponent,
         SideEffectsComponent,

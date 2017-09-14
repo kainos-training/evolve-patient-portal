@@ -30,10 +30,11 @@ import { TooltipModule } from 'ngx-bootstrap/tooltip';
 import { MyTasksComponent } from '../my-tasks/my-tasks.component';
 import { RepeatPrescriptionComponent } from '../repeat-prescription/repeat-prescription.component';
 import { TimelineComponent } from '../timeline/timeline.component';
-import {SecondaryInfoHeaderComponent} from '../secondary-info-header/secondary-info-header.component';
-import {PersonalInfoHeaderComponent} from '../personal-info-header/personal-info-header.component';
-import {DependantViewComponent} from '../dependant-view/dependant-view.component';
+import { SecondaryInfoHeaderComponent } from '../secondary-info-header/secondary-info-header.component';
+import { PersonalInfoHeaderComponent } from '../personal-info-header/personal-info-header.component';
+import { DependantViewComponent } from '../dependant-view/dependant-view.component';
 import { SideEffectsComponent } from '../side-effects/side-effects.component';
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core'
 
 export class MockDataService {
     getCurrentConditions(userID: number) {
@@ -94,24 +95,17 @@ describe('ConditionComponent', () => {
                 SecondaryInfoHeaderComponent,
                 DependantViewComponent,
                 ConditionComponent
-
             ],
             providers: [
                 DataService,
-                HttpClient,
-                HttpHandler,
-                HttpClientModule,
-                CookieService,
                 SwitchBoardService,
                 { provide: APP_BASE_HREF, useValue: '/' }
             ],
             imports: [
-                routes,
-                BrowserModule,
-                ModalModule.forRoot(),
-                FormsModule,
-                TooltipModule.forRoot()
-            ]
+                TooltipModule.forRoot(),
+                FormsModule
+            ],
+            schemas: [CUSTOM_ELEMENTS_SCHEMA]
         })
             .compileComponents();
     }));

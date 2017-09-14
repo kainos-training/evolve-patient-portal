@@ -1,3 +1,4 @@
+
 import { BrowserModule } from '@angular/platform-browser';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { FormsModule } from '@angular/forms';
@@ -77,22 +78,15 @@ describe('SideEffectsComponent', () => {
                 DashboardComponent,
                 SettingNewPasswordComponent,
                 RequestPasswordResetComponent,
-                RepeatPrescriptionComponent],
+                RepeatPrescriptionComponent
+                ],
             providers: [
                 DataService,
-                HttpClientModule,
-                BsModalService,
-                CookieService,
-                SwitchBoardService,
-                RouteGuard,
+                
                 { provide: APP_BASE_HREF, useValue: '/' }],
             imports: [
-                routes,
                 ModalModule.forRoot(),
-                BrowserModule,
-                HttpClientModule,
                 FormsModule,
-                AlertModule.forRoot()
             ],
             schemas: [CUSTOM_ELEMENTS_SCHEMA]
         })

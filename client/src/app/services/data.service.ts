@@ -122,11 +122,10 @@ export class DataService {
         const options = {
             headers: new HttpHeaders().set('Content-Type', 'application/json'),
         };
-        var tmp = this.http.post<Task[]>('api/task/list', body, options);
-        var str;
-        tmp.subscribe(blah => str = blah[0].taskName);
-        console.log(str);
-        return tmp;
+         var tmp = this.http.post<Task[]>('api/task/list', body, options);
+         var str;
+         tmp.subscribe(blah => str = blah[0].taskName);
+         return tmp;
     };
 
     public getUserSideEffects(userID) {
@@ -213,6 +212,17 @@ export class DataService {
             headers: new HttpHeaders().set('Content-Type', 'application/json'),
         };
         this.http.post('api/medication/side-effects/add', body, options).subscribe();
+    }
+
+    public addQuestionnaireAnswer(taskID, answer) {
+        const body = {
+            'taskID': taskID,
+            'answer': JSON.stringify(answer)
+        }
+        const options = {
+            headers: new HttpHeaders().set('Content-Type', 'application/json'),
+        };
+        this.http.post('api/task/answer', body, options).subscribe();
     }
 
     public getWikiSummary(medName) {

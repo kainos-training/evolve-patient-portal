@@ -3,6 +3,7 @@ import { DataService } from '../../services/data.service';
 import { Task } from '../../class/Task';
 import { User } from '../../class/User';
 import { SwitchBoardService } from '../../services/switch-board.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'evolve-my-tasks',
@@ -14,9 +15,13 @@ export class MyTasksComponent implements OnInit{
   public tasksList: Task[];
   private user: User = new User();
 
-  constructor(private dataService: DataService, private switchboard: SwitchBoardService) { 
+  constructor(private dataService: DataService, private router: Router, private switchboard: SwitchBoardService) { 
     this.switchboard.user$.subscribe(usr => this.user = usr);
     this.dataService.getUserFromCookie(this.user);
+  }
+
+  btnClick = function(currentTask: Task){
+    this.router.navigateByUrl("/questionnaire?taskID=" + btoa(currentTask.taskID.toString()))
   }
 
   ngOnInit(): void {

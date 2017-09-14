@@ -16,6 +16,7 @@ import { ModalModule } from 'ngx-bootstrap/modal';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { APP_BASE_HREF } from '@angular/common';
 import { MedicationUser } from '../../class/MedicationUser';
+import { QuestionnaireComponent } from '../../components/questionnaire/questionnaire.component';
 
 export class MockDataService {
     getRepeatMedication(userID: number) {
@@ -41,7 +42,7 @@ describe('RepeatPrescriptionComponent', () => {
         mockDataService = new MockDataService();
         TestBed.configureTestingModule({
             declarations: [RepeatPrescriptionComponent, LoginComponent, ErrorPageComponent, DashboardComponent,
-                RequestPasswordResetComponent, SettingNewPasswordComponent],
+                RequestPasswordResetComponent, SettingNewPasswordComponent, QuestionnaireComponent],
             providers: [DataService, HttpClient, HttpHandler, CookieService, SwitchBoardService, RouterModule, { provide: APP_BASE_HREF, useValue: '/' }],
             imports: [
                 routes,
