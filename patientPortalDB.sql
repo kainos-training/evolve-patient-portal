@@ -57,7 +57,6 @@ CREATE TABLE IF NOT EXISTS MedicationType (
     primary key (medicationTypeID)
 );
 
-
 CREATE TABLE IF NOT EXISTS Medication (
     medicationID int auto_increment not null,
     medicationName varchar(60) not null,
@@ -101,22 +100,22 @@ CREATE TABLE IF NOT EXISTS MedicationUserComment (
 );
 
 CREATE TABLE IF NOT EXISTS Clinician (
-clinicianID int auto_increment not null,
-title enum('Mr', 'Mrs', 'Miss', 'Ms', 'Dr'),
-firstName varchar(60) not null,
-lastName varchar(60) not null,
-jobTitle varchar(30) not null,
-email varchar(100) not null,
-primary key (clinicianID)
+    clinicianID int auto_increment not null,
+    title enum('Mr', 'Mrs', 'Miss', 'Ms', 'Dr'),
+    firstName varchar(60) not null,
+    lastName varchar(60) not null,
+    jobTitle varchar(30) not null,
+    email varchar(100) not null,
+    primary key (clinicianID)
 );
 
 CREATE TABLE IF NOT EXISTS UserClinician (
-userClinicianID int auto_increment not null,
-userID int not null,
-clinicianID int not null,
-primary key (userClinicianID),
-foreign key (userID) references `User` (userID),
-foreign key (clinicianID) references Clinician(clinicianID)
+    userClinicianID int auto_increment not null,
+    userID int not null,
+    clinicianID int not null,
+    primary key (userClinicianID),
+    foreign key (userID) references `User` (userID),
+    foreign key (clinicianID) references Clinician(clinicianID)
 );
 
 CREATE TABLE IF NOT EXISTS Location (
