@@ -1,4 +1,5 @@
 
+import { SideEffectsComponent } from './components/side-effects/side-effects.component';
 import { DependantViewComponent } from './components/dependant-view/dependant-view.component';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
@@ -54,13 +55,12 @@ import { AgmCoreModule } from '@agm/core';
         TopBarComponent,
         EllipsisPipe,
         RepeatPrescriptionComponent,
+        SideEffectsComponent,
         ConditionComponent,
         MyTasksComponent,
         PersonalInfoHeaderComponent,
         SecondaryInfoHeaderComponent,
-        DependantViewComponent,
-        MyTasksComponent,
-        ConditionComponent
+        DependantViewComponent
     ],
     imports: [
         BrowserModule,

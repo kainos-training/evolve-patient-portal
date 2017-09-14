@@ -13,6 +13,8 @@ import { User } from '../../class/User';
 import { SwitchBoardService } from '../../services/switch-board.service';
 import { Subscription } from 'rxjs/Rx';
 import { SecurityContext, SimpleChanges, Input } from '@angular/core';
+import { SideEffect } from '../../class/SideEffect';
+
 @Component({
     selector: 'evolve-review-medication',
     templateUrl: './review-medication.component.html',
@@ -24,24 +26,28 @@ export class ReviewMedicationComponent implements OnInit, OnDestroy {
 
     public selectedMedication: Medication;
     public selectedMedicationComments: MedicationComment[];
-    public selectedRemovedMedicationComments: MedicationComment[];
     public selectedMedicationHistory: Medication[];
+    public selectedRemovedMedicationComments: MedicationComment[];
     public modalRef: BsModalRef;
     public medicationsList: Medication[];
     public newComment: string;
     public description: MedicationDescription;
     public sanitizer: Sanitizer;
     public collapsedDescription: boolean;
+    public showPrescriptionHistory: boolean;
     private user: User = new User();
     private userSubscription: Subscription;
+    private dataService: DataService;
+    public prescriptionHistoryExists: boolean;
     private subCenter: Subscription;
 
     public openModal(meds: Medication, template: TemplateRef<any>) {
+
         this.collapsedDescription = true;
         this.selectedMedication = meds;
+        this.showPrescriptionHistory = false;
         this.modalRef = this.modalService.show(template);
         let description = this.dataService.getWikiSummary(meds.medicationName);
-        
         const id = this.dependantID || this.user.userID; 
         
         this.dataService.getMedicationComments(this.selectedMedication.medicationUserID).subscribe(
@@ -69,40 +75,23 @@ export class ReviewMedicationComponent implements OnInit, OnDestroy {
         );
     }
 
-    public removeComment(medicationUserCommentID) {
-        this.dataService.removeMedicationComment(medicationUserCommentID);
-        this.refreshMedicationComments();
-    }
-
-    public addComment() {
-        if (this.newComment != null) {
-            this.dataService.addMedicationComment(this.selectedMedication.medicationUserID, this.newComment);
-            this.refreshMedicationComments();
-            this.newComment = null;
-        }
-    }
-
-    public refreshMedicationComments() {
-        this.dataService.getMedicationComments(this.selectedMedication.medicationUserID).subscribe(
-            res => this.selectedMedicationComments = res
-        );
-        this.dataService.getRemovedMedicationComments(this.selectedMedication.medicationUserID).subscribe(
-            res => this.selectedRemovedMedicationComments = res,
-            err => console.log(err)
-        );
+    public openPrescriptionModal(template: TemplateRef<any>) {
+        this.modalRef = this.modalService.show(template);
     }
 
     public toggleCollapse() {
         this.collapsedDescription = this.collapsedDescription == true ? false : true;
     }
 
-    constructor(private dataService: DataService, private modalService: BsModalService, private switchboard: SwitchBoardService) {
-        this.userSubscription = this.switchboard.user$.subscribe(user => {
-            this.user = user;
-        });
-        this.dataService.getUserFromCookie(this.user);
+    public displayPrescriptionHistory() {
+        this.showPrescriptionHistory = !this.showPrescriptionHistory;
     }
 
+    constructor(dataService: DataService, private modalService: BsModalService, private switchboard: SwitchBoardService) {
+        this.dataService = dataService;
+        console.log("User Id in this constructor: " + this.user.userID);
+    }
+    
     ngOnInit() {
         this.getMedicationsForUser();
     }
