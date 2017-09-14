@@ -1,6 +1,5 @@
 const express = require('express');
 const publicResetPasswordRoutes = express.Router();
-const requestPasswordResetController = require('../controllers/requestPasswordResetController');
 const resetPasswordController = require('../controllers/resetPasswordController');
 
 publicResetPasswordRoutes.post('/reset', function(req, res) {
@@ -8,11 +7,11 @@ publicResetPasswordRoutes.post('/reset', function(req, res) {
 });
 
 publicResetPasswordRoutes.post('/user', function(req, res) {
-    return requestPasswordResetController.requestPasswordReset(req, res);
+    return resetPasswordController.requestPasswordReset(req, res);
 });
 
 publicResetPasswordRoutes.post('/getUser', function(req, res) {
-    return requestPasswordResetController.getUser(req, res);
+    return resetPasswordController.getUser(req, res);
 });
 
 module.exports = publicResetPasswordRoutes;

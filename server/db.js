@@ -11,7 +11,6 @@ const database = mysql.createConnection({
 
 database.connect(function(err) {
     if (err) throw err;
-    console.log("connected to mysql")
 });
 
 database.getMedications = function(userID, callback) {
@@ -210,6 +209,8 @@ database.selectUserInfoByUserID = (userID, cb) => {
             }
         }
     )
+};
+
 database.getCurrentConditions = function(userID, callback) {
     database.query(
         "SELECT UC.userID, UC.conditionID, UC.userConditionID, UC.startDate, UC.endDate, " +
