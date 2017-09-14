@@ -1,20 +1,21 @@
-import {NavigatorGeolocation} from '@ngui/map';
-import {Subscription} from 'rxjs/Rx';
-import {AppointmentFurtherInfo} from '../../class/AppointmentFurtherInfo';
-import {Component, OnDestroy, OnInit, TemplateRef} from '@angular/core';
-import {BsModalService} from 'ngx-bootstrap/modal';
-import {BsModalRef} from 'ngx-bootstrap/modal/modal-options.class';
-import {Appointment} from '../../class/Appointment';
-import {DataService} from '../../services/data.service';
-import {SwitchBoardService} from '../../services/switch-board.service';
-import {User} from '../../class/User';
+import { SimpleChanges } from '@angular/core/src/metadata/lifecycle_hooks';
+import { NavigatorGeolocation } from '@ngui/map';
+import { Subscription } from 'rxjs/Rx';
+import { AppointmentFurtherInfo } from '../../class/AppointmentFurtherInfo';
+import { Component, Input, OnChanges, OnDestroy, OnInit, TemplateRef, SimpleChange } from '@angular/core';
+import { BsModalService } from 'ngx-bootstrap/modal';
+import { BsModalRef } from 'ngx-bootstrap/modal/modal-options.class';
+import { Appointment } from '../../class/Appointment';
+import { DataService } from '../../services/data.service';
+import { SwitchBoardService } from '../../services/switch-board.service';
+import { User } from '../../class/User';
 
 @Component({
     selector: 'evolve-appointment',
     templateUrl: './appointment.component.html',
     styleUrls: ['./appointment.component.css']
 })
-export class AppointmentComponent implements OnInit, OnDestroy {
+export class AppointmentComponent implements OnInit, OnDestroy, OnChanges {
 
     private appointments: Appointment[];
     private focusedAppointment: AppointmentFurtherInfo;
@@ -25,6 +26,9 @@ export class AppointmentComponent implements OnInit, OnDestroy {
     private user: User = new User();
     private userSubscription: Subscription;
     private mapPath: string;
+
+    // input for viewing as dependant
+    @Input() dependantID;
 
     constructor(private modalService: BsModalService, private data: DataService, private switchboard: SwitchBoardService) {
         this.userSubscription = this.switchboard.user$.subscribe(user => {
@@ -49,12 +53,28 @@ export class AppointmentComponent implements OnInit, OnDestroy {
     }
 
     ngOnInit() {
+        this.getAppointmentsForUser();
+    }
+
+    getAppointmentsForUser() {
         this.data.getUserFromCookie(this.user);
-        if(this.user)
-            if(this.user.userID)
-                this.data.getAllAppointmentsByUserID(this.user.userID).subscribe(
-                    res => this.appointments = res
-                );
+        if(this.user) {
+            // uses dependantID if available, else defaults to logged in use ID
+            const id = this.dependantID || this.user.userID; 
+
+            // get the data from the component
+            this.data.getAllAppointmentsByUserID(id).subscribe(
+                res => this.appointments = res
+            );
+        }
+    }
+
+    ngOnChanges(changes: SimpleChanges) {
+        //Called before any other lifecycle hook. Use it to inject dependencies, but avoid any serious work here.
+        //Add '${implements OnChanges}' to the class.
+
+        // download the new data to update the widgets
+        this.getAppointmentsForUser();
     }
 
     ngOnDestroy() {
