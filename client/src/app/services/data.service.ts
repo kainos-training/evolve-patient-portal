@@ -12,6 +12,7 @@ import { Router } from '@angular/router';
 import { Appointment } from '../class/Appointment';
 import { AppointmentFurtherInfo } from '../class/AppointmentFurtherInfo';
 import { User } from '../class/User';
+import { SideEffect } from '../class/SideEffect';
 import { Condition } from '../class/Condition';
 
 @Injectable()
@@ -47,6 +48,16 @@ export class DataService {
          tmp.subscribe(blah => str = blah[0].taskName);
         console.log(str);
          return tmp;
+    };
+
+    public getUserSideEffects(userID) {
+        const body = {
+            'userID': userID
+        };
+        const options = {
+            headers: new HttpHeaders().set('Content-Type', 'application/json'),
+        };
+        return this.http.post<SideEffect[]>('api/medication/side-effects', body, options);
     };
 
     public getMedicationComments(medicationUserID) {
@@ -93,6 +104,16 @@ export class DataService {
         this.http.post('api/medication/comments/remove', body, options).subscribe();
     }
 
+    public removeUserSideEffect(userSideEffectID) {
+        const body = {
+            'userSideEffectID': userSideEffectID
+        };
+        const options = {
+            headers: new HttpHeaders().set('Content-Type', 'application/json'),
+        };
+        this.http.post('api/medication/side-effects/remove', body, options).subscribe();
+    }
+
     public addMedicationComment(medicationUserID, commentText) {
         const body = {
             'medicationUserID': medicationUserID,
@@ -102,6 +123,17 @@ export class DataService {
             headers: new HttpHeaders().set('Content-Type', 'application/json'),
         };
         this.http.post('api/medication/comments/add', body, options).subscribe();
+    }
+
+    public addUserSideEffect(userID, commentText){
+        const body = {
+            'userID': userID,
+            'commentText': commentText
+        };
+        const options = {
+            headers: new HttpHeaders().set('Content-Type', 'application/json'),
+        };
+        this.http.post('api/medication/side-effects/add', body, options).subscribe();
     }
 
     public getWikiSummary(medName) {
@@ -207,6 +239,12 @@ export class DataService {
         }
     }
 
+    public getCookie(): string {
+        const cookieJSON = JSON.parse(this.cookieService.get(this.cookieName));
+        var userID = cookieJSON.userID;
+        return userID;
+    }
+
     public removeCookie(): void {
         this.cookieService.delete(this.cookieName);
     }
@@ -256,7 +294,19 @@ export class DataService {
             headers: new HttpHeaders().set('Content-Type', 'application/json'),
         };
         let url = '/api/userInfo/getUserInfoByUserID';
-        return this.http.post<User>(url, body, options);
+        return this.http.post<User[]>(url, body, options);
+    }
+
+    public getAllUserDependants(userID){
+        let headers = new Headers({ 'Content-Type': 'application/json' });
+        const body = {
+            'userID': userID
+        };
+        const options = {
+            headers: new HttpHeaders().set('Content-Type', 'application/json'),
+        };
+        let url = '/api/dependants/getAllDependants';
+        return this.http.post<User[]>(url, body, options);
     }
 
     public getCurrentConditions(userID) {

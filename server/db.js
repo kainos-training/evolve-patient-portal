@@ -15,15 +15,10 @@ database.connect(function(err) {
 
 database.getMedications = function(userID, callback) {
     database.query(
-        "SELECT U.userID, " +
-        "M.medicationID, M.medicationName, " +
-        "MT.medicationType, " +
-        "MU.startDate, MU.endDate, MU.dosage, MU.medicationUserID " +
-        "FROM User AS U INNER JOIN MedicationUser AS MU ON U.userID = MU.userID " +
-        "INNER JOIN Medication AS M ON MU.medicationID = M.medicationID " +
-        "INNER JOIN MedicationType AS MT ON MT.medicationTypeID = M.medicationTypeID " +
-        "WHERE U.userID = ? " +
-        "AND MU.endDate >= NOW();", [userID],
+        "SELECT userID, medicationID, medicationName, medicationType, startDate, endDate, dosage, instructions, prescribedDate, repeated " + 
+        "FROM User NATURAL JOIN MedicationUser NATURAL JOIN Medication NATURAL JOIN MedicationType " +
+        "WHERE userID = ? AND endDate >= NOW();", 
+        [userID],
         function(err, rows) {
             callback(err, rows);
         });
@@ -57,6 +52,16 @@ database.getRemovedMedicationUserComments = function(medicationUserID, callback)
         });
 };
 
+database.getUserSideEffects = function(userID, callback) {
+    database.query(
+        "SELECT userSideEffectID, userID, sideEffectText, `timeStamp`, deleted " +
+        "FROM UserSideEffect " +
+        "WHERE userID = ? order by `timestamp` desc;", [userID],
+        function(err, rows) {
+            callback(err, rows);
+        });
+};
+
 database.removeComment = function(medicationUserCommentID, callback) {
     database.query(
         "UPDATE MedicationUserComment SET deleted = true WHERE medicationUserCommentID = ?;", [medicationUserCommentID],
@@ -64,6 +69,23 @@ database.removeComment = function(medicationUserCommentID, callback) {
             callback(err);
         });
 };
+
+database.removeSideEffect = function(userSideEffectID, callback) {
+    database.query(
+        "UPDATE UserSideEffect SET deleted = true WHERE userSideEffectID = ?;", [userSideEffectID],
+        function(err) {
+            callback(err);
+        }
+    );
+};
+
+database.addSideEffect = function(userID, commentText, callback) {
+    database.query(
+        "INSERT INTO UserSideEffect (userID, sideEffectText, deleted) VALUES (?, ?, false);", [userID, commentText],
+        function(err) {
+            callback(err);
+        });
+}
 
 database.getMedicationHistory = function(medicationID, userID, callback) {
     database.query(
@@ -217,8 +239,7 @@ database.getCurrentConditions = function(userID, callback) {
         "C.conditionName, C.conditionLink " +
         "FROM UserCondition AS UC INNER JOIN `Condition` AS C ON UC.conditionID = C.conditionID " +
         "WHERE UC.userID = ? " +
-        "AND UC.endDate IS NULL;",
-        [userID],
+        "AND UC.endDate IS NULL;", [userID],
         function(err, rows) {
             callback(err, rows);
         });
@@ -230,8 +251,7 @@ database.getPreviousConditions = function(userID, callback) {
         "C.conditionName, C.conditionLink " +
         "FROM UserCondition AS UC INNER JOIN `Condition` AS C ON UC.conditionID = C.conditionID " +
         "WHERE UC.userID = ? " +
-        "AND UC.endDate < NOW();",
-        [userID],
+        "AND UC.endDate < NOW();", [userID],
         function(err, rows) {
             callback(err, rows);
         });
@@ -242,7 +262,7 @@ database.getTaskList = function(userID, callback) {
         "SELECT taskName, taskSummary, recievedDate, dueDate FROM Task " +
         "WHERE userID = ? " +
         "AND dueDate > NOW() " +
-        "ORDER BY dueDate;" , [userID],
+        "ORDER BY dueDate;", [userID],
         function(err, rows) {
             callback(err, rows);
         });

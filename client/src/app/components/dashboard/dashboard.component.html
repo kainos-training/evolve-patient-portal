@@ -1,8 +1,23 @@
 <evolve-top-bar></evolve-top-bar>
 <evolve-left-side-menu></evolve-left-side-menu>
-<div id="widget-container" class="col-sm-9">
-    <evolve-appointment>Loading Map</evolve-appointment>
-    <evolve-review-medication></evolve-review-medication>
-    <evolve-condition></evolve-condition>
-    <evolve-my-tasks></evolve-my-tasks>
+<!-- widget container -->
+<div id="widgetContainer" class="col-sm-9">
+    <!-- My Dashboard -->
+    <div [hidden]="!(navigationOption===navigationOptions.MyDashboard)">
+        <!-- information headers -->
+        <evolve-personal-info-header></evolve-personal-info-header>
+        <evolve-secondary-info-header></evolve-secondary-info-header>
+        <!-- widgets -->
+        <evolve-appointment></evolve-appointment>
+        <evolve-review-medication></evolve-review-medication>
+        <evolve-condition></evolve-condition>
+        <evolve-side-effects></evolve-side-effects>
+        <evolve-my-tasks></evolve-my-tasks>
+    </div>
+
+    <!-- My dependants dashboard -->
+    <!-- <div *ngIf="navigationOption===navigationOptions.MyDependants"> -->
+    <div [hidden]="!(navigationOption===navigationOptions.MyDependants)">
+        <evolve-dependant-view></evolve-dependant-view>
+    </div>
 </div>

@@ -1,0 +1,9 @@
+<div *ngIf="viewingDependant">
+    <h3>Your Dependants</h3>
+    <evolve-personal-info-header [dependantID]="viewingDependant.userID"></evolve-personal-info-header>
+    <evolve-secondary-info-header [dependantID]="viewingDependant.userID"></evolve-secondary-info-header>
+
+    <evolve-appointment [dependantID]="viewingDependant.userID"></evolve-appointment>
+    <evolve-review-medication [dependantID]="viewingDependant.userID"></evolve-review-medication>
+ 
+</div>
