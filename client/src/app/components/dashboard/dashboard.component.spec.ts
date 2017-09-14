@@ -16,17 +16,22 @@ import { AppointmentComponent } from '../appointment/appointment.component';
 import { Marker, NguiMapComponent, DirectionsRenderer } from '@ngui/map/dist';
 import { ReviewMedicationComponent } from '../review-medication/review-medication.component';
 import { EllipsisPipe } from '../../utils/ellipsis.pipe';
+import { OrderByPipe } from '../../utils/orderby.pipe';
+import { UniquePipe } from '../../utils/unique.pipe';
+import { FilterPipe } from '../../utils/filter.pipe';
 import { ModalModule } from 'ngx-bootstrap/modal';
 import { FormsModule } from '@angular/forms';
-import { NgModule } from '@angular/core';
+import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
 import { PersonalInfoHeaderComponent } from '../personal-info-header/personal-info-header.component'; 
 import { ConditionComponent } from '../condition/condition.component';
 import { TooltipModule } from 'ngx-bootstrap/tooltip';
+import { DatePickerOptions, DateModel } from 'ng2-datepicker';
 import { MyTasksComponent } from '../my-tasks/my-tasks.component';
 import { DependantViewComponent } from '../dependant-view/dependant-view.component';
 import { SideEffectsComponent } from '../side-effects/side-effects.component';
+import { PreviousAppointmentsComponent } from '../previous-appointments/previous-appointments.component';
 
 describe('DashboardComponent', () => {
     let component: DashboardComponent;
@@ -37,8 +42,12 @@ describe('DashboardComponent', () => {
     beforeEach(() => {
         TestBed.configureTestingModule({
             declarations: [
+                PreviousAppointmentsComponent,
                 DashboardComponent,
                 EllipsisPipe,
+                OrderByPipe,
+                UniquePipe,
+                FilterPipe,
                 TopBarComponent,
                 LeftSideMenuComponent,
                 MapViewComponent,
@@ -58,6 +67,10 @@ describe('DashboardComponent', () => {
                 MyTasksComponent
             ],
             providers: [
+                EllipsisPipe,
+                OrderByPipe,
+                UniquePipe,
+                FilterPipe,
                 SwitchBoardService,
                 DataService,
                 CookieService,
@@ -74,6 +87,7 @@ describe('DashboardComponent', () => {
                 BrowserAnimationsModule,
                 TooltipModule.forRoot()
             ]
+            ,schemas: [CUSTOM_ELEMENTS_SCHEMA]
         })
             .compileComponents();
     });
