@@ -8,6 +8,7 @@ import {Appointment} from '../../class/Appointment';
 import {DataService} from '../../services/data.service';
 import {SwitchBoardService} from '../../services/switch-board.service';
 import {User} from '../../class/User';
+import { Clinician } from '../../class/Clinician';
 
 @Component({
     selector: 'evolve-appointment',
@@ -25,6 +26,7 @@ export class AppointmentComponent implements OnInit, OnDestroy {
     private user: User = new User();
     private userSubscription: Subscription;
     private mapPath: string;
+    private clinicians: Clinician[];
 
     constructor(private modalService: BsModalService, private data: DataService, private switchboard: SwitchBoardService) {
         this.userSubscription = this.switchboard.user$.subscribe(user => {
@@ -35,6 +37,14 @@ export class AppointmentComponent implements OnInit, OnDestroy {
             this.userLocation = location;
         });
     }
+    public openModalQuery(template: TemplateRef<any>, userID: number) {
+        this.data.getUserClinicians(userID).subscribe(
+            res => this.clinicians = res,
+            err => console.log(err)
+        );
+    }
+
+
     
     public openModal(template: TemplateRef<any>, appointment: Appointment) {
         this.data.getAppointmentInformation(appointment.appointmentID).subscribe(

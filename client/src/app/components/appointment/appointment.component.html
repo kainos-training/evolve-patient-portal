@@ -78,8 +78,21 @@
                
                 <strong>From:</strong><br>
                 <textarea disabled type="text" class="form-control input-disabled" id="username" rows="1">{{user.firstName}} {{user.lastName}}</textarea>
+                
+                <!-- --------------------------------------- -->
                 <strong>To:</strong><br>
-                <textarea type="text" class="form-control input-disabled" id="recipient" rows="1">{{focusedAppointment.clinicianName}}</textarea>
+              
+                        <select><option *ngFor="let clinician of clinicians" value="Doctor 1">{{clinician.firstName}} {{clinician.lastName}}</option></select>
+                        
+
+
+
+
+    
+
+                <br>
+
+                 <!-- --------------------------------------- -->
                 <strong>Subject:</strong><br>
                 <textarea type="text" class="form-control input-disabled" id="username" rows="1"></textarea>
                 
