@@ -115,13 +115,4 @@ describe('SideEffectsComponent', () => {
     component = fixture.componentInstance;
     expect(component).toBeTruthy();
   });
-
-  it('should add a new side effect to appropriate user', async() => {
-    fixture = TestBed.createComponent(SideEffectsComponent);
-    component = fixture.componentInstance;
-    component.newSideEffect = "I can't sleep";
-    component.addSideEffect();
-    let testSideEffect: SideEffect = component.userSideEffects.pop();
-    expect(testSideEffect.sideEffectText).toBe("I can't sleep");
-  });
 });
