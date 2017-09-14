@@ -99,6 +99,46 @@ database.getMedicationHistory = function(medicationID, userID, callback) {
         });
 };
 
+database.updatePrescribedDate = function(medicationUserID, deliveryStatus, callback) {
+    console.log(medicationUserID);
+    database.query(
+        'UPDATE medicationUser ' +
+        'SET prescribedDate = curdate(), repeated = 0, delivery = ? ' +
+        'WHERE medicationUserID in ' + medicationUserID + ' ;', [deliveryStatus],
+        function(err) {
+            console.log(err);
+            callback(err);
+        });
+};
+
+database.getRepeatedMedication = function(userID, callback) {
+    database.query(
+        "SELECT U.userID, " +
+        "M.medicationID, M.medicationName, " +
+        "MT.medicationType, " +
+        "MU.startDate, MU.endDate, MU.dosage, MU.medicationUserID " +
+        "FROM User AS U INNER JOIN MedicationUser AS MU ON U.userID = MU.userID " +
+        "INNER JOIN Medication AS M ON MU.medicationID = M.medicationID " +
+        "INNER JOIN MedicationType AS MT ON MT.medicationTypeID = M.medicationTypeID " +
+        "WHERE U.userID = ? " +
+        "AND MU.endDate >= NOW() " +
+        "AND MU.repeated = TRUE;", [userID],
+        function(err, rows) {
+            callback(err, rows);
+        });
+};
+
+database.getLocalPharmacy = function(userID, callback) {
+    database.query(
+        "SELECT pharmacyName, Pharmacy.address " +
+        "FROM Pharmacy,`User` " +
+        "WHERE `User`.userID = ? " +
+        "AND `User`.pharmacyID = Pharmacy.pharmacyID;", [userID],
+        function(err, rows) {
+            callback(err, rows);
+        });
+}
+
 database.getCurrentConditions = function(userID, callback) {
     database.query(
         "SELECT UC.userID, UC.conditionID, UC.userConditionID, UC.startDate, UC.endDate, " +
@@ -122,6 +162,8 @@ database.getPreviousConditions = function(userID, callback) {
             callback(err, rows);
         });
 };
+
+
 
 database.getTaskList = function(userID, callback) {
     database.query(

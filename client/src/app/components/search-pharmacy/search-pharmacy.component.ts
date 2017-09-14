@@ -18,6 +18,8 @@ export class SearchPharmacyComponent implements OnInit, OnDestroy {
     private navigatorGeolocation = new NavigatorGeolocation();
     private geocoder = new google.maps.Geocoder();
 
+    public searchText: String;
+
     constructor() { }
 
     ngOnInit() {

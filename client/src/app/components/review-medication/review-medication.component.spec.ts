@@ -1,3 +1,4 @@
+
 import { BrowserModule } from '@angular/platform-browser';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { FormsModule } from '@angular/forms';
@@ -23,6 +24,7 @@ import { BsModalService } from 'ngx-bootstrap/modal';
 import { SettingNewPasswordComponent } from '../setting-new-password/setting-new-password.component';
 import { RequestPasswordResetComponent } from '../request-password-reset/request-password-reset.component';
 import { APP_BASE_HREF } from '@angular/common';
+import { RepeatPrescriptionComponent } from '../repeat-prescription/repeat-prescription.component';
 import { User } from '../../class/User';
 import { BsModalRef } from 'ngx-bootstrap/modal/modal-options.class';
 import { NgModel } from '@angular/forms';
@@ -75,7 +77,8 @@ describe('ReviewMedicationComponent', () => {
                 ErrorPageComponent, 
                 DashboardComponent, 
                 SettingNewPasswordComponent, 
-                RequestPasswordResetComponent],
+                RequestPasswordResetComponent,
+                RepeatPrescriptionComponent],
             providers: [
                 DataService, 
                 HttpClientModule, 

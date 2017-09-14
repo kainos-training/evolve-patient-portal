@@ -3,16 +3,18 @@ const request = require('request');
 const xml = require("node-xml-lite");
 const wikiAPIurl = "https://en.wikipedia.org/w/api.php?action=query&prop=extracts&format=xml&exintro=&titles=";
 
-exports.getListOfMedications = function (req, res) {
+exports.getListOfMedications = function(req, res) {
     const userID = req.body.userID;
 
     if (userID == null) {
+        console.log(userID);
         res.status(400).json({
             success: false
         });
     } else {
-        db.getMedications(userID, function (err, rows) {
+        db.getMedications(userID, function(err, rows) {
             if (err) {
+                console.log(err);
                 res.status(400).json({
                     success: false
                 });
@@ -24,7 +26,7 @@ exports.getListOfMedications = function (req, res) {
     }
 };
 
-exports.addMedicationUserComment = function (req, res) {
+exports.addMedicationUserComment = function(req, res) {
     const medicationUserID = req.body.medicationUserID;
     const commentText = req.body.commentText;
 
@@ -37,7 +39,7 @@ exports.addMedicationUserComment = function (req, res) {
             success: false
         });
     } else {
-        db.insertComment(medicationUserID, commentText, function (err) {
+        db.insertComment(medicationUserID, commentText, function(err) {
             if (err) {
                 res.status(400).json({
                     success: false
@@ -51,7 +53,7 @@ exports.addMedicationUserComment = function (req, res) {
     }
 };
 
-exports.getListOfMedicationUserComments = function (req, res) {
+exports.getListOfMedicationUserComments = function(req, res) {
     const medicationUserID = req.body.medicationUserID;
 
     if (medicationUserID == null) {
@@ -59,8 +61,9 @@ exports.getListOfMedicationUserComments = function (req, res) {
             success: false
         });
     } else {
-        db.getMedicationUserComments(medicationUserID, function (err, rows) {
+        db.getMedicationUserComments(medicationUserID, function(err, rows) {
             if (err) {
+                console.log(err);
                 res.status(400).json({
                     success: false
                 });
@@ -71,6 +74,7 @@ exports.getListOfMedicationUserComments = function (req, res) {
     }
 };
 
+exports.getListOfRemovedMedicationUserComments = function(req, res) {
 exports.getUserSideEffects = function(req, res) {
     const userID = req.body.userID;
 
@@ -98,7 +102,7 @@ exports.getListOfRemovedMedicationUserComments = function (req, res) {
             success: false
         });
     } else {
-        db.getRemovedMedicationUserComments(medicationUserID, function (err, rows) {
+        db.getRemovedMedicationUserComments(medicationUserID, function(err, rows) {
             if (err) {
                 res.status(400).json({
                     success: false
@@ -118,7 +122,7 @@ exports.removeMedicationUserComment = function(req, res) {
             success: false
         });
     } else {
-        db.removeComment(medicationUserCommentID, function (err) {
+        db.removeComment(medicationUserCommentID, function(err) {
             if (err) {
                 res.status(400).json({
                     success: false
@@ -196,9 +200,9 @@ exports.getWikiMedicationDescription = function(req, res) {
             json: true
         }
 
-        request(requestOptions, function (err, httpResponse, body) {
+        request(requestOptions, function(err, httpResponse, body) {
             const returnData = {
-                // Note(Dariusz J.): 
+                // Note(Dariusz J.):
                 // xml.parseString.childs[0].... is due to format of how data is pulled from wikipedia API.
                 // We only need one filed therefore we get only necessary data to post to front end => it is easier to handle it on the client side.
                 // For more info, refer to wikipedia API documentation.
@@ -209,7 +213,7 @@ exports.getWikiMedicationDescription = function(req, res) {
     }
 };
 
-exports.getMedicationHistory = function (req, res) {
+exports.getMedicationHistory = function(req, res) {
     const medicationID = req.body.medicationID;
     const userID = req.body.userID;
 
@@ -218,7 +222,7 @@ exports.getMedicationHistory = function (req, res) {
             success: false
         });
     } else {
-        db.getMedicationHistory(medicationID, userID, function (err, rows) {
+        db.getMedicationHistory(medicationID, userID, function(err, rows) {
             if (err) {
                 res.status(400).json({
                     success: false
@@ -230,4 +234,4 @@ exports.getMedicationHistory = function (req, res) {
             }
         });
     }
-};
+}};
