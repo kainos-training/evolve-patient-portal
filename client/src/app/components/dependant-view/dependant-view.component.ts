@@ -7,7 +7,6 @@ import { BsDropdownConfig } from 'ngx-bootstrap/dropdown';
 import { Medication } from '../../class/Medication';
 import { MedicationComment } from '../../class/MedicationComment';
 import { ReviewMedicationComponent } from '../review-medication/review-medication.component';
-
 @Component({
     selector: 'evolve-dependant-view',
     templateUrl: './dependant-view.component.html',
