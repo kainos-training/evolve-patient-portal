@@ -23,6 +23,8 @@ import {BsModalService} from 'ngx-bootstrap/modal';
 import {SettingNewPasswordComponent} from '../setting-new-password/setting-new-password.component';
 import {RequestPasswordResetComponent} from '../request-password-reset/request-password-reset.component';
 import {APP_BASE_HREF} from '@angular/common';
+import {User} from '../../class/User';
+import { BsModalRef } from 'ngx-bootstrap/modal/modal-options.class';
 
 export class MockDataService {
     getMedicationList(userID: number) {
@@ -30,24 +32,27 @@ export class MockDataService {
         if (userID == 1) {
             toReturn.push(new Medication(1, 'Mood Stabilizer', new Date(2017, 2, 12), new Date(2017, 3, 12), 'Take 1 daily','Be Very Careful', new Date(2017, 4, 11), false));
             toReturn.push(new Medication(1, 'Antibiotics', new Date(2017, 3, 13), new Date(2017, 4, 11), 'Take 2 daily', 'Be Careful', new Date(2017, 4, 11), false));
-
-            /*
-              medicationUserID : number;
-                medicationID : number;
-                medicationName : String;
-                medicationType : String;
-                startDate : Date;
-                endDate : Date;
-                dosage : String;
-                instructions: String;
-                prescribedDate: Date;
-                repeated: boolean;
-            */
         }
         return toReturn;
     }
 
 
+}
+
+export class MockSwitchboardService {
+    getUser(userID: number) {
+        let u : User;
+        return u;
+    }
+
+
+}
+
+export class MockBSModalService {
+    show()
+    {
+        return new BsModalRef();
+    }
 }
 
 describe('ReviewMedicationComponent', () => {
@@ -65,15 +70,10 @@ describe('ReviewMedicationComponent', () => {
                 LoginComponent, 
                 ErrorPageComponent, 
                 DashboardComponent, 
-                LeftSideMenuComponent, 
-                TopBarComponent, 
-                AppointmentComponent, 
                 SettingNewPasswordComponent, 
                 RequestPasswordResetComponent],
             providers: [
                 DataService, 
-                HttpClient,
-                HttpHandler, 
                 HttpClientModule, 
                 BsModalService, 
                 CookieService, 
@@ -95,7 +95,9 @@ describe('ReviewMedicationComponent', () => {
         TestBed.overrideComponent(ReviewMedicationComponent, {
             set: {
                 providers: [
-                    {provide: DataService, useClass: MockDataService}
+                    {provide: DataService, useClass: MockDataService},
+                    {provide: SwitchBoardService, useClass: MockSwitchboardService},
+                    {provide: BsModalService, useClass: MockBSModalService}
                 ]
             }
         });
