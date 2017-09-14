@@ -34,6 +34,7 @@ import { ReviewMedicationComponent } from './components/review-medication/review
 import { ConditionComponent } from './components/condition/condition.component';
 import { TooltipModule } from 'ngx-bootstrap/tooltip';
 import { MyTasksComponent } from './components/my-tasks/my-tasks.component';
+import { TimelineComponent } from './components/timeline/timeline.component';
 
 @NgModule({
     declarations: [
@@ -49,6 +50,8 @@ import { MyTasksComponent } from './components/my-tasks/my-tasks.component';
         SettingNewPasswordComponent,
         TopBarComponent,
         EllipsisPipe,
+        TimelineComponent,
+        ConditionComponent,
         SideEffectsComponent,
         ConditionComponent,
         MyTasksComponent,
