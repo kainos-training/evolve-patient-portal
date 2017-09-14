@@ -48,10 +48,9 @@ export class AppointmentComponent implements OnInit, OnDestroy, OnChanges {
         this.modalService.onHidden.asObservable().subscribe(() => this.onHidden());
     }
 
-    public openModalQuery(currentTemp: TemplateRef<any>, newTemp:TemplateRef<any>) {
-        
-        this.modalService.show(newTemp);
-    }
+    // public openModalQuery(currentTemp: TemplateRef<any>, newTemp:TemplateRef<any>) {
+    //     this.modalService.show(newTemp);
+    // }
 
     toggleSecondVisible() {
         this.secondVisible = !this.secondVisible;
