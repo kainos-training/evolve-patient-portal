@@ -18,6 +18,7 @@ import { LeftSideMenuComponent } from '../left-side-menu/left-side-menu.componen
 import { AppointmentComponent } from '../appointment/appointment.component';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { Task } from '../../class/Task';
+import { RepeatPrescriptionComponent } from '../repeat-prescription/repeat-prescription.component';
 
 export class MockDataService {
   getTaskList(userID: number) {
@@ -38,7 +39,7 @@ describe('MyTasksComponent', () => {
   beforeEach(async(() => {
     mockDataService = new MockDataService();
     TestBed.configureTestingModule({
-      declarations: [ MyTasksComponent,LoginComponent, AppointmentComponent, LeftSideMenuComponent, TopBarComponent, ErrorPageComponent, DashboardComponent, SettingNewPasswordComponent, RequestPasswordResetComponent ],
+      declarations: [ MyTasksComponent,LoginComponent, AppointmentComponent, LeftSideMenuComponent, TopBarComponent, ErrorPageComponent, DashboardComponent, SettingNewPasswordComponent, RequestPasswordResetComponent, RepeatPrescriptionComponent ],
       providers: [DataService, HttpClient, HttpHandler, HttpClientModule, CookieService, SwitchBoardService, {provide: APP_BASE_HREF, useValue: '/'} ],
       imports: [
         routes,

@@ -1,3 +1,4 @@
+
 import { Component, OnDestroy, OnInit, TemplateRef } from '@angular/core';
 import { DataService } from '../../services/data.service';
 import { Medication } from '../../class/Medication';
@@ -7,10 +8,11 @@ import { Observable } from 'rxjs/Observable';
 import { MedicationComment } from '../../class/MedicationComment';
 import { MedicationDescription } from '../../class/MedicationDescription';
 import { Sanitizer } from '@angular/core';
+import { RepeatPrescriptionComponent } from  '../repeat-prescription/repeat-prescription.component';
+import { User } from '../../class/User';
 import { SwitchBoardService } from '../../services/switch-board.service';
 import { Subscription } from 'rxjs/Rx';
 import { SecurityContext, SimpleChanges, Input } from '@angular/core';
-import { User } from '../../class/User';
 import { SideEffect } from '../../class/SideEffect';
 
 @Component({

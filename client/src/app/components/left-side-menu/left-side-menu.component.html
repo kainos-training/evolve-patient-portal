@@ -12,6 +12,8 @@
         <div class="patientInfoText"><span class="patientInfoTextTitle">Email: </span>{{user.email}}</div>
     </div>
     <ul class="linkList">
+
+        <li class="linkItem"><a routerLink="/repeat-prescription">Repeat Prescription</a></li>
         <!-- MyDashboard set to active (first page the user will see) -->
         <li class="linkItem active" (click)="navigationItemClicked($event)">{{navigationOptions.MyDashboard}}</li>
         <li class="linkItem" (click)="navigationItemClicked($event)">{{navigationOptions.MyDependants}}</li>

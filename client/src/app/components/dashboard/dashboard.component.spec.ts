@@ -1,3 +1,4 @@
+
 import { SecondaryInfoHeaderComponent } from '../secondary-info-header/secondary-info-header.component';
 import { NavigationOption, NavigationOptionEnum } from '../../app.globals';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -17,13 +18,14 @@ import { ReviewMedicationComponent } from '../review-medication/review-medicatio
 import { EllipsisPipe } from '../../utils/ellipsis.pipe';
 import { ModalModule } from 'ngx-bootstrap/modal';
 import { FormsModule } from '@angular/forms';
-import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import { MyTasksComponent } from '../my-tasks/my-tasks.component';
+import {ConditionComponent} from '../condition/condition.component';
+import {TooltipModule} from 'ngx-bootstrap/tooltip';
+import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
 import { PersonalInfoHeaderComponent } from '../personal-info-header/personal-info-header.component'; 
-import { ConditionComponent } from '../condition/condition.component';
-import { TooltipModule } from 'ngx-bootstrap/tooltip';
-import { MyTasksComponent } from '../my-tasks/my-tasks.component';
 import { DependantViewComponent } from '../dependant-view/dependant-view.component';
 import { SearchPharmacyComponent } from '../search-pharmacy/search-pharmacy.component';
 import { SideEffectsComponent } from '../side-effects/side-effects.component';
@@ -72,7 +74,8 @@ describe('DashboardComponent', () => {
                 HttpClientModule,
                 BrowserAnimationsModule,
                 TooltipModule.forRoot()
-            ]
+            ],
+            schemas: [CUSTOM_ELEMENTS_SCHEMA]
         })
             .compileComponents();
     });
