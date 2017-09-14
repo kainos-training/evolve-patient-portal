@@ -163,10 +163,12 @@ foreign key (appointmentTypeID) references AppointmentType (appointmentTypeID)
 CREATE TABLE IF NOT EXISTS AppointmentQuery (
 appointmentQueryID int auto_increment not null,
 appointmentID int not null,
+clinicianID int not null,
 querySubject varchar(100) not null,
 queryText varchar(350) not null,
 primary key (appointmentQueryID),
-foreign key (appointmentID) references Appointment(appointmentID)
+foreign key (appointmentID) references Appointment(appointmentID),
+foreign key (clinicianID) references Clinician(clinicianID)
 );
 
 INSERT INTO GP (gpFullName, gpPracticeName, gpPracticeAddress)
@@ -255,6 +257,5 @@ VALUES('Pre-op questionnaire', 1, 'Questionnaire to be filled out before surgery
 ('Pre-op Assessment: Olanzapine', 1, 'Form used to assess your suitibility for Olanzapine which will be used post surgery.', (NOW() - INTERVAL 12 DAY), (NOW() - INTERVAL 2 DAY)),
 ('Pre-op Assessment: Paracetamol', 1, 'Form used to assess your suitibility for Paracetamol which will be used post surgery.', NOW(), (NOW() + INTERVAL 12 DAY));
 
-INSERT INTO AppointmentQuery(appointmentID, querySubject, queryText)
-VALUES (1, 'Pre-appointment instructions', 'Do I need to fast before coming to this appointment?');
-
+INSERT INTO AppointmentQuery(appointmentID, clinicianID, querySubject, queryText)
+VALUES (1, 1, 'Pre-appointment instructions', 'Do I need to fast before coming to this appointment?');

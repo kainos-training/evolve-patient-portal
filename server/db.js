@@ -125,4 +125,14 @@ database.getUserClinicians = function(userID, callback) {
         });
 };
 
+database.addAppointmentQuery = function(appointmentID, clinicianID, querySubject, queryText) {
+    database.query(
+        "INSERT INTO AppointmentQuery(appointmentID, clinicianID, querySubject, queryText) " +
+        "VALUES(?, ?, ?, ?);",
+        [appointmentID, clinicianID, querySubject, queryText],
+        function(err, rows) {
+            callback(err)
+        });
+};
+
 module.exports = database;

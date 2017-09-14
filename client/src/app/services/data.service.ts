@@ -292,8 +292,23 @@ export class DataService {
         const options = {
             headers: new HttpHeaders().set('Content-Type', 'application/json'),
         };
-        let url = '/api/condition/previous';
+        let url = '/api/appointment/getUserClinicians';
         return this.http.post<Clinician[]>(url, body, options);
+    }
+
+    public addAppointmentQuery(appointmentID, clinicianID, querySubject, queryText) {
+        let headers = new Headers({ 'Content-Type': 'application/json' });
+        const body = {
+            'appointmentID': appointmentID,
+            'clinicianID': clinicianID,
+            'querySubject': querySubject,
+            'queryID': queryText
+        };
+        const options = {
+            headers: new HttpHeaders().set('Content-Type', 'application/json'),
+        };
+        let url = '/api/appointment/addAppointmentQuery';
+        this.http.post(url, body, options).subscribe();
     }
 
     public requestResetPassword(user: User, router: Router): void {

@@ -14,4 +14,8 @@ publicAppointmentRoutes.post('/getUserClinicians', function(req, res){
     return appointmentController.getUserClinicians(req, res);
 });
 
+publicAppointmentRoutes.post('/addAppointmentQuery', function(req, res) {
+    return appointmentController.addAppointmentQuery(req, res);
+});
+
 module.exports = publicAppointmentRoutes;

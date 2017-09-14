@@ -65,3 +65,27 @@ exports.getUserClinicians = function(req, res) {
         });
     }
 };
+
+exports.addAppointmentQuery = function(req, res) {
+    const appointmentID = req.body.appointmentID;
+    const clinicianID = req.body.clinicianID;
+    const querySubject = req.body.querySubject;
+    const queryText = req.body.queryText;
+
+    if (appointmentID == null || clinicianID == null || querySubject == null || queryText == null) {
+        res.status(400).json({
+            success: false
+        });
+    } else {
+        db.addAppointmentQuery(appointmentID, clinicianID, querySubject, queryText, function(err) {
+            if (err) {
+                console.log(err);
+                res.status(400).json({
+                    success: false
+                });
+            } else {
+                res.status(200).send("success");
+            }
+        });
+    }
+};
