@@ -1,6 +1,5 @@
 import { document } from 'ngx-bootstrap/utils/facade/browser';
 import { Component, OnInit } from '@angular/core';
-//import { googlemaps } from 'google-maps';
 import { } from '@types/googlemaps';
 
 @Component({
@@ -10,6 +9,8 @@ import { } from '@types/googlemaps';
 })
 export class SearchPharmacyComponent implements OnInit {
 
+    public searchText: String;
+
     constructor() { }
 
     ngOnInit() {
@@ -18,6 +19,7 @@ export class SearchPharmacyComponent implements OnInit {
     onInputChange($event) {
         // enters here when input is detected
         // GoogleMapsLoader
+        console.log(this.searchText);
 
         var input = <HTMLInputElement>document.getElementById('searchTextField');
 
@@ -28,9 +30,10 @@ export class SearchPharmacyComponent implements OnInit {
                     'regions'
                 ],
             };
-            // var autocomplete = new google.maps.places.Autocomplete(input, options);
             var autocomplete = new google.maps.places.Autocomplete(input);
         }
+
+    
     }
 }
 

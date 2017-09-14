@@ -1,2 +1,2 @@
-<label>Enter in your local pharmacy: <br></label>
-<input id="searchTextField" type="text" size="50" placeholder="Enter a pharmacy" (input)="onInputChange($event)">
+<label>Selected another pharmacy: <br></label>
+<input id="searchTextField" type="text" size="50" placeholder="Enter a pharmacy" [(ngModel)]="searchText" (input)="onInputChange($event)">
