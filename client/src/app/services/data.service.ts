@@ -61,6 +61,7 @@ export class DataService {
         const options = {
             headers: new HttpHeaders().set('Content-Type', 'application/json'),
         };
+        console.log(body);
         return this.http.post('api/prescription/updatePrescribedDate', body, options).subscribe();
     };
 

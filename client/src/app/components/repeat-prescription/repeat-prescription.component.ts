@@ -60,7 +60,7 @@ export class RepeatPrescriptionComponent implements OnInit {
         }
 
         for (var i = 0; i < this.prescriptionList.length; i++) {
-            this.confirmedPrescriptionList.push(prescriptionList[i].medicationUserID);
+            this.confirmedPrescriptionList.push(this.prescriptionList[i].medicationUserID);
         }
         this.dataService.updatePrescriptionDate(this.confirmedPrescriptionList, this.deliveryType);
         this.ngOnInit()
@@ -80,7 +80,6 @@ export class RepeatPrescriptionComponent implements OnInit {
         this.dataService.getLocalPharmacy(1).subscribe(res => {
             this.localPharmacy = res
             this.pharmacy = this.localPharmacy[0]
-            console.log(this.pharmacy.pharmacyName);
         });
 
         this.dataService.getRepeatedMedication(this.userID).subscribe(

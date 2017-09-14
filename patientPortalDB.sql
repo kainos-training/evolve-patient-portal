@@ -97,6 +97,7 @@ dosage varchar(60) not null,
 instructions varchar(60) not null,
 prescribedDate date not null,
 repeated bool not null,
+delivery bool not null,
 primary key (medicationUserID),
 foreign key (userID) references `User` (userID),
 foreign key (medicationID) references Medication (medicationID)
@@ -228,13 +229,13 @@ VALUES('Penicillin', 1, 'https://en.wikipedia.org/wiki/Penicillin'),
 ('Ketoprofen', 4, 'https://en.wikipedia.org/wiki/Ketoprofen'),
 ('Xylometazoline', 1, 'https://en.wikipedia.org/wiki/Xylometazoline');
 
-INSERT INTO MedicationUser(userID, medicationID, startDate, endDate, dosage, instructions,prescribedDate,repeated)
-VALUES (1, 3, '2017-06-01', '2019-08-10', '10mg', 'Take one tablet twice a day, after meals','2017-09-01',TRUE),
-(1, 3, '2016-06-01', '2017-06-01', '5mg', 'Take two tablets twice a day', '2017-09-01',TRUE),
-(1, 3, '2015-06-01', '2016-06-01', '20mg', 'Take two tablets twice a day', '2017-04-01',TRUE),
-(1, 4, '2016-06-01', '2019-08-10', '5mg', 'Take two tablets twice a day','2016-04-01',TRUE),
-(2, 1, '2017-02-09', '2019-02-27', '15mg', 'Take one tablet twice a day','2017-09-01',FALSE), 
-(3, 2, '2016-09-29', '2018-10-10', '10mg', 'Take one tablet twice a day','2017-09-01',TRUE);
+INSERT INTO MedicationUser(userID, medicationID, startDate, endDate, dosage, instructions,prescribedDate,repeated, delivery)
+VALUES (1, 3, '2017-06-01', '2019-08-10', '10mg', 'Take one tablet twice a day, after meals','2017-09-01',TRUE, TRUE),
+(1, 3, '2016-06-01', '2017-06-01', '5mg', 'Take two tablets twice a day', '2017-09-01',TRUE, TRUE),
+(1, 3, '2015-06-01', '2016-06-01', '20mg', 'Take two tablets twice a day', '2017-04-01',TRUE, TRUE),
+(1, 4, '2016-06-01', '2019-08-10', '5mg', 'Take two tablets twice a day','2016-04-01',TRUE, TRUE),
+(2, 1, '2017-02-09', '2019-02-27', '15mg', 'Take one tablet twice a day','2017-09-01',FALSE, TRUE), 
+(3, 2, '2016-09-29', '2018-10-10', '10mg', 'Take one tablet twice a day','2017-09-01',TRUE, TRUE);
 
 INSERT INTO MedicationUserComment(medicationUserID, commentText, deleted)
 VALUES (1, 'Not feeling the benefit after two weeks', false), (2, 'Helping to minimise pain but still exists', false),
