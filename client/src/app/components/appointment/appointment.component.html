@@ -83,17 +83,17 @@
                 <strong>Subject:</strong><br>
                 <textarea type="text" class="form-control input-disabled" id="username" rows="1"></textarea>
                 
-                  
+                <br>
+                    <strong><span style="padding-left: 30px">This query is in relation to the appoinment below:</span><br>  </strong>  
+                <br>
+    
+                    <i><span style="padding-left: 30px"><strong>Location: </strong>{{focusedAppointment.locationAddress}}</span><br></i>
+                    <i><span style="padding-left: 30px"><strong>Due: </strong> {{focusedAppointment.dateOfAppointment | date: 'dd/MM/yyyy'}}</span><br></i> 
+                    <i><span style="padding-left: 30px"><strong>Time: </strong> {{focusedAppointment.dateOfAppointment | date:'h:mm a'}}</span></i>
 
-                  <br>
-                  <br>
-                  <br>  
-                  <br> 
-                  <br> 
+                <br> 
+                <br> 
 
-                 
-
-                
                 <label><strong>Query</strong></label>
                     <textarea type="text" class="form-control input-disabled" id="comment-input" rows="8"></textarea>
             
