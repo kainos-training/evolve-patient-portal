@@ -214,8 +214,8 @@ VALUES (1, 3, '2017-06-01', '2019-08-10', '10mg', '2017-09-01',TRUE,TRUE),
 INSERT INTO MedicationUserComment(medicationUserID, commentText, deleted)
 VALUES (1, 'Not feeling the benefit after two weeks', false), (2, 'Helping to minimise pain but still exists', false),
 (3, 'Not helping with pain, possibly need stronger medication', false), (4, 'Feeling better mentally', false), 
-(12, 'Hearing not improving', false),
-(13, 'Ear pain easing', false), 
+(4, 'Hearing not improving', false),
+(5, 'Ear pain easing', false), 
 (7, 'Eye pain gone', true);
 
 INSERT INTO Clinician (title, firstName, lastName, jobTitle)
