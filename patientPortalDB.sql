@@ -216,7 +216,7 @@ VALUES (1, 'Not feeling the benefit after two weeks', false), (2, 'Helping to mi
 (3, 'Not helping with pain, possibly need stronger medication', false), (4, 'Feeling better mentally', false), 
 (4, 'Hearing not improving', false),
 (5, 'Ear pain easing', false), 
-(7, 'Eye pain gone', true);
+(6, 'Eye pain gone', true);
 
 INSERT INTO Clinician (title, firstName, lastName, jobTitle)
 VALUES ('Dr', 'Alex', 'Hyndman', 'Consultant'), ('Dr', 'John', 'Adams', 'Oncologist'), ('Dr', 'Karen', 'Reid', 'Obstetrician');
