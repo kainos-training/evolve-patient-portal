@@ -115,4 +115,22 @@ describe('SideEffectsComponent', () => {
     component = fixture.componentInstance;
     expect(component).toBeTruthy();
   });
+
+
+  it('should change showSideEffects boolean from true to false', async () => {
+    fixture = TestBed.createComponent(SideEffectsComponent);
+    component = fixture.componentInstance;
+    component.showSideEffects = true;
+    component.selectShowSideEffects();
+    expect(component.showSideEffects).toBe(false);
+});
+
+it('should remove ', async () => {
+  fixture = TestBed.createComponent(SideEffectsComponent);
+  component = fixture.componentInstance;
+  component.showSideEffects = true;
+  component.selectShowSideEffects();
+  expect(component.showSideEffects).toBe(false);
+});
+
 });
