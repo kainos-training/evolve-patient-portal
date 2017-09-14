@@ -5,6 +5,7 @@ import { ToolTipModule } from 'angular2-tooltip';
 import { BsModalService } from 'ngx-bootstrap/modal';
 import { BsModalRef } from 'ngx-bootstrap/modal/modal-options.class';
 import { Observable } from 'rxjs/Observable';
+import { Pharmacy } from '../../class/Pharmacy';
 
 @Component({
     selector: 'evolve-repeat-prescription',
@@ -18,6 +19,8 @@ export class RepeatPrescriptionComponent implements OnInit {
     public prescriptionList: Medication[];
     public confirmedPrescriptionList: number[];
     public renewPrescriptionList: Medication[];
+    public localPharmacy: Pharmacy[];
+    public pharmacy: Pharmacy;
     public modalRef: BsModalRef;
     public deliveryType: boolean;
     public warning: boolean;
@@ -26,16 +29,17 @@ export class RepeatPrescriptionComponent implements OnInit {
     };
 
     constructor(dataService: DataService, private modalService: BsModalService) {
+        let data;
         this.renewPrescriptionList = new Array();
         this.dataService = dataService;
         this.confirmedPrescriptionList = new Array();
         this.deliveryType = false;
         this.warning = false;
+
     }
 
     public addToList(medication: Medication) {
         if (this.renewPrescriptionList.length > 0 && this.renewPrescriptionList.find(p => p.medicationName == medication.medicationName)) {
-            //alert("ALREADY REQUESTED!");
             this.warning = true;
         } else {
             this.renewPrescriptionList.push(medication);
@@ -49,7 +53,7 @@ export class RepeatPrescriptionComponent implements OnInit {
 
     public requestPrescription(prescriptionList: Array<Medication>) {
         console.log(this.collectionType.status);
-        if(this.collectionType.status == "true") {
+        if (this.collectionType.status == "true") {
             this.deliveryType = true;
         } else {
             this.deliveryType = false;
@@ -71,6 +75,13 @@ export class RepeatPrescriptionComponent implements OnInit {
     }
     ngOnInit() {
         this.userID = this.dataService.getCookie();
+        
+        this.dataService.getLocalPharmacy(1).subscribe(res => {
+            this.localPharmacy = res
+            this.pharmacy = this.localPharmacy[0]
+            console.log(this.pharmacy.pharmacyName);
+        });
+
         this.dataService.getRepeatedMedication(this.userID).subscribe(
             res => this.prescriptionList = res
         );
