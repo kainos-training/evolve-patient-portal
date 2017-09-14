@@ -29,6 +29,7 @@ import { TemplateComponent } from './components/template/template.component';
 import { ConditionComponent } from './components/condition/condition.component';
 import { TooltipModule } from 'ngx-bootstrap/tooltip';
 import { MyTasksComponent } from './components/my-tasks/my-tasks.component';
+import { SearchPharmacyComponent } from './components/search-pharmacy/search-pharmacy.component';
 
 @NgModule({
     declarations: [
@@ -45,7 +46,8 @@ import { MyTasksComponent } from './components/my-tasks/my-tasks.component';
         TopBarComponent,
         EllipsisPipe,
         ConditionComponent,
-        MyTasksComponent
+        MyTasksComponent,
+        SearchPharmacyComponent
     ],
     imports: [
         BrowserModule,
