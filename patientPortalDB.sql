@@ -190,6 +190,8 @@ queryText varchar(350) not null,
 primary key (appointmentQueryID),
 foreign key (appointmentID) references Appointment(appointmentID),
 foreign key (clinicianID) references Clinician(clinicianID)
+);
+
 CREATE TABLE IF NOT EXISTS UserSideEffect(
 	userSideEffectID int auto_increment not null,
     userID int not null,
