@@ -123,13 +123,22 @@ database.getUserClinicians = function(userID, callback) {
         });
 };
 
-database.addAppointmentQuery = function(appointmentID, clinicianID, querySubject, queryText) {
+database.addAppointmentQuery = function(appointmentID, clinicianID, querySubject, queryText, callback) {
     database.query(
         "INSERT INTO AppointmentQuery(appointmentID, clinicianID, querySubject, queryText) " +
         "VALUES(?, ?, ?, ?);",
         [appointmentID, clinicianID, querySubject, queryText],
         function(err, rows) {
             callback(err)
+        });
+};
+
+database.getAppointmentQuery = function(clinicianID, callback) {
+    database.query(
+        "SELECT email, firstname FROM Clinician WHERE clinicianID = ?;",
+        [clinicianID],
+        function(err, rows) {
+            callback(err, rows);
         });
 };
 
