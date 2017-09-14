@@ -23,6 +23,7 @@ import {BsModalService} from 'ngx-bootstrap/modal';
 import {SettingNewPasswordComponent} from '../setting-new-password/setting-new-password.component';
 import {RequestPasswordResetComponent} from '../request-password-reset/request-password-reset.component';
 import {APP_BASE_HREF} from '@angular/common';
+import { NgModel } from '@angular/forms';
 
 export class MockDataService {
     getMedicationList(userID: number) {
