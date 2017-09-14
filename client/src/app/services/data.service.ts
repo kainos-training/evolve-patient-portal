@@ -23,15 +23,24 @@ export class DataService {
 
     constructor(private http: HttpClient, private cookieService: CookieService, private switchBoard: SwitchBoardService, private router: Router) {
     }
+    
+    private addAuthorizationHeader(headers: HttpHeaders) {
+        var token = this.getTokenFromCookie();
+        return headers.append('x-access-token', token );
+    }
 
     public getMedicationList(userID) {
         const body = {
             'userID': userID
         };
-        const options = {
-            headers: new HttpHeaders().set('Content-Type', 'application/json'),
-        };
 
+        var headers = new HttpHeaders().set('Content-Type', 'application/json');
+        headers = this.addAuthorizationHeader(headers);
+                
+        const options = {
+            headers: headers
+        };
+        
         return this.http.post<Medication[]>('api/medication/list', body, options);
     };
 
@@ -48,70 +57,96 @@ export class DataService {
         console.log(str);
          return tmp;
     };
-
+    
     public getMedicationComments(medicationUserID) {
         const body = {
             'medicationUserID': medicationUserID
         };
+        
+        var headers = new HttpHeaders().set('Content-Type', 'application/json');
+        headers = this.addAuthorizationHeader(headers);
+                
         const options = {
-            headers: new HttpHeaders().set('Content-Type', 'application/json'),
+            headers: headers
         };
 
         return this.http.post<MedicationComment[]>('api/medication/comments/list', body, options);
     }
-
+    
     public getRemovedMedicationComments(medicationUserID) {
         const body = {
             "medicationUserID": medicationUserID
         };
+        
+        var headers = new HttpHeaders().set('Content-Type', 'application/json');
+        headers = this.addAuthorizationHeader(headers);
+                
         const options = {
-            headers: new HttpHeaders().set('Content-Type', 'application/json'),
+            headers: headers
         };
 
         return this.http.post<MedicationComment[]>('api/medication/comments/removedList', body, options);
     }
-
+    
     public getMedicationHistory(medicationID, userID) {
         const body = {
             'medicationID': medicationID,
             'userID': userID
         };
+        
+        var headers = new HttpHeaders().set('Content-Type', 'application/json');
+        headers = this.addAuthorizationHeader(headers);
+                
         const options = {
-            headers: new HttpHeaders().set('Content-Type', 'application/json'),
+            headers: headers
         };
 
         return this.http.post<Medication[]>('api/medication/history', body, options);
     }
-
+    
     public removeMedicationComment(medicationUserCommentID) {
         const body = {
             'medicationUserCommentID': medicationUserCommentID
         };
+        
+        var headers = new HttpHeaders().set('Content-Type', 'application/json');
+        headers = this.addAuthorizationHeader(headers);
+                
         const options = {
-            headers: new HttpHeaders().set('Content-Type', 'application/json'),
+            headers: headers
         };
+        
         this.http.post('api/medication/comments/remove', body, options).subscribe();
     }
-
+    
     public addMedicationComment(medicationUserID, commentText) {
         const body = {
             'medicationUserID': medicationUserID,
             'commentText': commentText
         };
+        
+        var headers = new HttpHeaders().set('Content-Type', 'application/json');
+        headers = this.addAuthorizationHeader(headers);
+                
         const options = {
-            headers: new HttpHeaders().set('Content-Type', 'application/json'),
+            headers: headers
         };
+        
         this.http.post('api/medication/comments/add', body, options).subscribe();
     }
-
+    
     public getWikiSummary(medName) {
         const body = {
             'medicationName': medName
         };
+        
+        var headers = new HttpHeaders().set('Content-Type', 'application/json');
+        headers = this.addAuthorizationHeader(headers);
+                
         const options = {
-            headers: new HttpHeaders().set('Content-Type', 'application/json')
+            headers: headers
         };
-
+        
         return this.http.post<MedicationDescription>('api/medication/wiki/desc', body, options);
     }
 
@@ -174,6 +209,20 @@ export class DataService {
         return user;
     }
 
+    private getTokenFromCookie(): string {
+        const cookieValue = this.cookieService.get(this.cookieName);
+        var cookieJSON;
+
+        if (cookieValue) {
+            cookieJSON = JSON.parse(cookieValue);
+        }
+
+        if (cookieJSON) {
+            if (cookieJSON.token) {
+                return cookieJSON.token;
+            }
+        }
+    }
     public getUserFromCookie(user: User): void {
         const cookieValue = this.cookieService.get(this.cookieName);
         var cookieJSON;
@@ -272,25 +321,33 @@ export class DataService {
     }
 
     public getCurrentConditions(userID) {
-        let headers = new Headers({ 'Content-Type': 'application/json' });
         const body = {
             'userID': userID
         };
+        
+        var headers = new HttpHeaders().set('Content-Type', 'application/json');
+        headers = this.addAuthorizationHeader(headers);
+                
         const options = {
-            headers: new HttpHeaders().set('Content-Type', 'application/json'),
+            headers: headers
         };
+        
         let url = '/api/condition/current';
         return this.http.post<Condition[]>(url, body, options);
     }
 
     public getPreviousConditions(userID) {
-        let headers = new Headers({ 'Content-Type': 'application/json' });
         const body = {
             'userID': userID
         };
+        
+        var headers = new HttpHeaders().set('Content-Type', 'application/json');
+        headers = this.addAuthorizationHeader(headers);
+                
         const options = {
-            headers: new HttpHeaders().set('Content-Type', 'application/json'),
+            headers: headers
         };
+        
         let url = '/api/condition/previous';
         return this.http.post<Condition[]>(url, body, options);
     }
