@@ -1,3 +1,4 @@
+
 import { BrowserModule } from '@angular/platform-browser';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { FormsModule } from '@angular/forms';
@@ -24,6 +25,7 @@ import { SettingNewPasswordComponent } from '../setting-new-password/setting-new
 import { RequestPasswordResetComponent } from '../request-password-reset/request-password-reset.component';
 import { APP_BASE_HREF } from '@angular/common';
 import { RepeatPrescriptionComponent } from '../repeat-prescription/repeat-prescription.component';
+import { NgModel } from '@angular/forms';
 
 export class MockDataService {
     getMedicationList(userID: number) {

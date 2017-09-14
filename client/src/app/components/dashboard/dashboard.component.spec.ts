@@ -1,4 +1,12 @@
 
+import { SecondaryInfoHeaderComponent } from '../secondary-info-header/secondary-info-header.component';
+import { NavigationOption, NavigationOptionEnum } from '../../app.globals';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MenuStateService } from '../../services/menu-state.service';
+import { Router } from '@angular/router';
+import { CookieService } from 'ngx-cookie-service';
+import { DataService } from '../../services/data.service';
+import { SwitchBoardService } from '../../services/switch-board.service';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { DashboardComponent } from './dashboard.component';
 import { TopBarComponent } from '../top-bar/top-bar.component';
@@ -15,12 +23,18 @@ import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { MyTasksComponent } from '../my-tasks/my-tasks.component';
 import {ConditionComponent} from '../condition/condition.component';
 import {TooltipModule} from 'ngx-bootstrap/tooltip';
+import { NgModule } from '@angular/core';
+import { HttpClientModule } from '@angular/common/http';
+import { PersonalInfoHeaderComponent } from '../personal-info-header/personal-info-header.component'; 
+import { DependantViewComponent } from '../dependant-view/dependant-view.component';
 
 describe('DashboardComponent', () => {
     let component: DashboardComponent;
     let fixture: ComponentFixture<DashboardComponent>;
 
-    beforeEach(async(() => {
+    const mockRouter = {};
+
+    beforeEach(() => {
         TestBed.configureTestingModule({
             declarations: [
                 DashboardComponent,
@@ -33,25 +47,44 @@ describe('DashboardComponent', () => {
                 Marker,
                 DirectionsRenderer,
                 NguiMapComponent,
+                DependantViewComponent,
+                PersonalInfoHeaderComponent,
+                SecondaryInfoHeaderComponent,
                 ConditionComponent,
                 MyTasksComponent
             ],
-            providers: [],
+            providers: [
+                SwitchBoardService,
+                DataService,
+                CookieService,
+                { provide: Router, useValue: mockRouter },
+                MenuStateService,
+                ConditionComponent,
+                MyTasksComponent
+            ],
             imports: [
                 BrowserModule,
                 ModalModule.forRoot(),
                 FormsModule,
+                HttpClientModule,
+                BrowserAnimationsModule,
                 TooltipModule.forRoot()
             ],
             schemas: [CUSTOM_ELEMENTS_SCHEMA]
         })
             .compileComponents();
-    }));
+    });
 
-    it('should be created', async () => {
+    it('should be created', () => {
         fixture = TestBed.createComponent(DashboardComponent);
         component = fixture.componentInstance;
         expect(component).toBeTruthy();
+    });
+
+    it('should only MyDashboard component on init', () => {
+        fixture = TestBed.createComponent(DashboardComponent);
+        component = fixture.componentInstance;
+        expect(component.getNavigationOption()).toEqual(NavigationOptionEnum.MyDashboard.toString());
     });
 });
 

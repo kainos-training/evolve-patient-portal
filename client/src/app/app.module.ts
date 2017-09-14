@@ -1,4 +1,5 @@
 
+import { DependantViewComponent } from './components/dependant-view/dependant-view.component';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
@@ -6,9 +7,9 @@ import { AppComponent } from './components/app.component';
 import { AlertModule } from 'ngx-bootstrap';
 import { DataService } from './services/data.service';
 import { HttpClientModule } from '@angular/common/http';
-import { ReviewMedicationComponent } from './components/review-medication/review-medication.component';
 import { SwitchBoardService } from './services/switch-board.service';
 import { ModalModule } from 'ngx-bootstrap/modal';
+import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { EllipsisPipe } from './utils/ellipsis.pipe';
 import { LoginComponent } from './components/login/login.component';
 import { CookieService } from 'ngx-cookie-service';
@@ -29,6 +30,9 @@ import { RequestPasswordResetComponent } from './components/request-password-res
 import { TemplateComponent } from './components/template/template.component';
 import { RepeatPrescriptionComponent } from './components/repeat-prescription/repeat-prescription.component';
 import { ToolTipModule } from 'angular2-tooltip';
+import { PersonalInfoHeaderComponent } from './components/personal-info-header/personal-info-header.component';
+import { SecondaryInfoHeaderComponent } from './components/secondary-info-header/secondary-info-header.component';
+import { ReviewMedicationComponent } from './components/review-medication/review-medication.component';
 import { ConditionComponent } from './components/condition/condition.component';
 import { TooltipModule } from 'ngx-bootstrap/tooltip';
 import { MyTasksComponent } from './components/my-tasks/my-tasks.component';
@@ -51,7 +55,12 @@ import { AgmCoreModule } from '@agm/core';
         EllipsisPipe,
         RepeatPrescriptionComponent,
         ConditionComponent,
-        MyTasksComponent
+        MyTasksComponent,
+        PersonalInfoHeaderComponent,
+        SecondaryInfoHeaderComponent,
+        DependantViewComponent,
+        MyTasksComponent,
+        ConditionComponent
     ],
     imports: [
         BrowserModule,
@@ -64,6 +73,8 @@ import { AgmCoreModule } from '@agm/core';
         BrowserAnimationsModule, 
         ToolTipModule,
         NguiMapModule.forRoot({apiUrl: 'https://maps.google.com/maps/api/js?key=AIzaSyC6v7VVrChAt97hxrsY76i8Xg2mcaQMuE8'}),
+        BsDropdownModule.forRoot(),
+        NguiMapModule.forRoot({ apiUrl: 'https://maps.google.com/maps/api/js?key=AIzaSyC6v7VVrChAt97hxrsY76i8Xg2mcaQMuE8' }),
         BrowserAnimationsModule,
         TooltipModule.forRoot(),
         AgmCoreModule.forRoot()
