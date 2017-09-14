@@ -34,7 +34,8 @@ export class ReviewMedicationComponent implements OnInit, OnDestroy {
     private user: User = new User();
     private userSubscription: Subscription;
     private dataService: DataService;
-    
+    public prescriptionHistoryExists: boolean;
+
     public openModal(meds: Medication, template: TemplateRef<any>) {
 
         this.collapsedDescription = true;
@@ -53,12 +54,13 @@ export class ReviewMedicationComponent implements OnInit, OnDestroy {
             err => console.log(err)
         );
 
-        if (this.user)
-            if (this.user.userID)
+        if (this.user){
+            if (this.user.userID){
                 this.dataService.getMedicationHistory(this.selectedMedication.medicationID, this.user.userID).subscribe(
                     res => this.selectedMedicationHistory = res
                 );
-
+            }
+        }
         this.dataService.getWikiSummary(meds.medicationName).subscribe(
             res => {
                 this.description = res;

@@ -7,9 +7,9 @@
             <div class="panel-body">
             <div class="side-effects">
                     <div class="new-side-effect">
-                            <div class="row">
+                            <div class="row side-effect-input">
                                 <div class="col-xs-10">
-                                        <input type="text" class="form-control" id="side-effect-input" [(ngModel)]="newSideEffect" [ngModelOptions]="{standalone: true}" placeholder="New side effect">
+                                        <input type="text" class="form-control" [(ngModel)]="newSideEffect" [ngModelOptions]="{standalone: true}" placeholder="New side effect">
                                 </div>
                                 <div class="col-xs-2">
                                     <div class="pull-right">
@@ -27,9 +27,11 @@
                             <span class="tiny-medication-txt">{{ sideeffect.timeStamp|date:'dd/MM/yyyy' }}</span>
                         </div>
                         <div class="col-xs-2">
+                                <div class="pull-right">
                             <button type="button" *ngIf="!sideeffect.deleted" id="minusButton" (click)="removeSideEffect(sideeffect.userSideEffectID)">
                                 <img src="assets/red_minus_icon.png">
                             </button>
+                                </div>
                         </div>
                     </div>
                     <br>

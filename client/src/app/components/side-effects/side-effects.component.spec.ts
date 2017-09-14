@@ -115,4 +115,11 @@ describe('SideEffectsComponent', () => {
     component = fixture.componentInstance;
     expect(component).toBeTruthy();
   });
+
+  it('should get the cookie from the data service', async() => {
+    fixture = TestBed.createComponent(SideEffectsComponent);
+    component = fixture.componentInstance;
+    expect(this.mockDataService.getCookie()).toBe("1");
+  });
+
 });
