@@ -97,7 +97,6 @@ CREATE TABLE IF NOT EXISTS TaskQuestionnaire (
 );
 
 CREATE TABLE IF NOT EXISTS MedicationUser (
-<<<<<<< HEAD
 medicationUserID int auto_increment not null,
 userID int not null,
 medicationID int not null,
@@ -111,20 +110,6 @@ delivery bool not null,
 primary key (medicationUserID),
 foreign key (userID) references `User` (userID),
 foreign key (medicationID) references Medication (medicationID)
-=======
-	medicationUserID int auto_increment not null,
-	userID int not null, 
-	medicationID int not null,
-	startDate date not null,
-	endDate date,
-	dosage varchar(60) not null,
-	instructions varchar(60) not null,
-	prescribedDate date not null,
-	repeated bool not null,
-	primary key (medicationUserID),
-	foreign key (userID) references `User` (userID),
-	foreign key (medicationID) references Medication (medicationID)
->>>>>>> 160fe0b028770c88ea1cb284a853777766811022
 );
 
 CREATE TABLE IF NOT EXISTS MedicationUserComment (
@@ -196,14 +181,10 @@ CREATE TABLE IF NOT EXISTS UserDependant(
     foreign key (dependantID) references User(userID)
 );
 
-<<<<<<< HEAD
-
 INSERT INTO Pharmacy(pharmacyName, address)
 VALUES('Gordons Chemists', '15-17 Corn Market, Belfast BT1 4DA'),
 ('Stranmillis Pharmacy', '62 Stranmillis Rd, Belfast BT9 5AD');
 
-=======
->>>>>>> 160fe0b028770c88ea1cb284a853777766811022
 CREATE TABLE IF NOT EXISTS UserSideEffect(
 	userSideEffectID int auto_increment not null,
 	userID int not null,
