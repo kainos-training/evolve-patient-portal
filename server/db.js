@@ -11,7 +11,6 @@ const database = mysql.createConnection({
 
 database.connect(function(err) {
     if (err) throw err;
-    console.log("connected to mysql")
 });
 
 database.getMedications = function(userID, callback) {
@@ -125,7 +124,7 @@ database.getPreviousConditions = function(userID, callback) {
 
 database.getTaskList = function(userID, callback) {
     database.query(
-        "SELECT taskName, taskSummary, recievedDate, dueDate FROM Task " +
+        "SELECT taskID, taskName, taskSummary, recievedDate, dueDate FROM Task " +
         "WHERE userID = ? " +
         "AND dueDate > NOW() " +
         "ORDER BY dueDate;", [userID],
@@ -133,5 +132,15 @@ database.getTaskList = function(userID, callback) {
             callback(err, rows);
         });
 };
+
+database.insertAnswer = function(taskID, answer, callback){
+    database.query(
+        "INSERT INTO TaskQuestionnaire (taskID, answer, answered, dateSubmitted) "
+        +"VALUES (?, ?, 1, CURRENT_TIMESTAMP);", [taskID, answer],
+        function(err){
+            callback(err);
+        }
+    )
+}
 
 module.exports = database;

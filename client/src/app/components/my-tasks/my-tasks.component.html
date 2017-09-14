@@ -9,7 +9,7 @@
                   <tbody>
                       <tr *ngFor="let task of tasksList">
                           <td>
-                              <button type="button" class="btn table-btn btn-block" (click)="openModal(medication, template)">
+                              <button type="button" class="btn table-btn btn-block" (click)="btnClick(task)">
                               <span class="widget-title-txt"><strong>{{task.taskName}}</strong></span><br>
                               <span class="widget-title-txt"><p id="summaryText">{{task.taskSummary}}</p></span><br>
                               <span class="widget-body-txt">Due:</span><span class="widget-title-txt"> {{task.dueDate | date:'dd/MM/yyyy'}}</span>
