@@ -1,6 +1,6 @@
 import { document } from 'ngx-bootstrap/utils/facade/browser';
 import { Component, OnInit } from '@angular/core';
-// import { googlemaps } from 'google-maps';
+//import { googlemaps } from 'google-maps';
 import { } from '@types/googlemaps';
 
 @Component({
@@ -24,8 +24,8 @@ export class SearchPharmacyComponent implements OnInit {
         if (input) {
             var options = {
                 types: [
-                    // '(regions)'
-                    'establishment'
+                    'establishment',
+                    'regions'
                 ],
             };
             // var autocomplete = new google.maps.places.Autocomplete(input, options);
