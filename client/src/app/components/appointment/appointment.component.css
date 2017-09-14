@@ -138,3 +138,13 @@ input[data-expanded="true"]:active, input[data-expanded="false"]:active {
     background-color: #067fbb;
     outline: none;
 }
+
+.query-icon-modal {
+    height: 25px;
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+.btn-primary{
+    width: 100%;
+}

@@ -9,7 +9,7 @@
                 <tbody>
                     <tr *ngFor="let appointment of appointments">
                         <td>
-                            <button type="button" class="btn table-btn" (click)="openModal(template,appointment)">
+                            <button type="button" class="btn table-btn" (click)="openModal(enquire,appointment)">
                                 <span class="medium-location-text">{{appointment.type}}: {{appointment.departmentName}}</span><br>
                                 <span class="sml-location-txt">Due: {{appointment.dateOfAppointment | date:'dd/MM/yyyy'}}</span><br>
                                 <span class="sml-location-txt">Time: {{appointment.dateOfAppointment | date:'h:mm a'}}</span><br>
@@ -60,5 +60,49 @@
             <input type="submit" [attr.data-expanded]="focusedAppointment.showLocalMap" (click)="toggle('showLocalMap')" class="btn btn-success btn-sm btn-block" value="{{!!focusedAppointment.showLocalMap ? 'Collapse' : 'Expand'}} hospital map" />
             <img [hidden]="!focusedAppointment.showLocalMap" [src]=mapPath />
         </div>
+    </div>
+</ng-template>
+
+
+<ng-template #enquire>
+    <div class="modal-header">
+        <h4 class="modal-title pull-left">Appointment Enquiry</h4> 
+        <img src="/assets/enquire.png" class="query-icon-modal"/>
+        <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <div class="perscription-header">
+            <p>
+               
+                <strong>From:</strong><br>
+                <textarea disabled type="text" class="form-control input-disabled" id="username" rows="1">{{user.firstName}} {{user.lastName}}</textarea>
+                <strong>To:</strong><br>
+                <textarea type="text" class="form-control input-disabled" id="recipient" rows="1">{{focusedAppointment.clinicianName}}</textarea>
+                <strong>Subject:</strong><br>
+                <textarea type="text" class="form-control input-disabled" id="username" rows="1"></textarea>
+                
+                  
+
+                  <br>
+                  <br>
+                  <br>  
+                  <br> 
+                  <br> 
+
+                 
+
+                
+                <label><strong>Query</strong></label>
+                    <textarea type="text" class="form-control input-disabled" id="comment-input" rows="8"></textarea>
+            
+            </p>
+            <hr>
+            
+            <button class="btn btn-primary" type="submit">Submit Query</button>
+
+        </div>
+      
     </div>
 </ng-template>
