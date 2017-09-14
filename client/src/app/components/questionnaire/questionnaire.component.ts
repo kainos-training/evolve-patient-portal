@@ -354,7 +354,7 @@ export class QuestionnaireComponent implements OnInit {
 
         this.answers = this.getAnswers();
         const result = {
-            taskID: 1,
+            taskID: this.taskID,
             answer: this.answers
         };
 
