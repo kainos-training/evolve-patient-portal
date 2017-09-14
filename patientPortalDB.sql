@@ -235,9 +235,9 @@ VALUES (1, 3, '2017-06-01', '2019-08-10', '10mg', 'Take one tablet twice a day, 
 INSERT INTO MedicationUserComment(medicationUserID, commentText, deleted)
 VALUES (1, 'Not feeling the benefit after two weeks', false), (2, 'Helping to minimise pain but still exists', false),
 (3, 'Not helping with pain, possibly need stronger medication', false), (4, 'Feeling better mentally', false), 
-(12, 'Hearing not improving', false),
-(13, 'Ear pain easing', false), 
-(7, 'Eye pain gone', true);
+(5, 'Hearing not improving', false),
+(6, 'Ear pain easing', false), 
+(6, 'Eye pain gone', true);
 
 INSERT INTO Clinician (title, firstName, lastName, jobTitle)
 VALUES ('Dr', 'Alex', 'Hyndman', 'Consultant'), ('Dr', 'John', 'Adams', 'Oncologist'), ('Dr', 'Karen', 'Reid', 'Obstetrician');
@@ -284,6 +284,10 @@ VALUES (1, 4, '2017-01-10', '2017-07-15'),
 (4, 3, '2017-09-09', '2017-09-27'),
 (7, 1, '2017-09-09', null),
 (7, 4, '2017-08-11', '2017-09-01');
+
+INSERT INTO UserSideEffect (userID, sideEffectText, deleted)
+VALUES (1, 'I get a sore head after I take my meds in the morning', false),
+(1, 'I feel drowsy since I started lithium', false);
 
 INSERT INTO Task(taskName, userID, taskSummary, recievedDate, dueDate)
 VALUES('Pre-op questionnaire', 1, 'Questionnaire to be filled out before surgery. Includes allergies and general health questions.', (NOW() - INTERVAL 4 DAY), (NOW() + INTERVAL 18 DAY)),
