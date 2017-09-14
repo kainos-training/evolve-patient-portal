@@ -80,18 +80,17 @@ export class ReviewMedicationComponent implements OnInit, OnDestroy {
 
     constructor(dataService: DataService, private modalService: BsModalService, private switchboard: SwitchBoardService) {
         this.dataService = dataService;
-        this.switchboard.user$.subscribe(usr => this.user = usr);
-        this.dataService.getUserFromCookie(this.user);
-
-        console.log("User Id in this constructor: " + this.user.userID);
-        dataService.getMedicationList(this.user.userID).subscribe(
-            res => this.medicationsList = res
-        );
-
         console.log("User Id in this constructor: " + this.user.userID);
     }
 
     ngOnInit(): void {
+        this.switchboard.user$.subscribe(usr => this.user = usr);
+        this.dataService.getUserFromCookie(this.user);
+
+        console.log("User Id in this constructor: " + this.user.userID);
+        this.dataService.getMedicationList(this.user.userID).subscribe(
+            res => this.medicationsList = res
+        );
         if (this.user)
             if (this.user.userID)
                 this.dataService.getMedicationList(this.user.userID).subscribe(
