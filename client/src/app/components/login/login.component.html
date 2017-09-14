@@ -9,7 +9,7 @@
     <main class="loginPage">
         <div *ngIf="user.message" class="callout-message col-xs-12">
             <div class="bs-callout bs-callout-danger">
-                <p><span>Error:</span> Invalid credentials. <a href="/request-reset">Lost your password?</a></p>
+                <p><span>Error:</span> Invalid credentials or account not activated. <a href="/request-reset">Lost your password?</a></p>
             </div>
         </div>
         <form method="POST" class="col-xs-12">
