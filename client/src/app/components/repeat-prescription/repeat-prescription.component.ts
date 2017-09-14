@@ -60,10 +60,10 @@ export class RepeatPrescriptionComponent implements OnInit {
         }
 
         for (var i = 0; i < this.prescriptionList.length; i++) {
-            alert(prescriptionList[i].medicationUserID + " " + this.collectionType.status);
             this.confirmedPrescriptionList.push(prescriptionList[i].medicationUserID);
         }
         this.dataService.updatePrescriptionDate(this.confirmedPrescriptionList, this.deliveryType);
+        this.ngOnInit()
         this.modalRef.hide();
     }
 
