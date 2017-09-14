@@ -1,3 +1,4 @@
+import { TimelineComponent } from '../timeline/timeline.component';
 import {SecondaryInfoHeaderComponent} from '../secondary-info-header/secondary-info-header.component';
 import {PersonalInfoHeaderComponent} from '../personal-info-header/personal-info-header.component';
 import {async, ComponentFixture, TestBed} from '@angular/core/testing';
@@ -81,6 +82,7 @@ describe('ConditionComponent', () => {
                 DirectionsRenderer,
                 NguiMapComponent,
                 MyTasksComponent,
+                TimelineComponent,
                 SideEffectsComponent,
                 PersonalInfoHeaderComponent,
                 SecondaryInfoHeaderComponent,
