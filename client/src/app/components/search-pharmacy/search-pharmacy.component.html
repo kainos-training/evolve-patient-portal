@@ -1,3 +1,5 @@
-<label>Enter in your local pharmacy for delivery: <br></label>
-<input id="searchTextField" type="text" size="50" placeholder="Enter a pharmacy" (input)="onInputChange($event)">
-<div id="map"></div>
+<div class="col-xs-12 col-sm-12 col-md-6 col-lg-4">
+    <label>Enter in your local pharmacy for delivery: <br></label>
+    <input id="searchTextField" type="text" placeholder="Enter a pharmacy" (keyup)="onInputChange($event)">
+    <div id="map"></div>
+</div>
