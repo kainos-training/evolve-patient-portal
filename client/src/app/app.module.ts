@@ -34,6 +34,7 @@ import { ReviewMedicationComponent } from './components/review-medication/review
 import { ConditionComponent } from './components/condition/condition.component';
 import { TooltipModule } from 'ngx-bootstrap/tooltip';
 import { MyTasksComponent } from './components/my-tasks/my-tasks.component';
+import { QuestionnaireComponent } from './components/questionnaire/questionnaire.component';
 import { TimelineComponent } from './components/timeline/timeline.component';
 
 @NgModule({
@@ -50,6 +51,7 @@ import { TimelineComponent } from './components/timeline/timeline.component';
         SettingNewPasswordComponent,
         TopBarComponent,
         EllipsisPipe,
+        QuestionnaireComponent,
         TimelineComponent,
         ConditionComponent,
         SideEffectsComponent,

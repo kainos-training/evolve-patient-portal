@@ -75,21 +75,21 @@ describe('Patient Portal Appointment Query Modal', function() {
     afterEach(function() {
         app.close();
     });
-    it('returns status code 400 with no userID (getUserClinicais)', function(done) {
+    it('returns status code 400 with no userID (getUserClinicians)', function(done) {
         request(app)
             .post('/appointment/getUserClinicians')
             .send()
             .expect(400, done);
     });
 
-    it('returns status code 200 with valid query data (getUserClinicais)', function(done) {
+    it('returns status code 200 with valid query data (getUserClinicians)', function(done) {
         request(app)
             .post('/appointment/getUserClinicians')
             .send('userID=1')
             .expect(200, done);
     });
 
-    it('returns status code 404 with page not found (getUserClinicais)', function(done) {
+    it('returns status code 404 with page not found (getUserClinicians)', function(done) {
         request(app)
             .post('/appointment/getUserCliniciansWroungRoute')
             .send('userID=1')

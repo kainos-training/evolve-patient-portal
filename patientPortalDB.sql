@@ -77,19 +77,29 @@ CREATE TABLE IF NOT EXISTS Task (
     foreign key (userID) references User (userID)
 );
 
+CREATE TABLE IF NOT EXISTS TaskQuestionnaire (
+    questionnaireID int auto_increment not null,
+    taskID int not null,
+    answer varchar(5000) not null,
+    answered bool not null,
+    dateSubmitted datetime not null,
+    primary key (questionnaireID),
+    foreign key (taskID) references Task (taskID)
+);
+
 CREATE TABLE IF NOT EXISTS MedicationUser (
-medicationUserID int auto_increment not null,
-userID int not null, 
-medicationID int not null,
-startDate date not null,
-endDate date,
-dosage varchar(60) not null,
-instructions varchar(60) not null,
-prescribedDate date not null,
-repeated bool not null,
-primary key (medicationUserID),
-foreign key (userID) references `User` (userID),
-foreign key (medicationID) references Medication (medicationID)
+	medicationUserID int auto_increment not null,
+	userID int not null, 
+	medicationID int not null,
+	startDate date not null,
+	endDate date,
+	dosage varchar(60) not null,
+	instructions varchar(60) not null,
+	prescribedDate date not null,
+	repeated bool not null,
+	primary key (medicationUserID),
+	foreign key (userID) references `User` (userID),
+	foreign key (medicationID) references Medication (medicationID)
 );
 
 CREATE TABLE IF NOT EXISTS MedicationUserComment (
@@ -171,25 +181,25 @@ CREATE TABLE IF NOT EXISTS UserDependant(
     foreign key (dependantID) references User(userID)
 );
 
-CREATE TABLE IF NOT EXISTS AppointmentQuery (
-appointmentQueryID int auto_increment not null,
-appointmentID int not null,
-clinicianID int not null,
-querySubject varchar(100) not null,
-queryText varchar(350) not null,
-primary key (appointmentQueryID),
-foreign key (appointmentID) references Appointment(appointmentID),
-foreign key (clinicianID) references Clinician(clinicianID)
-);
-
 CREATE TABLE IF NOT EXISTS UserSideEffect(
 	userSideEffectID int auto_increment not null,
-    userID int not null,
-    sideEffectText text not null,
-    `timeStamp` timeStamp not null DEFAULT CURRENT_TIMESTAMP,
-    deleted boolean not null,
-    primary key(userSideEffectID),
-    foreign key (userID) references User(userID)
+	userID int not null,
+	sideEffectText text not null,
+	`timeStamp` timeStamp not null DEFAULT CURRENT_TIMESTAMP,
+	deleted boolean not null,
+	primary key(userSideEffectID),
+	foreign key (userID) references User(userID)
+);
+
+CREATE TABLE IF NOT EXISTS AppointmentQuery (
+	appointmentQueryID int auto_increment not null,
+	appointmentID int not null,
+	clinicianID int not null,
+	querySubject varchar(100) not null,
+	queryText varchar(350) not null,
+	primary key (appointmentQueryID),
+	foreign key (appointmentID) references Appointment(appointmentID),
+	foreign key (clinicianID) references Clinician(clinicianID)
 );
 
 INSERT INTO GP (gpFullName, gpPracticeName, gpPracticeAddress)
