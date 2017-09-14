@@ -53,6 +53,7 @@ describe('Patient Portal Webservice', function() {
                 })
                 .end(done);
         });
+        
         it('return status code 400 with 101 characters for name', function(done) {
             request(app)
                 .post('/auth/login')
@@ -78,6 +79,15 @@ describe('Patient Portal Webservice', function() {
                 .expect(404, done);
         });
 
+    });
+    describe('POST /auth/signup', function() {
+        var app;
+        beforeEach(function() {
+            app = require('../../index');
+        });
+        afterEach(function() {
+            app.close();
+        });
         it('returns status code 400 with invalid username', function(done) {
 
             let data = {
@@ -101,7 +111,7 @@ describe('Patient Portal Webservice', function() {
                 .expect(400, done);
         });
 
-        it('returns status code 400 with invalid username', function(done) {
+        it('returns status code 400 with invalid password', function(done) {
 
             let data = {
                 password: ''

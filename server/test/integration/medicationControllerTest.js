@@ -6,93 +6,59 @@ var should = chai.should();
 var assert = chai.assert;
 
 describe('Medication Endpoints', function() {
-    var app;
-
+    let app;
+    let token;
+    
+    // Before all tests in this file run the application, login, then store the token
+    before(function(done) {
+        app = require('../../index');
+        
+        request(app)
+            .post('/auth/login')
+            .send('username=jsmith')
+            .send('password=password123')
+            .expect(200)
+            .end(function(err, res) {
+                token = res.body.token;
+                app.close();
+                done();
+            });
+        
+    });
+    // Before each tests in this file re-run the application
     beforeEach(function() {
         app = require('../../index');
     });
+    // After each tests in this file close the application
     afterEach(function() {
         app.close();
     });
     describe('Test /medication/list', function() {
         it('returns valid data and status code 200 when posting valid data', function(done) {
-            async.waterfall(
-                [
-                    login,
-                    async.apply(testMedicationListRoute),
-                ],
-                function finish(err, result) {
-                    done(err);
-                }
-            );
-
-            function login(callback) {
-                var user = {
-                    username: 'jsmith',
-                    password: 'password123'
-                };
-            
-                request(app)
-                    .post('/auth/login')
-                    .send(user)
-                    .expect(200)
-                    .end(function(err, res) {
-                        if (err) return callback(err);
-                        callback(null, res.body.token);
-                    });
-                callback(null, 'one')
-            }
-
-            function testMedicationListRoute(token, callback) {
-                request(app)
-                    .post('/medication/list')
-                    .set('x-access-token', token)
-                    .type('json')
-                    .send('{"userID":1}')
-                    .expect(200, done);
-                callback(null, 'done');
-            }
+            request(app)
+                .post('/medication/list')
+                .type('json')
+                .set('x-access-token', token)
+                .send('{"userID":1}')
+                .expect(200, done);
         });
-
         it('returns success false and status code 400 when posting invalid data', function(done) {
-            async.waterfall(
-                [
-                    function login(callback) {
-                        var user = {
-                            username: 'jsmith',
-                            password: 'password123'
-                        };
-
-                        request(app)
-                            .post('/auth/login')
-                            .send(user)
-                            .expect(200)
-                            .end(function(err, res) {
-                                if (err) return callback(err);
-                                callback(null, res.body.token);
-                            });
-                    },
-                    function testMedicationListRoute(token, callback) {
-                        request(app)
-                            .post('/medication/list')
-                            .expect(403)
-                            .expect(function(res) {
-                                res.body.success.should.equal(false);
-                            })
-                            .end(done);
-                    }
-                ],
-                function finish(err, result) {
-                    done(err);
-                }
-            );
+            request(app)
+                .post('/medication/list')
+                .set('x-access-token', token)
+                .expect(400)
+                .expect(function(res) {
+                    res.body.success.should.equal(false);
+                })
+                .end(done);
         });
     });
-
+    
     describe('Test /medication/comments/add', function() {
         it('returns success false and status code 400 when posting invalid data', function(done) {
             request(app)
                 .post('/medication/comments/add')
+                .set('x-access-token', token)
                 .expect(400)
                 .expect(function(res) {
                     res.body.success.should.equal(false);
@@ -100,6 +66,7 @@ describe('Medication Endpoints', function() {
 
             request(app)
                 .post('/medication/comments/add')
+                .set('x-access-token', token)
                 .expect(400)
                 .send('{"commentText": "Test"}')
                 .expect(function(res) {
@@ -108,6 +75,7 @@ describe('Medication Endpoints', function() {
 
             request(app)
                 .post('/medication/comments/add')
+                .set('x-access-token', token)
                 .expect(400)
                 .send('{"medicationUserID":1}')
                 .expect(function(res) {
@@ -122,6 +90,7 @@ describe('Medication Endpoints', function() {
             request(app)
                 .post('/medication/comments/list')
                 .type('json')
+                .set('x-access-token', token)
                 .set('Accept', 'application/json')
                 .send('{"medicationUserID":1}')
                 .expect(200, done);
@@ -130,6 +99,7 @@ describe('Medication Endpoints', function() {
         it('returns success false and status code 400 when posting invalid data', function(done) {
             request(app)
                 .post('/medication/comments/list')
+                .set('x-access-token', token)
                 .expect(400)
                 .expect(function(res) {
                     res.body.success.should.equal(false);
@@ -143,6 +113,7 @@ describe('Medication Endpoints', function() {
             request(app)
                 .post('/medication/wiki/desc')
                 .type('json')
+                .set('x-access-token', token)
                 .set('Accept', 'application/json')
                 .send('{"medicationName":"Lithium"}')
                 .expect(200, done);
@@ -151,6 +122,7 @@ describe('Medication Endpoints', function() {
         it('returns success false and status code 400 when posting invalid data', function(done) {
             request(app)
                 .post('/medication/wiki/desc')
+                .set('x-access-token', token)
                 .expect(400)
                 .expect(function(res) {
                     res.body.success.should.equal(false);
@@ -164,6 +136,7 @@ describe('Medication Endpoints', function() {
             request(app)
                 .post('/medication/history')
                 .type('json')
+                .set('x-access-token', token)
                 .set('Accept', 'application/json')
                 .send('{"medicationID":1, "userID": 1}')
                 .expect(200, done);
@@ -172,6 +145,7 @@ describe('Medication Endpoints', function() {
         it('returns success false and status code 400 when posting invalid data', function(done) {
             request(app)
                 .post('/medication/history')
+                .set('x-access-token', token)
                 .send('{"userID": 1}')
                 .expect(400)
                 .expect(function(res) {
@@ -179,6 +153,7 @@ describe('Medication Endpoints', function() {
                 });
             request(app)
                 .post('/medication/history')
+                .set('x-access-token', token)
                 .send('{"medicationID":1}')
                 .expect(400)
                 .expect(function(res) {
@@ -186,6 +161,7 @@ describe('Medication Endpoints', function() {
                 });
             request(app)
                 .post('/medication/history')
+                .set('x-access-token', token)
                 .expect(400)
                 .expect(function(res) {
                     res.body.success.should.equal(false);
