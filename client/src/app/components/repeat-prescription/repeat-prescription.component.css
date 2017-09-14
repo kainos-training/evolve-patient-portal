@@ -66,3 +66,8 @@ h1::before {
 #widget-header{
     font-size: 24px; 
 }
+
+.spaced {
+    margin-left: 25px;
+    max-width: 30%;
+}

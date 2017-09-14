@@ -8,6 +8,13 @@
                 <div class="panel-heading">
                     <h1 class="panel-title" id="widget-header">Your current prescriptions</h1>
                 </div>
+                
+                <div *ngIf="warning" class="callout-message spaced col-xs-12">
+                        <div class="bs-callout bs-callout-danger">
+                                <a (click)="closeAlert()" class="close" data-dismiss="alert" aria-label="close">x</a>
+                            <p><span>Error:</span> You have already selected this medication.</p>
+                        </div>
+                    </div>
                 <div class="panel-body" id="medicationDetails">
                     <table class="table table-hover">
                         <tbody>
