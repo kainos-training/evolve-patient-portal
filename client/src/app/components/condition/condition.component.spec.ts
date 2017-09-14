@@ -32,6 +32,7 @@ import { RepeatPrescriptionComponent } from '../repeat-prescription/repeat-presc
 import {SecondaryInfoHeaderComponent} from '../secondary-info-header/secondary-info-header.component';
 import {PersonalInfoHeaderComponent} from '../personal-info-header/personal-info-header.component';
 import {DependantViewComponent} from '../dependant-view/dependant-view.component';
+import { SideEffectsComponent } from './components/side-effects/side-effects.component';
 
 export class MockDataService {
     getCurrentConditions(userID: number) {
@@ -86,6 +87,7 @@ describe('ConditionComponent', () => {
                 NguiMapComponent,
                 MyTasksComponent,
                 RepeatPrescriptionComponent,
+                SideEffectsComponent,
                 PersonalInfoHeaderComponent,
                 SecondaryInfoHeaderComponent,
                 DependantViewComponent,

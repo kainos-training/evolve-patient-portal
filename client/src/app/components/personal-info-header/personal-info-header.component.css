@@ -15,11 +15,11 @@
 
 #patientPicMobile {
     float: left;
-    background-color: grey;
     border-radius: 50%;
-    width: 100px;
-    height: 80px;
+    width: 75px;
+    height: 75px;
     margin-left: 20px;
+    margin-top: 2.5px;
     flex-grow: 0;
 }
 

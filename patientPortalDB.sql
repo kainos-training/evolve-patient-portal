@@ -95,6 +95,7 @@ startDate date not null,
 endDate date,
 dosage varchar(60) not null,
 prescribedDate date not null,
+instructions varchar(60) not null,
 repeated bool not null,
 delivery bool not null,
 primary key (medicationUserID),
@@ -176,6 +177,26 @@ INSERT INTO Pharmacy(pharmacyName, address)
 VALUES('Gordons Chemists', '15-17 Corn Market, Belfast BT1 4DA'),
 ('Stranmillis Pharmacy', '62 Stranmillis Rd, Belfast BT9 5AD');
 
+CREATE TABLE IF NOT EXISTS UserSideEffect(
+	userSideEffectID int auto_increment not null,
+    userID int not null,
+    sideEffectText text not null,
+    `timeStamp` timeStamp not null DEFAULT CURRENT_TIMESTAMP,
+    deleted boolean not null,
+    primary key(userSideEffectID),
+    foreign key (userID) references User(userID)
+);
+
+CREATE TABLE IF NOT EXISTS Task (
+taskID int auto_increment not null,
+taskName varchar(60) not null,
+userID int not null,
+recievedDate date not null,
+dueDate date not null,
+primary key (taskID),
+foreign key (userID) references User (userID)
+);
+
 INSERT INTO GP (gpFullName, gpPracticeName, gpPracticeAddress)
 VALUES ('Dr. A Cheyne', 'Ormeau Park Surgery', '281 Ormeau Rd, Belfast BT7 3GG, UK'),
 ('Dr. E Glass', 'The Surgery', '1 Church St, Newtownards BT23 4FH'),
@@ -205,21 +226,22 @@ VALUES('Penicillin', 1, 'https://en.wikipedia.org/wiki/Penicillin'),
 ('Paracetamol', 3, 'https://en.wikipedia.org/wiki/Paracetamol'),
 ('Morphine', 3, 'https://en.wikipedia.org/wiki/Morphine'),
 ('Ibuprofen', 4, 'https://en.wikipedia.org/wiki/Ibuprofen'),
-('Ketoprofen', 4, 'https://en.wikipedia.org/wiki/Ketoprofen');
+('Ketoprofen', 4, 'https://en.wikipedia.org/wiki/Ketoprofen'),
+('Xylometazoline', 1, 'https://en.wikipedia.org/wiki/Xylometazoline');
 
-INSERT INTO MedicationUser(userID, medicationID, startDate, endDate, dosage,prescribedDate,repeated,delivery)
-VALUES (1, 3, '2017-06-01', '2019-08-10', '10mg', '2017-09-01',TRUE,TRUE),
-(1, 3, '2016-06-01', '2017-06-01', '5mg', '2017-04-01',TRUE,TRUE),
-(1, 3, '2015-06-01', '2016-06-01', '20mg','2016-04-01',TRUE,TRUE),
-(1, 4, '2016-06-01', '2019-08-10', '5mg','2017-09-01',FALSE,TRUE),
-(2, 1, '2017-02-09', '2019-02-27', '15mg','2017-09-01',TRUE,TRUE),
-(3, 2, '2016-09-29', '2018-10-10', '10mg','2017-09-01',TRUE,TRUE);
+INSERT INTO MedicationUser(userID, medicationID, startDate, endDate, dosage, instructions,prescribedDate,repeated,delivery)
+VALUES (1, 3, '2017-06-01', '2019-08-10', '10mg', 'Take one tablet twice a day, after meals','2017-09-01',TRUE,TRUE),
+(1, 3, '2016-06-01', '2017-06-01', '5mg', 'Take two tablets twice a day', '2017-09-01',TRUE,TRUE),
+(1, 3, '2015-06-01', '2016-06-01', '20mg', 'Take two tablets twice a day', '2017-04-01',TRUE,TRUE),
+(1, 4, '2016-06-01', '2019-08-10', '5mg', 'Take two tablets twice a day','2016-04-01',TRUE,TRUE),
+(2, 1, '2017-02-09', '2019-02-27', '15mg', 'Take one tablet twice a day','2017-09-01',FALSE,TRUE),
+(3, 2, '2016-09-29', '2018-10-10', '10mg', 'Take one tablet twice a day','2017-09-01',TRUE,TRUE);
 
 INSERT INTO MedicationUserComment(medicationUserID, commentText, deleted)
 VALUES (1, 'Not feeling the benefit after two weeks', false), (2, 'Helping to minimise pain but still exists', false),
 (3, 'Not helping with pain, possibly need stronger medication', false), (4, 'Feeling better mentally', false),
-(4, 'Hearing not improving', false),
-(5, 'Ear pain easing', false),
+(5, 'Hearing not improving', false),
+(6, 'Ear pain easing', false),
 (6, 'Eye pain gone', true);
 
 INSERT INTO Clinician (title, firstName, lastName, jobTitle)
@@ -240,7 +262,8 @@ INSERT INTO AppointmentType (`type`)
 VALUES ('Pre-Op Assessment'), ('Emergency Surgery'), ('GP Appointment'), ('Check-up');
 
 INSERT INTO Appointment (userID, locationDepartmentID, clinicianID, dateOfAppointment, `comment`, appointmentTypeID)
-VALUES(1, 3, 3, (NOW() + INTERVAL 2 DAY), 'Ultrasound to be performed to ensure pregnancy is progressing normally.', 4),
+VALUES(1, 3, 3, '2017-07-07', 'Ultrasound performed, pregnancy progressing normally.', 4),
+(1, 3, 3, (NOW() + INTERVAL 2 DAY), 'Ultrasound to be performed to ensure pregnancy is progressing normally.', 4),
 (3, 4, 2, (NOW() + INTERVAL 12 DAY), null, 1),
 (1, 3, 3, (NOW() - INTERVAL 20 DAY), 'Appointment in relation to abdominal cramps', 3),
 (1, 3, 2, (NOW() + INTERVAL 30 DAY), 'Checkup after Ultrasound,', 4),
@@ -255,7 +278,7 @@ VALUES(1, 3, 3, (NOW() + INTERVAL 2 DAY), 'Ultrasound to be performed to ensure 
 INSERT INTO `Condition` (conditionName, conditionLink)
 VALUES ("Hip Replacement", "http://www.nhs.uk/Conditions/Hip-replacement/Pages/Introduction.aspx"),
 ("Diabetes", "http://www.nhs.uk/Conditions/Diabetes/Pages/Diabetes.aspx"),
-("Conjunctivitis", "http://www.nhs.uk/Conditions/Conjunctivitis-infective/Pages/Treatment.aspx"),
+("Conjunctivitis", "http:/g/www.nhs.uk/Conditions/Conjunctivitis-infective/Pages/Treatment.aspx"),
 ("Back Pain", "http://www.nhs.uk/conditions/back-pain/Pages/Introduction.aspx");
 
 INSERT INTO UserCondition (userID, conditionID, startDate, endDate)
@@ -266,6 +289,10 @@ VALUES (1, 4, '2017-01-10', '2017-07-15'),
 (4, 3, '2017-09-09', '2017-09-27'),
 (7, 1, '2017-09-09', null),
 (7, 4, '2017-08-11', '2017-09-01');
+
+INSERT INTO UserSideEffect (userID, sideEffectText, deleted)
+VALUES (1, 'I get a sore head after I take my meds in the morning', false),
+(1, 'I feel drowsy since I started lithium', false);
 
 INSERT INTO Task(taskName, userID, taskSummary, recievedDate, dueDate)
 VALUES('Pre-op questionnaire', 1, 'Questionnaire to be filled out before surgery. Includes allergies and general health questions.', (NOW() - INTERVAL 4 DAY), (NOW() + INTERVAL 18 DAY)),
