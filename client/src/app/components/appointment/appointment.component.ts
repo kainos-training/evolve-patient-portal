@@ -28,6 +28,10 @@ export class AppointmentComponent implements OnInit, OnDestroy, OnChanges {
     private userSubscription: Subscription;
     private mapPath: string;
     private clinicians: Clinician[];
+    private secondVisible = false;
+
+
+    onHidden() { this.secondVisible = false; }
 
     // input for viewing as dependant
     @Input() dependantID;
@@ -37,19 +41,22 @@ export class AppointmentComponent implements OnInit, OnDestroy, OnChanges {
             this.user = user;
         });
 
-        this.subCenter = this.navigatorGeolocation.getCurrentPosition({'timeout': 10000}).subscribe((location) => {
+        this.subCenter = this.navigatorGeolocation.getCurrentPosition({ 'timeout': 10000 }).subscribe((location) => {
             this.userLocation = location;
         });
-    }
-    public openModalQuery(template: TemplateRef<any>, userID: number) {
-        this.data.getUserClinicians(userID).subscribe(
-            res => this.clinicians = res,
-            err => console.log(err)
-        );
+
+        this.modalService.onHidden.asObservable().subscribe(() => this.onHidden());
     }
 
+    public openModalQuery(currentTemp: TemplateRef<any>, newTemp:TemplateRef<any>) {
+        
+        this.modalService.show(newTemp);
+    }
 
-    
+    toggleSecondVisible() {
+        this.secondVisible = !this.secondVisible;
+    }
+
     public openModal(template: TemplateRef<any>, appointment: Appointment) {
         this.data.getAppointmentInformation(appointment.appointmentID).subscribe(
             res => {
@@ -60,6 +67,10 @@ export class AppointmentComponent implements OnInit, OnDestroy, OnChanges {
                 this.focusedAppointment.showGoogleMap = false;
             }
         );
+        this.data.getUserClinicians(this.user.userID).subscribe(
+            res => this.clinicians = res,
+            err => console.log(err)
+        );
     }
 
     ngOnInit() {
@@ -68,9 +79,9 @@ export class AppointmentComponent implements OnInit, OnDestroy, OnChanges {
 
     getAppointmentsForUser() {
         this.data.getUserFromCookie(this.user);
-        if(this.user) {
+        if (this.user) {
             // uses dependantID if available, else defaults to logged in use ID
-            const id = this.dependantID || this.user.userID; 
+            const id = this.dependantID || this.user.userID;
 
             // get the data from the component
             this.data.getAllAppointmentsByUserID(id).subscribe(
@@ -88,9 +99,9 @@ export class AppointmentComponent implements OnInit, OnDestroy, OnChanges {
     }
 
     ngOnDestroy() {
-        if(this.userSubscription)
+        if (this.userSubscription)
             this.userSubscription.unsubscribe();
-        if(this.subCenter)
+        if (this.subCenter)
             this.subCenter.unsubscribe();
     }
 
