@@ -14,6 +14,7 @@ import {BrowserModule} from '@angular/platform-browser';
 import {LoginComponent} from '../login/login.component';
 import {ErrorPageComponent} from '../error-page/error-page.component';
 import {DashboardComponent} from '../dashboard/dashboard.component';
+import {SideEffectsComponent} from '../side-effects/side-effects.component';
 import {TopBarComponent} from '../top-bar/top-bar.component';
 import {LeftSideMenuComponent} from '../left-side-menu/left-side-menu.component';
 import {AppointmentComponent} from '../appointment/appointment.component';
@@ -81,6 +82,7 @@ describe('ConditionComponent', () => {
                 DirectionsRenderer,
                 NguiMapComponent,
                 MyTasksComponent,
+                SideEffectsComponent,
                 PersonalInfoHeaderComponent,
                 SecondaryInfoHeaderComponent,
                 DependantViewComponent,
@@ -180,5 +182,5 @@ describe('ConditionComponent', () => {
         expect(window.open).toHaveBeenCalled();
         expect(window.open).toHaveBeenCalledWith("http://localhost:9876/notalink");
     });
-
+    
 });

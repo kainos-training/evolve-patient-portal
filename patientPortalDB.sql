@@ -79,15 +79,18 @@ CREATE TABLE IF NOT EXISTS Task (
 );
 
 CREATE TABLE IF NOT EXISTS MedicationUser (
-    medicationUserID int auto_increment not null,
-    userID int not null, 
-    medicationID int not null,
-    startDate date not null,
-    endDate date,
-    dosage varchar(60) not null,
-    primary key (medicationUserID),
-    foreign key (userID) references `User` (userID),
-    foreign key (medicationID) references Medication (medicationID)
+medicationUserID int auto_increment not null,
+userID int not null, 
+medicationID int not null,
+startDate date not null,
+endDate date,
+dosage varchar(60) not null,
+instructions varchar(60) not null,
+prescribedDate date not null,
+repeated bool not null,
+primary key (medicationUserID),
+foreign key (userID) references `User` (userID),
+foreign key (medicationID) references Medication (medicationID)
 );
 
 CREATE TABLE IF NOT EXISTS MedicationUserComment (
@@ -169,6 +172,26 @@ CREATE TABLE IF NOT EXISTS Task (
     foreign key (userID) references User (userID)
 );
 
+CREATE TABLE IF NOT EXISTS UserSideEffect(
+	userSideEffectID int auto_increment not null,
+    userID int not null,
+    sideEffectText text not null,
+    `timeStamp` timeStamp not null DEFAULT CURRENT_TIMESTAMP,
+    deleted boolean not null,
+    primary key(userSideEffectID),
+    foreign key (userID) references User(userID)
+);
+
+CREATE TABLE IF NOT EXISTS Task (
+taskID int auto_increment not null,
+taskName varchar(60) not null,
+userID int not null,
+recievedDate date not null,
+dueDate date not null,
+primary key (taskID),
+foreign key (userID) references User (userID)
+);
+
 INSERT INTO GP (gpFullName, gpPracticeName, gpPracticeAddress)
 VALUES ('Dr. A Cheyne', 'Ormeau Park Surgery', '281 Ormeau Rd, Belfast BT7 3GG, UK'),
 ('Dr. E Glass', 'The Surgery', '1 Church St, Newtownards BT23 4FH'),
@@ -201,29 +224,20 @@ VALUES('Penicillin', 1, 'https://en.wikipedia.org/wiki/Penicillin'),
 ('Ketoprofen', 4, 'https://en.wikipedia.org/wiki/Ketoprofen'),
 ('Xylometazoline', 1, 'https://en.wikipedia.org/wiki/Xylometazoline');
 
-INSERT INTO MedicationUser(userID, medicationID, startDate, endDate, dosage)
-VALUES (1, 3, '2017-06-01', '2019-08-10', '10mg'),
-(1, 3, '2016-06-01', '2017-06-01', '5mg'),
-(1, 3, '2015-06-01', '2016-06-01', '20mg'),
-(1, 4, '2016-06-01', '2019-08-10', '5mg'),
-(2, 1, '2017-02-09', '2019-02-27', '15mg'),
-(3, 2, '2016-09-29', '2018-10-10', '10mg'),
-(4, 9, '2017-09-09', '2017-09-12', '10mg'),
-(3, 4, '2016-09-29', '2017-10-10', '5mg'), 
-(4, 9, '2017-02-09', '2019-02-27', '15mg'), 
-(6, 3, '2016-01-01', '2017-01-01', '15mg'), 
-(6, 3, '2017-01-01', '2018-01-01', '20mg'), 
-(7, 2, '2017-12-09', '2017-12-31', '20mg'),
-(8, 5, '2016-09-01', '2017-09-09', '5mg'), 
-(8, 5, '2016-09-10', '2017-09-30', '10mg'), 
-(8, 7, '2017-09-02', '2019-09-29', '5mg');
+INSERT INTO MedicationUser(userID, medicationID, startDate, endDate, dosage, instructions,prescribedDate,repeated)
+VALUES (1, 3, '2017-06-01', '2019-08-10', '10mg', 'Take one tablet twice a day, after meals','2017-09-01',TRUE),
+(1, 3, '2016-06-01', '2017-06-01', '5mg', 'Take two tablets twice a day', '2017-09-01',TRUE),
+(1, 3, '2015-06-01', '2016-06-01', '20mg', 'Take two tablets twice a day', '2017-04-01',TRUE),
+(1, 4, '2016-06-01', '2019-08-10', '5mg', 'Take two tablets twice a day','2016-04-01',TRUE),
+(2, 1, '2017-02-09', '2019-02-27', '15mg', 'Take one tablet twice a day','2017-09-01',FALSE), 
+(3, 2, '2016-09-29', '2018-10-10', '10mg', 'Take one tablet twice a day','2017-09-01',TRUE);
 
 INSERT INTO MedicationUserComment(medicationUserID, commentText, deleted)
 VALUES (1, 'Not feeling the benefit after two weeks', false), (2, 'Helping to minimise pain but still exists', false),
 (3, 'Not helping with pain, possibly need stronger medication', false), (4, 'Feeling better mentally', false), 
-(12, 'Hearing not improving', false),
-(13, 'Ear pain easing', false), 
-(7, 'Eye pain gone', true);
+(5, 'Hearing not improving', false),
+(6, 'Ear pain easing', false), 
+(6, 'Eye pain gone', true);
 
 INSERT INTO Clinician (title, firstName, lastName, jobTitle)
 VALUES ('Dr', 'Alex', 'Hyndman', 'Consultant'), ('Dr', 'John', 'Adams', 'Oncologist'), ('Dr', 'Karen', 'Reid', 'Obstetrician');
@@ -243,7 +257,8 @@ INSERT INTO AppointmentType (`type`)
 VALUES ('Pre-Op Assessment'), ('Emergency Surgery'), ('GP Appointment'), ('Check-up');
 
 INSERT INTO Appointment (userID, locationDepartmentID, clinicianID, dateOfAppointment, `comment`, appointmentTypeID)
-VALUES(1, 3, 3, (NOW() + INTERVAL 2 DAY), 'Ultrasound to be performed to ensure pregnancy is progressing normally.', 4),
+VALUES(1, 3, 3, '2017-07-07', 'Ultrasound performed, pregnancy progressing normally.', 4),
+(1, 3, 3, (NOW() + INTERVAL 2 DAY), 'Ultrasound to be performed to ensure pregnancy is progressing normally.', 4),
 (3, 4, 2, (NOW() + INTERVAL 12 DAY), null, 1),
 (1, 3, 3, (NOW() - INTERVAL 20 DAY), 'Appointment in relation to abdominal cramps', 3),
 (1, 3, 2, (NOW() + INTERVAL 30 DAY), 'Checkup after Ultrasound,', 4),
@@ -258,7 +273,7 @@ VALUES(1, 3, 3, (NOW() + INTERVAL 2 DAY), 'Ultrasound to be performed to ensure 
 INSERT INTO `Condition` (conditionName, conditionLink)
 VALUES ("Hip Replacement", "http://www.nhs.uk/Conditions/Hip-replacement/Pages/Introduction.aspx"),
 ("Diabetes", "http://www.nhs.uk/Conditions/Diabetes/Pages/Diabetes.aspx"),
-("Conjunctivitis", "http://www.nhs.uk/Conditions/Conjunctivitis-infective/Pages/Treatment.aspx"),
+("Conjunctivitis", "http:/g/www.nhs.uk/Conditions/Conjunctivitis-infective/Pages/Treatment.aspx"),
 ("Back Pain", "http://www.nhs.uk/conditions/back-pain/Pages/Introduction.aspx");
 
 INSERT INTO UserCondition (userID, conditionID, startDate, endDate) 
@@ -269,6 +284,10 @@ VALUES (1, 4, '2017-01-10', '2017-07-15'),
 (4, 3, '2017-09-09', '2017-09-27'),
 (7, 1, '2017-09-09', null),
 (7, 4, '2017-08-11', '2017-09-01');
+
+INSERT INTO UserSideEffect (userID, sideEffectText, deleted)
+VALUES (1, 'I get a sore head after I take my meds in the morning', false),
+(1, 'I feel drowsy since I started lithium', false);
 
 INSERT INTO Task(taskName, userID, taskSummary, recievedDate, dueDate)
 VALUES('Pre-op questionnaire', 1, 'Questionnaire to be filled out before surgery. Includes allergies and general health questions.', (NOW() - INTERVAL 4 DAY), (NOW() + INTERVAL 18 DAY)),
