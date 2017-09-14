@@ -11,4 +11,8 @@ protectedPrescriptionRoutes.post('/repeatedMedication', function(req, res) {
     return prescriptionController.repeatedMedication(req, res);
 });
 
+protectedPrescriptionRoutes.post('/pharmacy', function(req, res) {
+    return prescriptionController.localPharmacy(req, res);
+});
+
 module.exports = protectedPrescriptionRoutes;

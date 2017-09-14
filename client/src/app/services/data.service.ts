@@ -13,6 +13,7 @@ import { Appointment } from '../class/Appointment';
 import { AppointmentFurtherInfo } from '../class/AppointmentFurtherInfo';
 import { User } from '../class/User';
 import { Condition } from '../class/Condition';
+import { Pharmacy } from '../class/Pharmacy';
 
 @Injectable()
 export class DataService {
@@ -50,15 +51,29 @@ export class DataService {
             deliveryStatus: deliveryStatus
         };
         console.log(body.deliveryStatus);
+            body.medicationUserIDs = '(';
         for (var i = 0; i < medicationUserIDs.length; i++) {
             body.medicationUserIDs += medicationUserIDs[i] + ',';
         }
         body.medicationUserIDs = body.medicationUserIDs.substring(0, body.medicationUserIDs.length - 1);
+        body.medicationUserIDs += ')';
         const options = {
             headers: new HttpHeaders().set('Content-Type', 'application/json'),
         };
         return this.http.post('api/prescription/updatePrescribedDate', body, options).subscribe();
     };
+
+    public getLocalPharmacy(userID) {
+        const body = {
+            'userID': userID
+        };
+        const options = {
+            headers: new HttpHeaders().set('Content-Type', 'application/json'),
+        };
+        return this.http.post<Pharmacy[]>('api/prescription/pharmacy', body, options);
+    };
+
+
 
     public getTaskList(userID) {
         const body = {

@@ -78,11 +78,13 @@ database.getMedicationHistory = function(medicationID, userID, callback) {
 };
 
 database.updatePrescribedDate = function(medicationUserID, deliveryStatus, callback) {
+    console.log(medicationUserID);
     database.query(
-        "UPDATE medicationUser " +
-        "SET prescribedDate = curdate(), delivery = (?) " +
-        "WHERE medicationUserID in (?);", [deliveryStatus, medicationUserID],
+        'UPDATE medicationUser ' +
+        'SET prescribedDate = curdate(), delivery = ? ' +
+        'WHERE medicationUserID in ' + medicationUserID + ' ;', [deliveryStatus],
         function(err) {
+            console.log(err);
             callback(err);
         });
 };
@@ -103,6 +105,17 @@ database.getRepeatedMedication = function(userID, callback) {
             callback(err, rows);
         });
 };
+
+database.getLocalPharmacy = function(userID, callback) {
+    database.query(
+        "SELECT pharmacyName, Pharmacy.address " +
+        "FROM Pharmacy,`User` " +
+        "WHERE `User`.userID = ? " +
+        "AND `User`.pharmacyID = Pharmacy.pharmacyID;", [userID],
+        function(err, rows) {
+            callback(err, rows);
+        });
+}
 
 database.getCurrentConditions = function(userID, callback) {
     database.query(
