@@ -55,10 +55,14 @@ export class RepeatPrescriptionComponent implements OnInit {
             this.deliveryType = false;
         }
 
-        for (var i = 0; i < this.prescriptionList.length; i++) {
-            alert(prescriptionList[i].medicationUserID + " " + this.collectionType.status);
-            this.confirmedPrescriptionList.push(prescriptionList[i].medicationUserID);
+        console.log("prescriptionList length ", this.prescriptionList.length);
+
+        for (var i = 0; i < this.renewPrescriptionList.length; ++i) {
+            console.log(this.renewPrescriptionList[i].medicationUserID);
+            alert(this.renewPrescriptionList[i].medicationUserID + " " + this.collectionType.status);
+            this.confirmedPrescriptionList.push(this.renewPrescriptionList[i].medicationUserID);
         }
+        console.log('test');
         this.dataService.updatePrescriptionDate(this.confirmedPrescriptionList, this.deliveryType);
     }
 
