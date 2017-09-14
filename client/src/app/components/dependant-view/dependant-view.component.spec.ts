@@ -13,6 +13,7 @@ import { ReviewMedicationComponent } from '../review-medication/review-medicatio
 import { PersonalInfoHeaderComponent } from '../personal-info-header/personal-info-header.component';
 import { SecondaryInfoHeaderComponent } from '../secondary-info-header/secondary-info-header.component';
 import { DependantViewComponent } from './dependant-view.component';
+import { SearchPharmacyComponent } from '../search-pharmacy/search-pharmacy.component';
 
 describe('DependantViewComponent', () => {
   let component: DependantViewComponent;
@@ -32,7 +33,8 @@ describe('DependantViewComponent', () => {
           ReviewMedicationComponent,
           EllipsisPipe,
           PersonalInfoHeaderComponent,
-          SecondaryInfoHeaderComponent
+          SecondaryInfoHeaderComponent,
+          SearchPharmacyComponent
         ],
       providers: [
           DataService,

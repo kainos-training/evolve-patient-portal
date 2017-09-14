@@ -25,6 +25,7 @@ import { ConditionComponent } from '../condition/condition.component';
 import { TooltipModule } from 'ngx-bootstrap/tooltip';
 import { MyTasksComponent } from '../my-tasks/my-tasks.component';
 import { DependantViewComponent } from '../dependant-view/dependant-view.component';
+import { SearchPharmacyComponent } from '../search-pharmacy/search-pharmacy.component';
 
 describe('DashboardComponent', () => {
     let component: DashboardComponent;
@@ -49,7 +50,8 @@ describe('DashboardComponent', () => {
                 PersonalInfoHeaderComponent,
                 SecondaryInfoHeaderComponent,
                 ConditionComponent,
-                MyTasksComponent
+                MyTasksComponent,
+                SearchPharmacyComponent
             ],
             providers: [
                 SwitchBoardService,

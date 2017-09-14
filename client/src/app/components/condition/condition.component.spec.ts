@@ -27,6 +27,7 @@ import {APP_BASE_HREF} from '@angular/common';
 import {TooltipModule} from 'ngx-bootstrap/tooltip';
 import {MyTasksComponent} from '../my-tasks/my-tasks.component';
 import {DependantViewComponent} from '../dependant-view/dependant-view.component';
+import { SearchPharmacyComponent } from '../search-pharmacy/search-pharmacy.component';
 
 export class MockDataService {
     getCurrentConditions(userID: number) {
@@ -83,7 +84,8 @@ describe('ConditionComponent', () => {
                 PersonalInfoHeaderComponent,
                 SecondaryInfoHeaderComponent,
                 DependantViewComponent,
-                ConditionComponent
+                ConditionComponent, 
+                SearchPharmacyComponent
             ],
             providers: [
                 DataService,
