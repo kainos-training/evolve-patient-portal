@@ -4,7 +4,7 @@ CREATE DATABASE IF NOT EXISTS patientPortal;
 
 USE patientPortal;
 
-CREATE TABLE IF NOT EXISTS pharmacy(
+CREATE TABLE IF NOT EXISTS Pharmacy(
 pharmacyID int auto_increment not null,
 pharmacyName varchar(100),
 address varchar(100),
@@ -171,15 +171,6 @@ CREATE TABLE IF NOT EXISTS UserDependant(
     foreign key (dependantID) references User(userID)
 );
 
-CREATE TABLE IF NOT EXISTS Task (
-    taskID int auto_increment not null,
-    taskName varchar(60) not null,
-    userID int not null,
-    recievedDate date not null,
-    dueDate date not null,
-    primary key (taskID),
-    foreign key (userID) references User (userID)
-);
 
 INSERT INTO Pharmacy(pharmacyName, address)
 VALUES('Gordons Chemists', '15-17 Corn Market, Belfast BT1 4DA'),
