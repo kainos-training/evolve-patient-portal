@@ -1,5 +1,27 @@
-
-import {CUSTOM_ELEMENTS_SCHEMA } from '@angular/core'
+import { TimelineComponent } from '../timeline/timeline.component';
+import {SecondaryInfoHeaderComponent} from '../secondary-info-header/secondary-info-header.component';
+import {PersonalInfoHeaderComponent} from '../personal-info-header/personal-info-header.component';
+import {HttpClient, HttpClientModule, HttpHandler} from '@angular/common/http';
+import {CookieService} from 'ngx-cookie-service';
+import {routes} from '../../app.router';
+import {ModalModule} from 'ngx-bootstrap/modal';
+import {FormsModule} from '@angular/forms';
+import {BrowserModule} from '@angular/platform-browser';
+import {LoginComponent} from '../login/login.component';
+import {ErrorPageComponent} from '../error-page/error-page.component';
+import {DashboardComponent} from '../dashboard/dashboard.component';
+import {SideEffectsComponent} from '../side-effects/side-effects.component';
+import {TopBarComponent} from '../top-bar/top-bar.component';
+import {LeftSideMenuComponent} from '../left-side-menu/left-side-menu.component';
+import {AppointmentComponent} from '../appointment/appointment.component';
+import {SettingNewPasswordComponent} from '../setting-new-password/setting-new-password.component';
+import {RequestPasswordResetComponent} from '../request-password-reset/request-password-reset.component';
+import {ReviewMedicationComponent} from '../review-medication/review-medication.component';
+import {MapViewComponent} from '../map-view/map-view.component';
+import {EllipsisPipe} from '../../utils/ellipsis.pipe';
+import {DirectionsRenderer, Marker, NguiMapComponent} from '@ngui/map/dist';
+import {MyTasksComponent} from '../my-tasks/my-tasks.component';
+import {DependantViewComponent} from '../dependant-view/dependant-view.component';
 import { Condition } from '../../class/Condition';
 import { TestBed } from '@angular/core/testing';
 import { async } from '@angular/core/testing';
@@ -54,9 +76,10 @@ describe('ConditionComponent', () => {
                 { provide: APP_BASE_HREF, useValue: '/' }
             ],
             imports: [
+                TooltipModule.forRoot(),
+                FormsModule,
                 TooltipModule.forRoot()
-            ],
-            schemas: [CUSTOM_ELEMENTS_SCHEMA]
+            ]
         })
             .compileComponents();
     }));

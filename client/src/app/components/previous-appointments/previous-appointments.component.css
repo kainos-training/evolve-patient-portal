@@ -1,0 +1,191 @@
+.panel-default {
+    border-top-width: 5px;
+    border-top-color: #027FBB;
+    margin-top: 10px;
+    height: 400px;
+}
+
+.panel-heading img {
+    height: 25px;
+    width: 25px;
+}
+
+.panel-heading {
+    background: white;
+    font: bold;
+}
+
+.panel-body{
+    width:100%;
+    height: 100%;
+    max-height: 300px;
+    overflow: auto;
+}
+
+.table-btn {
+    background-color: transparent;
+    border: none;
+    width: 100%;
+    text-align: left;
+    outline: none;
+    overflow: hidden;
+}
+
+.pill-icon-modal {
+    height: 25px;
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+.modal-form-input {
+    font-size: 15px;
+    font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+    color: #666666;
+}
+
+.medium-location-text {
+    font-size: 15px;
+    font-family: "Helvetica";
+    font-style: bold;
+    color: #666666;
+}
+
+.sml-location-txt {
+    font-size: 15px;
+    font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+    color: #666666;
+}
+
+#appointment-header {
+    font-size: 24px;
+}
+
+h1 {
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+#previous-appointments-header::before {
+    content: "";
+    display: block;
+    background-repeat: no-repeat;
+    margin-top: 0px;
+    margin-left: 20px;
+    margin-right: 10px;
+    margin-bottom: 10px;
+    background-image: url("../../../assets/upcomingAppointmentsIcon.png");
+    width: 25px;
+    height: 26px;
+    float: left;
+    background-size: cover;
+}
+
+.container-fixed {
+    margin: 0 auto;
+    max-width: 500px;
+    min-width: 300px;
+    padding: 0;
+    height: 300px;
+    position: relative;
+}
+
+.input-disabled {
+    background-color: #FFF !important;
+    cursor: default;
+}
+
+#information-display {
+    overflow: auto;
+    max-height: 300px;
+}
+
+.debugRed {
+    outline: 1px solid red;
+}
+
+.debugBlue {
+    outline: 1px solid blue;
+}
+
+code {
+    font-size: 12px;
+    color: #666666;
+    height:auto;
+}
+
+.local-map-container {
+    overflow: hidden;
+}
+
+.local-map-container img {
+    width: 100%;
+}
+
+input[data-expanded="false"] {
+    margin: 0;
+}
+
+input[data-expanded="true"] {
+    margin: 20px 0;
+}
+
+input.btn.btn-block:last-of-type {
+    margin-top: 20px;
+}
+
+input[data-expanded="true"], input[data-expanded="false"],
+input[data-expanded="true"]:visited, input[data-expanded="false"]:visited {
+    background-color: rgba(0, 50, 0, 0.80);
+}
+
+input[data-expanded="true"]:hover, input[data-expanded="false"]:hover,
+input[data-expanded="true"]:focus, input[data-expanded="false"]:focus,
+input[data-expanded="true"]:active, input[data-expanded="false"]:active {
+    background-color: rgba(0, 50, 0, 0.70);
+    outline: none;
+}
+
+
+.text-button:hover {
+    color: #00579f;
+    cursor: pointer;
+}
+
+.text-button{
+    outline:none;
+    color:#067fbb;
+    text-decoration: none;
+    margin-bottom: 15px;
+}
+
+#previous-appointments-header {
+    font-size: 24px;
+}
+
+.btn.sharp {
+    border-radius:0;
+}
+
+.btn-primary {
+      width: 49%;
+      color: #fff;
+      background-color:#067fbb;
+      border-color: #067fbb; 
+      outline:none !important;
+}
+
+.btn-primary:hover, .btn-primary:active, .btn-primary.active {
+      color: #fff;
+      background-color: #00579f;
+      border-color: #00579f; 
+}
+
+.btn-group{
+    width: 100%;
+    border: none;
+}
+
+.btn-default{
+    width:49%;
+    outline:none !important;
+}

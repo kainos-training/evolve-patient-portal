@@ -310,6 +310,18 @@ export class DataService {
         this.cookieService.delete(this.urlCookie);
     }
 
+    public getPreviousAppointments(userID) {
+        let headers = new Headers({ 'Content-Type': 'application/json' });
+        const body = {
+            'userID': userID
+        };
+        const options = {
+            headers: new HttpHeaders().set('Content-Type', 'application/json'),
+        };
+        let url = '/api/appointment/previous';
+        return this.http.post<Appointment[]>(url, body, options);
+    };
+
     public getAllAppointmentsByUserID(userID) {
         let headers = new Headers({ 'Content-Type': 'application/json' });
         const body = {
