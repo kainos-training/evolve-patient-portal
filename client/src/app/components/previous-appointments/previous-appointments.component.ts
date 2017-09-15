@@ -8,7 +8,7 @@ import { User } from '../../class/User';
 import { EllipsisPipe } from '../../utils/ellipsis.pipe';
 import { BsModalService } from 'ngx-bootstrap/modal';
 import { BsModalRef } from 'ngx-bootstrap/modal/modal-options.class';
-import { DatePickerOptions, DateModel } from 'ng2-datepicker';
+import { IMyDpOptions, IMyDateModel } from 'mydatepicker';
 
 @Component({
     selector: 'evolve-previous-appointments',
@@ -25,20 +25,27 @@ export class PreviousAppointmentsComponent implements OnInit, OnDestroy, OnChang
     private order = 'dateOfAppointment';
     private filter = new Appointment();
     private filterType: string;
-    private date: DateModel;
-    private options: DatePickerOptions;
+    private date: Date;
     private filters: string;
     private dateCleared: boolean;
     private filtersOpen = false;
     private modalRef: BsModalRef;
     private id: number;
 
+    public myDatePickerOptions: IMyDpOptions = {
+        // other options...
+        dateFormat: 'dd/mm/yyyy',
+    };
+    // dateChanged callback function called when the user select the date. This is mandatory callback
+    // in this option. There are also optional inputFieldChanged and calendarViewChanged callbacks.
+    onDateChanged(event: IMyDateModel) {
+        this.date = event.jsdate;
+    }
+
     @Input() dependantID;
 
     constructor(private modalService: BsModalService,
         private data: DataService, private switchboard: SwitchBoardService, private ellipsis: EllipsisPipe) {
-        this.options = new DatePickerOptions();
-        this.options.format = "DD/MM/YYYY";
         this.userSubscription = this.switchboard.user$.subscribe(user => {
             this.user = user;
         });
@@ -67,7 +74,7 @@ export class PreviousAppointmentsComponent implements OnInit, OnDestroy, OnChang
         this.getAppointmentsForUser();
     }
 
-    getAppointmentsForUser(){
+    getAppointmentsForUser() {
         if (this.dependantID || this.user) {
             if (this.dependantID) {
                 this.id = this.dependantID;
@@ -84,10 +91,6 @@ export class PreviousAppointmentsComponent implements OnInit, OnDestroy, OnChang
 
 
     ngOnChanges(changes: SimpleChanges) {
-        //Called before any other lifecycle hook. Use it to inject dependencies, but avoid any serious work here.
-        //Add '${implements OnChanges}' to the class.
-
-        // download the new data to update the widgets
         this.getAppointmentsForUser();
     }
     ngOnDestroy() {
@@ -112,9 +115,7 @@ export class PreviousAppointmentsComponent implements OnInit, OnDestroy, OnChang
         let dateString;
 
         if (this.date) {
-            dateString = this.date.formatted;
-            let newDate = new Date(this.date.month + '/' + this.date.day + '/' + this.date.year);
-            this.filter.dateOfAppointment = newDate;
+            this.filter.dateOfAppointment = this.date;
             this.filters += "Date";
         }
         else {

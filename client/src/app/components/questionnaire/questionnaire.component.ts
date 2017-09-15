@@ -277,7 +277,6 @@ export class QuestionnaireComponent implements OnInit {
                 try {
                     this.taskID = parseInt(window.atob(params['taskID']));
                     if (this.taskID > 0) {
-                        console.log('Using taskID =', this.taskID);
                     } else {
                         throw 'ATOB ERROR';
                     }

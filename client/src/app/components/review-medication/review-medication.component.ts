@@ -49,19 +49,16 @@ export class ReviewMedicationComponent implements OnInit, OnDestroy {
         const id = this.dependantID || this.user.userID; 
         
         this.dataService.getMedicationComments(this.selectedMedication.medicationUserID).subscribe(
-            res => this.selectedMedicationComments = res,
-            err => console.log(err)
+            res => this.selectedMedicationComments = res
         );
         this.dataService.getRemovedMedicationComments(this.selectedMedication.medicationUserID).subscribe(
-            res => this.selectedRemovedMedicationComments = res,
-            err => console.log(err)
+            res => this.selectedRemovedMedicationComments = res
         );
 
         if(this.user) {
             if(this.user.userID) {
                 this.dataService.getMedicationHistory(this.selectedMedication.medicationID, id).subscribe(
-                    res => this.selectedMedicationHistory = res,
-                    err => console.log(err)
+                    res => this.selectedMedicationHistory = res
                 );
             }
         }
@@ -87,7 +84,6 @@ export class ReviewMedicationComponent implements OnInit, OnDestroy {
 
     constructor(dataService: DataService, private modalService: BsModalService, private switchboard: SwitchBoardService) {
         this.dataService = dataService;
-        console.log("User Id in this constructor: " + this.user.userID);
     }
     
     ngOnInit() {

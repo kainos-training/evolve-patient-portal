@@ -38,9 +38,9 @@ import { ReviewMedicationComponent } from './components/review-medication/review
 import { ConditionComponent } from './components/condition/condition.component';
 import { TooltipModule } from 'ngx-bootstrap/tooltip';
 import { MyTasksComponent } from './components/my-tasks/my-tasks.component';
-import { DatePickerModule } from 'ng2-datepicker';
 import { QuestionnaireComponent } from './components/questionnaire/questionnaire.component';
 import { TimelineComponent } from './components/timeline/timeline.component';
+import { MyDatePickerModule } from 'mydatepicker';
 
 @NgModule({
     declarations: [
@@ -71,7 +71,7 @@ import { TimelineComponent } from './components/timeline/timeline.component';
         DependantViewComponent
     ],
     imports: [
-        DatePickerModule,
+        MyDatePickerModule,
         BrowserModule,
         FormsModule,
         HttpClientModule,

@@ -31,7 +31,6 @@ export class MyTasksComponent implements OnInit {
             if (this.user.userID)
                 this.dataService.getTaskList(this.user.userID).subscribe(
                     res => {
-                        console.log(res);
                         if (res.length == 0) {
                             this.emptyList = true;
                         } else {
