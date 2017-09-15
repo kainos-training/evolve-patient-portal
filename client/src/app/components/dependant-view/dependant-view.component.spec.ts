@@ -17,7 +17,7 @@ import { PreviousAppointmentsComponent } from '../previous-appointments/previous
 import { OrderByPipe } from '../../utils/orderby.pipe';
 import { FilterPipe } from '../../utils/filter.pipe';
 import { UniquePipe } from '../../utils/unique.pipe';
-import {DatePickerModule} from 'ng2-datepicker';
+import { MyDatePickerModule } from 'mydatepicker';
 
 describe('DependantViewComponent', () => {
   let component: DependantViewComponent;
@@ -50,8 +50,8 @@ describe('DependantViewComponent', () => {
           {provide: Router, useValue: mockRouter}
         ],
       imports: [
+          MyDatePickerModule,
           HttpClientModule,
-          DatePickerModule,
           FormsModule
         ]
     })
