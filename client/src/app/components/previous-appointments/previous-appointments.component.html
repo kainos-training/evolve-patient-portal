@@ -37,7 +37,7 @@
             <div class="pull-left" style="width:100%">
                 <div class="prescription-form">
                     <label><strong>Filter by date:</strong></label><br><br>
-                    <ng2-datepicker style="margin-left:25px; position:absolute;" [options]="options" [(ngModel)]="date"></ng2-datepicker>
+                    <my-date-picker name="mydate" [options]="myDatePickerOptions" (dateChanged)="onDateChanged($event)" required></my-date-picker>
                 </div>
                 <br><br>
                 <div class="prescription-form">
@@ -95,7 +95,4 @@
             </form>
         </div>
     </div>
-</ng-template>
-
-<ng-template #template2>
 </ng-template>

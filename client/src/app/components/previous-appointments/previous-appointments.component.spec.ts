@@ -8,8 +8,8 @@ import {OrderByPipe} from '../../utils/orderby.pipe';
 import {EllipsisPipe} from '../../utils/ellipsis.pipe';
 import {UniquePipe} from '../../utils/unique.pipe';
 import {FilterPipe} from '../../utils/filter.pipe';
-import {DatePickerModule} from 'ng2-datepicker';
 import {CUSTOM_ELEMENTS_SCHEMA} from '@angular/core';
+import {MyDatePickerModule} from 'mydatepicker';
 
 describe('PreviousAppointmentsComponent', () => {
     let component: PreviousAppointmentsComponent;
@@ -34,7 +34,7 @@ describe('PreviousAppointmentsComponent', () => {
                 {provide: DataService, useValue: mockDataService}
             ],
             imports: [
-                DatePickerModule,
+                MyDatePickerModule,
                 BrowserAnimationsModule,
                 HttpClientModule
             ],
