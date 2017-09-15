@@ -15,11 +15,12 @@
 
         <!-- <li class="linkItem"><a routerLink="/repeat-prescription">Repeat Prescription</a></li> -->
         <!-- MyDashboard set to active (first page the user will see) -->
-        <li class="linkItem active" (click)="navigationItemClicked($event)">{{navigationOptions.MyDashboard}}</li>
+        <li class="linkItem active visible-sm visible-md visible-lg visible-xl" (click)="navigationItemClicked($event)">{{navigationOptions.MyDashboard}}</li>
+        <li class="linkItem active visible-xs" (click)="navigationItemClicked($event); toggleMenuState();">{{navigationOptions.MyDashboard}}</li>
         <li class="linkItem" (click)="navigationItemClicked($event)">{{navigationOptions.MyDependants}}</li>
         <div id="dependantsAccordion">
-            <div href="#" onclick="return false;">Dependants:</div>
-            <a *ngFor="let dependant of dependants" href="#" (click)="onDependantClicked($event, dependant)">{{dependant.firstName}} {{dependant.lastName}}</a>
+            <a class="visible-xs" *ngFor="let dependant of dependants" href="#" (click)="onDependantClicked($event, dependant); toggleMenuState();">{{dependant.firstName}} {{dependant.lastName}}</a>
+            <a class="visible-sm visible-md visible-lg visible-xl" *ngFor="let dependant of dependants" href="#" (click)="onDependantClicked($event, dependant)">{{dependant.firstName}} {{dependant.lastName}}</a>
         </div>
         <li class="linkItem" (click)="navigationItemClicked($event)">{{navigationOptions.RepeatPerscription}}</li>
     </ul>

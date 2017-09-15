@@ -37,15 +37,33 @@
     margin-top: 2.5%;
 }
 
+.patientBirthday-small{
+    color: darkgrey;
+    margin-left: 5%;
+    font-size: 15px;
+}
+
 .patientGender{
     color: darkgrey;
     margin-left: 5%;
     font-size: 15px;
     margin-top: 2.5%;
 }
+
+.patientGender-small{
+    color: darkgrey;
+    margin-left: 5%;
+    font-size: 15px;
+}
 .patientMrin{
     color: darkgrey;
     margin-left: 5%;
     font-size: 15px;
     margin-top: 2.5%;
+}
+
+.patientMrin-small{
+    color: darkgrey;
+    margin-left: 5%;
+    font-size: 15px;
 }

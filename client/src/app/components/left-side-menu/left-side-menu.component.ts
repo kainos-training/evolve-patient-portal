@@ -1,5 +1,5 @@
 import { NavigationOption, NavigationOptionEnum } from '../../app.globals';
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, HostListener, OnInit } from '@angular/core';
 import {trigger, state, style} from '@angular/animations';
 import {MenuStateService} from '../../services/menu-state.service';
 import {Subscription} from 'rxjs/Subscription';
@@ -33,9 +33,11 @@ export class LeftSideMenuComponent implements OnInit {
 
     private viewingDependant: User;
     private dependants: User[];
+    private readonly MDSCREENSIZE: number = 768;
 
     constructor(private data: DataService, private switchboard: SwitchBoardService, private menuStateService: MenuStateService) {
         this.menuStateSubscription = this.menuStateService.menuState$.subscribe(menuState => this.menuState = menuState);
+        this.determineMenuState();
     }
 
     ngOnDestroy(): void {
@@ -102,5 +104,24 @@ export class LeftSideMenuComponent implements OnInit {
                     }
                 }
             
+    }
+
+    private determineMenuState() {
+        this.menuState = window.innerWidth >= this.MDSCREENSIZE ? 'out' : 'in';
+    }
+
+    toggleMenuState() {
+        this.menuState = this.menuState === 'out' ? 'in' : 'out';
+        this.menuStateService.stateString(this.menuState);
+    }
+
+    getMenuState(): string {
+        return this.menuState;
+    }
+
+    @HostListener('window:resize', ['$event'])
+    resize(event) {
+        this.determineMenuState();
+        this.menuStateService.stateString(this.menuState);
     }
 }
