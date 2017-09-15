@@ -90,8 +90,7 @@ export class LeftSideMenuComponent implements OnInit {
                 this.user.lastName = res[0].lastName;
                 this.user.phoneNumber = res[0].phoneNumber;
                 this.user.title = res[0].title;
-            },
-            err => console.log(err)
+            }
         );
         
                 if(this.user) {
