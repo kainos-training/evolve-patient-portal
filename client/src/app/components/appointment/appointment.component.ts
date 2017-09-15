@@ -33,7 +33,6 @@ export class AppointmentComponent implements OnInit, OnDestroy, OnChanges {
     private queryText: string;
     private selectedClinician: Clinician;
     private showMap: boolean;
-    private savedUser: User;
     private selectedAppointment: Appointment;
 
     onHidden() { 
@@ -71,7 +70,8 @@ export class AppointmentComponent implements OnInit, OnDestroy, OnChanges {
                 this.focusedAppointment.showGoogleMap = false;
             }
         );
-        this.data.getUserClinicians(this.user.userID).subscribe(
+        const id = this.dependantID || this.user.userID;
+        this.data.getUserClinicians(id).subscribe(
             res => this.clinicians = res,
             err => console.log(err)
         );
@@ -88,7 +88,6 @@ export class AppointmentComponent implements OnInit, OnDestroy, OnChanges {
 
     ngOnInit() {
         this.data.getUserFromCookie(this.user);   
-        this.savedUser = this.user;
         this.getAppointmentsForUser();
     }
 

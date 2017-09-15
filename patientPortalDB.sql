@@ -258,7 +258,7 @@ VALUES ('Dr', 'Alex', 'Hyndman', 'Consultant', 'a.weir@kainos.com'),
 (NULL, 'Clinic', 'Administration', 'Admin team', 'c.administration@hospital.com');
 
 INSERT INTO UserClinician (userID, clinicianID)
-VALUES (1, 4), (1, 5), (1,6);
+VALUES (1, 4), (1, 5), (1, 6), (8, 4);
 
 INSERT INTO Location (locationAddress)
 VALUES ('Royal Victoria Hospital, 274 Grosvenor Rd, Belfast, BT12 6BA'),
