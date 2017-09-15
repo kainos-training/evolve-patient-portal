@@ -74,31 +74,18 @@ exports.addAppointmentQuery = function(req, res) {
     const querySubject = req.body.querySubject;
     const queryText = req.body.queryText;
 
-
-    console.log("appointmentID is: " + appointmentID);
-    console.log("clinicianID is: " + clinicianID);
-    console.log("querySubject is: " + querySubject);
-    console.log("queryText is: " + queryText);
-    
-
-
     if (!appointmentID || !clinicianID || !querySubject || !queryText) {
-        console.log("1");
         res.status(400).json({
             success: false
         });
     } else {
-        console.log("About to add appointment query");
         db.addAppointmentQuery(appointmentID, clinicianID, querySubject, queryText, function(err) {
             if (err) {
-                console.log("2");
-                
                 console.log(err);
                 res.status(400).json({
                     success: false
                 });
             } else {
-                console.log("3");
                 db.getAppointmentQuery(clinicianID, function(err, rows){
                     if (err) {
                         console.log(err);
@@ -106,7 +93,6 @@ exports.addAppointmentQuery = function(req, res) {
                             success: false
                         });
                     } else {
-                        console.log("Email returned is: " + rows[0].email);
                         emailer.sendNotification(rows[0].email, rows[0].name, 0, "appointment", querySubject, queryText);
                         
                     }

@@ -84,37 +84,44 @@
                         </p>
                     </div>
                 </div>
-                <p>
-                    <strong>From:</strong><br>
-                    <textarea disabled type="text" class="form-control input-disabled" id="username" rows="1">{{selectedAppointment.firstName}} {{selectedAppointment.lastName}}</textarea>
+                <div *ngIf="querySuccess">
+                    <h5 class="successMessageTitle">Success!</h5>
+                    <p id="querySuccessMessage">Your query has been submitted. Estimated response time: 3 days</p>
+                    <input type="button" (click)="toggleSecondVisible()" class="btn btn-success btn-sm btn-block" value="Back" />
+                    <br>
+                </div>
+                <div *ngIf="!querySuccess">
+                    <p>
+                        <strong>From:</strong><br>
+                        <textarea disabled type="text" class="form-control input-disabled" id="username" rows="1">{{selectedAppointment.firstName}} {{selectedAppointment.lastName}}</textarea>
 
-                    <strong>To:</strong><br>
-                    <select [(ngModel)]="selectedClinician" required>
+                        <strong>To:</strong><br>
+                        <select [(ngModel)]="selectedClinician" required>
                         <option *ngFor="let clinician of clinicians" [ngValue]="clinician">{{clinician.firstName}} {{clinician.lastName}}</option>
                     </select>
 
-                    <br>
-                    <strong>Subject:</strong><br>
-                    <textarea type="text" class="form-control input-disabled" id="subject" rows="1" [(ngModel)]="querySubject" required></textarea>
+                        <br>
+                        <strong>Subject:</strong><br>
+                        <textarea type="text" class="form-control input-disabled" id="subject" rows="1" [(ngModel)]="querySubject" required></textarea>
 
-                    <br>
-                    <strong><span style="padding-left: 30px">This query is in relation to the appoinment below:</span><br>  </strong>
-                    <br>
-                    <i><span style="padding-left: 30px"><strong>Location: </strong>{{focusedAppointment.locationAddress}}</span><br></i>
-                    <i><span style="padding-left: 30px"><strong>Due: </strong> {{focusedAppointment.dateOfAppointment | date: 'dd/MM/yyyy'}}</span><br></i>
-                    <i><span style="padding-left: 30px"><strong>Time: </strong> {{focusedAppointment.dateOfAppointment | date:'h:mm a'}}</span></i>
-                    <br>
-                    <br>
+                        <br>
+                        <strong><span style="padding-left: 30px">This query is in relation to the appoinment below:</span><br>  </strong>
+                        <br>
+                        <i><span style="padding-left: 30px"><strong>Location: </strong>{{focusedAppointment.locationAddress}}</span><br></i>
+                        <i><span style="padding-left: 30px"><strong>Due: </strong> {{focusedAppointment.dateOfAppointment | date: 'dd/MM/yyyy'}}</span><br></i>
+                        <i><span style="padding-left: 30px"><strong>Time: </strong> {{focusedAppointment.dateOfAppointment | date:'h:mm a'}}</span></i>
+                        <br>
+                        <br>
 
-                    <label><strong>Query</strong></label>
-                    <textarea type="text" class="form-control input-disabled" id="comment-input" rows="8" [(ngModel)]="queryText" required></textarea>
+                        <label><strong>Query</strong></label>
+                        <textarea type="text" class="form-control input-disabled" id="comment-input" rows="8" [(ngModel)]="queryText" required></textarea>
 
-                </p>
-                <hr>
+                    </p>
+                    <hr>
 
-                <p>By clicking submit you agree to thew terms and conditions</p>
-                <button class="btn btn-primary" type="submit" (click)="submitQuery()">Submit Query</button>
-
+                    <p>By clicking submit you agree to thew terms and conditions</p>
+                    <button class="btn btn-primary" type="submit" (click)="submitQuery()">Submit Query</button>
+                </div>
             </div>
 
         </div>

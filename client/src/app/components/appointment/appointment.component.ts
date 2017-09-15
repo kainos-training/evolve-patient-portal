@@ -35,6 +35,7 @@ export class AppointmentComponent implements OnInit, OnDestroy, OnChanges {
     private showMap: boolean;
     private selectedAppointment: Appointment;
     private invalidInput: boolean;
+    private querySuccess: boolean;
 
     onHidden() { 
         this.secondVisible = false;
@@ -46,6 +47,7 @@ export class AppointmentComponent implements OnInit, OnDestroy, OnChanges {
 
     constructor(private modalService: BsModalService, private data: DataService, private switchboard: SwitchBoardService) {
         this.invalidInput = false;
+        this.querySuccess = false;
         this.userSubscription = this.switchboard.user$.subscribe(user => {
             this.user = user;
         });
@@ -58,11 +60,17 @@ export class AppointmentComponent implements OnInit, OnDestroy, OnChanges {
     }
 
     toggleSecondVisible() {
+        this.selectedClinician = null;
+        this.queryText = null;
+        this.querySubject = null;
+        this.querySuccess = false;
+        this.invalidInput = false;
         this.secondVisible = !this.secondVisible;
     }
 
     public openModal(template: TemplateRef<any>, appointment: Appointment) {
         this.invalidInput = false;
+        this.querySuccess = false;
         this.selectedAppointment = appointment;
         this.data.getAppointmentInformation(appointment.appointmentID).subscribe(
             res => {
@@ -82,8 +90,9 @@ export class AppointmentComponent implements OnInit, OnDestroy, OnChanges {
 
     submitQuery() {
         if(this.querySubject && this.queryText && this.selectedClinician.clinicianID) {
+            this.invalidInput = false;
             this.data.addAppointmentQuery(this.selectedAppointment.appointmentID, this.selectedClinician.clinicianID, this.querySubject, this.queryText);
-            this.toggleSecondVisible();
+            this.querySuccess = true;
         } else {
             this.invalidInput = true;
         }

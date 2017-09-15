@@ -183,3 +183,17 @@ input[data-expanded="true"]:active, input[data-expanded="false"]:active {
     color: #666666 ;
     font-family: Helvetica, sans-serif;
 }
+
+.successMessageTitle {
+    color: #666666 ;
+    font-family: Helvetica, sans-serif;
+    text-align: center;
+    font-size: 1.5em;
+}
+
+#querySuccessMessage {
+    color: #666666 ;
+    font-family: Helvetica, sans-serif;
+    text-align: center;
+    padding-top: 10px;
+}
