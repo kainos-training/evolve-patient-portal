@@ -4,7 +4,7 @@
           <div class="panel-heading">
               <h1 class="panel-title" id="oneline-title">My Tasks</h1>
           </div>
-          <div class="panel-body" id="medicationDetails">
+          <div class="panel-body" id="medicationDetails" *ngIf="!emptyList">
               <table class="table table-hover">
                   <tbody>
                       <tr *ngFor="let task of tasksList">
@@ -19,6 +19,7 @@
                   </tbody>
               </table>
           </div>
+          <h4 *ngIf="emptyList" class="text-center"> All tasks have been completed.</h4>
       </div>
   </div>
 </body>
