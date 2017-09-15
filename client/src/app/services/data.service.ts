@@ -412,7 +412,7 @@ export class DataService {
             'appointmentID': appointmentID,
             'clinicianID': clinicianID,
             'querySubject': querySubject,
-            'queryID': queryText
+            'queryText': queryText
         };
         const options = {
             headers: new HttpHeaders().set('Content-Type', 'application/json'),

@@ -80,7 +80,7 @@
             <div class="perscription-header">
                 <p>
                     <strong>From:</strong><br>
-                    <textarea disabled type="text" class="form-control input-disabled" id="username" rows="1">{{user.firstName}} {{user.lastName}}</textarea>
+                    <textarea disabled type="text" class="form-control input-disabled" id="username" rows="1">{{userName}}</textarea>
 
                     <strong>To:</strong><br>
 
@@ -109,6 +109,7 @@
                 </p>
                 <hr>
 
+                <p>By clicking submit you agree to thew terms and conditions</p>
                 <button class="btn btn-primary" type="submit" (click)="submitQuery(); secondVisible = !secondVisible">Submit Query</button>
 
             </div>
