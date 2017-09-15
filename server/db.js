@@ -20,7 +20,11 @@ database.getMedications = function(userID, callback) {
         "WHERE userID = ? AND endDate >= NOW();", 
         [userID],
         function(err, rows) {
-            callback(err, rows);
+            if(err) {
+                callback(err);
+            } else {
+                callback(null, rows);
+            }
         });
 };
 
@@ -38,7 +42,11 @@ database.getMedicationUserComments = function(medicationUserID, callback) {
         "FROM MedicationUserComment " +
         "WHERE medicationUserID = ? AND deleted = false;", [medicationUserID],
         function(err, rows) {
-            callback(err, rows);
+            if(err) {
+                callback(err);
+            } else {
+                callback(null, rows);
+            }
         });
 };
 
@@ -48,7 +56,11 @@ database.getRemovedMedicationUserComments = function(medicationUserID, callback)
         "FROM MedicationUserComment " +
         "WHERE medicationUserID = ? AND deleted = true;", [medicationUserID],
         function(err, rows) {
-            callback(err, rows);
+            if(err) {
+                callback(err);
+            } else {
+                callback(null, rows);
+            }
         });
 };
 

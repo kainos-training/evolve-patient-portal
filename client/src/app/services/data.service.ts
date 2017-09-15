@@ -38,8 +38,11 @@ export class DataService {
             'intervalBefore' : intervalBefore,
             'intervalAfter' : intervalAfter
         };
+        var headers = new HttpHeaders().set('Content-Type', 'application/json');
+        headers = this.addAuthorizationHeader(headers);
+                
         const options = {
-            headers: new HttpHeaders().set('Content-Type', 'application/json'),
+            headers: headers
         };
 
         return this.http.post<TimelineAppointment[]>('api/timeline/getTimelineAppointments', body, options);
@@ -49,10 +52,13 @@ export class DataService {
         const body = {
             'appCount':appCount,
             'userID':userID
-             };
-        const options = {
-            headers: new HttpHeaders().set('Content-Type', 'application/json'),
-        };
+         };
+         var headers = new HttpHeaders().set('Content-Type', 'application/json');
+         headers = this.addAuthorizationHeader(headers);
+                 
+         const options = {
+             headers: headers
+         };
         return this.http.post<AppointmentCount>('api/timeline/countTimelineAppointmentsFuture', body, options);
     }    
 
@@ -60,10 +66,13 @@ export class DataService {
         const body = {
             'appCount':appCount,
             'userID':userID
-             };
-        const options = {
-            headers: new HttpHeaders().set('Content-Type', 'application/json'),
-        };
+         };
+         var headers = new HttpHeaders().set('Content-Type', 'application/json');
+         headers = this.addAuthorizationHeader(headers);
+                 
+         const options = {
+             headers: headers
+         };
 
         return this.http.post<AppointmentCount>('api/timeline/countTimelineAppointmentsPrevious', body, options);
     } 
@@ -100,8 +109,11 @@ export class DataService {
         const body = {
             'userID': userID
         };
+        var headers = new HttpHeaders().set('Content-Type', 'application/json');
+        headers = this.addAuthorizationHeader(headers);
+                
         const options = {
-            headers: new HttpHeaders().set('Content-Type', 'application/json'),
+            headers: headers
         };
         return this.http.post<SideEffect[]>('api/medication/side-effects', body, options);
     };
@@ -303,6 +315,7 @@ export class DataService {
             }
         }
     }
+    
     public getUserFromCookie(user: User): void {
         const cookieValue = this.cookieService.get(this.cookieName);
         var cookieJSON;
@@ -359,36 +372,42 @@ export class DataService {
     }
 
     public getPreviousAppointments(userID) {
-        let headers = new Headers({ 'Content-Type': 'application/json' });
         const body = {
             'userID': userID
         };
+        var headers = new HttpHeaders().set('Content-Type', 'application/json');
+        headers = this.addAuthorizationHeader(headers);
+                
         const options = {
-            headers: new HttpHeaders().set('Content-Type', 'application/json'),
+            headers: headers
         };
         let url = '/api/appointment/previous';
         return this.http.post<Appointment[]>(url, body, options);
     };
 
     public getAllAppointmentsByUserID(userID) {
-        let headers = new Headers({ 'Content-Type': 'application/json' });
         const body = {
             'userID': userID
         };
+        var headers = new HttpHeaders().set('Content-Type', 'application/json');
+        headers = this.addAuthorizationHeader(headers);
+                
         const options = {
-            headers: new HttpHeaders().set('Content-Type', 'application/json'),
+            headers: headers
         };
         let url = '/api/appointment/getAllAppointmentsByUserID';
         return this.http.post<Appointment[]>(url, body, options);
     };
 
     public getAppointmentInformation(appointmentID) {
-        let headers = new Headers({ 'Content-Type': 'application/json' });
         const body = {
             'appointmentID': appointmentID
         };
+        var headers = new HttpHeaders().set('Content-Type', 'application/json');
+        headers = this.addAuthorizationHeader(headers);
+                
         const options = {
-            headers: new HttpHeaders().set('Content-Type', 'application/json'),
+            headers: headers
         };
         let url = '/api/appointment/getAppointmentFurtherInfo';
         return this.http.post<AppointmentFurtherInfo>(url, body, options);
