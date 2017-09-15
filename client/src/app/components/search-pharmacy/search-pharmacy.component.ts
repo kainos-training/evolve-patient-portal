@@ -13,12 +13,12 @@ import { } from '@types/googlemaps';
 })
 export class SearchPharmacyComponent implements OnInit, OnDestroy {
 
+    static locations: google.maps.GeocoderResult[];
+
     private autocomplete: google.maps.places.Autocomplete;
     private subCenter: Subscription;
     private navigatorGeolocation = new NavigatorGeolocation();
     private geocoder = new google.maps.Geocoder();
-
-    public searchText: String;
 
     constructor() { }
 
@@ -38,71 +38,61 @@ export class SearchPharmacyComponent implements OnInit, OnDestroy {
 
         // get user input
         const userInput = $event.target.value;
+        this.getLocationsForArea(userInput);
+    }
 
+    getLocationsForArea(area) {
+        // make geocode request
         var geocoderRequest = {
-            address: userInput
+            address: area
         }
 
-        this.geocoder.geocode(geocoderRequest, function (results, status) {
-            if (status === google.maps.GeocoderStatus.OK) {
-                for (var i = 0; i < results.length; i++) {
-                    const latLng = new google.maps.LatLng(results[i].geometry.location.lat(), results[i].geometry.location.lng())
-                    var map = new google.maps.Map(document.getElementById('map'), {
-                        zoom: 15
-                    });
-            
-                    var request = {
-                        location: latLng,
-                        query: 'pharmacy'
-                    };
-            
-                    var service = new google.maps.places.PlacesService(map);
-                    service.textSearch(request, function (results, status) {
-                        if (status == google.maps.places.PlacesServiceStatus.OK) {
-                            for (var i = 0; i < results.length; i++) {
-                                console.log(results[i].name);
-                            }
-                        }
-                    });
-                }
-            } else {
-                console.log("error with geocoder");
-            }
-        });
-
-        // var input = <HTMLInputElement>document.getElementById('searchTextField');
-
-        // if (input) {
-        //     var options = {
-        //         types: ['pharmacy']
-        //     };
-        //     this.autocomplete = new google.maps.places.Autocomplete(input);
-        //     this.autocomplete.addListener('place_changed', this.onPlaceChanged);
-        // }
+        // send the request
+        this.geocoder.geocode(geocoderRequest, this.handleGeocoderResults);
     }
 
-    getPharmaciesForLatLng(latLng) {
-        var map = new google.maps.Map(document.getElementById('map'), {
-            zoom: 15
-        });
+    handleGeocoderResults(results, status) {
+        // check status of response
+        if (status === google.maps.GeocoderStatus.OK) {
+            // loop through results
+            for (var i = 0; i < results.length; i++) {
+                // create latLng object for the result
+                const latLng = new google.maps.LatLng(results[i].geometry.location.lat(), results[i].geometry.location.lng())
+                var map = new google.maps.Map(document.getElementById('map'), {
+                    zoom: 15
+                });
 
-        var request = {
-            location: latLng,
-            query: 'pharmacy'
-        };
+                // var request = {
+                //     location: latLng,
+                //     query: 'pharmacy'
+                // };
+                var request = {
+                    location: latLng,
+                    type: 'pharmacy',
+                    radius: 10000
+                };
 
-        var service = new google.maps.places.PlacesService(map);
-        service.textSearch(request, function (results, status) {
-            if (status == google.maps.places.PlacesServiceStatus.OK) {
-                for (var i = 0; i < results.length; i++) {
-                    console.log(results[i].name);
-                }
+                var service = new google.maps.places.PlacesService(map);
+                service.nearbySearch(request, SearchPharmacyComponent.handlePlacesNearbySearch);
+                // service.textSearch(request, this.handlePlacesNearbySearch);
             }
-        });
+        } else {
+            console.log("error with geocoder");
+        }
     }
 
-    onPlaceChanged() {
-        console.log(this.autocomplete);
+    static handlePlacesNearbySearch(results, status) {
+        if (status == google.maps.places.PlacesServiceStatus.OK) {
+            // reinit the array 
+            SearchPharmacyComponent.locations = [];
+            // loop results
+            for (var i = 0; i < results.length; i++) {
+                SearchPharmacyComponent.locations.push(results[i]);
+            }
+            console.log("pharmacies for specified area: ", SearchPharmacyComponent.locations);
+        } else {
+            console.log("PlacesService error");
+        }
     }
 
     ngOnDestroy() {
