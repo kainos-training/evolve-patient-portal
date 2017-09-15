@@ -1,3 +1,7 @@
+import {UniquePipe} from './utils/unique.pipe';
+import {OrderByPipe} from './utils/orderby.pipe';
+import {FilterPipe} from './utils/filter.pipe';
+import { PreviousAppointmentsComponent } from './components/previous-appointments/previous-appointments.component';
 import { SideEffectsComponent } from './components/side-effects/side-effects.component';
 import { DependantViewComponent } from './components/dependant-view/dependant-view.component';
 import { BrowserModule } from '@angular/platform-browser';
@@ -34,6 +38,9 @@ import { ReviewMedicationComponent } from './components/review-medication/review
 import { ConditionComponent } from './components/condition/condition.component';
 import { TooltipModule } from 'ngx-bootstrap/tooltip';
 import { MyTasksComponent } from './components/my-tasks/my-tasks.component';
+import { DatePickerModule } from 'ng2-datepicker';
+import { QuestionnaireComponent } from './components/questionnaire/questionnaire.component';
+import { TimelineComponent } from './components/timeline/timeline.component';
 
 @NgModule({
     declarations: [
@@ -49,6 +56,13 @@ import { MyTasksComponent } from './components/my-tasks/my-tasks.component';
         SettingNewPasswordComponent,
         TopBarComponent,
         EllipsisPipe,
+        UniquePipe,
+        OrderByPipe,
+        FilterPipe,
+        PreviousAppointmentsComponent,
+        QuestionnaireComponent,
+        TimelineComponent,
+        ConditionComponent,
         SideEffectsComponent,
         ConditionComponent,
         MyTasksComponent,
@@ -57,6 +71,7 @@ import { MyTasksComponent } from './components/my-tasks/my-tasks.component';
         DependantViewComponent
     ],
     imports: [
+        DatePickerModule,
         BrowserModule,
         FormsModule,
         HttpClientModule,
@@ -69,6 +84,10 @@ import { MyTasksComponent } from './components/my-tasks/my-tasks.component';
         TooltipModule.forRoot()
     ],
     providers: [
+        UniquePipe,
+        OrderByPipe,
+        EllipsisPipe,
+        FilterPipe,
         DataService,
         CookieService,
         SwitchBoardService,

@@ -8,16 +8,21 @@
         <evolve-personal-info-header></evolve-personal-info-header>
         <evolve-secondary-info-header></evolve-secondary-info-header>
         <!-- widgets -->
+        <evolve-timeline></evolve-timeline>
         <evolve-appointment></evolve-appointment>
+        <evolve-previous-appointments></evolve-previous-appointments>
         <evolve-review-medication></evolve-review-medication>
         <evolve-condition></evolve-condition>
         <evolve-side-effects></evolve-side-effects>
         <evolve-my-tasks></evolve-my-tasks>
+
     </div>
 
-    <!-- My dependants dashboard -->
-    <!-- <div *ngIf="navigationOption===navigationOptions.MyDependants"> -->
-    <div [hidden]="!(navigationOption===navigationOptions.MyDependants)">
-        <evolve-dependant-view></evolve-dependant-view>
+    <div id="widgetContainer" class="col-sm-12">
+        <!-- My dependants dashboard -->
+        <!-- <div *ngIf="navigationOption===navigationOptions.MyDependants"> -->
+        <div [hidden]="!(navigationOption===navigationOptions.MyDependants)">
+            <evolve-dependant-view></evolve-dependant-view>
+        </div>
     </div>
 </div>

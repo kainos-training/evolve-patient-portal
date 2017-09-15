@@ -1,10 +1,6 @@
+import { TimelineComponent } from '../timeline/timeline.component';
 import {SecondaryInfoHeaderComponent} from '../secondary-info-header/secondary-info-header.component';
 import {PersonalInfoHeaderComponent} from '../personal-info-header/personal-info-header.component';
-import {async, ComponentFixture, TestBed} from '@angular/core/testing';
-import {ConditionComponent} from './condition.component';
-import {Condition} from '../../class/Condition';
-import {SwitchBoardService} from '../../services/switch-board.service';
-import {DataService} from '../../services/data.service';
 import {HttpClient, HttpClientModule, HttpHandler} from '@angular/common/http';
 import {CookieService} from 'ngx-cookie-service';
 import {routes} from '../../app.router';
@@ -24,10 +20,17 @@ import {ReviewMedicationComponent} from '../review-medication/review-medication.
 import {MapViewComponent} from '../map-view/map-view.component';
 import {EllipsisPipe} from '../../utils/ellipsis.pipe';
 import {DirectionsRenderer, Marker, NguiMapComponent} from '@ngui/map/dist';
-import {APP_BASE_HREF} from '@angular/common';
-import {TooltipModule} from 'ngx-bootstrap/tooltip';
 import {MyTasksComponent} from '../my-tasks/my-tasks.component';
 import {DependantViewComponent} from '../dependant-view/dependant-view.component';
+import { Condition } from '../../class/Condition';
+import { TestBed } from '@angular/core/testing';
+import { async } from '@angular/core/testing';
+import { ConditionComponent } from './condition.component';
+import { ComponentFixture } from '@angular/core/testing';
+import { SwitchBoardService } from '../../services/switch-board.service';
+import { DataService } from '../../services/data.service';
+import { APP_BASE_HREF } from '@angular/common';
+import { TooltipModule } from 'ngx-bootstrap';
 
 export class MockDataService {
     getCurrentConditions(userID: number) {
@@ -65,41 +68,15 @@ describe('ConditionComponent', () => {
         mockDataService = new MockDataService();
         TestBed.configureTestingModule({
             declarations: [
-                ConditionComponent,
-                LoginComponent,
-                ErrorPageComponent,
-                DashboardComponent,
-                TopBarComponent,
-                LeftSideMenuComponent,
-                AppointmentComponent,
-                SettingNewPasswordComponent,
-                RequestPasswordResetComponent,
-                ReviewMedicationComponent,
-                MapViewComponent,
-                EllipsisPipe,
-                Marker,
-                DirectionsRenderer,
-                NguiMapComponent,
-                MyTasksComponent,
-                SideEffectsComponent,
-                PersonalInfoHeaderComponent,
-                SecondaryInfoHeaderComponent,
-                DependantViewComponent,
                 ConditionComponent
             ],
             providers: [
                 DataService,
-                HttpClient,
-                HttpHandler,
-                HttpClientModule,
-                CookieService,
                 SwitchBoardService,
                 { provide: APP_BASE_HREF, useValue: '/' }
             ],
             imports: [
-                routes,
-                BrowserModule,
-                ModalModule.forRoot(),
+                TooltipModule.forRoot(),
                 FormsModule,
                 TooltipModule.forRoot()
             ]

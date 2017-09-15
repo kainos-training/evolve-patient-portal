@@ -5,5 +5,5 @@ export class Appointment{
     clinicianID:number;
     dateOfAppointment:Date;
     comment:string;
-    appointmentTypeID:number;
+    type:string;
 }

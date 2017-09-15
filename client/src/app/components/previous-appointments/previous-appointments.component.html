@@ -1,0 +1,101 @@
+<div class=" col-xs-12 col-sm-12 col-md-6 col-lg-4">
+    <div *ngIf=!filtersOpen class="panel panel-default">
+        <div class="panel-heading">
+            <h1 class="panel-title" id="previous-appointments-header">Previous Encounters</h1>
+        </div>
+        <div class="panel-body">
+            <div class="pull-right">
+                <div style="display:inline-block;" type="button" class="text-button" (click)=this.toggleOrder()>{{(order == 'dateOfAppointment')?'Order by: Date': 'Order by: Speciality'}}</div>
+                <span style="display:inline-block; color:#00579f">&nbsp;&nbsp;|&nbsp;&nbsp;</span>
+                <div style="display:inline-block;">
+                    <div type="button" class="text-button" (click)=this.toggleFilters()>{{( filters == undefined || filters == "") ? "Filter by..." : "Filter by: " + filters}}</div>
+                </div>
+            </div>
+            <table class="table table-hover">
+                <tbody>
+                    <tr *ngFor="let appointment of appointments|filter:this.filter|orderby:this.order">
+                        <td>
+                            <button type="button" class="btn table-btn" (click)="openModal(appointment,template)">
+                                <span class="medium-location-text">{{appointment.type}}: {{appointment.departmentName}}</span><br>
+                                <span class="sml-location-txt">Due: {{appointment.dateOfAppointment | date:'dd/MM/yyyy'}}</span><br>
+                                <span class="sml-location-txt">Time: {{appointment.dateOfAppointment | date:'h:mm a'}}</span><br>
+                            </button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div *ngIf=filtersOpen class="panel panel-default">
+        <div class="panel-heading">
+            <button type="button" class="close pull-right" style="margin-top:12px; outline:none" aria-label="Close" (click)="toggleFilters()">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+            <h1 style="font-size:24px;" class="panel-title">Filter Previous Encounters</h1>
+        </div>
+        <div class="panel-body">
+            <div class="pull-left" style="width:100%">
+                <div class="prescription-form">
+                    <label><strong>Filter by date:</strong></label><br><br>
+                    <ng2-datepicker style="margin-left:25px; position:absolute;" [options]="options" [(ngModel)]="date"></ng2-datepicker>
+                </div>
+                <br><br>
+                <div class="prescription-form">
+                    <label><strong>Filter by speciality:</strong></label><br><br>
+                    <div style="margin-left:25px">
+                        <table class="table table-hover">
+                            <tbody>
+                                <tr *ngFor="let appointment of appointments|unique:'type'">
+                                    <td (click)=changeFilterType(appointment.type)>
+                                        {{appointment.type}}
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="btn-group">
+                    <button class="btn btn-primary sharp" (click)=updateFilter()>Apply filter</button>
+                    <button class="btn btn-default sharp" (click)=clearFilter()>Clear</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<ng-template #template>
+    <div class="modal-header">
+        <h4 class="modal-title pull-left">Previous Encounter</h4>
+        <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <div class="perscription-header">
+            <p>
+                <img src="/assets/upcomingAppointmentsIcon.png" class="pill-icon-modal" />
+                <strong>Department: {{focusedAppointment.departmentName}}</strong><br>
+                <span style="padding-left: 70px">{{focusedAppointment.locationAddress}}</span><br>
+                <span style="padding-left: 90px"><strong>Due:</strong> {{focusedAppointment.dateOfAppointment | date: 'dd/MM/yyyy'}}</span><br>
+                <span style="padding-left: 110px"><strong>Time:</strong> {{focusedAppointment.dateOfAppointment | date:'h:mm a'}}</span>
+            </p>
+            <hr>
+        </div>
+        <div class="perscription-form">
+            <form>
+                <div class="form-group">
+                    <label><strong>Clinician Name:</strong></label>
+                    <code class="form-control input-disabled" id="perscription-input" [innerHTML]=focusedAppointment.clinicianName></code>
+                </div>
+                <div class="form-group">
+                    <label><strong>Clinician comments:</strong></label>
+                    <code *ngIf='focusedAppointment.comment!="null"' class="form-control input-disabled" id="comment-input" [innerHTML]="focusedAppointment.comment|ellipsis:200:collapsedComment"
+                        (click)=toggleCollapse()></code>
+                </div>
+            </form>
+        </div>
+    </div>
+</ng-template>
+
+<ng-template #template2>
+</ng-template>

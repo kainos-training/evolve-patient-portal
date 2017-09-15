@@ -63,8 +63,7 @@
                 <form>
                     <div class="form-group">
                         <label><strong>{{selectedMedication.medicationName}} details:</strong></label>
-                        <pre *ngIf=this.collapsedDescription&&this.description><code [innerHTML]=this.description.description|ellipsis:200 (click)=toggleCollapse() ></code></pre>
-                        <pre *ngIf=!this.collapsedDescription&&this.description><code [innerHTML]=this.description.description|ellipsis:20000 (click)=toggleCollapse() ></code></pre>
+                        <pre *ngIf=this.description><code [innerHTML]=this.description.description|ellipsis:200:collapsedDescription (click)=toggleCollapse() ></code></pre>
                     </div>
                 </form>
             </div>

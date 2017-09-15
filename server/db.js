@@ -259,13 +259,26 @@ database.getPreviousConditions = function(userID, callback) {
 
 database.getTaskList = function(userID, callback) {
     database.query(
-        "SELECT taskName, taskSummary, recievedDate, dueDate FROM Task " +
-        "WHERE userID = ? " +
-        "AND dueDate > NOW() " +
-        "ORDER BY dueDate;", [userID],
+        "SELECT T.taskID, T.taskName, T.taskSummary, T.recievedDate, T.dueDate FROM Task as T " +
+        "LEFT JOIN TaskQuestionnaire as TQ " +
+        "ON T.taskID = TQ.taskID " +
+        "WHERE TQ.questionnaireID IS NULL " +
+        "AND T.dueDate > NOW() " +
+        "AND T.userID = ? " +
+        "ORDER BY T.dueDate;", [userID],
         function(err, rows) {
             callback(err, rows);
         });
 };
+
+database.insertAnswer = function(taskID, answer, callback){
+    database.query(
+        "INSERT INTO TaskQuestionnaire (taskID, answer, answered, dateSubmitted) "
+        +"VALUES (?, ?, 1, CURRENT_TIMESTAMP);", [taskID, answer],
+        function(err){
+            callback(err);
+        }
+    )
+}
 
 module.exports = database;

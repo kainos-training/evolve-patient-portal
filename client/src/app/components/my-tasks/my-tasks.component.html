@@ -4,12 +4,12 @@
           <div class="panel-heading">
               <h1 class="panel-title" id="oneline-title">My Tasks</h1>
           </div>
-          <div class="panel-body" id="medicationDetails">
+          <div class="panel-body" id="medicationDetails" *ngIf="!emptyList">
               <table class="table table-hover">
                   <tbody>
                       <tr *ngFor="let task of tasksList">
                           <td>
-                              <button type="button" class="btn table-btn btn-block" (click)="openModal(medication, template)">
+                              <button type="button" class="btn table-btn btn-block" (click)="btnClick(task)">
                               <span class="widget-title-txt"><strong>{{task.taskName}}</strong></span><br>
                               <span class="widget-title-txt"><p id="summaryText">{{task.taskSummary}}</p></span><br>
                               <span class="widget-body-txt">Due:</span><span class="widget-title-txt"> {{task.dueDate | date:'dd/MM/yyyy'}}</span>
@@ -19,6 +19,7 @@
                   </tbody>
               </table>
           </div>
+          <h4 *ngIf="emptyList" class="text-center"> All tasks have been completed.</h4>
       </div>
   </div>
 </body>
