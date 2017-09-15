@@ -50,12 +50,9 @@ export class SideEffectsComponent implements OnInit {
   }
 
   constructor(dataService: DataService, private modalService: BsModalService, private switchboard: SwitchBoardService) {
-      console.log("Constructor started");
     this.dataService = dataService;
     this.switchboard.user$.subscribe(usr => this.user = usr);
     this.dataService.getUserFromCookie(this.user);
-
-    console.log("Constructor Ended");
   }
 
   ngOnInit() {

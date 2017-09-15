@@ -27,7 +27,6 @@ import { HttpClientModule } from '@angular/common/http';
 import { PersonalInfoHeaderComponent } from '../personal-info-header/personal-info-header.component'; 
 import { ConditionComponent } from '../condition/condition.component';
 import { TooltipModule } from 'ngx-bootstrap/tooltip';
-import { DatePickerOptions, DateModel } from 'ng2-datepicker';
 import { MyTasksComponent } from '../my-tasks/my-tasks.component';
 import { DependantViewComponent } from '../dependant-view/dependant-view.component';
 import { SideEffectsComponent } from '../side-effects/side-effects.component';
