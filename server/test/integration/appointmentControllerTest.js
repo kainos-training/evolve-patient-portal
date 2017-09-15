@@ -100,3 +100,47 @@ describe('Patient Portal Previous Appointments', function () {
             .expect(404, done);
     });
 });
+
+describe('Patient Portal Appointment Query Modal', function() {
+    var app;
+    beforeEach(function() {
+        app = require('../../index');
+    });
+    afterEach(function() {
+        app.close();
+    });
+    it('returns status code 400 with no userID (getUserClinicians)', function(done) {
+        request(app)
+            .post('/appointment/getUserClinicians')
+            .send()
+            .expect(400, done);
+    });
+
+    it('returns status code 200 with valid query data (getUserClinicians)', function(done) {
+        request(app)
+            .post('/appointment/getUserClinicians')
+            .send('userID=1')
+            .expect(200, done);
+    });
+
+    it('returns status code 404 with page not found (getUserClinicians)', function(done) {
+        request(app)
+            .post('/appointment/getUserCliniciansWroungRoute')
+            .send('userID=1')
+            .expect(404, done);
+    });
+
+    it('returns status code 400 with no appointmentID, clinicianID, querySubject, queryText (addAppointmentQuery)', function(done) {
+        request(app)
+            .post('/appointment/addAppointmentQuery')
+            .send()
+            .expect(400, done);
+    });
+
+    it('returns status code 404 with page not found (addAppointmentQuery)', function(done) {
+        request(app)
+            .post('/appointment/addAppointmentQueryWroungRoute')
+            .send('{"appointmentID": 1, "clinicianID": 1, "querySubject": "Transport", "queryText": "I`ve hurt my leg"}')
+            .expect(404, done);
+     });
+});

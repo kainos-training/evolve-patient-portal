@@ -14,4 +14,12 @@ protectedAppointmentRoutes.post('/previous', function(req, res) {
     return appointmentController.getPreviousAppointments(req, res);
 });
 
+protectedAppointmentRoutes.post('/getUserClinicians', function(req, res){
+    return appointmentController.getUserClinicians(req, res);
+});
+
+protectedAppointmentRoutes.post('/addAppointmentQuery', function(req, res) {
+    return appointmentController.addAppointmentQuery(req, res);
+});
+
 module.exports = protectedAppointmentRoutes;

@@ -2,7 +2,7 @@
     <ngui-map center="userLocation">
         <marker [position]="userLatLng" label="A"></marker>
         <marker [position]="departmentAddress" label="B"></marker>
-        <directions-renderer [suppressMarkers]="true" [draggable]="true" panel="#directionsPanel" [directions-request]="directions"></directions-renderer>
+        <directions-renderer *ngIf="userLatLng !== undefined && departmentAddress !== undefined" [suppressMarkers]="true" [draggable]="true" panel="#directionsPanel" [directions-request]="directions"></directions-renderer>
         <div *ngIf="false" id="directionsPanel"></div>
     </ngui-map>
 </div>

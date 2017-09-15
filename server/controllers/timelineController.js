@@ -5,7 +5,7 @@ exports.getTimelineAppointments = function(req,res) {
     let intervalBefore = req.body.intervalBefore;
     let intervalAfter = req.body.intervalAfter;
     db.query(
-        "SELECT Department.departmentName, AppointmentType.`type`, Appointment.dateOfAppointment, "+
+        "SELECT Department.departmentName, AppointmentType.`type`, Appointment.dateOfAppointment, Appointment.appointmentID, "+
         "MONTHNAME(Appointment.dateOfAppointment) AS dateMonth, " +
         "YEAR(Appointment.dateOfAppointment) AS dateYear, " +
         "MONTH(Appointment.dateOfAppointment)-1 AS dateMonthNumber " +
@@ -19,7 +19,7 @@ exports.getTimelineAppointments = function(req,res) {
         [userID,intervalBefore,intervalAfter],
         function(err, rows) {
             if (err) {
-                console.log(err);
+                console.log("BBBB"+err);
             } else {
                 res.send(JSON.stringify(rows));
             }

@@ -1,4 +1,6 @@
 const db = require('../db');
+const bodyParser = require('body-parser');
+const emailer = require('../emailer');
 
 exports.getAllAppointmentsByUserID = function(req, res) {
     let userID = req.body.userID;
@@ -43,6 +45,62 @@ exports.getAppointmentFurtherInfo = function(req, res) {
             }
         }
     )
+};
+
+exports.getUserClinicians = function(req, res) {
+    const userID = req.body.userID;
+
+    if (userID == null) {
+        res.status(400).json({
+            success: false
+        });
+    } else {
+        db.getUserClinicians(userID, function(err, rows) {
+            if (err) {
+                console.log(err);
+                res.status(400).json({
+                    success: false
+                });
+            } else {
+                res.status(200).send(rows);
+            }
+        });
+    }
+};
+
+exports.addAppointmentQuery = function(req, res) {
+    const appointmentID = req.body.appointmentID;
+    const clinicianID = req.body.clinicianID;
+    const querySubject = req.body.querySubject;
+    const queryText = req.body.queryText;
+
+    if (!appointmentID || !clinicianID || !querySubject || !queryText) {
+        res.status(400).json({
+            success: false
+        });
+    } else {
+        db.addAppointmentQuery(appointmentID, clinicianID, querySubject, queryText, function(err) {
+            if (err) {
+                console.log(err);
+                res.status(400).json({
+                    success: false
+                });
+            } else {
+                db.getAppointmentQuery(clinicianID, function(err, rows){
+                    if (err) {
+                        console.log(err);
+                        res.status(400).json({
+                            success: false
+                        });
+                    } else {
+                        emailer.sendNotification(rows[0].email, rows[0].name, 0, "appointment", querySubject, queryText);
+                        
+                    }
+                })
+                res.status(200).send("success");
+            }
+        });
+    }
 };
 
 exports.getPreviousAppointments = function(req, res) {

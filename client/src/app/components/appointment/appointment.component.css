@@ -129,12 +129,85 @@ input.btn.btn-block:last-of-type {
 
 input[data-expanded="true"], input[data-expanded="false"],
 input[data-expanded="true"]:visited, input[data-expanded="false"]:visited {
-    background-color: #00579f;
+    background-color: #067fbb;
+    outline: none;
 }
 
 input[data-expanded="true"]:hover, input[data-expanded="false"]:hover,
 input[data-expanded="true"]:focus, input[data-expanded="false"]:focus,
 input[data-expanded="true"]:active, input[data-expanded="false"]:active {
-    background-color: #067fbb;
+    background-color: #00579f;
     outline: none;
+}
+
+.query-icon-modal {
+    height: 25px;
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+.btn-primary{
+    width: 100%;
+    background-color: #067fbb;
+    font: white;
+    margin-top: 20px; 
+}
+
+.btn-primary:hover{
+    background-color: #00579f;
+}
+
+.bs-callout {
+    margin: 20px 0;
+    padding: 15px 30px 15px 15px;
+    border-left: 5px solid #eee;
+}
+
+.bs-callout p {
+    margin-bottom: 0;
+}
+
+.bs-callout span {
+    font-weight: bold;
+}
+
+.bs-callout-danger {
+    background-color: white;
+    border-color: #EC0211 
+}
+
+.callout-message {
+    padding: 0;
+}
+
+.callout-message a:link {
+    text-decoration: underline;
+    display: block;
+}
+
+.bs-callout-danger, .input-group, .loginPage form h5, header div span {
+    color: #666666 ;
+    font-family: Helvetica, sans-serif;
+}
+
+.successMessageTitle {
+    color: #666666 ;
+    font-family: Helvetica, sans-serif;
+    text-align: center;
+    font-size: 1.5em;
+}
+
+#querySuccessMessage {
+    color: #666666 ;
+    font-family: Helvetica, sans-serif;
+    text-align: center;
+    padding-top: 10px;
+}
+
+.btn-block{
+    text-transform: capitalize;
+}
+    
+#submit-Button{
+    margin-bottom: 20px;
 }

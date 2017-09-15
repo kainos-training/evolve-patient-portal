@@ -1,10 +1,13 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, TemplateRef } from '@angular/core';
 import { DataService } from "../../services/data.service";
 import { Subscription } from 'rxjs/Subscription';
 import { SwitchBoardService } from '../../services/switch-board.service';
 import { User } from "../../class/User";
 import { TimelineStructure } from "../../class/TimelineStructure";
 import { AppointmentCount } from '../../class/AppointmentCount';
+import { AppointmentFurtherInfo } from '../../class/AppointmentFurtherInfo';
+import { BsModalRef, BsModalService } from 'ngx-bootstrap';
+import { NavigatorGeolocation } from '@ngui/map';
 
 @Component({
     selector: 'evolve-timeline',
@@ -13,7 +16,6 @@ import { AppointmentCount } from '../../class/AppointmentCount';
     providers: [DataService]
 })
 export class TimelineComponent implements OnInit {
-
     private timelineStructure: TimelineStructure;
     private user: User = new User();
     private userSubscription: Subscription;
@@ -26,8 +28,22 @@ export class TimelineComponent implements OnInit {
     private loadFuture:boolean;
     private loadPrevious:boolean;
 
-    constructor(private data: DataService, private switchboard: SwitchBoardService) {
+    //appointment modal 
+    private modalRef: BsModalRef;
+    private mapPath: string;
+    private focusedAppointment: AppointmentFurtherInfo;
+    private subCenter: Subscription;  
+    private navigatorGeolocation = new NavigatorGeolocation(); 
+    private userLocation;    
+    
+
+    constructor(private modalService:BsModalService, private data: DataService, private switchboard: SwitchBoardService) {
         this.userSubscription = this.switchboard.user$.subscribe(user => this.user = user);
+
+        this.subCenter = this.navigatorGeolocation.getCurrentPosition({'timeout': 10000}).subscribe((location) => {
+            this.userLocation = location;
+        });
+
         var currentDate: Date = new Date();
         this.currentYear = currentDate.getFullYear();
         this.loadFuture = true;
@@ -65,7 +81,7 @@ export class TimelineComponent implements OnInit {
                             this.timelineStructure
                                 .getAppointmentYear(indexOfYear)
                                 .getAppointmentMonth(indexOfMonth)
-                                .pushAppointmentDetails(appointment.type, appointment.dateOfAppointment, appointment.departmentName);
+                                .pushAppointmentDetails(appointment.appointmentID,appointment.type, appointment.dateOfAppointment, appointment.departmentName);
                         }
                     }
                 );
@@ -76,6 +92,10 @@ export class TimelineComponent implements OnInit {
     ngOnDestroy(): void {
         if (this.userSubscription) {
             this.userSubscription.unsubscribe();
+        }
+
+        if(this.subCenter) {
+            this.subCenter.unsubscribe();
         }
     }
 
@@ -125,5 +145,23 @@ export class TimelineComponent implements OnInit {
                 );
             }
         }
+    }
+
+    //appointment modal
+    openAppointmentModal(template: TemplateRef<any>, appointmentID:number)
+    {
+         this.data.getAppointmentInformation(appointmentID).subscribe(
+            res => {
+                this.focusedAppointment = res[0];
+                this.mapPath = '../assets/hospitals/' + this.focusedAppointment.locationID + '/' + this.focusedAppointment.departmentID;
+                this.modalRef = this.modalService.show(template);
+                this.focusedAppointment.showLocalMap = false;
+                this.focusedAppointment.showGoogleMap = false;
+            }
+        ); 
+    }
+
+    private toggle(name):void {
+        this.focusedAppointment[name] = !this.focusedAppointment[name];
     }
 }

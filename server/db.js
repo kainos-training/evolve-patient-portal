@@ -175,6 +175,36 @@ database.getTaskList = function(userID, callback) {
         });
 };
 
+database.getUserClinicians = function(userID, callback) {
+    database.query(
+        "SELECT c.clinicianID, c.title, c.firstName, c.lastName, c.jobTitle, c.email " +
+        "FROM Clinician AS c JOIN UserClinician AS uc ON c.clinicianID = uc.clinicianID " +
+        "WHERE uc.userID = ?;",
+        [userID],
+        function(err, rows) {
+            callback(err, rows);
+        });
+};
+
+database.addAppointmentQuery = function(appointmentID, clinicianID, querySubject, queryText, callback) {
+    database.query(
+        "INSERT INTO AppointmentQuery(appointmentID, clinicianID, querySubject, queryText) " +
+        "VALUES(?, ?, ?, ?);",
+        [appointmentID, clinicianID, querySubject, queryText],
+        function(err, rows) {
+            callback(err)
+        });
+};
+
+database.getAppointmentQuery = function(clinicianID, callback) {
+    database.query(
+        "SELECT email, firstname FROM Clinician WHERE clinicianID = ?;",
+        [clinicianID],
+        function(err, rows) {
+            callback(err, rows);
+        });
+};
+
 database.insertAnswer = function(taskID, answer, callback){
     database.query(
         "INSERT INTO TaskQuestionnaire (taskID, answer, answered, dateSubmitted) "
