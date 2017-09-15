@@ -5,10 +5,10 @@ CREATE DATABASE IF NOT EXISTS patientPortal;
 USE patientPortal;
 
 CREATE TABLE IF NOT EXISTS Pharmacy(
-    pharmacyID int auto_increment not null,
-    pharmacyName varchar(100),
-    address varchar(100),
-    primary key (pharmacyID)
+pharmacyID int auto_increment not null,
+pharmacyName varchar(100),
+address varchar(100),
+primary key (pharmacyID)
 );
 
 CREATE TABLE IF NOT EXISTS GP (
@@ -97,29 +97,29 @@ CREATE TABLE IF NOT EXISTS TaskQuestionnaire (
 );
 
 CREATE TABLE IF NOT EXISTS MedicationUser (
-    medicationUserID int auto_increment not null,
-    userID int not null,
-    medicationID int not null,
-    startDate date not null,
-    endDate date,
-    dosage varchar(60) not null,
-    prescribedDate date not null,
-    instructions varchar(60) not null,
-    repeated bool not null,
-    delivery bool not null,
-    primary key (medicationUserID),
-    foreign key (userID) references `User` (userID),
-    foreign key (medicationID) references Medication (medicationID)
+medicationUserID int auto_increment not null,
+userID int not null,
+medicationID int not null,
+startDate date not null,
+endDate date,
+dosage varchar(60) not null,
+prescribedDate date not null,
+instructions varchar(200) not null,
+repeated bool not null,
+delivery bool not null,
+primary key (medicationUserID),
+foreign key (userID) references `User` (userID),
+foreign key (medicationID) references Medication (medicationID)
 );
 
 CREATE TABLE IF NOT EXISTS MedicationUserComment (
-    medicationUserCommentID int auto_increment not null,
-    medicationUserID int not null,
-    commentText text not null,
-    `timeStamp` timeStamp not null,
-    deleted boolean default false not null,
-    primary key (medicationUserCommentID),
-    foreign key (medicationUserID) references MedicationUser (medicationUserID)
+medicationUserCommentID int auto_increment not null,
+medicationUserID int not null,
+commentText text not null,
+`timeStamp` timeStamp not null,
+deleted boolean default false not null,
+primary key (medicationUserCommentID),
+foreign key (medicationUserID) references MedicationUser (medicationUserID)
 );
 
 CREATE TABLE IF NOT EXISTS Clinician (
@@ -214,26 +214,30 @@ INSERT INTO UserDependant (userID, dependantID)
 VALUES(1, 3), (1, 4), (1, 8);
 
 INSERT INTO MedicationType(medicationType)
-VALUES ('Antibiotics'), ('Mood Stabilizers'), ('Analgesics'), ('Antipyretics');
+VALUES ('Antibiotic'), ('Mood Stabilizer'), ('Analgesic'), ('Antipyretic'),('Pain Killer'),('Anti-Inflammatory'),('Hormone');
 
 INSERT INTO Medication(medicationName, medicationTypeID, resourceURL)
-VALUES('Penicillin', 1, 'https://en.wikipedia.org/wiki/Penicillin'),
-('Amoxicillin', 1, 'https://en.wikipedia.org/wiki/Amoxicillin'),
-('Lithium', 2, 'https://en.wikipedia.org/wiki/Lithium_(medication)'),
-('Olanzapine', 2, 'https://en.wikipedia.org/wiki/Olanzapine'),
-('Paracetamol', 3, 'https://en.wikipedia.org/wiki/Paracetamol'),
-('Morphine', 3, 'https://en.wikipedia.org/wiki/Morphine'),
-('Ibuprofen', 4, 'https://en.wikipedia.org/wiki/Ibuprofen'),
-('Ketoprofen', 4, 'https://en.wikipedia.org/wiki/Ketoprofen'),
-('Xylometazoline', 1, 'https://en.wikipedia.org/wiki/Xylometazoline');
+VALUES('Penicillin', 1, 'https://en.wikipedia.org/wiki/Penicillin'), -- 1
+('Amoxicillin', 1, 'https://en.wikipedia.org/wiki/Amoxicillin'), -- 2
+('Lithium', 2, 'https://en.wikipedia.org/wiki/Lithium_(medication)'), -- 3
+('Olanzapine', 2, 'https://en.wikipedia.org/wiki/Olanzapine'), -- 4
+('Paracetamol', 3, 'https://en.wikipedia.org/wiki/Paracetamol'), -- 5
+('Morphine', 3, 'https://en.wikipedia.org/wiki/Morphine'), -- 6
+('Ibuprofen', 4, 'https://en.wikipedia.org/wiki/Ibuprofen'), -- 7
+('Ketoprofen', 4, 'https://en.wikipedia.org/wiki/Ketoprofen'), -- 8
+('Xylometazoline', 1, 'https://en.wikipedia.org/wiki/Xylometazoline'), -- 9
+('Codeine',5,'https://en.wikipedia.org/wiki/Codeine'), -- 10
+('Naproxen',6,'https://en.wikipedia.org/wiki/Naproxen'), -- 11
+('Insulin',7,'https://en.wikipedia.org/wiki/Insulin'); -- 12
 
 INSERT INTO MedicationUser(userID, medicationID, startDate, endDate, dosage, instructions,prescribedDate,repeated, delivery)
-VALUES (1, 3, '2017-06-01', '2019-08-10', '10mg', 'Take one tablet twice a day, after meals','2017-09-01',TRUE, TRUE),
-(1, 3, '2016-06-01', '2017-06-01', '5mg', 'Take two tablets twice a day', '2017-09-01',TRUE, TRUE),
-(1, 3, '2015-06-01', '2016-06-01', '20mg', 'Take two tablets twice a day', '2017-04-01',TRUE, TRUE),
-(1, 4, '2016-06-01', '2019-08-10', '5mg', 'Take two tablets twice a day','2016-04-01',TRUE, TRUE),
-(2, 1, '2017-02-09', '2019-02-27', '15mg', 'Take one tablet twice a day','2017-09-01',FALSE, TRUE),
-(3, 2, '2016-09-29', '2018-10-10', '10mg', 'Take one tablet twice a day','2017-09-01',TRUE, TRUE);
+VALUES
+(1, 12, '2017-06-01', '2019-08-10', '30 units', 'Subcutaneous injection. Take as recommended by your diabetic specialist','2017-09-01',TRUE,TRUE),
+(1, 12, '2016-06-01', '2017-06-01', '20 units', 'Subcutaneous injection. Take as recommended by your diabetic specialist', '2017-09-01',TRUE,TRUE),
+(1, 12, '2015-06-01', '2016-06-01', '20 units', 'Subcutaneous injection. Take as recommended by your diabetic specialist', '2017-04-01',TRUE,TRUE),
+(1,10, (NOW() - INTERVAL 170 DAY),(NOW() + INTERVAL 100 DAY),'60mg','Take 1 tablet every 4 hours as needed. Do not exceed 240mg a day.', (NOW() - INTERVAL 20 DAY), true,TRUE),
+(1,11,(NOW() - INTERVAL 170 DAY),(NOW() + INTERVAL 100 DAY),'220mg','Take 1 caplet every 8-12 hours',(NOW() - INTERVAL 20 DAY),false,TRUE),
+(1,12,(NOW() - INTERVAL 1000 DAY),NULL,'30 Units','Subcutaneous injection. Take as recommended by your diabetic specialist',(NOW() - INTERVAL 12 DAY),true,TRUE);
 
 INSERT INTO MedicationUserComment(medicationUserID, commentText, deleted)
 VALUES (1, 'Not feeling the benefit after two weeks', false), (2, 'Helping to minimise pain but still exists', false),
@@ -251,88 +255,34 @@ VALUES ('Royal Victoria Hospital, 274 Grosvenor Rd, Belfast, BT12 6BA'),
 ('Belfast City Hospital, Lisburn Rd, Belfast, BT9 7AB');
 
 INSERT INTO Department (DepartmentName)
-VALUES ('A&E'), ('Maternity'), ('Oncology'), ('GP');
+VALUES ('Orthopeadic'), ('Community Diabetes Team'), ('Oncology'), ('GP'),('Orthopeadic'),('Community Diabetes Team');
 
 INSERT INTO LocationDepartment (locationID, departmentID)
-VALUES (1, 1), (2, 1), (2, 2), (3, 3);
+VALUES (1, 1), (2, 1), (2, 2), (3, 3),(1,1),(2,2),(1,4);
 
 INSERT INTO AppointmentType (`type`)
 VALUES ('Pre-Op Assessment'), ('Emergency Surgery'), ('GP Appointment'), ('Check-up');
 
 INSERT INTO Appointment (userID, locationDepartmentID, clinicianID, dateOfAppointment, `comment`, appointmentTypeID)
-VALUES(1, 3, 3, '2017-07-07', 'Ultrasound performed, pregnancy progressing normally.', 4),
-(1, 3, 3, (NOW() + INTERVAL 2 DAY), 'Ultrasound to be performed to ensure pregnancy is progressing normally.', 4),
+VALUES
+(1,6,1,(NOW() - INTERVAL 20 DAY),'Jane expressed issues with drowsiness recently, investigation ongoing.',4),
+(1,6,1,(NOW() - INTERVAL 4 DAY),'Check up on Jane''s hip problems - surgery scheduled for a month''s time',1),
+(1,7,3,(NOW() - INTERVAL 170 DAY),'Jane has been experiencing hip problems, prescribed painkillers, investigation ongoing',3),
+(1,7,3,(NOW() - INTERVAL 30 DAY),'Diagnosed with conjunctivitis - antibiotics prescribed',3),
+(1,5,1,(NOW() + INTERVAL 12 DAY),'Please fill in the pre-op assessment form',4),
+(1,6,1,(NOW() + INTERVAL 20 DAY), NULL,4),
 (3, 4, 2, (NOW() + INTERVAL 12 DAY), null, 1),
-(3, 3, 3, (NOW() - INTERVAL 2 DAY), 'Ultrasound to be performed to ensure pregnancy is progressing normally.', 4),
+(3, 7, 1, (NOW() - INTERVAL 2 DAY), 'Regular check-up - patient in good health', 4),
 (3, 4, 2, (NOW() - INTERVAL 322 DAY), 'null', 1),
-(1, 3, 3, (NOW() - INTERVAL 20 DAY), '
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. In pulvinar sapien suscipit neque vehicula, quis facilisis dolor tempor. Etiam nunc erat, sodales ac eleifend a, placerat vel sapien. Aenean aliquet lacus ac finibus cursus. Vivamus eu tortor pulvinar, finibus urna eget, cursus ipsum. Vivamus vestibulum neque vitae arcu laoreet ullamcorper. Sed mollis pulvinar ante ut auctor. Donec erat nisl, ornare vitae diam a, tristique euismod risus. Nullam aliquet elit augue, in mollis ipsum vehicula eu. Aenean ut lectus quis sem vulputate rhoncus.
-Quisque odio ligula, dictum vel blandit ac, ornare convallis quam. Maecenas in ligula vel neque consequat pharetra vitae ut nulla. Vestibulum rutrum, nunc eget lobortis auctor, elit dolor faucibus enim, ac elementum dolor orci eu odio. Etiam eu euismod ex, et consectetur turpis. Proin quam purus, blandit sed sapien nec, sagittis consequat purus. Ut erat ante, posuere vel sapien sit amet, efficitur pellentesque lectus. Nullam congue volutpat ex, vitae tristique tellus blandit molestie. Morbi pellentesque a dui nec sodales. Suspendisse pellentesque sapien ac tellus vestibulum, quis pharetra felis iaculis. Donec ultrices ultricies sapien, et vulputate risus feugiat et. Maecenas purus diam, finibus vel elementum congue, tincidunt nec neque. Suspendisse at leo et sem tincidunt commodo vitae et nisi. Proin sodales metus vitae tortor volutpat, vestibulum lobortis dui eleifend.
-Morbi consequat erat in nunc laoreet blandit. Morbi sodales sollicitudin velit vel dictum. Quisque lectus nisi, volutpat id risus vel, pretium accumsan purus. Ut at varius magna, id sollicitudin metus. Donec quis porta tellus.', 4),
-(1, 1, 1, '2017-11-10 15:00:00', 'INSTRUCTIONS: Do not eat any food 24 hours before surgery.', 3),
-(1, 3, 2, (NOW() + INTERVAL 30 DAY), 'Checkup after Ultrasound,', 4),
-(1, 1, 1, (NOW() - INTERVAL 4 DAY), 'INSTRUCTIONS: Do not eat any food 24 hours before surgery.', 1),
-(1, 2, 1, (NOW() + INTERVAL 4 DAY), 'Foot complaints.', 3),
-(1, 3, 1, (NOW() - INTERVAL 62 DAY), 'Other food complaints .', 3),
-(4, 2, 1, (NOW() + INTERVAL 12 DAY), 'Eye check-up', 4),
-(4, 2, 1, (NOW() - INTERVAL 12 DAY), 'Eye check-up', 4),
-(7, 3, 1, (NOW() - INTERVAL 62 DAY), 'Routine checkup.', 3),
-(7, 3, 1, (NOW() - INTERVAL 62 DAY), 'Routine checkup.', 3),
-(8, 3, 2, (NOW() + INTERVAL 17 DAY), 'Ear complaints.', 4),
-(8, 2, 1, (NOW() + INTERVAL 22 DAY), 'Further investigation required for persistent ear complaints', 3),
-(8, 2, 1, (NOW() - INTERVAL 22 DAY), 'Further investigation required for persistent ear complaints', 3),
-(1, 3, 2, (NOW() + INTERVAL 60 DAY), 'Other food complaints .', 3),
-(1, 3, 2, (NOW() + INTERVAL 125 DAY), 'Other food complaints .', 3),
-(1, 3, 1, (NOW() + INTERVAL 151 DAY), 'Other food complaints .', 3),
-(1, 3, 2, (NOW() + INTERVAL 152 DAY), 'Other food complaints .', 3),
-(1, 3, 3, (NOW() + INTERVAL 400 DAY), 'Other food complaints .', 3),
-(1, 3, 1, (NOW() + INTERVAL 420 DAY), 'Other food complaints .', 3),
-(1, 3, 3, (NOW() + INTERVAL 430 DAY), 'Other food complaints .', 3),
-(1, 3, 2, (NOW() + INTERVAL 500 DAY), 'Other food complaints .', 3),
-(1, 3, 1, (NOW() + INTERVAL 600 DAY), 'Other food complaints .', 3),
-(1, 2, 1, (NOW() - INTERVAL 14 DAY), 'Foot complaints.', 3),
-(1, 3, 2, (NOW() - INTERVAL 125 DAY), 'Other food complaints .', 3),
-(1, 3, 2, (NOW() - INTERVAL 160 DAY), 'Other food complaints .', 3),
-(1, 3, 2, (NOW() - INTERVAL 185 DAY), 'Other food complaints .', 3),
-(1, 3, 1, (NOW() - INTERVAL 181 DAY), 'Other food complaints .', 3),
-(1, 3, 2, (NOW() - INTERVAL 192 DAY), 'Other food complaints .', 3),
-(1, 3, 3, (NOW() - INTERVAL 183 DAY), 'Other food complaints .', 3),
-(1, 3, 1, (NOW() - INTERVAL 204 DAY), 'Other food complaints .', 3),
-(1, 3, 3, (NOW() - INTERVAL 206 DAY), 'Other food complaints .', 3),
-(1, 3, 2, (NOW() - INTERVAL 300 DAY), 'Other food complaints .', 3),
-(1, 3, 1, (NOW() - INTERVAL 320 DAY), 'Other food complaints .', 3),
-(1, 3, 3, (NOW() - INTERVAL 340 DAY), 'Other food complaints .', 3),
-(1, 3, 3, (NOW() - INTERVAL 490 DAY), 'Other food complaints .', 3),
-(1, 3, 2, (NOW() - INTERVAL 500 DAY), 'Other food complaints .', 3),
-(1, 3, 3, (NOW() - INTERVAL 890 DAY), 'Other food complaints .', 3),
-(1, 3, 2, (NOW() - INTERVAL 900 DAY), 'Other food complaints .', 3),
-(1, 3, 1, (NOW() - INTERVAL 950 DAY), 'Other food complaints .', 3),
-(1, 3, 3, (NOW() + INTERVAL 340 DAY), 'Other food complaints .', 3),
-(1, 3, 1, (NOW() + INTERVAL 350 DAY), 'Other food complaints .', 3),
-(1, 3, 3, (NOW() + INTERVAL 360 DAY), 'Other food complaints .', 3),
-(1, 3, 2, (NOW() + INTERVAL 390 DAY), 'Other food complaints .', 3),
-(1, 3, 3, (NOW() + INTERVAL 400 DAY), 'Other food complaints .', 3),
-(1, 3, 1, (NOW() + INTERVAL 450 DAY), 'Other food complaints .', 3),
-(1, 3, 3, (NOW() + INTERVAL 490 DAY), 'Other food complaints .', 3),
-(1, 3, 1, (NOW() + INTERVAL 840 DAY), 'Other food complaints .', 3),
-(1, 3, 3, (NOW() + INTERVAL 890 DAY), 'Other food complaints .', 3),
-(1, 3, 2, (NOW() + INTERVAL 900 DAY), 'Other food complaints .', 3),
-(1, 3, 3, (NOW() - INTERVAL 400 DAY), 'Other food complaints .', 3),
-(1, 3, 1, (NOW() - INTERVAL 450 DAY), 'Other food complaints .', 3),
-(1, 3, 3, (NOW() - INTERVAL 490 DAY), 'Other food complaints .', 3),
-(1, 3, 2, (NOW() - INTERVAL 500 DAY), 'Other food complaints .', 3),
-(1, 3, 1, (NOW() - INTERVAL 700 DAY), 'Other food complaints .', 3),
-(1, 3, 3, (NOW() - INTERVAL 800 DAY), 'Other food complaints .', 3),
-(1, 3, 1, (NOW() - INTERVAL 840 DAY), 'Other food complaints .', 3),
-(1, 3, 3, (NOW() - INTERVAL 890 DAY), 'Other food complaints .', 3),
-(1, 3, 2, (NOW() - INTERVAL 900 DAY), 'Other food complaints .', 3),
-(1, 3, 1, (NOW() - INTERVAL 901 DAY), 'Other food complaints .', 3),
-(1, 3, 1, (NOW() - INTERVAL 950 DAY), 'Other food complaints .', 3),
-(1, 3, 3, (NOW() - INTERVAL 952 DAY), 'Other food complaints .', 3),
-(1, 3, 1, (NOW() - INTERVAL 1000 DAY), 'Other food complaints .', 3),
-(1, 3, 3, (NOW() - INTERVAL 1001 DAY), 'Other food complaints .', 3),
-(1, 3, 2, (NOW() - INTERVAL 1029 DAY), 'Other food complaints .', 3),
-(1, 3, 1, (NOW() - INTERVAL 1080 DAY), 'Other food complaints .', 3);
+(4, 7, 1, (NOW() + INTERVAL 12 DAY), 'Eye check-up', 4),
+(4, 7, 1, (NOW() - INTERVAL 12 DAY), 'Eye check-up', 4),
+(7, 7, 1, (NOW() - INTERVAL 62 DAY), 'Routine checkup.', 3),
+(7, 7, 1, (NOW() - INTERVAL 62 DAY), 'Routine checkup.', 3),
+(1,6,1,'2015-10-10','Jane has received a diagnosis of Type 1 Diabetes',3),
+(1,6,1,'2016-04-10','Diabetes checkup',3),
+(1,6,1,'2016-10-10','Diabetes checkup',3),
+(1,6,1,'2017-04-10','Diabetes checkup',3),
+(1,7,1,'2014-07-03','Jane has been diagnosed as being allergic to penicillin',3);
 
 INSERT INTO `Condition` (conditionName, conditionLink)
 VALUES ("Hip Replacement", "http://www.nhs.uk/Conditions/Hip-replacement/Pages/Introduction.aspx"),
@@ -341,19 +291,15 @@ VALUES ("Hip Replacement", "http://www.nhs.uk/Conditions/Hip-replacement/Pages/I
 ("Back Pain", "http://www.nhs.uk/conditions/back-pain/Pages/Introduction.aspx");
 
 INSERT INTO UserCondition (userID, conditionID, startDate, endDate)
-VALUES (1, 4, '2017-01-10', '2017-07-15'),
-(1, 3, '2016-11-10', '2017-07-20'),
-(1, 2, '1998-04-03', null),
-(1, 4, '2017-08-03', null),
-(4, 3, '2017-09-09', '2017-09-27'),
-(7, 1, '2017-09-09', null),
-(7, 4, '2017-08-11', '2017-09-01');
+VALUES (1,1,(NOW() - INTERVAL 170 DAY),NULL),
+(1,2,(NOW() - INTERVAL 1000 DAY),NULL),
+(1,3,(NOW() - INTERVAL 30 DAY),(NOW() - INTERVAL 25 DAY)),
+(4,3,(NOW() - INTERVAL 3 DAY),NULL);
 
 INSERT INTO UserSideEffect (userID, sideEffectText, deleted)
 VALUES (1, 'I get a sore head after I take my meds in the morning', false),
 (1, 'I feel drowsy since I started lithium', false);
 
 INSERT INTO Task(taskName, userID, taskSummary, recievedDate, dueDate)
-VALUES('Pre-op questionnaire', 1, 'Questionnaire to be filled out before surgery. Includes allergies and general health questions.', (NOW() - INTERVAL 4 DAY), (NOW() + INTERVAL 18 DAY)),
-('Pre-op Assessment: Olanzapine', 1, 'Form used to assess your suitibility for Olanzapine which will be used post surgery.', (NOW() - INTERVAL 12 DAY), (NOW() - INTERVAL 2 DAY)),
-('Pre-op Assessment: Paracetamol', 1, 'Form used to assess your suitibility for Paracetamol which will be used post surgery.', NOW(), (NOW() + INTERVAL 12 DAY));
+VALUES('Pre-op questionnaire', 1, 'Questionnaire to be filled out before surgery. Includes allergies and general health questions.', (NOW() - INTERVAL 4 DAY), (NOW() + INTERVAL 30 DAY)),
+('Pre-op Assessment: Olanzapine', 1, 'Form used to assess your suitibility for Olanzapine which will be used post surgery.', (NOW() - INTERVAL 12 DAY), (NOW() - INTERVAL 2 DAY));
