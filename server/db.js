@@ -231,7 +231,7 @@ database.selectUserInfoByUserID = (userID, cb) => {
             }
         }
     )
-}
+};
 
 database.getCurrentConditions = function(userID, callback) {
     database.query(
