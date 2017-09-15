@@ -19,7 +19,7 @@ exports.getAppointmentFurtherInfo = function(req, res) {
         } else {
             res.send(JSON.stringify(rows));
         }
-    )
+    });
 };
 
 exports.getPreviousAppointments = function(req, res) {

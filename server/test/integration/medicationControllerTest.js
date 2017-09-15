@@ -1,6 +1,5 @@
 var request = require('supertest');
 var chai = require('chai');
-var async = require('async');
 
 var should = chai.should();
 var assert = chai.assert;
