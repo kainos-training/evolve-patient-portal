@@ -79,11 +79,11 @@ export class AppointmentComponent implements OnInit, OnDestroy, OnChanges {
     }
 
     submitQuery() {
-        console.log(this.querySubject);
-        console.log(this.queryText);
-        console.log(this.selectedClinician.clinicianID);
         if(this.querySubject.length > 0 && this.queryText.length > 0 && this.selectedClinician.clinicianID) {
             this.data.addAppointmentQuery(this.selectedAppointment.appointmentID, this.selectedClinician.clinicianID, this.querySubject, this.queryText);
+            this.toggleSecondVisible();
+        } else {
+            
         }
     }
 
