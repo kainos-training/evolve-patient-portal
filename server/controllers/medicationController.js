@@ -74,7 +74,6 @@ exports.getListOfMedicationUserComments = function(req, res) {
     }
 };
 
-exports.getListOfRemovedMedicationUserComments = function(req, res) {
     exports.getUserSideEffects = function(req, res) {
         const userID = req.body.userID;
 
@@ -93,8 +92,8 @@ exports.getListOfRemovedMedicationUserComments = function(req, res) {
                 }
             });
         }
-    }
-};
+    };
+
 exports.getListOfRemovedMedicationUserComments = function(req, res) {
     const medicationUserID = req.body.medicationUserID;
     if (medicationUserID == null) {
