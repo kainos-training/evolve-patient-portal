@@ -24,13 +24,12 @@ exports.getListOfTasks = function(req, res) {
 exports.insertAnswer = function(req, res) {
     const taskID = req.body.taskID;
     const answer = JSON.stringify(req.body.answer);
-    console.log(answer);
 
     if (taskID == null) {
         res.status(400).json({
             success: false
         });
-    } if (answer == null) {
+    } else if (answer == null) {
         res.status(400).json({
             success: false
         });
