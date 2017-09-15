@@ -108,7 +108,7 @@ exports.addAppointmentQuery = function(req, res) {
                         });
                     } else {
                         console.log("Email returned is: " + rows[0].email);
-                        emailer.sendNotification(rows[0].email,rows[0].name,0,"appointment", querySubject, queryText);
+                        emailer.sendNotification(rows[0].email, rows[0].name, 0, "appointment", querySubject, queryText);
                         
                     }
                 })

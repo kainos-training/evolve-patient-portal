@@ -2,7 +2,7 @@
 // the user who booked into the event
 const nodemailer = require('nodemailer');
 
-exports.sendNotification = function(emailAddress, name, id) {
+exports.sendNotification = function(emailAddress, name, id, type, querySubject, queryText) {
     var isTrueSet = (process.env.SECURE == 'true');
     nodemailer.createTestAccount((err, account) => {
         // create reusable transporter object using the default SMTP transport

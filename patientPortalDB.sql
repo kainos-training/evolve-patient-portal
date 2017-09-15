@@ -208,7 +208,7 @@ VALUES ('Dr. A Cheyne', 'Ormeau Park Surgery', '281 Ormeau Rd, Belfast BT7 3GG, 
 ('Dr. R Kane', 'Springvale Medical Practice', '463 Springfield Rd, Belfast BT12 7DP, UK');
 
 INSERT INTO `User` (username, `password`, dateOfBirth, gender, MRIN, firstName, lastName, phoneNumber, title, address, email, deceased, gpID, active)
-VALUES ('jsmith', '$2a$10$YqV/YtnOUd62xFSai8gRseO4nU5otTdyDTD7yWwaVquZfo02O2Uee', '1960-01-01', 'Female', '123456789', 'Jane', 'Smith', '07712345678', 'Mrs', '32 Orby Walk, Belfast', 's.dorrian@kainos.com', 'No', 1, true),
+VALUES ('jsmith', '$2a$10$YqV/YtnOUd62xFSai8gRseO4nU5otTdyDTD7yWwaVquZfo02O2Uee', '1960-01-01', 'Female', '123456789', 'Jane', 'Smith', '07712345678', 'Mrs', '32 Orby Walk, Belfast', 'a.weir@kainos.com', 'No', 1, true),
 ('smurray', '$2a$10$YqV/YtnOUd62xFSai8gRseO4nU5otTdyDTD7yWwaVquZfo02O2Uee', '1997-08-08', 'Female', '123456890', 'Shannon', 'Murray', '07912345678', 'Mrs', '23 Grace Avenue, Belfast', 's.dorrian@kainos.com', 'No', 2, true),
 ('asmith', '$2a$10$YqV/YtnOUd62xFSai8gRseO4nU5otTdyDTD7yWwaVquZfo02O2Uee', '2005-03-01', 'Male', '123458289', 'Andrew', 'Smith', '07856748927', 'Mr', '32 Orby Walk, Belfast', 's.dorrian@kainos.com', 'No', 1, false),
 ('ksmith', '$2a$10$YqV/YtnOUd62xFSai8gRseO4nU5otTdyDTD7yWwaVquZfo02O2Uee', '2012-03-01', 'Female', '803409789', 'Kate', 'Smith', '07856799927', 'Miss', '32 Orby Walk, Belfast', 's.dorrian@kainos.com', 'No', 1, false),
@@ -250,7 +250,7 @@ VALUES (1, 'Not feeling the benefit after two weeks', false), (2, 'Helping to mi
 (6, 'Eye pain gone', true);
 
 INSERT INTO Clinician (title, firstName, lastName, jobTitle, email)
-VALUES ('Dr', 'Alex', 'Hyndman', 'Consultant', 'a.hyndman@hospital.com'), 
+VALUES ('Dr', 'Alex', 'Hyndman', 'Consultant', 'a.weir@kainos.com'), 
 ('Dr', 'John', 'Adams', 'Oncologist', 'j.adams@hospital.com'), 
 ('Dr', 'Karen', 'Reid', 'Obstetrician', 'k.reid@hospital.com'),
 ('Dr', 'Sally', 'Jones', 'Consultant', 's.jones@hospital.com'),
