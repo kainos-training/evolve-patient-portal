@@ -33,7 +33,7 @@ export class AppointmentComponent implements OnInit, OnDestroy, OnChanges {
     private queryText: string;
     private selectedClinician: Clinician;
     private showMap: boolean;
-    private userName: string;
+    private savedUser: User;
     private selectedAppointment: Appointment;
 
     onHidden() { 
@@ -62,7 +62,6 @@ export class AppointmentComponent implements OnInit, OnDestroy, OnChanges {
 
     public openModal(template: TemplateRef<any>, appointment: Appointment) {
         this.selectedAppointment = appointment;
-        this.userName = this.user.firstName + " " + this.user.lastName;
         this.data.getAppointmentInformation(appointment.appointmentID).subscribe(
             res => {
                 this.focusedAppointment = res[0];
@@ -83,17 +82,19 @@ export class AppointmentComponent implements OnInit, OnDestroy, OnChanges {
             this.data.addAppointmentQuery(this.selectedAppointment.appointmentID, this.selectedClinician.clinicianID, this.querySubject, this.queryText);
             this.toggleSecondVisible();
         } else {
-            
+
         }
     }
 
     ngOnInit() {
+        this.data.getUserFromCookie(this.user);   
+        this.savedUser = this.user;
         this.getAppointmentsForUser();
     }
 
     getAppointmentsForUser() {
-        this.data.getUserFromCookie(this.user);
         if (this.user) {
+            console.log("6", this.user);  
             // uses dependantID if available, else defaults to logged in use ID
             const id = this.dependantID || this.user.userID;
 
@@ -105,6 +106,8 @@ export class AppointmentComponent implements OnInit, OnDestroy, OnChanges {
     }
 
     ngOnChanges(changes: SimpleChanges) {
+        console.log(this.user);
+
         //Called before any other lifecycle hook. Use it to inject dependencies, but avoid any serious work here.
         //Add '${implements OnChanges}' to the class.
 

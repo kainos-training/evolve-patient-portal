@@ -80,10 +80,9 @@
             <div class="perscription-header">
                 <p>
                     <strong>From:</strong><br>
-                    <textarea disabled type="text" class="form-control input-disabled" id="username" rows="1">{{userName}}</textarea>
+                    <textarea disabled type="text" class="form-control input-disabled" id="username" rows="1">{{savedUser.firstName}} {{savedUser.lastName}}</textarea>
 
                     <strong>To:</strong><br>
-
                     <select [(ngModel)]="selectedClinician" required>
                         <option *ngFor="let clinician of clinicians" [ngValue]="clinician">{{clinician.firstName}} {{clinician.lastName}}</option>
                     </select>
@@ -95,11 +94,9 @@
                     <br>
                     <strong><span style="padding-left: 30px">This query is in relation to the appoinment below:</span><br>  </strong>
                     <br>
-
                     <i><span style="padding-left: 30px"><strong>Location: </strong>{{focusedAppointment.locationAddress}}</span><br></i>
                     <i><span style="padding-left: 30px"><strong>Due: </strong> {{focusedAppointment.dateOfAppointment | date: 'dd/MM/yyyy'}}</span><br></i>
                     <i><span style="padding-left: 30px"><strong>Time: </strong> {{focusedAppointment.dateOfAppointment | date:'h:mm a'}}</span></i>
-
                     <br>
                     <br>
 
