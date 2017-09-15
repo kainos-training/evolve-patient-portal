@@ -1,3 +1,9 @@
+import {UniquePipe} from './utils/unique.pipe';
+import {OrderByPipe} from './utils/orderby.pipe';
+import {FilterPipe} from './utils/filter.pipe';
+import { PreviousAppointmentsComponent } from './components/previous-appointments/previous-appointments.component';
+import { SideEffectsComponent } from './components/side-effects/side-effects.component';
+import { DependantViewComponent } from './components/dependant-view/dependant-view.component';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
@@ -5,9 +11,9 @@ import { AppComponent } from './components/app.component';
 import { AlertModule } from 'ngx-bootstrap';
 import { DataService } from './services/data.service';
 import { HttpClientModule } from '@angular/common/http';
-import { ReviewMedicationComponent } from './components/review-medication/review-medication.component';
 import { SwitchBoardService } from './services/switch-board.service';
 import { ModalModule } from 'ngx-bootstrap/modal';
+import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { EllipsisPipe } from './utils/ellipsis.pipe';
 import { LoginComponent } from './components/login/login.component';
 import { CookieService } from 'ngx-cookie-service';
@@ -26,9 +32,15 @@ import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { SettingNewPasswordComponent } from './components/setting-new-password/setting-new-password.component';
 import { RequestPasswordResetComponent } from './components/request-password-reset/request-password-reset.component';
 import { TemplateComponent } from './components/template/template.component';
+import { PersonalInfoHeaderComponent } from './components/personal-info-header/personal-info-header.component';
+import { SecondaryInfoHeaderComponent } from './components/secondary-info-header/secondary-info-header.component';
+import { ReviewMedicationComponent } from './components/review-medication/review-medication.component';
 import { ConditionComponent } from './components/condition/condition.component';
 import { TooltipModule } from 'ngx-bootstrap/tooltip';
 import { MyTasksComponent } from './components/my-tasks/my-tasks.component';
+import { DatePickerModule } from 'ng2-datepicker';
+import { QuestionnaireComponent } from './components/questionnaire/questionnaire.component';
+import { TimelineComponent } from './components/timeline/timeline.component';
 
 @NgModule({
     declarations: [
@@ -44,21 +56,38 @@ import { MyTasksComponent } from './components/my-tasks/my-tasks.component';
         SettingNewPasswordComponent,
         TopBarComponent,
         EllipsisPipe,
+        UniquePipe,
+        OrderByPipe,
+        FilterPipe,
+        PreviousAppointmentsComponent,
+        QuestionnaireComponent,
+        TimelineComponent,
         ConditionComponent,
-        MyTasksComponent
+        SideEffectsComponent,
+        ConditionComponent,
+        MyTasksComponent,
+        PersonalInfoHeaderComponent,
+        SecondaryInfoHeaderComponent,
+        DependantViewComponent
     ],
     imports: [
+        DatePickerModule,
         BrowserModule,
         FormsModule,
         HttpClientModule,
         routes,
         AlertModule.forRoot(),
         ModalModule.forRoot(),
-        NguiMapModule.forRoot({apiUrl: 'https://maps.google.com/maps/api/js?key=AIzaSyC6v7VVrChAt97hxrsY76i8Xg2mcaQMuE8'}),
+        BsDropdownModule.forRoot(),
+        NguiMapModule.forRoot({ apiUrl: 'https://maps.google.com/maps/api/js?key=AIzaSyC6v7VVrChAt97hxrsY76i8Xg2mcaQMuE8' }),
         BrowserAnimationsModule,
         TooltipModule.forRoot()
     ],
     providers: [
+        UniquePipe,
+        OrderByPipe,
+        EllipsisPipe,
+        FilterPipe,
         DataService,
         CookieService,
         SwitchBoardService,

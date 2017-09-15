@@ -1,0 +1,79 @@
+<evolve-top-bar id="topBarComp"></evolve-top-bar>
+<evolve-left-side-menu></evolve-left-side-menu>
+<div id="questionnaire"  class="col-sm-9" [style.height]="componentHeight">
+
+    <ul>
+        <li *ngFor="let section of sections" [attr.data-section]="section">
+            <h3>{{section}}</h3>
+            <h6 class="form-text text-muted">{{sectionInfo[section]}}</h6>
+            <ol [attr.data-section]="section">
+                <li *ngFor="let questionObj of questions[section]" [attr.data-element]="questionObj.id">
+                    <div class="form-group">
+                        <label>{{questionObj.q}}{{questionObj.mandatory ? '*' : ''}}</label>
+                        <input onReturn [type]="questionObj.type? questionObj.type : 'text'" [ngClass]="questionObj.type ? 'typeCheckboxClassHere' : 'form-control'" placeholder="Type your answer here..."
+                               [attr.data-section]="section"
+                               [attr.data-element]="questionObj.id"
+                               [attr.data-submit]="questionObj.submit"
+                               [attr.data-next]="questionObj.next"
+                               [attr.data-required]="questionObj.mandatory"
+                               (focus)="focusFunction($event)"
+                               [tabindex]="questionObj.id"
+                               [id]="'question-' + questionObj.id"
+                        />
+                    </div>
+                </li>
+            </ol>
+        </li>
+    </ul>
+    <hr>
+    <div id="final-information">
+        <p>If you currently have community support such as home help, district nurse, meals on wheels etc. by clicking 
+        submit on this form you agree to make arrangements to stop and restart this support during and after your visit.</p>
+        <p><strong>Your surgery may be cancelled if you have not made arrangements to be in the company of a responsible adult for 24
+        hours after your surgery.</strong></p>
+        <br>
+        <p>
+            By clicking submit you agree that as the patient / parent / guardian you [the patient] will not drive a car, 
+            ride a bicycle or operate machinery for 24 hours after my general anaesthetic. You am aware that any legal 
+            documents that you sign within 24 hours of having anaesthetic may be invalid. You shall not drink alcohol for 
+            24 hours after your general anaesthetic. A responsible person will accompany you home after your admission.
+            You shall be in the company of a responsible adult for 24 hours after your anaesthetic. You have access to a 
+            telephone for 24 hours after you discharge.
+            You understand the hospital is not accountable for my possessions.
+        </p>
+        <br>
+        <p>All patients in readiness for your discharge following your surgery – please make certain that you have shopping, heating, travel
+                arrangements in place prior to your admission for surgery. Patients having joint replacement please complete your Occupational
+                Therapy form and have the appropriate equipment in your home prior to admission.</p>
+    </div>
+
+    <input type="submit" class="btn btn-success" (click)="doSubmit($event, template)" value="Submit" tabindex="{{maxIndex +1}}" />
+    <h6 class="form-text text-muted">Press SPACE</h6>
+
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+</div>
+<div class="options-bar col-sm-9 text-right">
+    <button type="button" class="btn btn-success" value="previous" (focus)="doPrevious($event)" [tabindex]="currentTabIndex">
+        <span class="glyphicon glyphicon-chevron-up"></span>
+    </button>
+    <button type="button" class="btn btn-success" value="next" (focus)="doNext($event)" [tabindex]="currentTabIndex">
+        <span class="glyphicon glyphicon-chevron-down"></span>
+    </button>
+</div>
+
+<template #template>
+    <div class="modal-header">
+        <h4 class="modal-title pull-left">Confirm submission</h4>
+    </div>
+    <div class="modal-body">
+        <p style="text-align: center">
+        Form has been submitted correctly. Press ok to go back to dashboard.
+        </p>
+        <input type="button" class="btn btn-success btn-mid" (click)="redirDashboard()" value="OK" tabindex="{{maxIndex +1}}" />
+    </div>
+</template>

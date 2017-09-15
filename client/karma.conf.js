@@ -11,7 +11,8 @@ module.exports = function (config) {
       require('karma-chrome-launcher'),
       require('karma-jasmine-html-reporter'),
       require('karma-coverage-istanbul-reporter'),
-      require('@angular/cli/plugins/karma')
+      require('@angular/cli/plugins/karma'),
+      require('karma-mocha-reporter')
     ],
     client:{
       clearContext: false // leave Jasmine Spec Runner output visible in browser
@@ -23,7 +24,12 @@ module.exports = function (config) {
     angularCli: {
       environment: 'dev'
     },
-    reporters: ['progress', 'kjhtml'],
+    // reporters configuration
+    reporters: ['mocha'],
+    mochaReporter: {
+      output: 'full'
+    },
+    terminal: true,
     port: 9876,
     colors: true,
     logLevel: config.LOG_INFO,
@@ -34,7 +40,7 @@ module.exports = function (config) {
       ChromeHeadless: {
         base: 'Chrome',
         flags: [
-          // See https://chromium.googlesource.com/chromium/src/+/lkgr/headless/README.md
+          // See https://chromium.googlesource.com/chromium/src/+/lkgr/headless/README.md,
           '--headless',
           '--disable-gpu',
           // Without a remote debugging port, Google Chrome exits immediately.
