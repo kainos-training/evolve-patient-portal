@@ -78,7 +78,7 @@ exports.addAppointmentQuery = function(req, res) {
     console.log("appointmentID is: " + appointmentID);
     console.log("clinicianID is: " + clinicianID);
     console.log("querySubject is: " + querySubject);
-    console.log("query text is: " + queryText);
+    console.log("queryText is: " + queryText);
     
 
 
@@ -98,7 +98,6 @@ exports.addAppointmentQuery = function(req, res) {
                     success: false
                 });
             } else {
-                //get query goes in here
                 console.log("3");
                 db.getAppointmentQuery(clinicianID, function(err, rows){
                     if (err) {

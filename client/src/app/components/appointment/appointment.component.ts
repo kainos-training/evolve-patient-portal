@@ -30,9 +30,11 @@ export class AppointmentComponent implements OnInit, OnDestroy, OnChanges {
     private clinicians: Clinician[];
     private secondVisible = false;
     private querySubject: string;
-    private quertText: string;
+    private queryText: string;
     private selectedClinician: Clinician;
     private showMap: boolean;
+    private userName: string;
+    private selectedAppointment: Appointment;
 
     onHidden() { 
         this.secondVisible = false;
@@ -54,15 +56,13 @@ export class AppointmentComponent implements OnInit, OnDestroy, OnChanges {
         this.modalService.onHidden.asObservable().subscribe(() => this.onHidden());
     }
 
-    // public openModalQuery(currentTemp: TemplateRef<any>, newTemp:TemplateRef<any>) {
-    //     this.modalService.show(newTemp);
-    // }
-
     toggleSecondVisible() {
         this.secondVisible = !this.secondVisible;
     }
 
     public openModal(template: TemplateRef<any>, appointment: Appointment) {
+        this.selectedAppointment = appointment;
+        this.userName = this.user.firstName + " " + this.user.lastName;
         this.data.getAppointmentInformation(appointment.appointmentID).subscribe(
             res => {
                 this.focusedAppointment = res[0];
@@ -76,6 +76,15 @@ export class AppointmentComponent implements OnInit, OnDestroy, OnChanges {
             res => this.clinicians = res,
             err => console.log(err)
         );
+    }
+
+    submitQuery() {
+        console.log(this.querySubject);
+        console.log(this.queryText);
+        console.log(this.selectedClinician.clinicianID);
+        if(this.querySubject.length > 0 && this.queryText.length > 0 && this.selectedClinician.clinicianID) {
+            this.data.addAppointmentQuery(this.selectedAppointment.appointmentID, this.selectedClinician.clinicianID, this.querySubject, this.queryText);
+        }
     }
 
     ngOnInit() {
