@@ -130,6 +130,7 @@ input.btn.btn-block:last-of-type {
 input[data-expanded="true"], input[data-expanded="false"],
 input[data-expanded="true"]:visited, input[data-expanded="false"]:visited {
     background-color: #00579f;
+    outline: none;
 }
 
 input[data-expanded="true"]:hover, input[data-expanded="false"]:hover,
@@ -147,4 +148,38 @@ input[data-expanded="true"]:active, input[data-expanded="false"]:active {
 
 .btn-primary{
     width: 100%;
+}
+
+.bs-callout {
+    margin: 20px 0;
+    padding: 15px 30px 15px 15px;
+    border-left: 5px solid #eee;
+}
+
+.bs-callout p {
+    margin-bottom: 0;
+}
+
+.bs-callout span {
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+.bs-callout-danger {
+    background-color: white;
+    border-color: #EC0211 
+}
+
+.callout-message {
+    padding: 0;
+}
+
+.callout-message a:link {
+    text-decoration: underline;
+    display: block;
+}
+
+.bs-callout-danger, .input-group, .loginPage form h5, header div span {
+    color: #666666 ;
+    font-family: Helvetica, sans-serif;
 }
