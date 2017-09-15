@@ -25,7 +25,7 @@
     <div *ngIf=!secondVisible>
         <div class="modal-header" (hide)="secondVisible=false">
             <h4 class="modal-title pull-left">Appointment</h4>
-            <button type="button" class="close pull-right" aria-label="Close" (click)="toggleSecondVisible()">
+            <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
                     <span aria-hidden="true">&times;</span>
                 </button>
         </div>
