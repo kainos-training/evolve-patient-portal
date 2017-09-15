@@ -23,11 +23,11 @@ import { ModalModule } from 'ngx-bootstrap/modal';
 import { FormsModule } from '@angular/forms';
 import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { MyTasksComponent } from '../my-tasks/my-tasks.component';
+import {ConditionComponent} from '../condition/condition.component';
+import {TooltipModule} from 'ngx-bootstrap/tooltip';
 import { HttpClientModule } from '@angular/common/http';
 import { PersonalInfoHeaderComponent } from '../personal-info-header/personal-info-header.component'; 
-import { ConditionComponent } from '../condition/condition.component';
-import { TooltipModule } from 'ngx-bootstrap/tooltip';
-import { MyTasksComponent } from '../my-tasks/my-tasks.component';
 import { DependantViewComponent } from '../dependant-view/dependant-view.component';
 import { SideEffectsComponent } from '../side-effects/side-effects.component';
 import { PreviousAppointmentsComponent } from '../previous-appointments/previous-appointments.component';
@@ -85,8 +85,8 @@ describe('DashboardComponent', () => {
                 HttpClientModule,
                 BrowserAnimationsModule,
                 TooltipModule.forRoot()
-            ]
-            ,schemas: [CUSTOM_ELEMENTS_SCHEMA]
+            ],
+            schemas: [CUSTOM_ELEMENTS_SCHEMA]
         })
             .compileComponents();
     });

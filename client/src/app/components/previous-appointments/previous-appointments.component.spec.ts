@@ -20,7 +20,7 @@ describe('PreviousAppointmentsComponent', () => {
 
     beforeEach(async(() => {
         TestBed.configureTestingModule({
-            declarations: [PreviousAppointmentsComponent, 
+            declarations: [PreviousAppointmentsComponent,
                 EllipsisPipe,
                 OrderByPipe,
                 UniquePipe,

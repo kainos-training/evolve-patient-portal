@@ -15,14 +15,16 @@
         <evolve-condition></evolve-condition>
         <evolve-side-effects></evolve-side-effects>
         <evolve-my-tasks></evolve-my-tasks>
-
     </div>
 
-    <div id="widgetContainer" class="col-sm-12">
-        <!-- My dependants dashboard -->
-        <!-- <div *ngIf="navigationOption===navigationOptions.MyDependants"> -->
-        <div [hidden]="!(navigationOption===navigationOptions.MyDependants)">
-            <evolve-dependant-view></evolve-dependant-view>
-        </div>
+    <div [hidden]="!(navigationOption===navigationOptions.RepeatPerscription)">
+        <evolve-personal-info-header></evolve-personal-info-header>
+        <evolve-secondary-info-header></evolve-secondary-info-header>
+        <evolve-repeat-prescription></evolve-repeat-prescription>
+    </div>
+
+    <!-- My dependants dashboard -->
+    <div [hidden]="!(navigationOption===navigationOptions.MyDependants)">
+        <evolve-dependant-view></evolve-dependant-view>
     </div>
 </div>

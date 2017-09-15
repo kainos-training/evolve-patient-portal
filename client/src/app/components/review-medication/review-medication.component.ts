@@ -1,3 +1,4 @@
+
 import { Component, OnDestroy, OnInit, TemplateRef } from '@angular/core';
 import { DataService } from '../../services/data.service';
 import { Medication } from '../../class/Medication';
@@ -7,6 +8,7 @@ import { Observable } from 'rxjs/Observable';
 import { MedicationComment } from '../../class/MedicationComment';
 import { MedicationDescription } from '../../class/MedicationDescription';
 import { Sanitizer } from '@angular/core';
+import { RepeatPrescriptionComponent } from  '../repeat-prescription/repeat-prescription.component';
 import { SwitchBoardService } from '../../services/switch-board.service';
 import { Subscription } from 'rxjs/Rx';
 import { SecurityContext, SimpleChanges, Input } from '@angular/core';
@@ -46,8 +48,8 @@ export class ReviewMedicationComponent implements OnInit, OnDestroy {
         this.showPrescriptionHistory = false;
         this.modalRef = this.modalService.show(template);
         let description = this.dataService.getWikiSummary(meds.medicationName);
-        const id = this.dependantID || this.user.userID; 
-        
+        const id = this.dependantID || this.user.userID;
+
         this.dataService.getMedicationComments(this.selectedMedication.medicationUserID).subscribe(
             res => this.selectedMedicationComments = res
         );
@@ -85,7 +87,7 @@ export class ReviewMedicationComponent implements OnInit, OnDestroy {
     constructor(dataService: DataService, private modalService: BsModalService, private switchboard: SwitchBoardService) {
         this.dataService = dataService;
     }
-    
+
     ngOnInit() {
         this.getMedicationsForUser();
     }
@@ -94,7 +96,7 @@ export class ReviewMedicationComponent implements OnInit, OnDestroy {
         this.dataService.getUserFromCookie(this.user);
         if(this.user) {
             // uses dependantID if available, else defaults to logged in use ID
-            const id = this.dependantID || this.user.userID; 
+            const id = this.dependantID || this.user.userID;
 
             // get the data from the component
             this.dataService.getMedicationList(id).subscribe(

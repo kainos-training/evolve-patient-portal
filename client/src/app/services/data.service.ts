@@ -15,6 +15,7 @@ import { User } from '../class/User';
 import { TimelineAppointment } from "../class/TimelineAppointment";
 import { SideEffect } from '../class/SideEffect';
 import { Condition } from '../class/Condition';
+import { Pharmacy } from '../class/Pharmacy';
 import { AppointmentCount } from '../class/AppointmentCount';
 
 @Injectable()
@@ -70,9 +71,49 @@ export class DataService {
         const options = {
             headers: new HttpHeaders().set('Content-Type', 'application/json'),
         };
-
         return this.http.post<Medication[]>('api/medication/list', body, options);
     };
+
+    public getRepeatedMedication(userID) {
+        const body = {
+            'userID': userID
+        };
+        const options = {
+            headers: new HttpHeaders().set('Content-Type', 'application/json'),
+        };
+        return this.http.post<Medication[]>('api/prescription/repeatedMedication', body, options);
+    };
+
+    public updatePrescriptionDate(medicationUserIDs: number[], deliveryStatus: boolean) {
+        const body = {
+            medicationUserIDs: '',
+            deliveryStatus: deliveryStatus
+        };
+        console.log(body.deliveryStatus);
+            body.medicationUserIDs = '(';
+        for (var i = 0; i < medicationUserIDs.length; i++) {
+            body.medicationUserIDs += medicationUserIDs[i] + ',';
+        }
+        body.medicationUserIDs = body.medicationUserIDs.substring(0, body.medicationUserIDs.length - 1);
+        body.medicationUserIDs += ')';
+        const options = {
+            headers: new HttpHeaders().set('Content-Type', 'application/json'),
+        };
+        console.log(body);
+        return this.http.post('api/prescription/updatePrescribedDate', body, options).subscribe();
+    };
+
+    public getLocalPharmacy(userID) {
+        const body = {
+            'userID': userID
+        };
+        const options = {
+            headers: new HttpHeaders().set('Content-Type', 'application/json'),
+        };
+        return this.http.post<Pharmacy[]>('api/prescription/pharmacy', body, options);
+    };
+
+
 
     public getTaskList(userID) {
         const body = {

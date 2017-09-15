@@ -4,6 +4,13 @@ CREATE DATABASE IF NOT EXISTS patientPortal;
 
 USE patientPortal;
 
+CREATE TABLE IF NOT EXISTS Pharmacy(
+    pharmacyID int auto_increment not null,
+    pharmacyName varchar(100),
+    address varchar(100),
+    primary key (pharmacyID)
+);
+
 CREATE TABLE IF NOT EXISTS GP (
     gpID int auto_increment not null,
     gpFullName varchar(150) not null,
@@ -13,7 +20,7 @@ CREATE TABLE IF NOT EXISTS GP (
 );
 
 CREATE TABLE IF NOT EXISTS `User` (
-    userID int auto_increment not null unique, 
+    userID int auto_increment not null unique,
     username varchar(100) not null unique,
     `password` varchar(256) not null,
     dateOfBirth date not null,
@@ -28,9 +35,11 @@ CREATE TABLE IF NOT EXISTS `User` (
     deceased enum('Yes', 'No') default 'No',
     dateOfDeath datetime,
     gpID int,
+    pharmacyID int,
     active bool default false,
     foreign key (gpID) references GP(gpID),
-    primary key (userID)
+    primary key (userID),
+    foreign key (pharmacyID) references Pharmacy(pharmacyID)
 );
 
 CREATE TABLE IF NOT EXISTS `Condition`(
@@ -88,22 +97,23 @@ CREATE TABLE IF NOT EXISTS TaskQuestionnaire (
 );
 
 CREATE TABLE IF NOT EXISTS MedicationUser (
-	medicationUserID int auto_increment not null,
-	userID int not null, 
-	medicationID int not null,
-	startDate date not null,
-	endDate date,
-	dosage varchar(60) not null,
-	instructions varchar(60) not null,
-	prescribedDate date not null,
-	repeated bool not null,
-	primary key (medicationUserID),
-	foreign key (userID) references `User` (userID),
-	foreign key (medicationID) references Medication (medicationID)
+    medicationUserID int auto_increment not null,
+    userID int not null,
+    medicationID int not null,
+    startDate date not null,
+    endDate date,
+    dosage varchar(60) not null,
+    prescribedDate date not null,
+    instructions varchar(60) not null,
+    repeated bool not null,
+    delivery bool not null,
+    primary key (medicationUserID),
+    foreign key (userID) references `User` (userID),
+    foreign key (medicationID) references Medication (medicationID)
 );
 
 CREATE TABLE IF NOT EXISTS MedicationUserComment (
-    medicationUserCommentID int auto_increment not null, 
+    medicationUserCommentID int auto_increment not null,
     medicationUserID int not null,
     commentText text not null,
     `timeStamp` timeStamp not null,
@@ -171,6 +181,10 @@ CREATE TABLE IF NOT EXISTS UserDependant(
     foreign key (dependantID) references User(userID)
 );
 
+INSERT INTO Pharmacy(pharmacyName, address)
+VALUES('Gordons Chemists', '15-17 Corn Market, Belfast BT1 4DA'),
+('Stranmillis Pharmacy', '62 Stranmillis Rd, Belfast BT9 5AD');
+
 CREATE TABLE IF NOT EXISTS UserSideEffect(
 	userSideEffectID int auto_increment not null,
 	userID int not null,
@@ -186,15 +200,15 @@ VALUES ('Dr. A Cheyne', 'Ormeau Park Surgery', '281 Ormeau Rd, Belfast BT7 3GG, 
 ('Dr. E Glass', 'The Surgery', '1 Church St, Newtownards BT23 4FH'),
 ('Dr. R Kane', 'Springvale Medical Practice', '463 Springfield Rd, Belfast BT12 7DP, UK');
 
-INSERT INTO `User` (username, `password`, dateOfBirth, gender, MRIN, firstName, lastName, phoneNumber, title, address, email, deceased, gpID, active)
-VALUES ('jsmith', '$2a$10$YqV/YtnOUd62xFSai8gRseO4nU5otTdyDTD7yWwaVquZfo02O2Uee', '1960-01-01', 'Female', '123456789', 'Jane', 'Smith', '07712345678', 'Mrs', '32 Orby Walk, Belfast', 's.dorrian@kainos.com', 'No', 1, true),
-('smurray', '$2a$10$YqV/YtnOUd62xFSai8gRseO4nU5otTdyDTD7yWwaVquZfo02O2Uee', '1997-08-08', 'Female', '123456890', 'Shannon', 'Murray', '07912345678', 'Mrs', '23 Grace Avenue, Belfast', 's.dorrian@kainos.com', 'No', 2, true),
-('asmith', '$2a$10$YqV/YtnOUd62xFSai8gRseO4nU5otTdyDTD7yWwaVquZfo02O2Uee', '2005-03-01', 'Male', '123458289', 'Andrew', 'Smith', '07856748927', 'Mr', '32 Orby Walk, Belfast', 's.dorrian@kainos.com', 'No', 1, false),
-('ksmith', '$2a$10$YqV/YtnOUd62xFSai8gRseO4nU5otTdyDTD7yWwaVquZfo02O2Uee', '2012-03-01', 'Female', '803409789', 'Kate', 'Smith', '07856799927', 'Miss', '32 Orby Walk, Belfast', 's.dorrian@kainos.com', 'No', 1, false),
-('csmith', '$2a$10$YqV/YtnOUd62xFSai8gRseO4nU5otTdyDTD7yWwaVquZfo02O2Uee', '2005-03-01', 'Female', '803409789', 'Chloe', 'Smith', '07856799927', 'Ms', '32 Orby Walk, Belfast', 's.dorrian@kainos.com', 'No', 1, false),
-('jdaniels', '$2a$10$YqV/YtnOUd62xFSai8gRseO4nU5otTdyDTD7yWwaVquZfo02O2Uee',  '1989-11-09', 'Male', '098765432', 'Jack', 'Daniels', '07745678921', 'Mr', '91 Bangor Road, Newtownards',  's.dorrian@kainos.com', 'No', 3, true),
-('ajackson', '$2a$10$YqV/YtnOUd62xFSai8gRseO4nU5otTdyDTD7yWwaVquZfo02O2Uee',  '1995-12-25', 'Male', '543028796', 'Andrew', 'Jackson', '07899137817', 'Dr', '66 Church Street, Antrim',  's.dorrian@kainos.com', 'No', 3, true),
-('bsmith', '$2a$10$YqV/YtnOUd62xFSai8gRseO4nU5otTdyDTD7yWwaVquZfo02O2Uee',  '1928-08-04', 'Male', '065756297', 'Bill', 'Smith', '07767584930', 'Mr', '33 Orby Walk, Belfast',  's.dorrian@kainos.com', 'No', 1, false);
+INSERT INTO `User` (username, `password`, dateOfBirth, gender, MRIN, firstName, lastName, phoneNumber, title, address, email, deceased, gpID,pharmacyID, active)
+VALUES ('jsmith', '$2a$10$YqV/YtnOUd62xFSai8gRseO4nU5otTdyDTD7yWwaVquZfo02O2Uee', '1960-01-01', 'Female', '123456789', 'Jane', 'Smith', '07712345678', 'Mrs', '32 Orby Walk, Belfast', 's.dorrian@kainos.com', 'No', 1,1, true),
+('smurray', '$2a$10$YqV/YtnOUd62xFSai8gRseO4nU5otTdyDTD7yWwaVquZfo02O2Uee', '1997-08-08', 'Female', '123456890', 'Shannon', 'Murray', '07912345678', 'Mrs', '23 Grace Avenue, Belfast', 's.dorrian@kainos.com', 'No', 2,1, true),
+('asmith', '$2a$10$YqV/YtnOUd62xFSai8gRseO4nU5otTdyDTD7yWwaVquZfo02O2Uee', '2005-03-01', 'Male', '123458289', 'Andrew', 'Smith', '07856748927', 'Mr', '32 Orby Walk, Belfast', 's.dorrian@kainos.com', 'No', 1,1,false),
+('ksmith', '$2a$10$YqV/YtnOUd62xFSai8gRseO4nU5otTdyDTD7yWwaVquZfo02O2Uee', '2012-03-01', 'Female', '803409789', 'Kate', 'Smith', '07856799927', 'Miss', '32 Orby Walk, Belfast', 's.dorrian@kainos.com', 'No', 1,1, false),
+('csmith', '$2a$10$YqV/YtnOUd62xFSai8gRseO4nU5otTdyDTD7yWwaVquZfo02O2Uee', '2005-03-01', 'Female', '803409789', 'Chloe', 'Smith', '07856799927', 'Ms', '32 Orby Walk, Belfast', 's.dorrian@kainos.com', 'No', 1,1, false),
+('jdaniels', '$2a$10$YqV/YtnOUd62xFSai8gRseO4nU5otTdyDTD7yWwaVquZfo02O2Uee',  '1989-11-09', 'Male', '098765432', 'Jack', 'Daniels', '07745678921', 'Mr', '91 Bangor Road, Newtownards',  's.dorrian@kainos.com', 'No', 3,1, true),
+('ajackson', '$2a$10$YqV/YtnOUd62xFSai8gRseO4nU5otTdyDTD7yWwaVquZfo02O2Uee',  '1995-12-25', 'Male', '543028796', 'Andrew', 'Jackson', '07899137817', 'Dr', '66 Church Street, Antrim',  's.dorrian@kainos.com', 'No', 3,1, true),
+('bsmith', '$2a$10$YqV/YtnOUd62xFSai8gRseO4nU5otTdyDTD7yWwaVquZfo02O2Uee',  '1928-08-04', 'Male', '065756297', 'Bill', 'Smith', '07767584930', 'Mr', '33 Orby Walk, Belfast',  's.dorrian@kainos.com', 'No', 1,1, false);
 
 INSERT INTO UserDependant (userID, dependantID)
 VALUES(1, 3), (1, 4), (1, 8);
@@ -213,19 +227,19 @@ VALUES('Penicillin', 1, 'https://en.wikipedia.org/wiki/Penicillin'),
 ('Ketoprofen', 4, 'https://en.wikipedia.org/wiki/Ketoprofen'),
 ('Xylometazoline', 1, 'https://en.wikipedia.org/wiki/Xylometazoline');
 
-INSERT INTO MedicationUser(userID, medicationID, startDate, endDate, dosage, instructions,prescribedDate,repeated)
-VALUES (1, 3, '2017-06-01', '2019-08-10', '10mg', 'Take one tablet twice a day, after meals','2017-09-01',TRUE),
-(1, 3, '2016-06-01', '2017-06-01', '5mg', 'Take two tablets twice a day', '2017-09-01',TRUE),
-(1, 3, '2015-06-01', '2016-06-01', '20mg', 'Take two tablets twice a day', '2017-04-01',TRUE),
-(1, 4, '2016-06-01', '2019-08-10', '5mg', 'Take two tablets twice a day','2016-04-01',TRUE),
-(2, 1, '2017-02-09', '2019-02-27', '15mg', 'Take one tablet twice a day','2017-09-01',FALSE), 
-(3, 2, '2016-09-29', '2018-10-10', '10mg', 'Take one tablet twice a day','2017-09-01',TRUE);
+INSERT INTO MedicationUser(userID, medicationID, startDate, endDate, dosage, instructions,prescribedDate,repeated, delivery)
+VALUES (1, 3, '2017-06-01', '2019-08-10', '10mg', 'Take one tablet twice a day, after meals','2017-09-01',TRUE, TRUE),
+(1, 3, '2016-06-01', '2017-06-01', '5mg', 'Take two tablets twice a day', '2017-09-01',TRUE, TRUE),
+(1, 3, '2015-06-01', '2016-06-01', '20mg', 'Take two tablets twice a day', '2017-04-01',TRUE, TRUE),
+(1, 4, '2016-06-01', '2019-08-10', '5mg', 'Take two tablets twice a day','2016-04-01',TRUE, TRUE),
+(2, 1, '2017-02-09', '2019-02-27', '15mg', 'Take one tablet twice a day','2017-09-01',FALSE, TRUE),
+(3, 2, '2016-09-29', '2018-10-10', '10mg', 'Take one tablet twice a day','2017-09-01',TRUE, TRUE);
 
 INSERT INTO MedicationUserComment(medicationUserID, commentText, deleted)
 VALUES (1, 'Not feeling the benefit after two weeks', false), (2, 'Helping to minimise pain but still exists', false),
-(3, 'Not helping with pain, possibly need stronger medication', false), (4, 'Feeling better mentally', false), 
+(3, 'Not helping with pain, possibly need stronger medication', false), (4, 'Feeling better mentally', false),
 (5, 'Hearing not improving', false),
-(6, 'Ear pain easing', false), 
+(6, 'Ear pain easing', false),
 (6, 'Eye pain gone', true);
 
 INSERT INTO Clinician (title, firstName, lastName, jobTitle)
@@ -326,7 +340,7 @@ VALUES ("Hip Replacement", "http://www.nhs.uk/Conditions/Hip-replacement/Pages/I
 ("Conjunctivitis", "http:/g/www.nhs.uk/Conditions/Conjunctivitis-infective/Pages/Treatment.aspx"),
 ("Back Pain", "http://www.nhs.uk/conditions/back-pain/Pages/Introduction.aspx");
 
-INSERT INTO UserCondition (userID, conditionID, startDate, endDate) 
+INSERT INTO UserCondition (userID, conditionID, startDate, endDate)
 VALUES (1, 4, '2017-01-10', '2017-07-15'),
 (1, 3, '2016-11-10', '2017-07-20'),
 (1, 2, '1998-04-03', null),

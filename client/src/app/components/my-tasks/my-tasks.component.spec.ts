@@ -17,6 +17,7 @@ import { LeftSideMenuComponent } from '../left-side-menu/left-side-menu.componen
 import { AppointmentComponent } from '../appointment/appointment.component';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { Task } from '../../class/Task';
+import { RepeatPrescriptionComponent } from '../repeat-prescription/repeat-prescription.component';
 
 export class MockDataService {
   getTaskList(userID: number) {
