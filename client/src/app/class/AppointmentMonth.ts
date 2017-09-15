@@ -10,9 +10,9 @@ export class AppointmentMonth {
         this.monthString = pMonthString;
     }
 
-    pushAppointmentDetails(appointmentType:string, appointmentDate:Date, departmentName:string)
+    pushAppointmentDetails(appointmentID:number, appointmentType:string, appointmentDate:Date, departmentName:string)
     {
-        var tempAppDet:AppointmentDetails = new AppointmentDetails(appointmentType, appointmentDate, departmentName);
+        var tempAppDet:AppointmentDetails = new AppointmentDetails(appointmentID,appointmentType, appointmentDate, departmentName);
         this.appointmentDetails.push(tempAppDet);
     }
 
