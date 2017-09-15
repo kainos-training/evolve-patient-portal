@@ -169,10 +169,13 @@ database.getPreviousConditions = function(userID, callback) {
 
 database.getTaskList = function(userID, callback) {
     database.query(
-        "SELECT taskID, taskName, taskSummary, recievedDate, dueDate FROM Task " +
-        "WHERE userID = ? " +
-        "AND dueDate > NOW() " +
-        "ORDER BY dueDate;", [userID],
+        "SELECT T.taskID, T.taskName, T.taskSummary, T.recievedDate, T.dueDate FROM Task as T " +
+        "LEFT JOIN TaskQuestionnaire as TQ " +
+        "ON T.taskID = TQ.taskID " +
+        "WHERE TQ.questionnaireID IS NULL " +
+        "AND T.dueDate > NOW() " +
+        "AND T.userID = ? " +
+        "ORDER BY T.dueDate;", [userID],
         function(err, rows) {
             callback(err, rows);
         });

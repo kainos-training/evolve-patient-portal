@@ -1,13 +1,9 @@
 
 import { async, ComponentFixture, TestBed, inject } from '@angular/core/testing';
-import { ConditionComponent } from './condition.component';
-import { Component, OnInit } from '@angular/core';
-import { Condition } from '../../class/Condition';
-import { User } from '../../class/User';
-import { SwitchBoardService } from '../../services/switch-board.service';
-import { Subscription } from 'rxjs/Rx';
-import { DataService } from '../../services/data.service';
-import { HttpClientModule, HttpClient, HttpHandler } from '@angular/common/http';
+import { TimelineComponent } from '../timeline/timeline.component';
+import { SecondaryInfoHeaderComponent } from '../secondary-info-header/secondary-info-header.component';
+import { PersonalInfoHeaderComponent } from '../personal-info-header/personal-info-header.component';
+import { HttpClient, HttpClientModule, HttpHandler } from '@angular/common/http';
 import { CookieService } from 'ngx-cookie-service';
 import { routes } from '../../app.router';
 import { ModalModule } from 'ngx-bootstrap/modal';
@@ -16,6 +12,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { LoginComponent } from '../login/login.component';
 import { ErrorPageComponent } from '../error-page/error-page.component';
 import { DashboardComponent } from '../dashboard/dashboard.component';
+import { SideEffectsComponent } from '../side-effects/side-effects.component';
 import { TopBarComponent } from '../top-bar/top-bar.component';
 import { LeftSideMenuComponent } from '../left-side-menu/left-side-menu.component';
 import { AppointmentComponent } from '../appointment/appointment.component';
@@ -24,17 +21,24 @@ import { RequestPasswordResetComponent } from '../request-password-reset/request
 import { ReviewMedicationComponent } from '../review-medication/review-medication.component';
 import { MapViewComponent } from '../map-view/map-view.component';
 import { EllipsisPipe } from '../../utils/ellipsis.pipe';
-import { Marker, NguiMapComponent, DirectionsRenderer } from '@ngui/map/dist';
+import { DirectionsRenderer, Marker, NguiMapComponent } from '@ngui/map/dist';
+import { MyTasksComponent } from '../my-tasks/my-tasks.component';
+import { DependantViewComponent } from '../dependant-view/dependant-view.component';
+import { Condition } from '../../class/Condition';
+import { ConditionComponent } from './condition.component';
+import { Component, OnInit } from '@angular/core';
+import { User } from '../../class/User';
+import { SwitchBoardService } from '../../services/switch-board.service';
+import { Subscription } from 'rxjs/Rx';
+import { DataService } from '../../services/data.service';
 import { APP_BASE_HREF } from '@angular/common';
 import { TooltipModule } from 'ngx-bootstrap/tooltip';
-import { MyTasksComponent } from '../my-tasks/my-tasks.component';
 import { RepeatPrescriptionComponent } from '../repeat-prescription/repeat-prescription.component';
-import { TimelineComponent } from '../timeline/timeline.component';
-import { SecondaryInfoHeaderComponent } from '../secondary-info-header/secondary-info-header.component';
-import { PersonalInfoHeaderComponent } from '../personal-info-header/personal-info-header.component';
-import { DependantViewComponent } from '../dependant-view/dependant-view.component';
-import { SideEffectsComponent } from '../side-effects/side-effects.component';
-import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core'
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import { PreviousAppointmentsComponent } from '../previous-appointments/previous-appointments.component';
+import { OrderByPipe } from "../../utils/orderby.pipe";
+import { FilterPipe } from "../../utils/filter.pipe";
+import { UniquePipe } from "../../utils/unique.pipe";
 
 export class MockDataService {
     getCurrentConditions(userID: number) {
@@ -70,42 +74,20 @@ describe('ConditionComponent', () => {
 
     beforeEach(async(() => {
         mockDataService = new MockDataService();
+        const mockSwitchBoardService = {};
         TestBed.configureTestingModule({
             declarations: [
-                ConditionComponent,
-                LoginComponent,
-                ErrorPageComponent,
-                DashboardComponent,
-                TopBarComponent,
-                LeftSideMenuComponent,
-                AppointmentComponent,
-                SettingNewPasswordComponent,
-                RequestPasswordResetComponent,
-                ReviewMedicationComponent,
-                MapViewComponent,
-                EllipsisPipe,
-                Marker,
-                DirectionsRenderer,
-                NguiMapComponent,
-                MyTasksComponent,
-                RepeatPrescriptionComponent,
-                TimelineComponent,
-                SideEffectsComponent,
-                PersonalInfoHeaderComponent,
-                SecondaryInfoHeaderComponent,
-                DependantViewComponent,
                 ConditionComponent
             ],
             providers: [
-                DataService,
-                SwitchBoardService,
+                { provide: DataService, useValue: mockDataService },
+                { provide: SwitchBoardService, useValue: mockSwitchBoardService },
                 { provide: APP_BASE_HREF, useValue: '/' }
             ],
             imports: [
                 TooltipModule.forRoot(),
                 FormsModule
-            ],
-            schemas: [CUSTOM_ELEMENTS_SCHEMA]
+            ]
         })
             .compileComponents();
     }));
