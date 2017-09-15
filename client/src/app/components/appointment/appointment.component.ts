@@ -29,9 +29,15 @@ export class AppointmentComponent implements OnInit, OnDestroy, OnChanges {
     private mapPath: string;
     private clinicians: Clinician[];
     private secondVisible = false;
+    private querySubject: string;
+    private quertText: string;
+    private selectedClinician: Clinician;
+    private showMap: boolean;
 
-
-    onHidden() { this.secondVisible = false; }
+    onHidden() { 
+        this.secondVisible = false;
+        this.showMap = false;
+    }
 
     // input for viewing as dependant
     @Input() dependantID;

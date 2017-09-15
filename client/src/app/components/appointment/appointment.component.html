@@ -54,11 +54,11 @@
                     </div>
                 </form>
             </div>
-            <input type="submit" *ngIf="userLocation" [attr.data-expanded]="focusedAppointment.showGoogleMap" (click)="toggle('showGoogleMap')"
+            <input type="submit" *ngIf="userLocation" [attr.data-expanded]="focusedAppointment.showGoogleMap" (click)="toggle('showGoogleMap'); showMap=true"
                 class="btn btn-success btn-sm btn-block" value="{{!!focusedAppointment.showGoogleMap ? 'Collapse' : 'Expand'}} Google map"
             />
             <div class="map-container" *ngIf="userLocation">
-                <evolve-map-view [userLocation]="userLocation" [hidden]="!focusedAppointment.showGoogleMap" [departmentAddress]="focusedAppointment.locationAddress"></evolve-map-view>
+                <evolve-map-view *ngIf="showMap" [userLocation]="userLocation" [hidden]="!focusedAppointment.showGoogleMap" [departmentAddress]="focusedAppointment.locationAddress"></evolve-map-view>
             </div>
             <div class="local-map-container" *ngIf="mapPath">
                 <input type="submit" [attr.data-expanded]="focusedAppointment.showLocalMap" (click)="toggle('showLocalMap')" class="btn btn-success btn-sm btn-block"
@@ -84,19 +84,14 @@
 
                     <strong>To:</strong><br>
 
-                    <!-- <select [(ngModel)]="selectedClinician">
+                    <select [(ngModel)]="selectedClinician" required>
                         <option *ngFor="let clinician of clinicians" [ngValue]="clinician">{{clinician.firstName}} {{clinician.lastName}}</option>
-                    </select> -->
-
-                    <select>
-                        <option *ngFor="let clinician of clinicians">{{clinician.firstName}} {{clinician.lastName}}</option>
                     </select>
 
                     <br>
                     <strong>Subject:</strong><br>
-                    <!-- <textarea type="text" class="form-control input-disabled" id="subject" rows="1" [(ngModel)]="querySubject"></textarea> -->
-                    <textarea type="text" class="form-control input-disabled" id="subject" rows="1"></textarea>
-
+                    <textarea type="text" class="form-control input-disabled" id="subject" rows="1" [(ngModel)]="querySubject" required></textarea>
+                    
                     <br>
                     <strong><span style="padding-left: 30px">This query is in relation to the appoinment below:</span><br>  </strong>
                     <br>
@@ -109,8 +104,7 @@
                     <br>
 
                     <label><strong>Query</strong></label>
-                    <!-- <textarea type="text" class="form-control input-disabled" id="comment-input" rows="8" [(ngModel)]="queryText"></textarea> -->
-                    <textarea type="text" class="form-control input-disabled" id="comment-input" rows="8"></textarea>
+                    <textarea type="text" class="form-control input-disabled" id="comment-input" rows="8" [(ngModel)]="queryText" required></textarea>
 
                 </p>
                 <hr>
