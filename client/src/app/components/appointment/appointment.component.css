@@ -129,14 +129,14 @@ input.btn.btn-block:last-of-type {
 
 input[data-expanded="true"], input[data-expanded="false"],
 input[data-expanded="true"]:visited, input[data-expanded="false"]:visited {
-    background-color: #00579f;
+    background-color: #067fbb;
     outline: none;
 }
 
 input[data-expanded="true"]:hover, input[data-expanded="false"]:hover,
 input[data-expanded="true"]:focus, input[data-expanded="false"]:focus,
 input[data-expanded="true"]:active, input[data-expanded="false"]:active {
-    background-color: #067fbb;
+    background-color: #00579f;
     outline: none;
 }
 
@@ -148,6 +148,13 @@ input[data-expanded="true"]:active, input[data-expanded="false"]:active {
 
 .btn-primary{
     width: 100%;
+    background-color: #067fbb;
+    font: white;
+    margin-top: 20px; 
+}
+
+.btn-primary:hover{
+    background-color: #00579f;
 }
 
 .bs-callout {
@@ -162,7 +169,6 @@ input[data-expanded="true"]:active, input[data-expanded="false"]:active {
 
 .bs-callout span {
     font-weight: bold;
-    text-transform: uppercase;
 }
 
 .bs-callout-danger {
@@ -196,4 +202,12 @@ input[data-expanded="true"]:active, input[data-expanded="false"]:active {
     font-family: Helvetica, sans-serif;
     text-align: center;
     padding-top: 10px;
+}
+
+.btn-block{
+    text-transform: capitalize;
+}
+    
+#submit-Button{
+    margin-bottom: 20px;
 }
