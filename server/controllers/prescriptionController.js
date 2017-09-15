@@ -44,13 +44,11 @@ exports.repeatedMedication = function(req, res) {
 
 exports.localPharmacy = function(req, res) {
     const userID = req.body.userID
-    console.log("PHARMACY USERID: " + userID)
     if (userID == null) {
         res.status(400).json({
             success: false
         });
     } else {
-        console.log("PREPARING QUERY")
         db.getLocalPharmacy(userID, function(err, rows) {
             if (err) {
                 res.status(400).json({

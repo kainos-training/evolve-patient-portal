@@ -7,19 +7,16 @@ exports.getListOfMedications = function(req, res) {
     const userID = req.body.userID;
 
     if (userID == null) {
-        console.log(userID);
         res.status(400).json({
             success: false
         });
     } else {
         db.getMedications(userID, function(err, rows) {
             if (err) {
-                console.log(err);
                 res.status(400).json({
                     success: false
                 });
             } else {
-                console.log(rows);
                 res.status(200).send(rows);
             }
         });
@@ -227,9 +224,7 @@ exports.getMedicationHistory = function(req, res) {
                     success: false
                 });
             } else {
-                console.log(rows);
                 res.status(200).send(rows);
-
             }
         });
     }
