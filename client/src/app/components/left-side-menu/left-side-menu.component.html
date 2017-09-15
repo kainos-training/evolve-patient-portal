@@ -13,7 +13,7 @@
     </div>
     <ul class="linkList">
 
-        <li class="linkItem"><a routerLink="/repeat-prescription">Repeat Prescription</a></li>
+        <!--<li class="linkItem"><a routerLink="/repeat-prescription">Repeat Prescription</a></li>-->
         <!-- MyDashboard set to active (first page the user will see) -->
         <li class="linkItem active" (click)="navigationItemClicked($event)">{{navigationOptions.MyDashboard}}</li>
         <li class="linkItem" (click)="navigationItemClicked($event)">{{navigationOptions.MyDependants}}</li>
@@ -21,5 +21,6 @@
             <div href="#" onclick="return false;">Dependants:</div>
             <a *ngFor="let dependant of dependants" href="#" (click)="onDependantClicked($event, dependant)">{{dependant.firstName}} {{dependant.lastName}}</a>
         </div>
+        <li class="linkItem" (click)="navigationItemClicked($event)">{{navigationOptions.RepeatPerscription}}</li>
     </ul>
 </div>

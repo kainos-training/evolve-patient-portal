@@ -12,9 +12,11 @@ import { Router } from '@angular/router';
 import { Appointment } from '../class/Appointment';
 import { AppointmentFurtherInfo } from '../class/AppointmentFurtherInfo';
 import { User } from '../class/User';
+import { TimelineAppointment } from "../class/TimelineAppointment";
 import { SideEffect } from '../class/SideEffect';
 import { Condition } from '../class/Condition';
 import { Pharmacy } from '../class/Pharmacy';
+import { AppointmentCount } from '../class/AppointmentCount';
 
 @Injectable()
 export class DataService {
@@ -25,6 +27,42 @@ export class DataService {
 
     constructor(private http: HttpClient, private cookieService: CookieService, private switchBoard: SwitchBoardService, private router: Router) {
     }
+
+    public getTimelineAppointments(userID,intervalBefore,intervalAfter){
+        const body = {
+            'userID' : userID,
+            'intervalBefore' : intervalBefore,
+            'intervalAfter' : intervalAfter
+        };
+        const options = {
+            headers: new HttpHeaders().set('Content-Type', 'application/json'),
+        };
+
+        return this.http.post<TimelineAppointment[]>('api/timeline/getTimelineAppointments', body, options);
+    }
+
+    public countTimelineAppointmentFuture(appCount, userID){
+        const body = {
+            'appCount':appCount,
+            'userID':userID
+             };
+        const options = {
+            headers: new HttpHeaders().set('Content-Type', 'application/json'),
+        };
+        return this.http.post<AppointmentCount>('api/timeline/countTimelineAppointmentsFuture', body, options);
+    }    
+
+    public countTimelineAppointmentPrevious(appCount,userID){
+        const body = {
+            'appCount':appCount,
+            'userID':userID
+             };
+        const options = {
+            headers: new HttpHeaders().set('Content-Type', 'application/json'),
+        };
+
+        return this.http.post<AppointmentCount>('api/timeline/countTimelineAppointmentsPrevious', body, options);
+    } 
 
     public getMedicationList(userID) {
         const body = {
@@ -61,6 +99,7 @@ export class DataService {
         const options = {
             headers: new HttpHeaders().set('Content-Type', 'application/json'),
         };
+        console.log(body);
         return this.http.post('api/prescription/updatePrescribedDate', body, options).subscribe();
     };
 
@@ -83,11 +122,10 @@ export class DataService {
         const options = {
             headers: new HttpHeaders().set('Content-Type', 'application/json'),
         };
-        var tmp = this.http.post<Task[]>('api/task/list', body, options);
-        var str;
-        tmp.subscribe(blah => str = blah[0].taskName);
-        console.log(str);
-        return tmp;
+         var tmp = this.http.post<Task[]>('api/task/list', body, options);
+         var str;
+         tmp.subscribe(blah => str = blah[0].taskName);
+         return tmp;
     };
 
     public getUserSideEffects(userID) {
@@ -174,6 +212,17 @@ export class DataService {
             headers: new HttpHeaders().set('Content-Type', 'application/json'),
         };
         this.http.post('api/medication/side-effects/add', body, options).subscribe();
+    }
+
+    public addQuestionnaireAnswer(taskID, answer) {
+        const body = {
+            'taskID': taskID,
+            'answer': JSON.stringify(answer)
+        }
+        const options = {
+            headers: new HttpHeaders().set('Content-Type', 'application/json'),
+        };
+        this.http.post('api/task/answer', body, options).subscribe();
     }
 
     public getWikiSummary(medName) {
@@ -300,6 +349,18 @@ export class DataService {
     public removeRedirectCookie(): void {
         this.cookieService.delete(this.urlCookie);
     }
+
+    public getPreviousAppointments(userID) {
+        let headers = new Headers({ 'Content-Type': 'application/json' });
+        const body = {
+            'userID': userID
+        };
+        const options = {
+            headers: new HttpHeaders().set('Content-Type', 'application/json'),
+        };
+        let url = '/api/appointment/previous';
+        return this.http.post<Appointment[]>(url, body, options);
+    };
 
     public getAllAppointmentsByUserID(userID) {
         let headers = new Headers({ 'Content-Type': 'application/json' });

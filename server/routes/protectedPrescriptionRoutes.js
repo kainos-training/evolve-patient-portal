@@ -3,6 +3,7 @@ const protectedPrescriptionRoutes = express.Router();
 const prescriptionController = require('../controllers/prescriptionController');
 
 protectedPrescriptionRoutes.post('/updatePrescribedDate', function(req, res) {
+    console.log("INSIDE ROUTE");
     return prescriptionController.updatePrescriptionDate(req, res);
 });
 

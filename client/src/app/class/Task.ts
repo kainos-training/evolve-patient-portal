@@ -1,4 +1,5 @@
 export class Task {
+    taskID: number;
     taskName : String;
     taskSummary : String;
     recievedDate : Date;

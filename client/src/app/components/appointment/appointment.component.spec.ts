@@ -1,11 +1,7 @@
-import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import { Component, OnInit, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import {async, ComponentFixture, TestBed} from '@angular/core/testing';
-import {HttpClientModule} from '@angular/common/http';
 import {AppointmentComponent} from './appointment.component';
-import {MenuStateService} from '../../services/menu-state.service';
 import {DataService} from '../../services/data.service';
-import { MapViewComponent } from "../map-view/map-view.component";
-import { Marker, DirectionsRenderer, NguiMapComponent } from "@ngui/map/dist";
 import {log} from 'util';
 
 describe('AppointmentComponent', () => {
@@ -17,20 +13,14 @@ describe('AppointmentComponent', () => {
 
     beforeEach(async(() => {
         TestBed.configureTestingModule({
-            declarations: [AppointmentComponent, 
-                MapViewComponent,
-                Marker,
-                DirectionsRenderer,
-                NguiMapComponent
+            declarations: [AppointmentComponent
             ],
             providers: [
-                MenuStateService,
                 {provide: DataService, useValue: mockDataService}
             ],
             imports: [
-                BrowserAnimationsModule,
-                HttpClientModule
-            ]
+            ],
+            schemas: [CUSTOM_ELEMENTS_SCHEMA]
         })
             .compileComponents();
     }));

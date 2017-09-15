@@ -14,6 +14,11 @@ import { PersonalInfoHeaderComponent } from '../personal-info-header/personal-in
 import { SecondaryInfoHeaderComponent } from '../secondary-info-header/secondary-info-header.component';
 import { DependantViewComponent } from './dependant-view.component';
 import { SearchPharmacyComponent } from '../search-pharmacy/search-pharmacy.component';
+import { PreviousAppointmentsComponent } from '../previous-appointments/previous-appointments.component';
+import { OrderByPipe } from '../../utils/orderby.pipe';
+import { FilterPipe } from '../../utils/filter.pipe';
+import { UniquePipe } from '../../utils/unique.pipe';
+import {DatePickerModule} from 'ng2-datepicker';
 
 describe('DependantViewComponent', () => {
   let component: DependantViewComponent;
@@ -32,6 +37,10 @@ describe('DependantViewComponent', () => {
           DependantViewComponent,
           ReviewMedicationComponent,
           EllipsisPipe,
+          OrderByPipe,
+          FilterPipe,
+          UniquePipe,
+          PreviousAppointmentsComponent,
           PersonalInfoHeaderComponent,
           SecondaryInfoHeaderComponent,
           SearchPharmacyComponent
@@ -44,6 +53,7 @@ describe('DependantViewComponent', () => {
         ],
       imports: [
           HttpClientModule,
+          DatePickerModule,
           FormsModule
         ]
     })

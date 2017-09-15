@@ -11,7 +11,6 @@ const database = mysql.createConnection({
 
 database.connect(function(err) {
     if (err) throw err;
-    console.log("connected to mysql")
 });
 
 database.getMedications = function(userID, callback) {
@@ -100,9 +99,9 @@ database.getMedicationHistory = function(medicationID, userID, callback) {
 };
 
 database.updatePrescribedDate = function(medicationUserID, deliveryStatus, callback) {
-    console.log(medicationUserID);
+    console.log("The ID is : " + medicationUserID);
     database.query(
-        'UPDATE medicationUser ' +
+        'UPDATE MedicationUser ' +
         'SET prescribedDate = curdate(), repeated = 0, delivery = ? ' +
         'WHERE medicationUserID in ' + medicationUserID + ' ;', [deliveryStatus],
         function(err) {
@@ -112,6 +111,7 @@ database.updatePrescribedDate = function(medicationUserID, deliveryStatus, callb
 };
 
 database.getRepeatedMedication = function(userID, callback) {
+    console.log("THIS IS NOT GOOD")
     database.query(
         "SELECT U.userID, " +
         "M.medicationID, M.medicationName, " +
@@ -129,6 +129,7 @@ database.getRepeatedMedication = function(userID, callback) {
 };
 
 database.getLocalPharmacy = function(userID, callback) {
+    console.log("Into the query")
     database.query(
         "SELECT pharmacyName, Pharmacy.address " +
         "FROM Pharmacy,`User` " +
@@ -136,6 +137,7 @@ database.getLocalPharmacy = function(userID, callback) {
         "AND `User`.pharmacyID = Pharmacy.pharmacyID;", [userID],
         function(err, rows) {
             callback(err, rows);
+            console.log(err)
         });
 }
 
@@ -167,13 +169,26 @@ database.getPreviousConditions = function(userID, callback) {
 
 database.getTaskList = function(userID, callback) {
     database.query(
-        "SELECT taskName, taskSummary, recievedDate, dueDate FROM Task " +
-        "WHERE userID = ? " +
-        "AND dueDate > NOW() " +
-        "ORDER BY dueDate;", [userID],
+        "SELECT T.taskID, T.taskName, T.taskSummary, T.recievedDate, T.dueDate FROM Task as T " +
+        "LEFT JOIN TaskQuestionnaire as TQ " +
+        "ON T.taskID = TQ.taskID " +
+        "WHERE TQ.questionnaireID IS NULL " +
+        "AND T.dueDate > NOW() " +
+        "AND T.userID = ? " +
+        "ORDER BY T.dueDate;", [userID],
         function(err, rows) {
             callback(err, rows);
         });
 };
+
+database.insertAnswer = function(taskID, answer, callback){
+    database.query(
+        "INSERT INTO TaskQuestionnaire (taskID, answer, answered, dateSubmitted) "
+        +"VALUES (?, ?, 1, CURRENT_TIMESTAMP);", [taskID, answer],
+        function(err){
+            callback(err);
+        }
+    )
+}
 
 module.exports = database;

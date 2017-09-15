@@ -10,11 +10,11 @@ export class Medication {
     prescribedDate: Date;
     repeated: boolean;
 
-    constructor(medicationUserID: number, 
-        medicationType: String, 
-        startDate: Date, 
-        endDate : Date, 
-        dosage : String, 
+    constructor(medicationUserID: number,
+        medicationType: String,
+        startDate: Date,
+        endDate : Date,
+        dosage : String,
         instructions: String,
         prescribedDate: Date,
         repeated: boolean) {

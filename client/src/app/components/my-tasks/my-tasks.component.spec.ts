@@ -7,7 +7,6 @@ import { CookieService } from 'ngx-cookie-service';
 import { SwitchBoardService } from '../../services/switch-board.service';
 import { APP_BASE_HREF } from '@angular/common';
 import { routes } from '../../app.router';
-import { LoginComponent } from '../login/login.component';
 import { ErrorPageComponent } from '../error-page/error-page.component';
 import { DashboardComponent } from '../dashboard/dashboard.component';
 import { SettingNewPasswordComponent } from '../setting-new-password/setting-new-password.component';
@@ -39,13 +38,9 @@ describe('MyTasksComponent', () => {
   beforeEach(async(() => {
     mockDataService = new MockDataService();
     TestBed.configureTestingModule({
-      declarations: [ MyTasksComponent,LoginComponent, AppointmentComponent, LeftSideMenuComponent, TopBarComponent, ErrorPageComponent, DashboardComponent, SettingNewPasswordComponent, RequestPasswordResetComponent, RepeatPrescriptionComponent ],
+      declarations: [ MyTasksComponent ],
       providers: [DataService, HttpClient, HttpHandler, HttpClientModule, CookieService, SwitchBoardService, {provide: APP_BASE_HREF, useValue: '/'} ],
-      imports: [
-        routes,
-        BrowserModule,
-        FormsModule
-      ], 
+      
       schemas: [CUSTOM_ELEMENTS_SCHEMA]
     })
     .compileComponents();

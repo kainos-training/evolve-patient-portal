@@ -75,27 +75,27 @@ exports.getListOfMedicationUserComments = function(req, res) {
 };
 
 exports.getListOfRemovedMedicationUserComments = function(req, res) {
-exports.getUserSideEffects = function(req, res) {
-    const userID = req.body.userID;
+    exports.getUserSideEffects = function(req, res) {
+        const userID = req.body.userID;
 
-    if (userID == null) {
-        res.status(400).json({
-            success: false
-        });
-    } else {
-        db.getUserSideEffects(userID, function(err, rows) {
-            if (err) {
-                res.status(400).json({
-                    success: false
-                });
-            } else {
-                res.status(200).send(rows);
-            }
-        });
+        if (userID == null) {
+            res.status(400).json({
+                success: false
+            });
+        } else {
+            db.getUserSideEffects(userID, function(err, rows) {
+                if (err) {
+                    res.status(400).json({
+                        success: false
+                    });
+                } else {
+                    res.status(200).send(rows);
+                }
+            });
+        }
     }
 };
-
-exports.getListOfRemovedMedicationUserComments = function (req, res) {
+exports.getListOfRemovedMedicationUserComments = function(req, res) {
     const medicationUserID = req.body.medicationUserID;
     if (medicationUserID == null) {
         res.status(400).json({
@@ -136,26 +136,26 @@ exports.removeMedicationUserComment = function(req, res) {
     }
 };
 
-exports.removeUserSideEffect = function(req, res){
+exports.removeUserSideEffect = function(req, res) {
     const userSideEffectID = req.body.userSideEffectID;
-    
-        if (userSideEffectID == null) {
-            res.status(400).json({
-                success: false
-            });
-        } else {
-            db.removeSideEffect(userSideEffectID, function(err) {
-                if (err) {
-                    res.status(400).json({
-                        success: false
-                    });
-                } else {
-                    res.status(200).json({
-                        success: true
-                    });
-                }
-            });
-        }
+
+    if (userSideEffectID == null) {
+        res.status(400).json({
+            success: false
+        });
+    } else {
+        db.removeSideEffect(userSideEffectID, function(err) {
+            if (err) {
+                res.status(400).json({
+                    success: false
+                });
+            } else {
+                res.status(200).json({
+                    success: true
+                });
+            }
+        });
+    }
 };
 
 exports.addUserSideEffect = function(req, res) {
@@ -230,8 +230,8 @@ exports.getMedicationHistory = function(req, res) {
             } else {
                 console.log(rows);
                 res.status(200).send(rows);
-                
+
             }
         });
     }
-}};
+};
