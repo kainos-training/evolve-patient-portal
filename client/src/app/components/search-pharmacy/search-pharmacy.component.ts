@@ -13,7 +13,7 @@ import { } from '@types/googlemaps';
 })
 export class SearchPharmacyComponent implements OnInit, OnDestroy {
 
-    static locations: google.maps.GeocoderResult[];
+    static locationsFromSearch: google.maps.GeocoderResult[] = [];
 
     private autocomplete: google.maps.places.Autocomplete;
     private subCenter: Subscription;
@@ -84,12 +84,12 @@ export class SearchPharmacyComponent implements OnInit, OnDestroy {
     static handlePlacesNearbySearch(results, status) {
         if (status == google.maps.places.PlacesServiceStatus.OK) {
             // reinit the array 
-            SearchPharmacyComponent.locations = [];
+            SearchPharmacyComponent.locationsFromSearch = [];
             // loop results
             for (var i = 0; i < results.length; i++) {
-                SearchPharmacyComponent.locations.push(results[i]);
+                SearchPharmacyComponent.locationsFromSearch.push(results[i]);
             }
-            console.log("pharmacies for specified area: ", SearchPharmacyComponent.locations);
+            console.log("pharmacies for specified area: ", SearchPharmacyComponent.locationsFromSearch);
         } else {
             console.log("PlacesService error");
         }
@@ -99,6 +99,10 @@ export class SearchPharmacyComponent implements OnInit, OnDestroy {
         //Called once, before the instance is destroyed.
         //Add 'implements OnDestroy' to the class.
         this.subCenter.unsubscribe();
+    }
+
+    get locations() {
+        return SearchPharmacyComponent.locationsFromSearch;
     }
 }
 

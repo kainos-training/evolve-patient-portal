@@ -1,5 +1,9 @@
 <div class="col-xs-12 col-sm-12 col-md-6 col-lg-4">
-    <label>Enter in your local pharmacy for delivery: <br></label>
+    <label>Enter in your local pharmacy for delivery:<br></label>
     <input id="searchTextField" type="text" placeholder="Enter a location" (keyup)="onInputChange($event)">
+    <select *ngIf="locations.length > 0">
+        <option value="">- - Select a Pharmacy - -</option>
+        <option *ngFor="let location of locations" value="location.name">{{location.name}} ({{location.vicinity}})</option>    
+    </select>
     <div id="map"></div>
 </div>
