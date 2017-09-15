@@ -254,7 +254,7 @@ VALUES ('Dr', 'Alex', 'Hyndman', 'Consultant', 'a.weir@kainos.com'),
 ('Dr', 'John', 'Adams', 'Oncologist', 'j.adams@hospital.com'), 
 ('Dr', 'Karen', 'Reid', 'Obstetrician', 'k.reid@hospital.com'),
 ('Dr', 'Sally', 'Jones', 'Consultant', 's.jones@hospital.com'),
-('Dr', 'Ian', 'Stokes', 'Clinical Nurse Specialist', 'i.stokes@hospital.com'),
+('Dr', 'Ian', 'Stokes', 'Clinical Nurse Specialist', 'a.weir@kainos.com'),
 (NULL, 'Clinic', 'Administration', 'Admin team', 'c.administration@hospital.com');
 
 INSERT INTO UserClinician (userID, clinicianID)
