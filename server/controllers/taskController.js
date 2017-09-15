@@ -15,7 +15,6 @@ exports.getListOfTasks = function(req, res) {
                     success: false
                 });
             } else {
-                console.log(rows);
                 res.status(200).send(rows);
             }
         });
@@ -25,7 +24,6 @@ exports.getListOfTasks = function(req, res) {
 exports.insertAnswer = function(req, res) {
     const taskID = req.body.taskID;
     const answer = JSON.stringify(req.body.answer);
-    console.log(answer);
 
     if (taskID == null) {
         res.status(400).json({

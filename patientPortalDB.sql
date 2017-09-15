@@ -124,11 +124,21 @@ foreign key (medicationUserID) references MedicationUser (medicationUserID)
 
 CREATE TABLE IF NOT EXISTS Clinician (
     clinicianID int auto_increment not null,
-    title enum('Mr', 'Mrs', 'Miss', 'Ms', 'Dr') default 'Dr',
+    title enum('Mr', 'Mrs', 'Miss', 'Ms', 'Dr'),
     firstName varchar(60) not null,
     lastName varchar(60) not null,
     jobTitle varchar(30) not null,
+    email varchar(100) not null,
     primary key (clinicianID)
+);
+
+CREATE TABLE IF NOT EXISTS UserClinician (
+    userClinicianID int auto_increment not null,
+    userID int not null,
+    clinicianID int not null,
+    primary key (userClinicianID),
+    foreign key (userID) references `User` (userID),
+    foreign key (clinicianID) references Clinician(clinicianID)
 );
 
 CREATE TABLE IF NOT EXISTS Location (
@@ -195,13 +205,24 @@ CREATE TABLE IF NOT EXISTS UserSideEffect(
 	foreign key (userID) references User(userID)
 );
 
+CREATE TABLE IF NOT EXISTS AppointmentQuery (
+	appointmentQueryID int auto_increment not null,
+	appointmentID int not null,
+	clinicianID int not null,
+	querySubject varchar(100) not null,
+	queryText varchar(350) not null,
+	primary key (appointmentQueryID),
+	foreign key (appointmentID) references Appointment(appointmentID),
+	foreign key (clinicianID) references Clinician(clinicianID)
+);
+
 INSERT INTO GP (gpFullName, gpPracticeName, gpPracticeAddress)
 VALUES ('Dr. A Cheyne', 'Ormeau Park Surgery', '281 Ormeau Rd, Belfast BT7 3GG, UK'),
 ('Dr. E Glass', 'The Surgery', '1 Church St, Newtownards BT23 4FH'),
 ('Dr. R Kane', 'Springvale Medical Practice', '463 Springfield Rd, Belfast BT12 7DP, UK');
 
 INSERT INTO `User` (username, `password`, dateOfBirth, gender, MRIN, firstName, lastName, phoneNumber, title, address, email, deceased, gpID,pharmacyID, active)
-VALUES ('jsmith', '$2a$10$YqV/YtnOUd62xFSai8gRseO4nU5otTdyDTD7yWwaVquZfo02O2Uee', '1960-01-01', 'Female', '123456789', 'Jane', 'Smith', '07712345678', 'Mrs', '32 Orby Walk, Belfast', 's.dorrian@kainos.com', 'No', 1,1, true),
+VALUES ('jsmith', '$2a$10$YqV/YtnOUd62xFSai8gRseO4nU5otTdyDTD7yWwaVquZfo02O2Uee', '1960-01-01', 'Female', '123456789', 'Jane', 'Smith', '07712345678', 'Mrs', '32 Orby Walk, Belfast', 'c.mullan@kainos.com', 'No', 1,1, true),
 ('smurray', '$2a$10$YqV/YtnOUd62xFSai8gRseO4nU5otTdyDTD7yWwaVquZfo02O2Uee', '1997-08-08', 'Female', '123456890', 'Shannon', 'Murray', '07912345678', 'Mrs', '23 Grace Avenue, Belfast', 's.dorrian@kainos.com', 'No', 2,1, true),
 ('asmith', '$2a$10$YqV/YtnOUd62xFSai8gRseO4nU5otTdyDTD7yWwaVquZfo02O2Uee', '2005-03-01', 'Male', '123458289', 'Andrew', 'Smith', '07856748927', 'Mr', '32 Orby Walk, Belfast', 's.dorrian@kainos.com', 'No', 1,1,false),
 ('ksmith', '$2a$10$YqV/YtnOUd62xFSai8gRseO4nU5otTdyDTD7yWwaVquZfo02O2Uee', '2012-03-01', 'Female', '803409789', 'Kate', 'Smith', '07856799927', 'Miss', '32 Orby Walk, Belfast', 's.dorrian@kainos.com', 'No', 1,1, false),
@@ -237,17 +258,26 @@ VALUES
 (1, 12, '2015-06-01', '2016-06-01', '20 units', 'Subcutaneous injection. Take as recommended by your diabetic specialist', '2017-04-01',TRUE,TRUE),
 (1,10, (NOW() - INTERVAL 170 DAY),(NOW() + INTERVAL 100 DAY),'60mg','Take 1 tablet every 4 hours as needed. Do not exceed 240mg a day.', (NOW() - INTERVAL 20 DAY), true,TRUE),
 (1,11,(NOW() - INTERVAL 170 DAY),(NOW() + INTERVAL 100 DAY),'220mg','Take 1 caplet every 8-12 hours',(NOW() - INTERVAL 20 DAY),false,TRUE),
-(1,12,(NOW() - INTERVAL 1000 DAY),NULL,'30 Units','Subcutaneous injection. Take as recommended by your diabetic specialist',(NOW() - INTERVAL 12 DAY),true,TRUE);
+(1,12,(NOW() - INTERVAL 1000 DAY),NULL,'30 Units','Subcutaneous injection. Take as recommended by your diabetic specialist',(NOW() - INTERVAL 12 DAY),true,TRUE),
+(4,9,(NOW() - INTERVAL 2 DAY),(NOW() + INTERVAL 12 DAY),'30mg','Subcutaneous injection. Take as recommended by your diabetic specialist',(NOW() - INTERVAL 12 DAY),true,TRUE);
 
-INSERT INTO MedicationUserComment(medicationUserID, commentText, deleted)
+/*INSERT INTO MedicationUserComment(medicationUserID, commentText, deleted)
 VALUES (1, 'Not feeling the benefit after two weeks', false), (2, 'Helping to minimise pain but still exists', false),
-(3, 'Not helping with pain, possibly need stronger medication', false), (4, 'Feeling better mentally', false),
+(8, 'Not helping with pain, possibly need stronger medication', false), (4, 'Feeling better mentally', false),
 (5, 'Hearing not improving', false),
 (6, 'Ear pain easing', false),
-(6, 'Eye pain gone', true);
+(6, 'Eye pain gone', true);*/
 
-INSERT INTO Clinician (title, firstName, lastName, jobTitle)
-VALUES ('Dr', 'Alex', 'Hyndman', 'Consultant'), ('Dr', 'John', 'Adams', 'Oncologist'), ('Dr', 'Karen', 'Reid', 'Obstetrician');
+INSERT INTO Clinician (title, firstName, lastName, jobTitle, email)
+VALUES ('Dr', 'Alex', 'Hyndman', 'Consultant', 'c.mullan@kainos.com'), 
+('Dr', 'John', 'Adams', 'Oncologist', 'c.mullan@kainos.com'), 
+('Dr', 'Karen', 'Reid', 'Obstetrician',  'c.mullan@kainos.com'),
+('Dr', 'Sally', 'Jones', 'Consultant',  'c.mullan@kainos.com'),
+('Dr', 'Ian', 'Stokes', 'Clinical Nurse Specialist',  'c.mullan@kainos.com'),
+(NULL, 'Clinic', 'Administration', 'Admin team',  'c.mullan@kainos.com');
+
+INSERT INTO UserClinician (userID, clinicianID)
+VALUES (1, 4), (1, 5), (1, 6), (8, 4);
 
 INSERT INTO Location (locationAddress)
 VALUES ('Royal Victoria Hospital, 274 Grosvenor Rd, Belfast, BT12 6BA'),
@@ -271,9 +301,9 @@ VALUES
 (1,7,3,(NOW() - INTERVAL 30 DAY),'Diagnosed with conjunctivitis - antibiotics prescribed',3),
 (1,5,1,(NOW() + INTERVAL 12 DAY),'Please fill in the pre-op assessment form',4),
 (1,6,1,(NOW() + INTERVAL 20 DAY), NULL,4),
-(3, 4, 2, (NOW() + INTERVAL 12 DAY), null, 1),
-(3, 7, 1, (NOW() - INTERVAL 2 DAY), 'Regular check-up - patient in good health', 4),
-(3, 4, 2, (NOW() - INTERVAL 322 DAY), 'null', 1),
+(8, 4, 2, (NOW() + INTERVAL 12 DAY), null, 1),
+(8, 7, 1, (NOW() - INTERVAL 2 DAY), 'Regular check-up - patient in good health', 4),
+(8, 4, 2, (NOW() - INTERVAL 322 DAY), 'null', 1),
 (4, 7, 1, (NOW() + INTERVAL 12 DAY), 'Eye check-up', 4),
 (4, 7, 1, (NOW() - INTERVAL 12 DAY), 'Eye check-up', 4),
 (7, 7, 1, (NOW() - INTERVAL 62 DAY), 'Routine checkup.', 3),
