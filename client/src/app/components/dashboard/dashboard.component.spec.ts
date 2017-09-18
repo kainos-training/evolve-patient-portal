@@ -103,4 +103,3 @@ describe('DashboardComponent', () => {
         expect(component.getNavigationOption()).toEqual(NavigationOptionEnum.MyDashboard.toString());
     });
 });
-

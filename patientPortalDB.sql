@@ -196,24 +196,24 @@ VALUES('Gordons Chemists', '15-17 Corn Market, Belfast BT1 4DA'),
 ('Stranmillis Pharmacy', '62 Stranmillis Rd, Belfast BT9 5AD');
 
 CREATE TABLE IF NOT EXISTS UserSideEffect(
-	userSideEffectID int auto_increment not null,
-	userID int not null,
-	sideEffectText text not null,
-	`timeStamp` timeStamp not null DEFAULT CURRENT_TIMESTAMP,
-	deleted boolean not null,
-	primary key(userSideEffectID),
-	foreign key (userID) references User(userID)
+    userSideEffectID int auto_increment not null,
+    userID int not null,
+    sideEffectText text not null,
+    `timeStamp` timeStamp not null DEFAULT CURRENT_TIMESTAMP,
+    deleted boolean not null,
+    primary key(userSideEffectID),
+    foreign key (userID) references User(userID)
 );
 
 CREATE TABLE IF NOT EXISTS AppointmentQuery (
-	appointmentQueryID int auto_increment not null,
-	appointmentID int not null,
-	clinicianID int not null,
-	querySubject varchar(100) not null,
-	queryText varchar(350) not null,
-	primary key (appointmentQueryID),
-	foreign key (appointmentID) references Appointment(appointmentID),
-	foreign key (clinicianID) references Clinician(clinicianID)
+    appointmentQueryID int auto_increment not null,
+    appointmentID int not null,
+    clinicianID int not null,
+    querySubject varchar(100) not null,
+    queryText varchar(350) not null,
+    primary key (appointmentQueryID),
+    foreign key (appointmentID) references Appointment(appointmentID),
+    foreign key (clinicianID) references Clinician(clinicianID)
 );
 
 INSERT INTO GP (gpFullName, gpPracticeName, gpPracticeAddress)

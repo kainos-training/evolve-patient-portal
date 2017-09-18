@@ -36,6 +36,14 @@ SECURE={SECURE}
 
 # JWT Variables
 JWT_SECRET={JWT_SECRET}
+{
+  "user" : "user",
+  "password" : "password",
+  "host" : "localhost",
+  "port" : 8002,
+  "database" :"database",
+  "jwtSecret": "jwtSecret"
+}
 ```
 
 ### Installing/Running

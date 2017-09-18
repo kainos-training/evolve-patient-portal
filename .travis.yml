@@ -42,4 +42,3 @@ script:
     # Backend build
     - cd server
     - npm run intTest -s && npm run unitTest -s
-    
