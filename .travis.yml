@@ -19,7 +19,7 @@ services:
 
 before_install:
     # Set npm version to 5.3.0
-    - npm i -g npm@5.3.0
+    - npm install -g npm@5.3.0
     # Run db script file to create and populate database
     - mysql -u root --password="" < patientPortalDB.sql
   
