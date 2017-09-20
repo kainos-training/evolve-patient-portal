@@ -1,0 +1,92 @@
+.panel-default{
+    border-top-width: 5px;
+    border-top-color: #027FBB;
+    min-height: 400px;
+    margin-top: 10px;
+}
+
+.panel-body{
+    width:100%;
+    height: 100%;
+    max-height: 300px;
+    overflow: auto;
+}
+
+.panel-heading img{
+    height: 25px;
+    width: 25px;
+}
+
+.panel-heading{
+    background: white;
+    font: bold;
+}
+
+.table-btn{
+    background-color: transparent;
+    border: none;
+    width: inherit;
+    text-align: left;
+    outline: none;
+    margin: 0;
+    white-space: normal;
+}
+
+.wrapped-button{
+    width: 100%;
+    overflow: hidden;
+    white-space: nowrap;
+    display: block;
+    text-overflow: ellipsis;
+}
+
+.widget-body-txt{
+    font-size: 15px;
+    font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+    color: #666666;
+}
+
+table{
+    table-layout: fixed
+}
+
+.widget-title-txt{
+    font-size: 15px;
+    font-family: "Helvetica";
+    font-style: bold;
+    color: #666666;
+}
+
+h1 {
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+h1::before {
+    content: "";
+    display: block;
+    background-repeat: no-repeat;
+    margin-top: 0px;
+    margin-right: 10px;
+    margin-bottom: 10px;
+    width: 25px;
+    height: 26px;
+    float: left;
+    background-image: url("../../../assets/myTask.png"); /* Icons made by https://www.flaticon.com/authors/smashicons from https://www.flaticon.com/ is licensed by http://creativecommons.org/licenses/by/3.0/ Creative Commons BY 3.0 */
+    width: 25px;
+    height: 26px;
+    background-size: 24px 24px;
+}
+
+#oneline-title{
+    font-size: 24px; 
+    padding-bottom: 25px;
+}
+
+#widget-header{
+    font-size: 24px; 
+}
+
+#summaryText{
+    font-size: 13px;
+}

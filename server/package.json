@@ -4,19 +4,18 @@
   "main": "index.js",
   "scripts": {
     "start": "npm run intTest -s && npm run build -s",
-    "build": "concurrently 'nodemon index.js' 'npm run unitTest'",
+    "build": "concurrently 'nodemon index.js' 'npm run unitTestWatch'",
     "intTest": "echo 'Starting Integration Tests\n' && mocha -R spec test/* && echo 'Finished Integration Tests\n'",
-    "unitTest": "mocha -R spec test/unit --watch"
+    "unitTestWatch": "mocha -R spec test/unit --watch",
+    "unitTest": "mocha -R spec test/unit"
   },
   "license": "MIT",
   "dependencies": {
-    "@ngui/map": "^0.18.6",
-    "@ngui/ngui": "^0.15.2",
-    "@types/googlemaps": "^3.26.20",
     "bcrypt": "^1.0.3",
-    "body-parser": "^1.17.2",
+    "body-parser": "^1.18.1",
     "concurrently": "^3.5.0",
     "cors": "^2.8.4",
+    "dotenv": "^4.0.0",
     "errorhandler": "^1.5.0",
     "express": "^4.15.4",
     "jsonwebtoken": "^7.4.3",

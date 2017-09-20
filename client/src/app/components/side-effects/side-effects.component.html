@@ -1,0 +1,41 @@
+<div class="col-xs-12 col-sm-12 col-md-6 col-lg-4 " id="sideEffectsComponent">
+    <div class="panel panel-default" id="sideEffectDetails">
+        <div class="panel-heading">
+            <h1 class="panel-title" id="oneline-title">Side Effects</h1>
+        </div>
+        <div class="panel-body">
+            <div class="side-effects">
+                <div class="new-side-effect">
+                    <div class="row side-effect-input">
+                        <div class="col-xs-10">
+                            <input type="text" maxlength="150" class="form-control" [(ngModel)]="newSideEffect" [ngModelOptions]="{standalone: true}" placeholder="New side effect">
+                        </div>
+                        <div class="col-xs-2">
+                            <div class="pull-right">
+                                <button type="button" id="plusButton" (click)="addSideEffect()">
+                                        <img src="assets/Green_Plus_Icon.png">
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div *ngFor="let sideeffect of userSideEffects" class="row side-effect-item">
+
+                    <div class="col-xs-10">
+                        <span class="sml-medication-txt" [ngClass]="{'strikethrough': sideeffect.deleted}">{{ sideeffect.sideEffectText }}</span><br>
+                        <span class="tiny-medication-txt">{{ sideeffect.timeStamp|date:'dd/MM/yyyy' }}</span>
+                    </div>
+                    <div class="col-xs-2">
+                        <div class="pull-right">
+                            <button type="button" *ngIf="!sideeffect.deleted" id="minusButton" (click)="removeSideEffect(sideeffect.userSideEffectID)">
+                                <img src="assets/red_minus_icon.png">
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <br>
+                <div class="clearfix"></div>
+            </div>
+
+        </div>
+    </div>

@@ -1,11 +1,10 @@
-import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import { Component, OnInit, CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 import {async, ComponentFixture, TestBed} from '@angular/core/testing';
-import {HttpClientModule} from '@angular/common/http';
 import {AppointmentComponent} from './appointment.component';
-import {MenuStateService} from '../../services/menu-state.service';
 import {DataService} from '../../services/data.service';
-import { MapViewComponent } from "../map-view/map-view.component";
-import { Marker, DirectionsRenderer, NguiMapComponent } from "@ngui/map/dist";
+import {log} from 'util';
+import {ModalModule} from 'ngx-bootstrap/modal';
+import { FormsModule } from '@angular/forms';
 
 describe('AppointmentComponent', () => {
     let component: AppointmentComponent;
@@ -16,20 +15,16 @@ describe('AppointmentComponent', () => {
 
     beforeEach(async(() => {
         TestBed.configureTestingModule({
-            declarations: [AppointmentComponent, 
-                MapViewComponent,
-                Marker,
-                DirectionsRenderer,
-                NguiMapComponent
+            declarations: [AppointmentComponent
             ],
             providers: [
-                MenuStateService,
                 {provide: DataService, useValue: mockDataService}
             ],
             imports: [
-                BrowserAnimationsModule,
-                HttpClientModule
-            ]
+                ModalModule.forRoot(),
+                FormsModule
+            ],
+            schemas: [CUSTOM_ELEMENTS_SCHEMA]
         })
             .compileComponents();
     }));
@@ -38,5 +33,21 @@ describe('AppointmentComponent', () => {
         fixture = TestBed.createComponent(AppointmentComponent);
         component = fixture.componentInstance;
         expect(component).toBeTruthy();
+    });
+
+    it('should toggle from false to true', async () => {
+        fixture = TestBed.createComponent(AppointmentComponent);
+        component = fixture.componentInstance;
+        this.focusedAppointment["FalseInput"] = false;
+        this.toggle("FalseInput");
+        expect(this.focusedAppointment["FalseInput"]).toBeTruthy();
+    });
+
+    it('should toggle from true to false', async () => {
+        fixture = TestBed.createComponent(AppointmentComponent);
+        component = fixture.componentInstance;
+        this.focusedAppointment["TrueInput"] = true;
+        this.toggle("TrueInput");
+        expect(this.focusedAppointment["TrueInput"]).toBeFalsy();
     });
 });

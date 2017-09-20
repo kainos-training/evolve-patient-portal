@@ -1,4 +1,5 @@
-import {Component, Input, OnInit} from '@angular/core';
+import { NavigationOption, NavigationOptionEnum } from '../../app.globals';
+import { Component, Input, HostListener, OnInit } from '@angular/core';
 import {trigger, state, style} from '@angular/animations';
 import {MenuStateService} from '../../services/menu-state.service';
 import {Subscription} from 'rxjs/Subscription';
@@ -27,11 +28,16 @@ export class LeftSideMenuComponent implements OnInit {
     @Input() menuState: string;
     private user: User = new User();
     private userSubscription: Subscription;
+    private navigationOptions: typeof NavigationOptionEnum = NavigationOptionEnum;
     private menuStateSubscription: Subscription;
 
+    private viewingDependant: User;
+    private dependants: User[];
+    private readonly MDSCREENSIZE: number = 768;
+
     constructor(private data: DataService, private switchboard: SwitchBoardService, private menuStateService: MenuStateService) {
-        this.userSubscription = this.switchboard.user$.subscribe(user => this.user = user);
         this.menuStateSubscription = this.menuStateService.menuState$.subscribe(menuState => this.menuState = menuState);
+        this.determineMenuState();
     }
 
     ngOnDestroy(): void {
@@ -41,6 +47,36 @@ export class LeftSideMenuComponent implements OnInit {
         if (this.menuStateSubscription) {
             this.menuStateSubscription.unsubscribe();
         }
+    }
+
+    navigationItemClicked($event) {
+        // update the css for the 'active' option
+        $($event.target).addClass('active').siblings().removeClass('active');
+        
+        // update switchboard
+        const targetHTML: NavigationOption = $event.target.innerHTML;
+        this.switchboard.updateNavigationOption(targetHTML);
+
+        // check if the option clicked was dependants to show the drop down of dependants
+        if(targetHTML == NavigationOptionEnum.MyDependants.toString()) {
+            // toggle the accordion 
+            $('#dependantsAccordion').slideToggle();
+        } else {
+            // close the accordion
+            $('#dependantsAccordion').slideUp();
+        }
+       
+    }
+
+    onDependantClicked($event, dependant) {
+        // prevent the page jumping
+        $event.preventDefault();
+
+        // update the css
+        $($event.target).addClass('active').siblings().removeClass('active');
+
+        // set the dependant
+        this.switchboard.updateViewingDependant(dependant);
     }
 
     ngOnInit(): void {
@@ -56,9 +92,36 @@ export class LeftSideMenuComponent implements OnInit {
                 this.user.lastName = res[0].lastName;
                 this.user.phoneNumber = res[0].phoneNumber;
                 this.user.title = res[0].title;
-            },
-            err => console.log(err)
+            }
         );
+        
+                if(this.user) {
+                    if (this.user.userID) {
+                        this.data.getAllUserDependants(this.user.userID).subscribe(
+                            res => this.dependants = res
+                        );
+                        
+                    }
+                }
+            
     }
 
+    private determineMenuState() {
+        this.menuState = window.innerWidth >= this.MDSCREENSIZE ? 'out' : 'in';
+    }
+
+    toggleMenuState() {
+        this.menuState = this.menuState === 'out' ? 'in' : 'out';
+        this.menuStateService.stateString(this.menuState);
+    }
+
+    getMenuState(): string {
+        return this.menuState;
+    }
+
+    @HostListener('window:resize', ['$event'])
+    resize(event) {
+        this.determineMenuState();
+        this.menuStateService.stateString(this.menuState);
+    }
 }

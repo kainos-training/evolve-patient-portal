@@ -16,16 +16,26 @@ patientPortalDB.sql
 Node, npm, git
 ```
 
-Please create a server/config.json file as follows:
+Please create a server/.env with the following template (refer to .env.example file):
 ```
-{
-  "user" : "user",
-  "password" : "password",
-  "host" : "localhost",
-  "port" : 8002,
-  "database" :"database",
-  "jwtSecret": "jwtSecret"
-}
+# Express Variables
+EXPRESSPORT={EXPRESS_PORT}
+
+# MySQL Variables
+MYSQL_USER={USER}
+MYSQL_PASSWORD={PASSWORD}
+MYSQL_HOST={HOST}
+DATABASENAME={DATABASENAME}
+
+# Email Variables
+EMAIL={EMAIL}
+EMAIL_PASSWORD={PASSWORD}
+EMAIL_HOST={HOST}
+EMAIL_PORT={PORT}
+SECURE={SECURE}
+
+# JWT Variables
+JWT_SECRET={JWT_SECRET}
 ```
 
 ### Installing/Running

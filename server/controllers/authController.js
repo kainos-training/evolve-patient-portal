@@ -49,7 +49,7 @@ exports.login = function(req, res) {
     let candidatePassword = req.body.password.trim();
 
     db.query(
-        "SELECT userID, password, firstName, lastName FROM User WHERE username=?", [username],
+        "SELECT userID, password, firstName, lastName FROM User WHERE username=? AND active=true", [username],
         function(err, rows) {
             if (err) {
                 return res.status(400).json({

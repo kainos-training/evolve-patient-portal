@@ -1,4 +1,4 @@
-<div [@slideInOut]="menuState" id="leftSideMenu" class="col-sm-3 col-xs-10  leftSideMenu">
+<div [@slideInOut]="menuState" id="leftSideMenu" class="col-sm-3 col-xs-10 col-md-3 col-lg-3  leftSideMenu">
     <div id="patientNameProfMobile">
         <div id="patientPicMobile"></div>
         <div id="patientNameMobile">{{user.firstName}} {{user.lastName}} ({{user.title}})</div>
@@ -11,13 +11,17 @@
         <div class="patientInfoText"><span class="patientInfoTextTitle">Phone: </span>{{user.phoneNumber}}</div>
         <div class="patientInfoText"><span class="patientInfoTextTitle">Email: </span>{{user.email}}</div>
     </div>
-    <h1 id="leftSideMenuHeading">Main Navigation</h1>
     <ul class="linkList">
-        <li class="linkItem">Profile</li>
-        <li class="linkItem">Medications</li>
-        <li class="linkItem">My Tasks</li>
-        <li class="linkItem">Upcoming Appointments</li>
-        <li class="linkItem">Previous Appointments</li>
-        <li class="linkItem">Timeline</li>
+
+        <!-- <li class="linkItem"><a routerLink="/repeat-prescription">Repeat Prescription</a></li> -->
+        <!-- MyDashboard set to active (first page the user will see) -->
+        <li class="linkItem active visible-sm visible-md visible-lg visible-xl" (click)="navigationItemClicked($event)">{{navigationOptions.MyDashboard}}</li>
+        <li class="linkItem active visible-xs" (click)="navigationItemClicked($event); toggleMenuState();">{{navigationOptions.MyDashboard}}</li>
+        <li class="linkItem" (click)="navigationItemClicked($event)">{{navigationOptions.MyDependants}}</li>
+        <div id="dependantsAccordion">
+            <a class="visible-xs" *ngFor="let dependant of dependants" href="#" (click)="onDependantClicked($event, dependant); toggleMenuState();">{{dependant.firstName}} {{dependant.lastName}}</a>
+            <a class="visible-sm visible-md visible-lg visible-xl" *ngFor="let dependant of dependants" href="#" (click)="onDependantClicked($event, dependant)">{{dependant.firstName}} {{dependant.lastName}}</a>
+        </div>
+        <li class="linkItem" (click)="navigationItemClicked($event)">{{navigationOptions.RepeatPerscription}}</li>
     </ul>
 </div>

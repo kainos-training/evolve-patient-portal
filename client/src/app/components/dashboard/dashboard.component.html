@@ -1,6 +1,30 @@
 <evolve-top-bar></evolve-top-bar>
 <evolve-left-side-menu></evolve-left-side-menu>
-<div id="widgetContainer" class="col-sm-9">
-    <evolve-appointment>Loading Map</evolve-appointment>
-    <evolve-review-medication></evolve-review-medication>
+<!-- widget container -->
+<div id="widgetContainer" class="col-xs-12 col-sm-9">
+    <!-- My Dashboard -->
+    <div [hidden]="!(navigationOption===navigationOptions.MyDashboard)">
+        <!-- information headers -->
+        <evolve-personal-info-header></evolve-personal-info-header>
+        <evolve-secondary-info-header></evolve-secondary-info-header>
+        <!-- widgets -->
+        <evolve-timeline></evolve-timeline>
+        <evolve-appointment></evolve-appointment>
+        <evolve-previous-appointments></evolve-previous-appointments>
+        <evolve-review-medication></evolve-review-medication>
+        <evolve-condition></evolve-condition>
+        <evolve-side-effects></evolve-side-effects>
+        <evolve-my-tasks></evolve-my-tasks>
+    </div>
+
+    <div [hidden]="!(navigationOption===navigationOptions.RepeatPerscription)">
+        <evolve-personal-info-header></evolve-personal-info-header>
+        <evolve-secondary-info-header></evolve-secondary-info-header>
+        <evolve-repeat-prescription></evolve-repeat-prescription>
+    </div>
+
+    <!-- My dependants dashboard -->
+    <div [hidden]="!(navigationOption===navigationOptions.MyDependants)">
+        <evolve-dependant-view></evolve-dependant-view>
+    </div>
 </div>

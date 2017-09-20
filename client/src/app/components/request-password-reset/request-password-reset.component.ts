@@ -52,4 +52,8 @@ export class RequestPasswordResetComponent implements OnInit, OnDestroy {
             this.successfulSubscription.unsubscribe();
         }
     }
+
+    onGoBack(): void {
+        this.router.navigateByUrl('/login');
+    }
 }

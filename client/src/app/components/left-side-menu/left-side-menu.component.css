@@ -1,22 +1,18 @@
 @media screen and (max-width: 767px) {
-
     #leftSideMenu {
         margin-left: -100%;
         position: absolute;
+        margin-top: 80px;
     }
-
     #patientNameProfMobile {
         display: flex;
     }
-
     #leftSideMenuHeading {
         font-size: 30px;
     }
-
     .linkItem {
-        font-size: 18px;
+        font-size: 15pt;
     }
-
     .linkItem::before {
         margin-top: 4px;
         width: 13px;
@@ -25,27 +21,21 @@
 }
 
 @media screen and (min-width: 768px) {
-
     #leftSideMenu {
         margin-left: 0%;
     }
-
     #patientNameProfMobile {
         display: none;
     }
-
     #patientInfoContainerMobile {
         display: none;
     }
-
     #leftSideMenuHeading {
         font-size: 26px;
     }
-
     .linkItem {
-        font-size: 23px;
+        font-size: 15pt;
     }
-
     .linkItem::before {
         margin-top: 6px;
         width: 17px;
@@ -54,15 +44,12 @@
 }
 
 @media screen and (min-width: 970px) {
-
     #leftSideMenuHeading {
         font-size: 29px;
     }
-
     .linkItem {
-        font-size: 23px;
+        font-size: 16pt;
     }
-
     .linkItem::before {
         margin-top: 6px;
         width: 17px;
@@ -71,15 +58,12 @@
 }
 
 @media screen and (min-width: 1170px) {
-
     #leftSideMenuHeading {
         font-size: 36px;
     }
-
     .linkItem {
-        font-size: 23px;
+        font-size: 17pt;
     }
-
     .linkItem::before {
         margin-top: 6px;
         width: 17px;
@@ -92,9 +76,8 @@
     background-color: rgba(42, 46, 58, 100);
     padding-top: 15px;
     padding-left: 0px;
-    overflow: scroll;
-    transition: all 400ms ease-in-out;
     z-index: 999;
+    transition: all 400ms ease-in-out;
 }
 
 #patientNameProfMobile {
@@ -145,29 +128,30 @@
     width: 100%;
     padding: 0;
     margin: 0;
+    list-style: none;
 }
 
 .linkItem {
     color: white;
     cursor: pointer;
     margin-left: 0;
-    margin-right: 20px;
+    /* margin-right: 20px; */
     padding-left: 15px;
     padding-top: 15px;
+    padding-right: 5px;
     padding-bottom: 15px;
     box-sizing: border-box;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.25);
 }
 
-.linkItem:hover {
+.linkItem:hover,
+.active,
+#dependantsAccordion {
     background-color: white;
     color: black;
 }
 
 .linkItem::before {
-    content: "";
     display: block;
-    background-image: url("../../../assets/whitePillIcon.png");
     background-repeat: no-repeat;
     background-size: cover;
     float: left;
@@ -192,4 +176,25 @@
 
 .debugBlue {
     outline: 1px solid blue;
+}
+
+#dependantsAccordion {
+    display: none;
+    border-top: 1px solid black;
+    background-color: rgba(42, 46, 58, 100);
+}
+
+#dependantsAccordion>a,
+#dependantsAccordion>div {
+    display: block;
+    text-decoration: none;
+    color: white;
+    font-size: 20px;
+    padding-left: 15%;
+}
+
+#dependantsAccordion>a:hover,
+#dependantsAccordion>a.active {
+    background-color: white;
+    color: black;
 }

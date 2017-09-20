@@ -1,7 +1,6 @@
 import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 import {ErrorPageComponent} from './error-page.component';
-import {Router} from '@angular/router';
-import {SimpleTimer} from 'ng2-simple-timer';
+import {CUSTOM_ELEMENTS_SCHEMA} from '@angular/core'
 
 describe('ErrorPageComponent', () => {
     let component: ErrorPageComponent;
@@ -14,9 +13,8 @@ describe('ErrorPageComponent', () => {
         TestBed.configureTestingModule({
             declarations: [ErrorPageComponent],
             providers: [
-                {provide: Router, useValue: mockRouter},
-                {provide: SimpleTimer, useValue: mockTimer}
             ]
+            ,schemas: [CUSTOM_ELEMENTS_SCHEMA]
         })
             .compileComponents();
     }));

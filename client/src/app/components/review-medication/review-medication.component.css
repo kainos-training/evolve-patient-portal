@@ -1,9 +1,8 @@
 .panel-default{
     border-top-width: 5px;
     border-top-color: #027FBB;
-    min-height: 400px;
+    height: 400px;
     margin-top: 10px;
-    
 }
 .panel-heading img{
     height: 25px;
@@ -36,11 +35,22 @@
     font-size: 12px;
     line-height: 14px;
 } 
+.btn.sharp {
+    border-radius:0;
+    border-bottom: 15px;
+  }
 
 .sml-medication-txt{
     font-size: 15px;
     font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
     color: #666666;
+}
+
+.sml-medication-txt-right{
+    font-size: 15px;
+    font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+    color: #666666;
+    float: right;
 }
 
 .sml-medication-txt-left{
@@ -68,36 +78,17 @@
     font-size: 15px;
     font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
     color: #666666;
-}
-.side-effects img{
-    height: 20px;
-    width: 20px;
+    padding-bottom: 5px;
 }
 
-#side-effect-input{
-    padding-left: 10px;
-    width: 100%;
-    min-width: 300px;
-    max-width: 500px;
-    float: left;
+.side-effects li {
+    list-style-type: none;
 }
 
 .table td{
     width: 400px;
 }
 
-#minusButton {
-    float: right;
-    border: none;
-    background-color: #EBF0F4;
-    width: 11%;
-}
-
-#plusButton {
-    float: right;
-    border: none;
-    background-color: #EBF0F4;
-}
 
 #medicationComment{
     word-wrap: break-word;
@@ -105,10 +96,13 @@
     float: left; 
 }
 
-#sideEffectTimeStamp {
-    width: 20%;
-    column-width: 10px;
+#removedMedicationComment{
+    word-wrap: break-word;
+    width: 600%;
+    float: left;
+    text-decoration: line-through;
 }
+
 
 #medicationComponent {
     position: relative;
@@ -157,4 +151,24 @@ h1::before {
     height: 26px;
     background-size: 24px 24px;
 }
+ 
+#borderBelow {
+    border-top: none;
+    border-bottom: 1px solid #ddd;
+}
 
+.prescription:hover {
+    cursor: pointer;
+}
+
+a {
+    cursor: pointer;
+}
+
+a:hover, pre:hover{
+    cursor: pointer;
+}
+
+.prescription-item {
+    cursor:pointer;
+}

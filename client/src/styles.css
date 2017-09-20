@@ -20,11 +20,9 @@
 }
 
 .input[type="submit"]{
-    background-color: #00CE8B;
+    background-color: #049766;
 }
 
-.pageBackground {
-}
 .modal-content{
     border-radius: 2px;
 }
@@ -134,6 +132,43 @@ input[type=submit] {
 .bs-callout-danger, .input-group, .loginPage form h5, header div span {
     color: #666666 !important;
     font-family: Helvetica, sans-serif;
+}
+
+.shakeBox:focus{
+    border-color: red;
+}
+
+.shakeBox {
+    -webkit-animation: do_shake 0.3s 1 linear;
+    -moz-animation: do_shake 0.3s 1 linear;
+    -o-animation: do_shake 0.3s 1 linear;
+}
+
+@-webkit-keyframes do_shake {
+    0% { -webkit-transform: translate(30px); }
+    20% { -webkit-transform: translate(-30px); }
+    40% { -webkit-transform: translate(15px); }
+    60% { -webkit-transform: translate(-15px); }
+    80% { -webkit-transform: translate(8px); }
+    100% { -webkit-transform: translate(0px); }
+}
+
+@-moz-keyframes do_shake {
+    0% { -moz-transform: translate(30px); }
+    20% { -moz-transform: translate(-30px); }
+    40% { -moz-transform: translate(15px); }
+    60% { -moz-transform: translate(-15px); }
+    80% { -moz-transform: translate(8px); }
+    100% { -moz-transform: translate(0px); }
+}
+
+@-o-keyframes do_shake {
+    0% { -o-transform: translate(30px); }
+    20% { -o-transform: translate(-30px); }
+    40% { -o-transform: translate(15px); }
+    60% { -o-transform: translate(-15px); }
+    80% { -o-transform: translate(8px); }
+    100% { -o-origin-transform: translate(0px); }
 }
 
 @media (max-width: 767px) {
