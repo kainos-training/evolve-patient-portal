@@ -1,19 +1,21 @@
-# evolve-patient-portal
+# evolve-patient-portal #
 
-## Getting Started
+## Getting Started ##
 
 This seed project has been created to get you up and running quickly for development and testing on the Evolve patient portal.
 
 For coding standards and additional info please see the project wiki :)
 
-### Database
+### Database ###
 Run script for creation and insertion of mock data to create a local copy of the database.
 patientPortalDB.sql
 
-### Prerequisites
+### Prerequisites ###
 
 ```
-Node, npm, git
+* Node 
+* npm
+* git
 ```
 
 Please create a server/.env with the following template (refer to .env.example file):
@@ -38,15 +40,29 @@ SECURE={SECURE}
 JWT_SECRET={JWT_SECRET}
 ```
 
-### Installing/Running
+### Installing/Running ###
+* To start the client side, run the following commands:
 
 ```
-- Clone the repository
-- cd client
-- npm install
-- npm start
+cd client
+npm install
+npm run start
+```
 
-- cd server
-- npm install
-- npm start
+* To start the server side, run the following commands:
+```
+cd server
+npm install
+nodemon index.js
+```
+
+### Testing ###
+* To run the client side tests, the following commands
+```
+ng test
+```
+* To run the server side tests, use the following commands
+```
+npm run intTest
+npm run unitTest
 ```
