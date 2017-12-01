@@ -89,7 +89,7 @@ export class SearchPharmacyComponent implements OnInit, OnDestroy {
             for (var i = 0; i < results.length; i++) {
                 SearchPharmacyComponent.locationsFromSearch.push(results[i]);
             }
-            console.log("pharmacies for specified area: ", SearchPharmacyComponent.locationsFromSearch);
+            // console.log("pharmacies for specified area: ", SearchPharmacyComponent.locationsFromSearch);
         } else {
             console.log("PlacesService error");
         }

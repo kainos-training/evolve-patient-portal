@@ -10,11 +10,11 @@
                 </div>
 
                 <div *ngIf="warning" class="callout-message spaced col-xs-12">
-                        <div class="bs-callout bs-callout-danger">
-                                <a (click)="closeAlert()" class="close" data-dismiss="alert" aria-label="close">x</a>
-                            <p><span>Error:</span> You have already selected this medication.</p>
-                        </div>
+                    <div class="bs-callout bs-callout-danger">
+                        <a (click)="closeAlert()" class="close" data-dismiss="alert" aria-label="close">x</a>
+                        <p><span>Error:</span> You have already selected this medication.</p>
                     </div>
+                </div>
                 <div class="panel-body" id="medicationDetails">
                     <table class="table table-hover">
                         <tbody>
@@ -62,7 +62,8 @@
                             </tr>
                         </tbody>
                     </table>
-                    <button class="btn btn-primary" (click)="openModal(selectedPres, template)">Confirm Prescription</button>
+                    <label type="button" class="btn btn-primary" (click)="openModal(selectedPres, template, $event)">Confirm Prescription</label>
+                    <!-- <button class="btn btn-primary" (click)="openModal(selectedPres, template, $event)">Confirm Prescription</button> -->
                 </div>
             </div>
         </div>
@@ -86,15 +87,27 @@
                 </div>
                 <div class="perscription-form">
                     <label><strong>Please select which method of delivery you wish to use:</strong></label>
-                    <form>
+                    <form onsubmit="event.preventDefault();">
                         <div class="form-group">
                             <form class="form">
-                                <input type="radio" name="delivery" [(ngModel)]="collectionType.status" value="true"> Home
-                                Delivery &nbsp;&nbsp;&nbsp;&nbsp;
-                                <input type="radio" name="delivery" [(ngModel)]="collectionType.status" value="false"> <span [(ngModel)]="pharmacy.pharmacyName" name="pharmacy" > {{ pharmacy.pharmacyName }}</span>
+                                <input type="radio" name="delivery" [(ngModel)]="collectionType.status" value="true"> Home Delivery &nbsp;&nbsp;&nbsp;&nbsp;
+                                <input type="radio" name="delivery" [(ngModel)]="collectionType.status" value="false"> <span [(ngModel)]="pharmacy.pharmacyName" name="pharmacy"> {{ pharmacy.pharmacyName }}</span>&nbsp;&nbsp;&nbsp;&nbsp;
+                                <input type="radio" name="other" value="false" (click)="otherDeliveryMethodClicked()"> Other
                             </form>
                         </div>
-                        <button type="submit" class="btn btn-success" (click)="requestPrescription(renewPrescriptionList)">Request Prescription</button>
+
+                        <div class="otherDeliveryOption" [hidden]="!showOtherDeliverInputFields">
+                            <label>Enter in your local pharmacy for delivery:<br></label>
+                            <input id="searchTextField" type="text" autocomplete="off" placeholder="Enter a location" keydowm="$event.preventDefault();" (keyup)="onInputChange($event)">
+                            <select id="pharmacySelect" *ngIf="locations.length > 0">
+                                    <option value="">- - Select a Pharmacy - -</option> <!-- default option -->
+                                    <option *ngFor="let location of locations" value="location.name">{{location.name}} ({{location.vicinity}})</option>    
+                                </select>
+                            <div id="map"></div>
+                        </div>
+
+                        <label type="button" class="btn btn-success" (click)="requestPrescription(renewPrescriptionList)">Confirm Prescription</label>
+                        <!-- <button class="btn btn-success" (click)="requestPrescription(renewPrescriptionList)">Request Prescription</button> -->
                     </form>
                 </div>
             </div>
