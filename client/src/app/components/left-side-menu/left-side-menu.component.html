@@ -22,6 +22,6 @@
             <a class="visible-xs" *ngFor="let dependant of dependants" href="#" (click)="onDependantClicked($event, dependant); toggleMenuState();">{{dependant.firstName}} {{dependant.lastName}}</a>
             <a class="visible-sm visible-md visible-lg visible-xl" *ngFor="let dependant of dependants" href="#" (click)="onDependantClicked($event, dependant)">{{dependant.firstName}} {{dependant.lastName}}</a>
         </div>
-        <li class="linkItem" (click)="navigationItemClicked($event)">{{navigationOptions.RepeatPerscription}}</li>
+        <li class="linkItem" (click)="navigationItemClicked($event)">{{navigationOptions.RepeatPrescription}}</li>
     </ul>
 </div>
