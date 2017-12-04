@@ -28,6 +28,8 @@ export class RepeatPrescriptionComponent implements OnInit {
     public collectionType = {
         status: null
     };
+    public collectionSelected: boolean = false;
+
 
     constructor(dataService: DataService, private modalService: BsModalService) {
         let data;
@@ -71,6 +73,7 @@ export class RepeatPrescriptionComponent implements OnInit {
     }
 
     public openModal(prescriptionList: Array<Medication>, template: TemplateRef<any>) {
+        this.collectionSelected = false;
         this.modalRef = this.modalService.show(template);
     }
 
