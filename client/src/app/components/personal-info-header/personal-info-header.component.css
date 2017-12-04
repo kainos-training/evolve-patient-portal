@@ -5,6 +5,14 @@
     background-color: #00579f;
 }
 
+:host-context(.shift-left) #patientPicMobile  {
+    margin-left: -3%;
+  }
+
+  :host-context(.top-bar) .flex-container  {
+    width: 90%;
+  } 
+
 
 
 .flex-item1 {
