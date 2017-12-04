@@ -1,4 +1,5 @@
 <div  class="col-sm-3 col-xs-12 col-md-3 col-lg-3 left-item">
+        
     <div id="menu-button" (click)="toggleMenuState()" class="visible-xs">
         <div class="menuButtonLine"></div>
         <div class="menuButtonLine"></div>
@@ -9,21 +10,25 @@
     <p class="visible-xs" (click)=this.data.logout()><span class="log-out-button glyphicon glyphicon-log-out"></span></p>
 </div>
 <div id="button-list" class="hidden-xs col-sm-9 col-md-9 col-lg-9 right-item">
-    <div class="settings-button" (click)="openModal(popup)"></div>
+        <evolve-personal-info-header></evolve-personal-info-header>
+    <div class="settings-button" (click)="openModal(popup)">
+    </div>
     <div (click)=this.data.logout()><span class="log-out-button glyphicon glyphicon-log-out"></span></div>
 </div>
-
 <ng-template #popup>
     <div class="modal-header">
         <h3 class="modal-title pull-left">Personal Information</h3>
         <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
             <span aria-hidden="true">&times;</span>
         </button>
+    
     </div>
     <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
         <span aria-hidden="true">&times;</span>
     </button>
+
     <div class="modal-body">
+            
         <div class="perscription-header">
             <hr>
         </div>

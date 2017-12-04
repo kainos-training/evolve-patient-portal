@@ -1,6 +1,8 @@
 <div style="min-height: calc(100vh - 85px)" *ngIf="viewingDependant">
     <h3 class="indent">Your Dependants</h3>
-    <evolve-personal-info-header [dependantID]="viewingDependant.userID"></evolve-personal-info-header>
+    <div class="">
+    <evolve-personal-info-header class="personal-info" [dependantID]="viewingDependant.userID"></evolve-personal-info-header>
+</div>
     <evolve-secondary-info-header [dependantID]="viewingDependant.userID"></evolve-secondary-info-header>
 
     <evolve-appointment [dependantID]="viewingDependant.userID"></evolve-appointment>
