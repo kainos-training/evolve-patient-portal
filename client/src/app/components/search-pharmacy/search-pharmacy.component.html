@@ -1,9 +1,18 @@
-<div class="col-xs-12 col-sm-12 col-md-6 col-lg-4">
-    <label>Enter in your local pharmacy for delivery:<br></label>
-    <input id="searchTextField" type="text" placeholder="Enter a location" (keyup)="onInputChange($event)">
-    <select *ngIf="locations.length > 0">
-        <option value="">- - Select a Pharmacy - -</option>
-        <option *ngFor="let location of locations" value="location.name">{{location.name}} ({{location.vicinity}})</option>    
-    </select>
+    <div *ngIf="!isLoading" style="margin-top: 20px; margin-left: 20px;">
+        <label>Enter Postcode:</label>
+        <input id="searchTextField" type="text" placeholder="Postcode" (keyup)="onInputChange($event)" [(ngModel)]="userInput" class="form-control" style="display: inline; width: auto;"> <button type="button" class="btn btn-primary" (click)="onSearchClick()">Search</button>
+        <select *ngIf="locations.length > 0" class="form-control" style="margin-top: 15px;" (change)="locationsChangeDropdown($event.target.value)" [(ngModel)]="selectedLocation">
+            <option value="- - Select a Pharmacy - -">- - Select a Pharmacy - -</option>
+            <option *ngFor="let location of locations | slice:0:indexLimit;" value="location.name">{{location.name}} ({{location.vicinity}})</option>
+            <option value="Display More..." *ngIf="displayMoreAvailable">Display More...</option>
+        </select>
+    </div>
+    <div class="row" *ngIf="isLoading">
+        <div class="col-md-3"></div>
+        <div class="col-md-6">
+            <div class="loader centerBlock"></div>
+        </div>
+        <div class="col-md-3"></div>
+    </div>
+
     <div id="map"></div>
-</div>

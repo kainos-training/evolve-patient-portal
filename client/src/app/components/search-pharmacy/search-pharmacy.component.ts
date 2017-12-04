@@ -1,108 +1,100 @@
-import { GeoCoder } from '@ngui/ngui/node_modules/@ngui/map/dist';
-import { NavigatorGeolocation } from '@ngui/map';
-import { Subscription } from 'rxjs/Rx';
 import { document } from 'ngx-bootstrap/utils/facade/browser';
-import { Component, OnDestroy, OnInit } from '@angular/core';
-// import { googlemaps } from 'google-maps';
-import { } from '@types/googlemaps';
+import { Component, OnInit } from '@angular/core';
 
 @Component({
     selector: 'evolve-search-pharmacy',
     templateUrl: './search-pharmacy.component.html',
     styleUrls: ['./search-pharmacy.component.css']
 })
-export class SearchPharmacyComponent implements OnInit, OnDestroy {
+export class SearchPharmacyComponent implements OnInit {
 
-    static locationsFromSearch: google.maps.GeocoderResult[] = [];
-
-    private autocomplete: google.maps.places.Autocomplete;
-    private subCenter: Subscription;
-    private navigatorGeolocation = new NavigatorGeolocation();
-    private geocoder = new google.maps.Geocoder();
+    public locationsFromSearch: google.maps.GeocoderResult[] = [];
+    private geoCoder = new google.maps.Geocoder();
+    public isLoading: boolean = false;
+    private userInput: string = "";
+    private indexLimit: number = 5;
+    private selectedLocation: string = "";
+    public displayMoreAvailable: boolean = true;
 
     constructor() { }
 
     ngOnInit() {
-        this.subCenter = this.navigatorGeolocation.getCurrentPosition({ 'timeout': 10000 }).subscribe((location) => {
-            const userLatLng = new google.maps.LatLng(location.coords.latitude, location.coords.longitude);
-            // this.getPharmaciesForLatLng(userLatLng);
-        });
+        this.locationsFromSearch = [];
     }
 
     onInputChange($event) {
-        // enters here when input is detected
         if ($event.keyCode != 13) {
-            // return if enter key was not pressed
             return;
         }
-
-        // get user input
-        const userInput = $event.target.value;
-        this.getLocationsForArea(userInput);
+        this.locationSearch();
     }
 
-    getLocationsForArea(area) {
-        // make geocode request
-        var geocoderRequest = {
-            address: area
-        }
-
-        // send the request
-        this.geocoder.geocode(geocoderRequest, this.handleGeocoderResults);
-    }
-
-    handleGeocoderResults(results, status) {
-        // check status of response
-        if (status === google.maps.GeocoderStatus.OK) {
-            // loop through results
-            for (var i = 0; i < results.length; i++) {
-                // create latLng object for the result
-                const latLng = new google.maps.LatLng(results[i].geometry.location.lat(), results[i].geometry.location.lng())
-                var map = new google.maps.Map(document.getElementById('map'), {
-                    zoom: 15
-                });
-
-                // var request = {
-                //     location: latLng,
-                //     query: 'pharmacy'
-                // };
-                var request = {
-                    location: latLng,
-                    type: 'pharmacy',
-                    radius: 10000
-                };
-
-                var service = new google.maps.places.PlacesService(map);
-                service.nearbySearch(request, SearchPharmacyComponent.handlePlacesNearbySearch);
-                // service.textSearch(request, this.handlePlacesNearbySearch);
-            }
-        } else {
-            console.log("error with geocoder");
+    locationsChangeDropdown(elemName: string){
+        if(elemName=="Display More..."){
+            this.indexLimit=this.locationsFromSearch.length;
+            this.selectedLocation = "- - Select a Pharmacy - -";
+            this.displayMoreAvailable = false;
         }
     }
 
-    static handlePlacesNearbySearch(results, status) {
-        if (status == google.maps.places.PlacesServiceStatus.OK) {
-            // reinit the array 
-            SearchPharmacyComponent.locationsFromSearch = [];
-            // loop results
-            for (var i = 0; i < results.length; i++) {
-                SearchPharmacyComponent.locationsFromSearch.push(results[i]);
-            }
-            console.log("pharmacies for specified area: ", SearchPharmacyComponent.locationsFromSearch);
-        } else {
-            console.log("PlacesService error");
-        }
+    onSearchClick(){
+        this.locationSearch();
     }
 
-    ngOnDestroy() {
-        //Called once, before the instance is destroyed.
-        //Add 'implements OnDestroy' to the class.
-        this.subCenter.unsubscribe();
+    locationSearch(){
+        this.displayMoreAvailable = true;
+        this.selectedLocation = "- - Select a Pharmacy - -";
+        this.indexLimit = 5;
+        this.isLoading = true;
+        this.locationsFromSearch = [];
+        this.getListOfLocations(this.userInput).then((result: google.maps.GeocoderResult[])=>{
+            this.isLoading = false;
+            this.selectedLocation = "- - Select a Pharmacy - -";
+            this.locationsFromSearch = result;
+        });
+    }
+
+    public getListOfLocations(area: string){
+        return new Promise((resolve, reject)=>{
+            let geoCoderRequest = {
+                address: area
+            };
+            this.geoCoder.geocode(geoCoderRequest, (results, status)=>{
+                if (status === google.maps.GeocoderStatus.OK) {
+                    for (let i = 0; i < results.length; i++) {
+                        const latLng = new google.maps.LatLng(results[i].geometry.location.lat(), results[i].geometry.location.lng())
+                        let map = new google.maps.Map(document.getElementById('map'), {
+                            zoom: 15
+                        });
+
+                        let request = {
+                            location: latLng,
+                            type: 'pharmacy',
+                            radius: 10000
+                        };
+
+                        let service = new google.maps.places.PlacesService(map);
+                        service.nearbySearch(request, (results, status)=>{
+                            if (status == google.maps.places.PlacesServiceStatus.OK) {
+                                let resultArr = [];
+                                for (let i = 0; i < results.length; i++) {
+                                    resultArr.push(results[i]);
+                                }
+                                resolve(resultArr);
+                            } else {
+                                reject("PlacesService error");
+                            }
+                        });
+                    }
+                } else {
+                    reject("error with geoCoder");
+                }
+            });
+        });
     }
 
     get locations() {
-        return SearchPharmacyComponent.locationsFromSearch;
+        return this.locationsFromSearch;
     }
 }
 

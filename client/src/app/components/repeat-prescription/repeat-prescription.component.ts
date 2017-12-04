@@ -6,6 +6,7 @@ import { BsModalService } from 'ngx-bootstrap/modal';
 import { BsModalRef } from 'ngx-bootstrap/modal/modal-options.class';
 import { Observable } from 'rxjs/Observable';
 import { Pharmacy } from '../../class/Pharmacy';
+import {SearchPharmacyComponent} from "../search-pharmacy/search-pharmacy.component";
 
 @Component({
     selector: 'evolve-repeat-prescription',
@@ -27,6 +28,7 @@ export class RepeatPrescriptionComponent implements OnInit {
     public collectionType = {
         status: null
     };
+    public collectionSelected: boolean = false;
 
     constructor(dataService: DataService, private modalService: BsModalService) {
         let data;
@@ -35,7 +37,7 @@ export class RepeatPrescriptionComponent implements OnInit {
         this.confirmedPrescriptionList = new Array();
         this.deliveryType = false;
         this.warning = false;
-
+        this.collectionSelected = false;
     }
 
     public addToList(medication: Medication) {
@@ -69,6 +71,7 @@ export class RepeatPrescriptionComponent implements OnInit {
     }
 
     public openModal(prescriptionList: Array<Medication>, template: TemplateRef<any>) {
+        this.collectionSelected = false;
         this.modalRef = this.modalService.show(template);
     }
 

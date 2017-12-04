@@ -89,9 +89,18 @@
                     <form>
                         <div class="form-group">
                             <form class="form">
-                                <input type="radio" name="delivery" [(ngModel)]="collectionType.status" value="true"> Home
-                                Delivery &nbsp;&nbsp;&nbsp;&nbsp;
-                                <input type="radio" name="delivery" [(ngModel)]="collectionType.status" value="false"> <span [(ngModel)]="pharmacy.pharmacyName" name="pharmacy" > {{ pharmacy.pharmacyName }}</span>
+                                <!--<input type="radio" name="delivery" [(ngModel)]="collectionType.status" value="false"> <span [(ngModel)]="pharmacy.pharmacyName" name="pharmacy" > {{ pharmacy.pharmacyName }}</span>-->
+
+                                <input type="radio" name="delivery" id="delivery" [(ngModel)]="collectionType.status" value="false" (change)="collectionSelected = false">
+                                <label for="delivery" style="margin-right: 20px;">Home Delivery</label>
+
+                                <input type="radio" name="delivery" id="collection" value="false" (change)="collectionSelected = true">
+                                <label for="collection">Collection</label>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <evolve-search-pharmacy *ngIf="collectionSelected"></evolve-search-pharmacy>
+                                    </div>
+                                </div>
                             </form>
                         </div>
                         <button type="submit" class="btn btn-success" (click)="requestPrescription(renewPrescriptionList)">Request Prescription</button>
