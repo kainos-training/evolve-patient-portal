@@ -36,6 +36,7 @@
     }
 }
 
+
 .left-item {
     background-color: rgb(6,127,187);
     height: 80px;
@@ -48,6 +49,7 @@
     background-color: #00579f;
     height: 80px;
     margin: 0px;
+    
 }
 
 #menu-button {  
@@ -98,6 +100,12 @@
     height: 30px;
     padding-right: 5px;
     cursor: pointer;    
+}
+.log-out-button{
+    position: absolute;
+    right: 0px;
+    top: -15px;
+    z-index: 1;
 }
 
 .settings-button:hover {

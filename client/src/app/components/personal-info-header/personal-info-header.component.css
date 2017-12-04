@@ -1,9 +1,11 @@
 .flex-container {
     display: -webkit-flex;
     display: flex;
-    width: 90%;
+    width: 100%;
     background-color: #00579f;
 }
+
+
 
 .flex-item1 {
     background-color: white;
