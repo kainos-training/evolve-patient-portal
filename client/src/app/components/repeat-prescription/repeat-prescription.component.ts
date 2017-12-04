@@ -1,19 +1,18 @@
+import { Subscription } from 'rxjs/Rx';
 import { Component, OnInit, TemplateRef } from '@angular/core';
 import { DataService } from '../../services/data.service';
 import { Medication } from '../../class/Medication';
-import { ToolTipModule } from 'angular2-tooltip';
 import { BsModalService } from 'ngx-bootstrap/modal';
 import { BsModalRef } from 'ngx-bootstrap/modal/modal-options.class';
-import { Observable } from 'rxjs/Observable';
 import { Pharmacy } from '../../class/Pharmacy';
-import {SearchPharmacyComponent} from "../search-pharmacy/search-pharmacy.component";
+import { OnDestroy } from '@angular/core/src/metadata/lifecycle_hooks';
 
 @Component({
     selector: 'evolve-repeat-prescription',
     templateUrl: './repeat-prescription.component.html',
     styleUrls: ['./repeat-prescription.component.css']
 })
-export class RepeatPrescriptionComponent implements OnInit {
+export class RepeatPrescriptionComponent implements OnInit, OnInit, OnDestroy {
 
     public userID: String;
     public dataService: DataService;
@@ -29,9 +28,9 @@ export class RepeatPrescriptionComponent implements OnInit {
         status: null
     };
     public collectionSelected: boolean = false;
+    private subCenter: Subscription;
 
     constructor(dataService: DataService, private modalService: BsModalService) {
-        let data;
         this.renewPrescriptionList = new Array();
         this.dataService = dataService;
         this.confirmedPrescriptionList = new Array();
@@ -55,7 +54,7 @@ export class RepeatPrescriptionComponent implements OnInit {
 
     public requestPrescription(prescriptionList: Array<Medication>) {
         console.log(this.collectionType.status);
-        if (this.collectionType.status == "true") {
+        if (this.collectionType.status === 'true') {
             this.deliveryType = true;
         } else {
             this.deliveryType = false;
@@ -66,7 +65,7 @@ export class RepeatPrescriptionComponent implements OnInit {
         }
         console.log('test');
         this.dataService.updatePrescriptionDate(this.confirmedPrescriptionList, this.deliveryType);
-        this.ngOnInit()
+        this.ngOnInit();
         this.modalRef.hide();
     }
 
@@ -79,16 +78,22 @@ export class RepeatPrescriptionComponent implements OnInit {
         this.warning = false;
     }
     ngOnInit() {
+
         this.userID = this.dataService.getCookie();
 
         this.dataService.getLocalPharmacy(1).subscribe(res => {
-            this.localPharmacy = res
-            this.pharmacy = this.localPharmacy[0]
+            this.localPharmacy = res;
+            this.pharmacy = this.localPharmacy[0];
         });
 
         this.dataService.getRepeatedMedication(this.userID).subscribe(
             res => this.prescriptionList = res
         );
+    }
 
+    ngOnDestroy() {
+        // Called once, before the instance is destroyed.
+        // Add 'implements OnDestroy' to the class.
+        this.subCenter.unsubscribe();
     }
 }

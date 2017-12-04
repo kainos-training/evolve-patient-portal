@@ -100,7 +100,9 @@ describe('ConditionComponent', () => {
                 SecondaryInfoHeaderComponent,
                 DependantViewComponent,
                 ConditionComponent, 
-                SearchPharmacyComponent
+                SearchPharmacyComponent,
+                TimelineComponent,
+                PreviousAppointmentsComponent
             ],
             providers: [
                 { provide: DataService, useValue: mockDataService },
