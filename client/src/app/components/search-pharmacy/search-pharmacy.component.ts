@@ -15,6 +15,8 @@ export class SearchPharmacyComponent implements OnInit {
   private indexLimit: number = 5;
   private selectedLocation: string = "";
   public displayMoreAvailable: boolean = true;
+  static currentlySelectedLocation: string = "";
+  public toStr = JSON.stringify;
 
   constructor() { }
 
@@ -29,11 +31,15 @@ export class SearchPharmacyComponent implements OnInit {
     this.locationSearch();
   }
 
-  locationsChangeDropdown(elemName: string){
+
+  locationsChangeDropdown(elemName: any){
     if(elemName=="Display More..."){
       this.indexLimit=this.locationsFromSearch.length;
       this.selectedLocation = "- - Select a Pharmacy - -";
       this.displayMoreAvailable = false;
+    }else{
+      let gmapLocation = JSON.parse(elemName);
+      SearchPharmacyComponent.currentlySelectedLocation = gmapLocation.name + ", " + gmapLocation.vicinity;
     }
   }
 
