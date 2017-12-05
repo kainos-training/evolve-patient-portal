@@ -39,4 +39,9 @@ fdescribe('TopBarComponent', () => {
         component = fixture.componentInstance;
         expect(component).toBeTruthy();
     });
+
+    it('sideMenu state should be out/in depending on the window size', () => {
+               var menuState = component.getMenuState();
+               expect(menuState).toEqual('out');
+        });
 });
