@@ -1,11 +1,7 @@
 <evolve-top-bar></evolve-top-bar>
 <evolve-left-side-menu></evolve-left-side-menu>
-<!-- widget container -->
 <div id="widgetContainer" class="col-xs-12 col-sm-9">
-    <!-- My Dashboard -->
     <div [hidden]="!(navigationOption===navigationOptions.MyDashboard)">
-        <!-- information headers -->
-        <!-- widgets -->
         <evolve-timeline></evolve-timeline>
         <evolve-appointment></evolve-appointment>
         <evolve-previous-appointments></evolve-previous-appointments>
@@ -19,7 +15,6 @@
         <evolve-repeat-prescription></evolve-repeat-prescription>
     </div>
 
-    <!-- My dependants dashboard -->
     <div [hidden]="!(navigationOption===navigationOptions.MyDependants)">
         <evolve-dependant-view></evolve-dependant-view>
     </div>
