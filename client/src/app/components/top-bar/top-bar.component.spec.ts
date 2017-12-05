@@ -1,10 +1,11 @@
 import {BsModalService, ComponentLoaderFactory, PositioningService} from 'ngx-bootstrap';
 import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 import {TopBarComponent} from './top-bar.component';
+import {PersonalInfoHeaderComponent} from '../personal-info-header/personal-info-header.component';
 import {MenuStateService} from '../../services/menu-state.service';
 import {DataService} from '../../services/data.service';
 import {Router} from '@angular/router';
-import { FormsModule } from '@angular/forms';
+import {FormsModule} from '@angular/forms';
 
 describe('TopBarComponent', () => {
     let component: TopBarComponent;
@@ -14,7 +15,7 @@ describe('TopBarComponent', () => {
 
     beforeEach(async(() => {
         TestBed.configureTestingModule({
-            declarations: [TopBarComponent],
+            declarations: [TopBarComponent, PersonalInfoHeaderComponent],
             imports: [FormsModule],
             providers: [
                 MenuStateService,
