@@ -4,6 +4,7 @@ import {TopBarComponent} from './top-bar.component';
 import {MenuStateService} from '../../services/menu-state.service';
 import {DataService} from '../../services/data.service';
 import {Router} from '@angular/router';
+import { FormsModule } from '@angular/forms';
 
 describe('TopBarComponent', () => {
     let component: TopBarComponent;
@@ -14,6 +15,7 @@ describe('TopBarComponent', () => {
     beforeEach(async(() => {
         TestBed.configureTestingModule({
             declarations: [TopBarComponent],
+            imports: [FormsModule],
             providers: [
                 MenuStateService,
                 BsModalService,
