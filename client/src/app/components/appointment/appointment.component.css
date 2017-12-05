@@ -211,3 +211,14 @@ input[data-expanded="true"]:active, input[data-expanded="false"]:active {
 #submit-Button{
     margin-bottom: 20px;
 }
+
+.infoIcon{
+    margin-right: 30%;
+    margin-top: 0%;
+    display: inline;
+}
+
+#departmentName{
+    margin-left: 0%;
+    padding-left: 5%;
+}

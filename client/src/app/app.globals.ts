@@ -4,6 +4,6 @@
 export type NavigationOption = string;
 export enum NavigationOptionEnum {
     MyDashboard = <any>'My Dashboard',
-    RepeatPerscription = <any>'Repeat Perscription',
+    RepeatPrescription = <any>'Repeat Prescription',
     MyDependants = <any>'My Dependants'
 }
