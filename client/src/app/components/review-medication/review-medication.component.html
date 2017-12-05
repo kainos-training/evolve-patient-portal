@@ -34,7 +34,7 @@
             </div>
         </div>
         <div class="modal-body">
-            <div class="perscription-header">
+            <div class="prescription-header">
                 <p>
                     <span class="sml-medication-txt"><strong>Name:</strong> {{selectedMedication.medicationName}}</span><br>
                     <span class="sml-medication-txt"><strong>Current Dosage:</strong> {{selectedMedication.dosage}}</span><br>
@@ -45,7 +45,7 @@
             <div *ngIf="this.selectedMedicationHistory?.length > 0">
                 <a *ngIf="!showPrescriptionHistory" (click)="displayPrescriptionHistory()"><strong>Show Prescription History</strong></a>
                 <a *ngIf="showPrescriptionHistory" (click)="displayPrescriptionHistory()"><strong>Hide Prescription History</strong></a>
-                <div *ngIf="showPrescriptionHistory" class="perscription-form">
+                <div *ngIf="showPrescriptionHistory" class="prescription-form">
                     <form>
                         <div class="form-group">
                             <ul *ngFor="let medicationHistoryItem of selectedMedicationHistory">
@@ -57,7 +57,7 @@
                 </div>
             </div>
             <br>
-            <div class="perscription-form">
+            <div class="prescription-form">
                 <form>
                     <div class="form-group">
                         <label><strong>{{selectedMedication.medicationName}} details:</strong></label>
