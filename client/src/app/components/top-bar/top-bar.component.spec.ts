@@ -26,8 +26,7 @@ describe('TopBarComponent', () => {
                 BsModalService,
                 ComponentLoaderFactory,
                 PositioningService,
-               // SwitchBoardService,
-               {provide: DataService, useValue: mockDataService},
+               SwitchBoardService,
                 {provide: Router, useValue: mockRouter}
             ]
         }).compileComponents();
