@@ -92,8 +92,6 @@ export class DataService {
             deliveryStatus: deliveryStatus,
             collectionAddress: SearchPharmacyComponent.currentlySelectedLocation,
             medicationID: medicationIDs
-            
-
         };
         console.log(body.deliveryStatus);
             body.medicationUserIDs = '(';
@@ -101,7 +99,7 @@ export class DataService {
             body.medicationUserIDs += medicationUserIDs[i] + ',';
         }
         body.medicationUserIDs = body.medicationUserIDs.substring(0, body.medicationUserIDs.length - 1)+')';
-        //body.medicationUserIDs += ')';
+        
         const options = {
             headers: new HttpHeaders().set('Content-Type', 'application/json'),
         };
