@@ -107,6 +107,7 @@ prescribedDate date not null,
 instructions varchar(200) not null,
 repeated bool not null,
 delivery bool not null,
+collectionAddresss varchar(200),
 primary key (medicationUserID),
 foreign key (userID) references `User` (userID),
 foreign key (medicationID) references Medication (medicationID)
