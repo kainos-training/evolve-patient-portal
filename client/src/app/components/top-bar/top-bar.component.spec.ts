@@ -6,12 +6,14 @@ import {MenuStateService} from '../../services/menu-state.service';
 import {DataService} from '../../services/data.service';
 import {Router} from '@angular/router';
 import {FormsModule} from '@angular/forms';
+import {SwitchBoardService} from '../../services/switch-board.service';
 
 describe('TopBarComponent', () => {
     let component: TopBarComponent;
     let fixture: ComponentFixture<TopBarComponent>;
     const mockDataService = {};
     const mockRouter = {};
+    const mockSwitchBoard = {};
 
     beforeEach(async(() => {
         TestBed.configureTestingModule({
@@ -23,7 +25,8 @@ describe('TopBarComponent', () => {
                 ComponentLoaderFactory,
                 PositioningService,
                 {provide: DataService, useValue: mockDataService},
-                {provide: Router, useValue: mockRouter}
+                {provide: Router, useValue: mockRouter},
+                {provide: SwitchBoardService, useValue: mockSwitchBoard} 
             ]
         }).compileComponents();
     }));
