@@ -31,7 +31,7 @@
                 </button>
         </div>
         <div class="modal-body">
-            <div class="perscription-header">
+            <div class="prescription-header">
                 <p>
                     <img src="/assets/upcomingAppointmentsIcon.png" class="pill-icon-modal" />
                     <span>
@@ -46,12 +46,11 @@
                 </p>
                 <hr>
             </div>
-            <!-- <button class="btn btn-primary btn-sm btn-block" id="submit-Button" type="submit" (click)="toggleSecondVisible()">Submit Query</button> -->
-            <div class="perscription-form">
+            <div class="prescription-form">
                 <form>
                     <div class="form-group">
                         <label><strong>Clinician Name:</strong></label>
-                        <textarea disabled type="text" class="form-control input-disabled" id="perscription-input" rows="1">{{focusedAppointment.clinicianName}}</textarea>
+                        <textarea disabled type="text" class="form-control input-disabled" id="prescription-input" rows="1">{{focusedAppointment.clinicianName}}</textarea>
                     </div>
                     <div class="form-group">
                         <label><strong>Clinician comments:</strong></label>
@@ -85,7 +84,7 @@
                 </button>
         </div>
         <div class="modal-body">
-            <div class="perscription-header">
+            <div class="prescription-header">
                 <div *ngIf="invalidInput" class="callout-message col-xs-12">
                     <div class="bs-callout bs-callout-danger">
                         <p><span>Error:</span> Please fill out all fields and select a clinician
