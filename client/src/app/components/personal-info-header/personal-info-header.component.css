@@ -2,8 +2,18 @@
     display: -webkit-flex;
     display: flex;
     width: 100%;
-    background-color: white;
+    background-color: #00579f;
 }
+
+:host-context(.shift-left) #patientPicMobile  {
+    margin-left: -3%;
+  }
+
+  :host-context(.top-bar) .flex-container  {
+    width: 90%;
+  } 
+
+
 
 .flex-item1 {
     background-color: white;
@@ -14,7 +24,6 @@
 
 #patientPicMobile {
     float: left;
-    /* background-color: grey; */
     border-radius: 50%;
     width: 75px;
     height: 75px;
@@ -24,46 +33,47 @@
 }
 
 .patientName{
-    color: #465463;
+    color: white;
     font-size: 20px;
     margin-left: 5px;
-    margin-top: 2.5%;
+    margin-top: 3%;
 }
 
 .patientBirthday{
-    color: darkgrey;
-    margin-left: 20%;
+    color: white;
+    margin-left: 16%;
     font-size: 15px;
-    margin-top: 2.5%;
+    margin-top: 3.2%;
 }
 
 .patientBirthday-small{
-    color: darkgrey;
+    color: white;
     margin-left: 5%;
+    margin-top: 3.2%;
     font-size: 15px;
 }
 
 .patientGender{
-    color: darkgrey;
+    color: white;
     margin-left: 5%;
     font-size: 15px;
-    margin-top: 2.5%;
+    margin-top: 3.2%;
 }
 
 .patientGender-small{
-    color: darkgrey;
+    color: white;
     margin-left: 5%;
     font-size: 15px;
 }
 .patientMrin{
-    color: darkgrey;
+    color: white;
     margin-left: 5%;
     font-size: 15px;
-    margin-top: 2.5%;
+    margin-top: 3.2%;
 }
 
 .patientMrin-small{
-    color: darkgrey;
+    color: white;
     margin-left: 5%;
     font-size: 15px;
 }
