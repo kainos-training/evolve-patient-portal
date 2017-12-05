@@ -20,7 +20,7 @@ describe('TopBarComponent', () => {
     beforeEach(async(() => {
         TestBed.configureTestingModule({
             declarations: [TopBarComponent, PersonalInfoHeaderComponent],
-            imports: [FormsModule],
+            imports:[],
             providers: [
                 MenuStateService,
                 BsModalService,
