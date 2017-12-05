@@ -1,42 +1,42 @@
-import {TopBarComponent} from './top-bar.component';
-import {FormsModule} from '@angular/forms';
+import {BsModalService, ComponentLoaderFactory, PositioningService} from 'ngx-bootstrap';
 import {async, ComponentFixture, TestBed} from '@angular/core/testing';
-import {PersonalInfoHeaderComponent} from '../personal-info-header/personal-info-header.component';
+import {TopBarComponent} from './top-bar.component';
+import {MenuStateService} from '../../services/menu-state.service';
 import {DataService} from '../../services/data.service';
-import {HttpClientModule} from '@angular/common/http';
-import {CookieService} from 'ngx-cookie-service';
-import {SwitchBoardService} from '../../services/switch-board.service';
 import {Router} from '@angular/router';
-import {MenuStateService} from "../../services/menu-state.service";
-import {BsModalRef, ComponentLoaderFactory, PositioningService} from "ngx-bootstrap";
-import {BsModalService} from 'ngx-bootstrap/modal';
 
-fdescribe('TopBarComponent', () => {
+describe('TopBarComponent', () => {
     let component: TopBarComponent;
     let fixture: ComponentFixture<TopBarComponent>;
-
+    const mockDataService = {};
     const mockRouter = {};
 
     beforeEach(async(() => {
         TestBed.configureTestingModule({
-            imports: [FormsModule, HttpClientModule],
-            declarations: [TopBarComponent,
-                PersonalInfoHeaderComponent],
-            providers: [DataService,
-                CookieService,
-                SwitchBoardService,
-                {provide: Router, useValue: mockRouter},
+            declarations: [TopBarComponent],
+            providers: [
                 MenuStateService,
-                BsModalRef,
                 BsModalService,
                 ComponentLoaderFactory,
-                PositioningService]
+                PositioningService,
+                {provide: DataService, useValue: mockDataService},
+                {provide: Router, useValue: mockRouter}
+            ]
         }).compileComponents();
     }));
 
-    it('should be created', async () => {
+    beforeEach(() => {
         fixture = TestBed.createComponent(TopBarComponent);
         component = fixture.componentInstance;
+        fixture.detectChanges();
+    });
+
+    it('should be created', () => {
         expect(component).toBeTruthy();
+    });
+
+    it('sideMenu state should be out/in depending on the window size', () => {
+        var menuState = component.getMenuState();
+        expect(menuState).toEqual('out');
     });
 });

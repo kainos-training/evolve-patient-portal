@@ -1,6 +1,6 @@
 <body>
 
-<div class="hidden-xs col-sm-8 flex-container">
+<div class="hidden-xs col-sm-9 flex-container">
     <img src="../../../assets/user.png" id="patientPicMobile">
     <div class="patientName"> {{userArray.firstName}} {{userArray.lastName}} ({{userArray.title}}) </div>
     <div class="patientBirthday"><span class="patientInfoTextTitle">DOB: </span>{{userArray.dateOfBirth| date: 'dd/MM/yyyy'}}</div>
@@ -8,7 +8,7 @@
     <div class="patientMrin"><span class="patientInfoTextTitle">MRIN: </span>{{userArray.MRIN}}</div>
 </div>
 
-<div class="visible-xs col-xs-8">
+<div class="visible-xs col-xs-12">
     <div class="patientName"> {{userArray.firstName}} {{userArray.lastName}} ({{userArray.title}}) </div>
     <div class="patientBirthday-small"><span class="patientInfoTextTitle">DOB: </span>{{userArray.dateOfBirth| date: 'dd/MM/yyyy'}}</div>
     <div class="patientGender-small"><span class="patientInfoTextTitle">Gender: </span>{{userArray.gender}}</div>

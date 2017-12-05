@@ -5,6 +5,8 @@
     <!-- My Dashboard -->
     <div [hidden]="!(navigationOption===navigationOptions.MyDashboard)">
         <!-- information headers -->
+        <evolve-personal-info-header></evolve-personal-info-header>
+        <evolve-secondary-info-header></evolve-secondary-info-header>
         <!-- widgets -->
         <evolve-timeline></evolve-timeline>
         <evolve-appointment></evolve-appointment>
@@ -16,6 +18,8 @@
     </div>
 
     <div [hidden]="!(navigationOption===navigationOptions.RepeatPrescription)">
+        <evolve-personal-info-header></evolve-personal-info-header>
+        <evolve-secondary-info-header></evolve-secondary-info-header>
         <evolve-repeat-prescription></evolve-repeat-prescription>
     </div>
 
