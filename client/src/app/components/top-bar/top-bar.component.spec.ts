@@ -7,6 +7,7 @@ import {DataService} from '../../services/data.service';
 import {Router} from '@angular/router';
 import {FormsModule} from '@angular/forms';
 import {SwitchBoardService} from '../../services/switch-board.service';
+import { Observable } from 'rxjs/Rx';
 
 describe('TopBarComponent', () => {
     let component: TopBarComponent;
@@ -27,7 +28,9 @@ describe('TopBarComponent', () => {
                 PositioningService,
                 SwitchBoardService,
                 {provide: DataService, useValue: mockDataService},
-                {provide: Router, useValue: mockRouter}
+                {provide: Router, useValue: mockRouter},
+                {provide: SwitchBoardService, useValue: mockSwitchBoard},
+                {provide: Observable, useValue: mockObservable} 
             ]
         }).compileComponents();
     }));
