@@ -12,3 +12,8 @@
     height: 35px;
     margin: 15px;
 }
+
+:host-context(.shift-secInfo-right) .flex-item {
+    
+    margin-left: 10%;
+  }
