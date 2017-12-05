@@ -6,7 +6,7 @@
 }
 
 :host-context(.shift-left) #patientPicMobile  {
-    margin-left: -3%;
+    margin-left: -2%;
   }
 
   :host-context(.top-bar) .flex-container  {
