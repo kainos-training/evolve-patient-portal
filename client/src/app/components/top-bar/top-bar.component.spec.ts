@@ -11,7 +11,7 @@ import {MenuStateService} from "../../services/menu-state.service";
 import {BsModalRef, ComponentLoaderFactory, PositioningService} from "ngx-bootstrap";
 import {BsModalService} from 'ngx-bootstrap/modal';
 
-fdescribe('TopBarComponent', () => {
+describe('TopBarComponent', () => {
     let component: TopBarComponent;
     let fixture: ComponentFixture<TopBarComponent>;
 
