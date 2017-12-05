@@ -18,8 +18,7 @@ import { Condition } from '../class/Condition';
 import { Clinician } from '../class/Clinician';
 import { Pharmacy } from '../class/Pharmacy';
 import { AppointmentCount } from '../class/AppointmentCount';
-import {SearchPharmacyComponent} from '../components/search-pharmacy/search-pharmacy.component';
-
+import { SearchPharmacyComponent } from '../components/search-pharmacy/search-pharmacy.component';
 
 @Injectable()
 export class DataService {

@@ -19,7 +19,6 @@ export class SearchPharmacyComponent implements OnInit {
   static currentlySelectedLocation: string = "";
   public toStr = JSON.stringify;
 
-
   constructor() { }
 
   ngOnInit() {
@@ -32,8 +31,6 @@ export class SearchPharmacyComponent implements OnInit {
     }
     this.locationSearch();
   }
-
-
 
   locationsChangeDropdown(elemName: any){
 
@@ -73,13 +70,13 @@ export class SearchPharmacyComponent implements OnInit {
       this.geoCoder.geocode(geoCoderRequest, (results, status)=>{
         if (status === google.maps.GeocoderStatus.OK) {
           for (let i = 0; i < results.length; i++) {
-            const latLng = new google.maps.LatLng(results[i].geometry.location.lat(), results[i].geometry.location.lng())
+            const latLong = new google.maps.LatLng(results[i].geometry.location.lat(), results[i].geometry.location.lng())
             let map = new google.maps.Map(document.getElementById('map'), {
               zoom: 15
             });
 
             let request = {
-              location: latLng,
+              location: latLong,
               type: 'pharmacy',
               radius: 10000
             };

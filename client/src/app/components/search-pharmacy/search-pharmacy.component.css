@@ -19,4 +19,15 @@
 
 select {
     width: 100%;
+    margin-top: 15px;
+}
+
+#maindiv{
+    margin-top: 20px;
+    margin-left: 20px;
+}
+
+#searchTextField{
+    display: inline; 
+    
 }

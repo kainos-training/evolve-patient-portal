@@ -1,7 +1,7 @@
-<div *ngIf="!isLoading" style="margin-top: 20px; margin-left: 20px;">
+<div  id ="maindiv" *ngIf="!isLoading">
   <label>Enter Postcode:</label>
-  <input id="searchTextField" type="text" placeholder="Postcode" (keyup)="onInputChange($event)" [(ngModel)]="userInput" class="form-control" style="display: inline; width: auto;"> <button type="button" class="btn btn-primary" (click)="onSearchClick()">Search</button>
-  <select *ngIf="locations.length > 0" class="form-control" style="margin-top: 15px;" (change)="locationsChangeDropdown($event.target.value)" [(ngModel)]="selectedLocation">
+  <input id="searchTextField" type="text" placeholder="Postcode" (keyup)="onInputChange($event)" [(ngModel)]="userInput" class="form-control"> <button type="button" class="btn btn-primary" (click)="onSearchClick()">Search</button>
+  <select *ngIf="locations.length > 0" class="form-control"  (change)="locationsChangeDropdown($event.target.value)" [(ngModel)]="selectedLocation">
     <option value="- - Select a Pharmacy - -">- - Select a Pharmacy - -</option>
 
     <option *ngFor="let location of locations | slice:0:indexLimit;" value="{{toStr(location)}}">{{location.name}} ({{location.vicinity}})</option>

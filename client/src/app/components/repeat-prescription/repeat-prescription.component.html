@@ -93,8 +93,6 @@
                     <form onsubmit="event.preventDefault();">
                         <div class="form-group">
                             <form class="form">
-                                <!--<input type="radio" name="delivery" [(ngModel)]="collectionType.status" value="false"> <span [(ngModel)]="pharmacy.pharmacyName" name="pharmacy" > {{ pharmacy.pharmacyName }}</span>-->
-
                                 <input type="radio" name="delivery" id="delivery" [(ngModel)]="collectionType.status" value="false" (change)="collectionSelected = false">
                                 <label for="delivery" style="margin-right: 20px;">Home Delivery</label>
 

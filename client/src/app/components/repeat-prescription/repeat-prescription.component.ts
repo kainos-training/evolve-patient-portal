@@ -6,7 +6,7 @@ import { BsModalService } from 'ngx-bootstrap/modal';
 import { BsModalRef } from 'ngx-bootstrap/modal/modal-options.class';
 import { Observable } from 'rxjs/Observable';
 import { Pharmacy } from '../../class/Pharmacy';
-import {SearchPharmacyComponent} from '../search-pharmacy/search-pharmacy.component';
+import { SearchPharmacyComponent } from '../search-pharmacy/search-pharmacy.component';
 
 @Component({
     selector: 'evolve-repeat-prescription',
@@ -73,13 +73,8 @@ export class RepeatPrescriptionComponent implements OnInit {
             this.deliveryType = false;
         }
 
-        
-
         for (var i = 0; i < this.prescriptionList.length; i++) {
-            this.confirmedPrescriptionList.push(this.prescriptionList[i].medicationUserID);
-            
-        
-       
+        this.confirmedPrescriptionList.push(this.prescriptionList[i].medicationUserID);
         this.dataService.updatePrescriptionDate(this.confirmedPrescriptionList, this.deliveryType, this.confirmedMedicationID);
         this.ngOnInit()
         this.modalRef.hide();
