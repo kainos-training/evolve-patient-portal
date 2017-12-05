@@ -15,6 +15,7 @@ describe('TopBarComponent', () => {
     const mockDataService = {};
     const mockRouter = {};
     const mockSwitchBoard = {};
+    const mockObservable = {};
 
     beforeEach(async(() => {
         TestBed.configureTestingModule({
@@ -25,10 +26,10 @@ describe('TopBarComponent', () => {
                 BsModalService,
                 ComponentLoaderFactory,
                 PositioningService,
-                Observable,
                 {provide: DataService, useValue: mockDataService},
                 {provide: Router, useValue: mockRouter},
-                {provide: SwitchBoardService, useValue: mockSwitchBoard} 
+                {provide: SwitchBoardService, useValue: mockSwitchBoard},
+                {provide: Observable, useValue: mockObservable} 
             ]
         }).compileComponents();
     }));
