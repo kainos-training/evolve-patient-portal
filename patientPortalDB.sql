@@ -303,7 +303,7 @@ VALUES
 (1,5,3,(NOW() - INTERVAL 30 DAY),'Diagnosed with conjunctivitis - antibiotics prescribed',3),
 (1,1,1,(NOW() + INTERVAL 12 DAY),'Please fill in the pre-op assessment form',4),
 (1,3,1,(NOW() + INTERVAL 20 DAY), NULL,4),
-(8,4,2, (NOW() + INTERVAL 12 DAY), null, 1),
+(8,4,2, (NOW() + INTERVAL 12 DAY), NULL, 1),
 (8,5,1, (NOW() - INTERVAL 2 DAY), 'Regular check-up - patient in good health', 4),
 (8,4,2, (NOW() - INTERVAL 322 DAY), 'null', 1),
 (4,5,1, (NOW() + INTERVAL 12 DAY), 'Eye check-up', 4),
