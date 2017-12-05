@@ -4,12 +4,14 @@ const request = require('request');
 exports.updatePrescriptionDate = function(req, res) {
     const medicationUserIDs = req.body.medicationUserIDs;
     const deliveryStatus = req.body.deliveryStatus;
+    const collectionAddress = req.body.collectionAddress;
+    const medicationID = req.body.medicationID;
     if (medicationUserIDs == null || deliveryStatus == null) {
         res.status(400).json({
             success: false
         });
     } else {
-        db.updatePrescribedDate(medicationUserIDs, deliveryStatus, function(err) {
+        db.updatePrescribedDate(medicationUserIDs, deliveryStatus,collectionAddress, medicationID, function(err) {
             if (err) {
                 res.status(400).json({
                     success: false

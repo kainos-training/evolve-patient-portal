@@ -6,6 +6,7 @@ import { BsModalService } from 'ngx-bootstrap/modal';
 import { BsModalRef } from 'ngx-bootstrap/modal/modal-options.class';
 import { Observable } from 'rxjs/Observable';
 import { Pharmacy } from '../../class/Pharmacy';
+import { SearchPharmacyComponent } from '../search-pharmacy/search-pharmacy.component';
 
 @Component({
     selector: 'evolve-repeat-prescription',
@@ -28,12 +29,17 @@ export class RepeatPrescriptionComponent implements OnInit {
     public collectionType = {
         status: null
     };
+    public collectionSelected: boolean = false;
+    public collectionAddress: string = "";
+    public confirmedMedicationID: number[];
+
 
     constructor(dataService: DataService, private modalService: BsModalService) {
         let data;
         this.renewPrescriptionList = new Array();
         this.dataService = dataService;
         this.confirmedPrescriptionList = new Array();
+        this.confirmedMedicationID = new Array();
         this.deliveryType = false;
         this.warning = false;
         this.warning = false;
@@ -45,7 +51,10 @@ export class RepeatPrescriptionComponent implements OnInit {
             this.warning = true;
         } else {
             this.renewPrescriptionList.push(medication);
+            this.confirmedMedicationID.push(medication.medicationID);
         }
+
+        console.log(this.renewPrescriptionList[0].medicationID)
     }
 
     public removeFromList(medication: Medication) {
@@ -55,6 +64,9 @@ export class RepeatPrescriptionComponent implements OnInit {
 
     public requestPrescription(prescriptionList: Array<Medication>) {
         console.log(this.collectionType.status);
+        let currentVal = SearchPharmacyComponent.currentlySelectedLocation;
+        console.log(currentVal);
+
         if (this.collectionType.status == "true") {
             this.deliveryType = true;
         } else {
@@ -62,15 +74,16 @@ export class RepeatPrescriptionComponent implements OnInit {
         }
 
         for (var i = 0; i < this.prescriptionList.length; i++) {
-            this.confirmedPrescriptionList.push(this.prescriptionList[i].medicationUserID);
-        }
-        this.dataService.updatePrescriptionDate(this.confirmedPrescriptionList, this.deliveryType);
+        this.confirmedPrescriptionList.push(this.prescriptionList[i].medicationUserID);
+        this.dataService.updatePrescriptionDate(this.confirmedPrescriptionList, this.deliveryType, this.confirmedMedicationID);
         this.ngOnInit()
         this.modalRef.hide();
         this.success = true;
+        }
     }
 
     public openModal(prescriptionList: Array<Medication>, template: TemplateRef<any>) {
+        this.collectionSelected = false;
         this.modalRef = this.modalService.show(template);
     }
 
