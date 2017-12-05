@@ -157,6 +157,8 @@ CREATE TABLE IF NOT EXISTS LocationDepartment (
     locationDepartmentID int auto_increment not null,
     locationID int not null,
     departmentID int not null,
+    departmentURL varchar(900),
+    departmentWards varchar(200),
     primary key (locationDepartmentID),
     foreign key (locationID) references Location (locationID),
     foreign key (departmentID) references Department (departmentID)
@@ -269,8 +271,8 @@ VALUES (1, 'Not feeling the benefit after two weeks', false), (2, 'Helping to mi
 (6, 'Eye pain gone', true);*/
 
 INSERT INTO Clinician (title, firstName, lastName, jobTitle, email)
-VALUES ('Dr', 'Alex', 'Hyndman', 'Consultant', 'c.mullan@kainos.com'), 
-('Dr', 'John', 'Adams', 'Oncologist', 'c.mullan@kainos.com'), 
+VALUES ('Dr', 'Alex', 'Hyndman', 'Consultant', 'c.mullan@kainos.com'),
+('Dr', 'John', 'Adams', 'Oncologist', 'c.mullan@kainos.com'),
 ('Dr', 'Karen', 'Reid', 'Obstetrician',  'c.mullan@kainos.com'),
 ('Dr', 'Sally', 'Jones', 'Consultant',  'c.mullan@kainos.com'),
 ('Dr', 'Ian', 'Stokes', 'Clinical Nurse Specialist',  'c.mullan@kainos.com'),
@@ -285,34 +287,34 @@ VALUES ('Royal Victoria Hospital, 274 Grosvenor Rd, Belfast, BT12 6BA'),
 ('Belfast City Hospital, Lisburn Rd, Belfast, BT9 7AB');
 
 INSERT INTO Department (DepartmentName)
-VALUES ('Orthopeadic'), ('Community Diabetes Team'), ('Oncology'), ('GP'),('Orthopeadic'),('Community Diabetes Team');
+VALUES ('Orthopeadic'), ('Community Diabetes Team'), ('Oncology'), ('GP');
 
-INSERT INTO LocationDepartment (locationID, departmentID)
-VALUES (1, 1), (2, 1), (2, 2), (3, 3),(1,1),(2,2),(1,4);
+INSERT INTO LocationDepartment (locationID, departmentID, departmentURL, departmentWards)
+VALUES (1, 1, 'http://www.belfasttrust.hscni.net/services/3035.htm', '3a'), (2, 1, 'http://www.belfasttrust.hscni.net/services/3035.htm', '3a'), (2, 2, 'http://www.belfasttrust.hscni.net/CommunityDiabetesSpecialistTeams.htm', '4c'), (3, 3, 'http://www.belfasttrust.hscni.net/services/CommunityOncologyPalliativeCare.htm', '1b'),(1,4, 'http://online.hscni.net/family-practitioners/general-practitioners-gps/', '4a');
 
 INSERT INTO AppointmentType (`type`)
 VALUES ('Pre-Op Assessment'), ('Emergency Surgery'), ('GP Appointment'), ('Check-up');
 
 INSERT INTO Appointment (userID, locationDepartmentID, clinicianID, dateOfAppointment, `comment`, appointmentTypeID)
 VALUES
-(1,6,1,(NOW() - INTERVAL 20 DAY),'Jane expressed issues with drowsiness recently, investigation ongoing.',4),
-(1,6,1,(NOW() - INTERVAL 4 DAY),'Check up on Jane''s hip problems - surgery scheduled for a month''s time',1),
-(1,7,3,(NOW() - INTERVAL 170 DAY),'Jane has been experiencing hip problems, prescribed painkillers, investigation ongoing',3),
-(1,7,3,(NOW() - INTERVAL 30 DAY),'Diagnosed with conjunctivitis - antibiotics prescribed',3),
-(1,5,1,(NOW() + INTERVAL 12 DAY),'Please fill in the pre-op assessment form',4),
-(1,6,1,(NOW() + INTERVAL 20 DAY), NULL,4),
-(8, 4, 2, (NOW() + INTERVAL 12 DAY), null, 1),
-(8, 7, 1, (NOW() - INTERVAL 2 DAY), 'Regular check-up - patient in good health', 4),
-(8, 4, 2, (NOW() - INTERVAL 322 DAY), 'null', 1),
-(4, 7, 1, (NOW() + INTERVAL 12 DAY), 'Eye check-up', 4),
-(4, 7, 1, (NOW() - INTERVAL 12 DAY), 'Eye check-up', 4),
-(7, 7, 1, (NOW() - INTERVAL 62 DAY), 'Routine checkup.', 3),
-(7, 7, 1, (NOW() - INTERVAL 62 DAY), 'Routine checkup.', 3),
-(1,6,1,'2015-10-10','Jane has received a diagnosis of Type 1 Diabetes',3),
-(1,6,1,'2016-04-10','Diabetes checkup',3),
-(1,6,1,'2016-10-10','Diabetes checkup',3),
-(1,6,1,'2017-04-10','Diabetes checkup',3),
-(1,7,1,'2014-07-03','Jane has been diagnosed as being allergic to penicillin',3);
+(1,3,1,(NOW() - INTERVAL 20 DAY),'Jane expressed issues with drowsiness recently, investigation ongoing.',4),
+(1,3,1,(NOW() - INTERVAL 4 DAY),'Check up on Jane''s hip problems - surgery scheduled for a month''s time',1),
+(1,5,3,(NOW() - INTERVAL 170 DAY),'Jane has been experiencing hip problems, prescribed painkillers, investigation ongoing',3),
+(1,5,3,(NOW() - INTERVAL 30 DAY),'Diagnosed with conjunctivitis - antibiotics prescribed',3),
+(1,1,1,(NOW() + INTERVAL 12 DAY),'Please fill in the pre-op assessment form',4),
+(1,3,1,(NOW() + INTERVAL 20 DAY), NULL,4),
+(8,4,2, (NOW() + INTERVAL 12 DAY), NULL, 1),
+(8,5,1, (NOW() - INTERVAL 2 DAY), 'Regular check-up - patient in good health', 4),
+(8,4,2, (NOW() - INTERVAL 322 DAY), 'null', 1),
+(4,5,1, (NOW() + INTERVAL 12 DAY), 'Eye check-up', 4),
+(4,5,1, (NOW() - INTERVAL 12 DAY), 'Eye check-up', 4),
+(7,5,1, (NOW() - INTERVAL 62 DAY), 'Routine checkup.', 3),
+(7,5,1, (NOW() - INTERVAL 62 DAY), 'Routine checkup.', 3),
+(1,3,1,'2015-10-10','Jane has received a diagnosis of Type 1 Diabetes',3),
+(1,3,1,'2016-04-10','Diabetes checkup',3),
+(1,3,1,'2016-10-10','Diabetes checkup',3),
+(1,3,1,'2017-04-10','Diabetes checkup',3),
+(1,5,1,'2014-07-03','Jane has been diagnosed as being allergic to penicillin',3);
 
 INSERT INTO `Condition` (conditionName, conditionLink)
 VALUES ("Hip Replacement", "http://www.nhs.uk/Conditions/Hip-replacement/Pages/Introduction.aspx"),

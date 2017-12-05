@@ -34,15 +34,19 @@
             <div class="perscription-header">
                 <p>
                     <img src="/assets/upcomingAppointmentsIcon.png" class="pill-icon-modal" />
-                    <strong>Department: {{focusedAppointment.departmentName}}</strong><br>
+                    <span>
+                        <strong>Department: {{focusedAppointment.departmentName}}</strong>
+                        <a [href]="focusedAppointment.departmentURL" target="_blank"><span class="glyphicon glyphicon-info-sign"></span></a>
+                    </span>
+                    <br>
                     <span style="padding-left: 70px">{{focusedAppointment.locationAddress}}</span><br>
-                    <span style="padding-left: 90px"><strong>Due:</strong> {{focusedAppointment.dateOfAppointment | date: 'dd/MM/yyyy'}}</span><br>
-                    <span style="padding-left: 110px"><strong>Time:</strong> {{focusedAppointment.dateOfAppointment | date:'h:mm a'}}</span>
+                    <span style="padding-left: 70px"><strong>Ward:</strong> {{focusedAppointment.departmentWards}}</span><br>                    
+                    <span style="padding-left: 70px"><strong>Date:</strong> {{focusedAppointment.dateOfAppointment | date: 'dd/MM/yyyy'}}</span><br>
+                    <span style="padding-left: 70px"><strong>Time:</strong> {{focusedAppointment.dateOfAppointment | date:'h:mm a'}}</span>
                 </p>
                 <hr>
             </div>
             <!-- <button class="btn btn-primary btn-sm btn-block" id="submit-Button" type="submit" (click)="toggleSecondVisible()">Submit Query</button> -->
-
             <div class="perscription-form">
                 <form>
                     <div class="form-group">
