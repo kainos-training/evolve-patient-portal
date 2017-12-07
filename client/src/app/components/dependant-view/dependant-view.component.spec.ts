@@ -20,6 +20,8 @@ import { OrderByPipe } from '../../utils/orderby.pipe';
 import { FilterPipe } from '../../utils/filter.pipe';
 import { UniquePipe } from '../../utils/unique.pipe';
 import { MyDatePickerModule } from 'mydatepicker';
+import { BsModalService } from 'ngx-bootstrap/modal';
+import {ComponentLoaderFactory, PositioningService} from "ngx-bootstrap";
 
 describe('DependantViewComponent', () => {
   let component: DependantViewComponent;
@@ -51,7 +53,10 @@ describe('DependantViewComponent', () => {
           DataService,
           CookieService,
           SwitchBoardService,
-          {provide: Router, useValue: mockRouter}
+          {provide: Router, useValue: mockRouter},
+          BsModalService,
+          ComponentLoaderFactory,
+          PositioningService
         ],
       imports: [
           MyDatePickerModule,
