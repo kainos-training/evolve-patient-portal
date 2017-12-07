@@ -493,7 +493,7 @@ export class DataService {
         };
     }
 
-    public updateUserDetails(newUserDetails: User){
+    public updateUserDetails(newUserDetails: any){
         return new Promise((resolve, reject)=>{
             const body = {
                 "email": newUserDetails.email,

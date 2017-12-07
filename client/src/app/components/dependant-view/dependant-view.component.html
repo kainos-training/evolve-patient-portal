@@ -6,8 +6,7 @@
     </div>
     
     <div class="btnDiv">
-    <button class="btn btn-primary"  (click)="openModal(template)"><span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span></button> 
-
+    <button class="btn btn-primary"  (click)="openModal(template)"><span class="glyphicon glyphicon-edit" aria-hidden="true"></span></button>
     </div>
     <evolve-appointment [dependantID]="viewingDependant.userID"></evolve-appointment>
     <evolve-previous-appointments [dependantID]="viewingDependant.userID"></evolve-previous-appointments>
@@ -28,17 +27,22 @@
             <div class="modal-body">
                 <div class="dependant-header">
                     <label><h4>Contact information</h4></label>
-                  
                 </div>
-                <div class="furtherInfo">
-                  
-                    <label id="address">Address: {{viewingDependant.address}}</label>
-                    <br>
-                    <label id="phone">Phone: {{viewingDependant.phoneNumber}}</label>
-                    <br>
-                    <label id="email">Email: {{viewingDependant.email}}</label>
-            
-                </div>
+                <form onsubmit="event.preventDefault();">
+                    <div class="form-group">
+                        <form class="form">
+                            <label for="address">Address: </label>
+                            <input  style="width: auto; display: inline;" id="address" name="address" type="text" placeholder="Address" [(value)]="address" class="form-control formTextBox"> <br>
+
+                            <label for="phoneNumber" style="margin-top: 20px;">Phone Number: </label>
+                            <input  style="width: auto; display: inline;" id="phoneNumber" name="phoneNumber" type="text" placeholder="Phone Number" [(value)]="phoneNumber" class="form-control formTextBox"> <br>
+
+                            <label for="email" style="margin-top: 20px;">Email: </label>
+                            <input  style="width: auto; display: inline;" id="email" name="email" type="text" placeholder="Email" [(value)]="email" class="form-control formTextBox">
+                        </form>
+                    </div>
+                    <button type="button" class="btn btn-success" (click)="updateUserDetails()">Update Details</button>
+                </form>
             </div>
         </div>
     </ng-template>

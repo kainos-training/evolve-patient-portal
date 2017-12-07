@@ -4,9 +4,6 @@ import { User } from '../../class/User';
 import { DataService } from '../../services/data.service';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { BsDropdownConfig } from 'ngx-bootstrap/dropdown';
-import { Medication } from '../../class/Medication';
-import { MedicationComment } from '../../class/MedicationComment';
-import { ReviewMedicationComponent } from '../review-medication/review-medication.component';
 import { TemplateRef } from '@angular/core';
 import { BsModalService } from 'ngx-bootstrap/modal';
 import { BsModalRef } from 'ngx-bootstrap/modal/modal-options.class';
@@ -22,17 +19,28 @@ export class DependantViewComponent implements OnInit, OnDestroy {
     private viewingDependant: User;
     private dependantSubscription: Subscription;
     public modalRef: BsModalRef;
+    public newUserDetails: User;
+    public address: string;
+    public email: string;
+    public phoneNumber: string;
+    private HTTPService: DataService;
 
     constructor(private data: DataService, private switchboard: SwitchBoardService, private modalService: BsModalService) {
-
+        this.HTTPService = data;
     }
 
     ngOnInit() {
         //Called after the constructor, initializing input properties, and the first call to ngOnChanges.
         //Add 'implements O nInit' to the class.
+        this.newUserDetails = new User();
         this.dependantSubscription = this.switchboard.viewingDependant$.subscribe(
-            dependant => this.viewingDependant = dependant
+            dependant => {
+                this.viewingDependant = dependant;
+                this.address = this.viewingDependant.address;
+                this.email = this.viewingDependant.email;
+                this.phoneNumber = this.viewingDependant.phoneNumber;}
         );
+
     }
 
     ngOnDestroy() {
@@ -41,15 +49,23 @@ export class DependantViewComponent implements OnInit, OnDestroy {
         this.dependantSubscription.unsubscribe();
     }
 
-    dropdownOptionClicked($event, selectedDependant) {
-        // prevent the page jumping
-        $event.preventDefault();
-        this.viewingDependant = selectedDependant;
+    public openModal(template: TemplateRef<any>){
+        this.modalRef = this.modalService.show(template);
     }
 
-    public openModal(template: TemplateRef<any>){
+    public updateUserDetails(){
+        const body = {
+            address: this.address,
+            userID: this.viewingDependant.userID,
+            email: this.email,
+            phoneNumber: this.phoneNumber
+        };
 
-        this.modalRef = this.modalService.show(template);
-
+        this.HTTPService.updateUserDetails(body).then((result)=>{
+            this.modalRef.hide();
+        }).catch((err)=>{
+            console.log(err);
+            //this.modalRef.hide();
+        });
     }
 }
