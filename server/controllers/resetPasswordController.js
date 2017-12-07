@@ -8,7 +8,6 @@ var bcrypt = require('bcrypt');
 //the salt to be used to hash the password
 const saltRounds = 10;
 
-
 // Update the user's password
 exports.updatePassword = function(req, res) {
 
@@ -27,27 +26,16 @@ exports.updatePassword = function(req, res) {
         });
     };
 
-
    exports.resetPass = function(password, userID){
-        return new Promise(function(resolve, reject){
+         return new Promise(function(resolve, reject){
             db.query(
                 "UPDATE User SET `password` = ? WHERE `userID` = ? ", [password, userID],
                 function(err, rows) {
                     if (err) {
-                        //reject(err);
-                        return res.status(400).json({
-                            success: false,
-                            message: "invalid password alternative"
-                        });
+                         reject(err);
                     } else {
-                        resolve(rows);
-                        return res.status(200).json({
-                            success: true,
-                            message: 'You have successfully changed your password!',
-                            userID: user.userID,
-                            username: user.username
-                        });
-                    }
-                });
-        });
-    }
+                         resolve(rows);
+                        }
+                    });
+         });
+        };
