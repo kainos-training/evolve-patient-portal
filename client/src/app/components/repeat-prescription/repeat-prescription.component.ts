@@ -1,4 +1,4 @@
-import { Component, OnInit, TemplateRef } from '@angular/core';
+import { Component, OnInit, TemplateRef, Input, SimpleChanges } from '@angular/core';
 import { DataService } from '../../services/data.service';
 import { Medication } from '../../class/Medication';
 import { ToolTipModule } from 'angular2-tooltip';
@@ -6,6 +6,7 @@ import { BsModalService } from 'ngx-bootstrap/modal';
 import { BsModalRef } from 'ngx-bootstrap/modal/modal-options.class';
 import { Observable } from 'rxjs/Observable';
 import { Pharmacy } from '../../class/Pharmacy';
+import { User } from '../../class/User';
 import { SearchPharmacyComponent } from '../search-pharmacy/search-pharmacy.component';
 
 @Component({
@@ -15,7 +16,10 @@ import { SearchPharmacyComponent } from '../search-pharmacy/search-pharmacy.comp
 })
 export class RepeatPrescriptionComponent implements OnInit {
 
+    @Input() dependantID;
+
     public userID: String;
+    private user: User = new User();
     public dataService: DataService;
     public prescriptionList: Medication[];
     public confirmedPrescriptionList: number[];
@@ -32,7 +36,6 @@ export class RepeatPrescriptionComponent implements OnInit {
     public collectionSelected: boolean = false;
     public collectionAddress: string = "";
     public confirmedMedicationID: number[];
-
 
     constructor(dataService: DataService, private modalService: BsModalService) {
         let data;
@@ -79,6 +82,7 @@ export class RepeatPrescriptionComponent implements OnInit {
         this.ngOnInit()
         this.modalRef.hide();
         this.success = true;
+        this.removeFromList(this.prescriptionList[i]);
         }
     }
 
@@ -93,15 +97,27 @@ export class RepeatPrescriptionComponent implements OnInit {
     }
     
     ngOnInit() {
-        this.userID = this.dataService.getCookie();
+        this.getRepeatPrescriptonForUser();
+    }
 
-        this.dataService.getLocalPharmacy(this.userID).subscribe(res => {
-            this.localPharmacy = res
-            this.pharmacy = this.localPharmacy[0]
-        });
+    ngOnChanges(changes: SimpleChanges) {
+        this.getRepeatPrescriptonForUser();
+    }
 
-        this.dataService.getRepeatedMedication(this.userID).subscribe(
-            res => this.prescriptionList = res
-        );
+    getRepeatPrescriptonForUser(){
+        this.dataService.getUserFromCookie(this.user);
+        if(this.user) {
+            // uses dependantID if available, else defaults to logged in use ID
+            const id = this.dependantID || this.user.userID;
+
+            this.dataService.getLocalPharmacy(id).subscribe(res => {
+                this.localPharmacy = res
+                this.pharmacy = this.localPharmacy[0]
+            });
+
+            this.dataService.getRepeatedMedication(id).subscribe(
+                res => this.prescriptionList = res
+            );
+        }
     }
 }
