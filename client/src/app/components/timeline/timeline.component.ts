@@ -174,10 +174,10 @@ export class TimelineComponent implements OnInit {
             return '#8be28b';
         }
         if(colorChoice=='Orthopeadic'){
-            return '#61a2ff';
+            return '#b19cd9';
         }
         if(colorChoice=='Oncology'){
-            return '#fdfd7d';
+            return '#ffb8c9';
         }
 
     }
