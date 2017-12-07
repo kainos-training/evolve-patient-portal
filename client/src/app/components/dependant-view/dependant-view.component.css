@@ -9,5 +9,34 @@
     background-color: #00579f;
     border-color: #00579f;
     position: absolute; 
-    right: 0;
+    left: 0;
+    height: 50px;
+    width: 50px;
+    
+}
+
+.btnDiv{
+    z-index: 2;
+    margin-left: 290px; 
+    margin-top: 20px;
+    position: absolute;
+    float: right;
+}
+
+.glyphicon-info-sign{
+        margin-left: 5px;
+    font-size: 20px;
+    color:white;
+    background: transparent;
+    float: right;
+    margin-top: 5%;
+    border: none;
+    width: 20px;
+    height: 20px;
+    margin-right: 5px;
+    cursor: pointer;   
+}
+#patientPicMobile{
+    height:75px;
+    width:75px;
 }

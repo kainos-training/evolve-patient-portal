@@ -1,9 +1,12 @@
 <div style="min-height: calc(100vh - 85px)" *ngIf="viewingDependant">
     <h3 class="indent">Dependant View</h3>
-    <div class="box" style=" width: 100%">
+    <div class="box" style="z-index: 1; position: relative; top: 0px; left: 0px; width: 100%;">
     <evolve-personal-info-header class="box"  [dependantID]="viewingDependant.userID"></evolve-personal-info-header>
+    </div>
+    
+    <div class="btnDiv">
     <button class="btn btn-primary"  (click)="openModal(template)"><span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span></button> 
-</div>
+    </div>
     <evolve-appointment [dependantID]="viewingDependant.userID"></evolve-appointment>
     <evolve-previous-appointments [dependantID]="viewingDependant.userID"></evolve-previous-appointments>
     <evolve-review-medication [dependantID]="viewingDependant.userID"></evolve-review-medication>
@@ -20,10 +23,8 @@
             </div>
             <div class="modal-body">
                 <div class="dependant-header">
-                    <label><h4>More information</h4></label>
-                  <!--  <li *ngFor="let finalPrescriptionList of renewPrescriptionList">{{finalPrescriptionList.medicationName}}
-                    </li>
-                    <hr>-->
+                    <label><h4>Contact information</h4></label>
+                  
                 </div>
                 <div class="furtherInfo">
                   
