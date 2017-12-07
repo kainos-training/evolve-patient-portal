@@ -28,6 +28,9 @@ select {
 }
 
 #searchTextField{
-    display: inline; 
-    
+    display: inline;
+}
+
+.formTextBox{
+    width: auto;
 }
