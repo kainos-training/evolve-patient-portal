@@ -4,21 +4,27 @@
         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 " id="">
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    <h1 class="panel-title" id="widget-header">Your current prescriptions</h1>
+                    <h1 *ngIf="dependantID;then dependant else user"></h1>
+                    <ng-template #user>
+                        <h1 class="panel-title" id="widget-header">Your current prescriptions</h1>
+                    </ng-template>
+                    <ng-template #dependant>
+                        <h1 class="panel-title" id="widget-header">Dependant's current prescriptions</h1>
+                    </ng-template>
                 </div>
 
                 <div *ngIf="success" class="callout-message spaced col-xs-12">
-                        <div class="bs-callout bs-callout-success">
-                                <a (click)="closeAlert()" class="close" data-dismiss="alert" aria-label="close">x</a>
-                            <p><span>Success:</span> Your request for a repeat prescription has been processed.</p>
-                        </div>
+                    <div class="bs-callout bs-callout-success">
+                        <a (click)="closeAlert()" class="close" data-dismiss="alert" aria-label="close">x</a>
+                        <p><span>Success:</span> Your request for a repeat prescription has been processed.</p>
                     </div>
+                </div>
                 <div *ngIf="warning" class="callout-message spaced col-xs-12">
-                        <div class="bs-callout bs-callout-danger">
-                                <a (click)="closeAlert()" class="close" data-dismiss="alert" aria-label="close">x</a>
-                            <p><span>Error:</span> You have already selected this medication.</p>
-                        </div>
+                    <div class="bs-callout bs-callout-danger">
+                        <a (click)="closeAlert()" class="close" data-dismiss="alert" aria-label="close">x</a>
+                        <p><span>Error:</span> You have already selected this medication.</p>
                     </div>
+                </div>
                 <div class="panel-body" id="medicationDetails">
                     <table class="table table-hover">
                         <tbody>
