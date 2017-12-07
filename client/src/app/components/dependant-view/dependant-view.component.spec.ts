@@ -48,12 +48,12 @@ describe('DependantViewComponent', () => {
           PreviousAppointmentsComponent,
           PersonalInfoHeaderComponent,
           SecondaryInfoHeaderComponent,
-          BsModalService,
           BsModalRef
         ],
       providers: [
           DataService,
           CookieService,
+           BsModalService,
           SwitchBoardService,
           {provide: Router, useValue: mockRouter}
         ],
