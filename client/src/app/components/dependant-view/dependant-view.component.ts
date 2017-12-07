@@ -63,6 +63,10 @@ export class DependantViewComponent implements OnInit, OnDestroy {
 
         this.HTTPService.updateUserDetails(body).then((result)=>{
             this.modalRef.hide();
+            this.viewingDependant.address = body.address;
+            this.viewingDependant.email = body.email;
+            this.viewingDependant.phoneNumber = body.phoneNumber;
+            console.log(result);
         }).catch((err)=>{
             console.log(err);
             //this.modalRef.hide();
