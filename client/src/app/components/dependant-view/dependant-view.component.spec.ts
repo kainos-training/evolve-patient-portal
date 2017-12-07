@@ -36,6 +36,7 @@ describe('DependantViewComponent', () => {
           NguiMapComponent,
           DependantViewComponent,
           ReviewMedicationComponent,
+          RepeatPrescriptionComponent,
           EllipsisPipe,
           OrderByPipe,
           FilterPipe,
