@@ -20,15 +20,34 @@ exports.updatePassword = function(req, res) {
         //Creates the hash of the plainTextPassword
         var hash = bcrypt.hashSync(plainTextPassword, salt);
         let password = hash;
-    
-        db.query(
-            "UPDATE User SET `password` = ? WHERE `userID` = ? ", [password, userID],
-            function(err, rows) {
-                if (err) {
-                    console.log(err);
-                } else {
-                    console.log(err, rows);
-                }
-    
-            });
+        resetPass(userID, password).then(function(result){
+            console.log(result);
+        }).catch(function(err){
+            console.log(err);
+        });
     };
+
+
+   exports.resetPass = function(password, userID){
+        return new Promise(function(resolve, reject){
+            db.query(
+                "UPDATE User SET `password` = ? WHERE `userID` = ? ", [password, userID],
+                function(err, rows) {
+                    if (err) {
+                        //reject(err);
+                        return res.status(400).json({
+                            success: false,
+                            message: "invalid password alternative"
+                        });
+                    } else {
+                        resolve(rows);
+                        return res.status(200).json({
+                            success: true,
+                            message: 'You have successfully changed your password!',
+                            userID: user.userID,
+                            username: user.username
+                        });
+                    }
+                });
+        });
+    }
