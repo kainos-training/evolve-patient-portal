@@ -1,4 +1,4 @@
-import { Component, OnInit, TemplateRef, Input } from '@angular/core';
+import { Component, OnInit, TemplateRef, Input, SimpleChanges } from '@angular/core';
 import { DataService } from '../../services/data.service';
 import { Medication } from '../../class/Medication';
 import { ToolTipModule } from 'angular2-tooltip';
@@ -96,6 +96,10 @@ export class RepeatPrescriptionComponent implements OnInit {
     }
     
     ngOnInit() {
+        this.getRepeatPrescriptonForUser();
+    }
+
+    ngOnChanges(changes: SimpleChanges) {
         this.getRepeatPrescriptonForUser();
     }
 
