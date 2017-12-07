@@ -17,14 +17,14 @@
                             <div *ngFor="let appointmentDetail of month.getAppDetsArray(); let lastAppointment = last">
                                 <div (click)="openAppointmentModal(template,appointmentDetail.getAppID() )" *ngIf="!last" class="timeline-appointment-container">
                                     <div class="timeline-appointment-header" >{{appointmentDetail.getDepName()}}: {{appointmentDetail.getAppType()}}</div>
-                                    <div class="timeline-appointment-date">{{appointmentDetail.getAppDate() | date:'dd/MM/yyyy'}} 
+                                    <div class="timeline-appointment-date">{{appointmentDetail.getAppDate() | date:'dd/MM/yyyy hh:mm'}} 
                                         <span class="dot" [ngStyle]="{'backgroundColor': getColor(appointmentDetail.getDepName())}"></span>
                                     </div>
                                     
                                 </div>
                                 <div (click)="openAppointmentModal(template,appointmentDetail.getAppID())" *ngIf="lastAppointment" class="timeline-appointment-container append-bottom-border">
                                     <div class="timeline-appointment-header">{{appointmentDetail.getDepName()}}: {{appointmentDetail.getAppType()}}</div>
-                                    <div class="timeline-appointment-date">{{appointmentDetail.getAppDate() | date:'dd/MM/yyyy'}} 
+                                    <div class="timeline-appointment-date">{{appointmentDetail.getAppDate() | date:'dd/MM/yyyy hh:mm'}} 
                                         <span class="dot" [ngStyle]="{'backgroundColor': getColor(appointmentDetail.getDepName())}"></span>
                                     </div>
                                 </div>
@@ -40,13 +40,13 @@
                                 <div *ngFor="let appointmentDetail of month.getAppDetsArray(); let lastAppointment = last">
                                     <div (click)="openAppointmentModal(template,appointmentDetail.getAppID() )" *ngIf="!last" class="timeline-appointment-container">
                                         <div class="timeline-appointment-header">{{appointmentDetail.getDepName()}}: {{appointmentDetail.getAppType()}}</div>
-                                        <div class="timeline-appointment-date">{{appointmentDetail.getAppDate() | date:'dd/MM/yyyy'}}
+                                        <div class="timeline-appointment-date">{{appointmentDetail.getAppDate() | date:'dd/MM/yyyy hh:mm'}}
                                                 <span class="dot" [ngStyle]="{'backgroundColor': getColor(appointmentDetail.getDepName())}"></span>
                                         </div>
                                     </div>
                                     <div (click)="openAppointmentModal(template,appointmentDetail.getAppID() )" *ngIf="lastAppointment" class="timeline-appointment-container append-bottom-border">
                                         <div class="timeline-appointment-header">{{appointmentDetail.getDepName()}}: {{appointmentDetail.getAppType()}}</div>
-                                        <div class="timeline-appointment-date">{{appointmentDetail.getAppDate() | date:'dd/MM/yyyy'}}
+                                        <div class="timeline-appointment-date">{{appointmentDetail.getAppDate() | date:'dd/MM/yyyy hh:mm'}}
                                                 <span class="dot" [ngStyle]="{'backgroundColor': getColor(appointmentDetail.getDepName())}"></span>
                                         </div>
                                     </div>
