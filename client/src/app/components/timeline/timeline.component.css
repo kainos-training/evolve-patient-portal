@@ -341,3 +341,12 @@ input[data-expanded="true"]:active, input[data-expanded="false"]:active {
     background-color: #067fbb;
     outline: none;
 }
+
+.dot {
+    height: 15px;
+    width: 15px;
+    background-color: #bbb;
+    border-radius: 50%;
+    display: inline-block;
+    margin-left: 80px;
+  }
