@@ -4,3 +4,10 @@
 .indent{
     padding-left: 10px;
 }    
+
+.btn-primary{
+    background-color: #00579f;
+    border-color: #00579f;
+    position: absolute; 
+    right: 0;
+}

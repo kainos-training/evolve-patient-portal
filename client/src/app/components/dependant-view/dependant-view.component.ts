@@ -7,6 +7,10 @@ import { BsDropdownConfig } from 'ngx-bootstrap/dropdown';
 import { Medication } from '../../class/Medication';
 import { MedicationComment } from '../../class/MedicationComment';
 import { ReviewMedicationComponent } from '../review-medication/review-medication.component';
+import { TemplateRef } from '@angular/core';
+import { BsModalService } from 'ngx-bootstrap/modal';
+import { BsModalRef } from 'ngx-bootstrap/modal/modal-options.class';
+
 @Component({
     selector: 'evolve-dependant-view',
     templateUrl: './dependant-view.component.html',
@@ -17,8 +21,9 @@ export class DependantViewComponent implements OnInit, OnDestroy {
 
     private viewingDependant: User;
     private dependantSubscription: Subscription;
+    public modalRef: BsModalRef;
 
-    constructor(private data: DataService, private switchboard: SwitchBoardService) {
+    constructor(private data: DataService, private switchboard: SwitchBoardService, private modalService: BsModalService) {
 
     }
 
@@ -40,5 +45,11 @@ export class DependantViewComponent implements OnInit, OnDestroy {
         // prevent the page jumping
         $event.preventDefault();
         this.viewingDependant = selectedDependant;
+    }
+
+    public openModal(template: TemplateRef<any>){
+
+        this.modalRef = this.modalService.show(template);
+
     }
 }
