@@ -181,7 +181,7 @@
 
 .timeline-appointment-date::before {
     margin-left: 14px;
-    content: "Due: ";
+    content: "Date: ";
 }    
 
 .collapsed-year {
@@ -348,5 +348,5 @@ input[data-expanded="true"]:active, input[data-expanded="false"]:active {
     background-color: #bbb;
     border-radius: 50%;
     display: inline-block;
-    margin-left: 80px;
+    margin-left: 70px;
   }

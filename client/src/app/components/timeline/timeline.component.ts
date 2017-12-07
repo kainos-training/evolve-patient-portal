@@ -176,6 +176,9 @@ export class TimelineComponent implements OnInit {
         if(colorChoice=='Orthopeadic'){
             return 'blue';
         }
+        if(colorChoice=='Oncology'){
+            return 'pink';
+        }
 
     }
 
