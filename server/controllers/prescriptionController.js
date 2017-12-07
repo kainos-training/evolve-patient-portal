@@ -11,7 +11,7 @@ exports.updatePrescriptionDate = function(req, res) {
             success: false
         });
     } else {
-        db.updatePrescribedDate(medicationUserIDs, deliveryStatus,collectionAddress, medicationID, function(err) {
+        db.updatePrescribedDate(medicationUserIDs, deliveryStatus, collectionAddress, medicationID, function(err) {
             if (err) {
                 res.status(400).json({
                     success: false

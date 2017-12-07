@@ -1,11 +1,11 @@
 <div style="min-height: calc(100vh - 85px)" *ngIf="viewingDependant">
     <h3 class="indent">Dependant View</h3>
     <div class="box" style=" width: 100%;">
-    <evolve-personal-info-header class="box" [dependantID]="viewingDependant.userID"></evolve-personal-info-header>
-
-    <evolve-secondary-info-header class="shift-secInfo-right" [dependantID]="viewingDependant.userID"></evolve-secondary-info-header>
-</div>
+        <evolve-personal-info-header class="box" [dependantID]="viewingDependant.userID"></evolve-personal-info-header>
+        <evolve-secondary-info-header class="shift-secInfo-right" [dependantID]="viewingDependant.userID"></evolve-secondary-info-header>
+    </div>
     <evolve-appointment [dependantID]="viewingDependant.userID"></evolve-appointment>
     <evolve-previous-appointments [dependantID]="viewingDependant.userID"></evolve-previous-appointments>
     <evolve-review-medication [dependantID]="viewingDependant.userID"></evolve-review-medication>
+    <evolve-repeat-prescription [dependantID]="viewingDependant.userID"></evolve-repeat-prescription>
 </div>
