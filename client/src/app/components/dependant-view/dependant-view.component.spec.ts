@@ -10,6 +10,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { DataService } from '../../services/data.service';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { ReviewMedicationComponent } from '../review-medication/review-medication.component';
+import { RepeatPrescriptionComponent } from  '../repeat-prescription/repeat-prescription.component';
 import { PersonalInfoHeaderComponent } from '../personal-info-header/personal-info-header.component';
 import { SecondaryInfoHeaderComponent } from '../secondary-info-header/secondary-info-header.component';
 import { DependantViewComponent } from './dependant-view.component';
