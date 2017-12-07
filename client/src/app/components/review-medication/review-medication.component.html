@@ -49,8 +49,7 @@
                     <form>
                         <div class="form-group">
                             <ul *ngFor="let medicationHistoryItem of selectedMedicationHistory">
-                                <li>{{medicationHistoryItem.startDate|date:'dd/MM/yyyy'}} - {{medicationHistoryItem.endDate|date:'dd/MM/yyyy'}}
-                                    : {{medicationHistoryItem.dosage}}</li>
+                                <li>{{medicationHistoryItem.startDate|date:'dd/MM/yyyy'}} - {{medicationHistoryItem.endDate|date:'dd/MM/yyyy'}} : {{medicationHistoryItem.dosage}}</li>
                             </ul>
                         </div>
                     </form>
