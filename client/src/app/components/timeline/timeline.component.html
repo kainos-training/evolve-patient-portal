@@ -15,7 +15,7 @@
                             <div class="month-spacer"></div>
                             <div class="timeline-month-header">{{month.getMonthName()}}</div>
                             <div *ngFor="let appointmentDetail of month.getAppDetsArray(); let lastAppointment = last">
-                                <div (click)="openAppointmentModal(template,appointmentDetail.getAppID() )" *ngIf="!last" class="timeline-appointment-container" [ngStyle]="{'backgroundColor': getColor(appointmentDetail.getDepName())}" [tooltip]="appointmentDetail.getDepName()">
+                                <div (click)="openAppointmentModal(template,appointmentDetail.getAppID() )" *ngIf="!last" class="timeline-appointment-container" [ngStyle]="{'backgroundColor': getColor(appointmentDetail.getDepName())}">
                                     <div class="timeline-appointment-header" >{{appointmentDetail.getDepName()}}: {{appointmentDetail.getAppType()}}</div>
                                     <div class="timeline-appointment-date">{{appointmentDetail.getAppDate() | date:'dd/MM/yyyy'}}</div>
                                 </div>

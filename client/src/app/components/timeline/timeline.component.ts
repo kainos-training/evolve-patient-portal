@@ -167,15 +167,6 @@ export class TimelineComponent implements OnInit {
 
     getColor(colorChoice:String){
         console.log(colorChoice);
-        if(colorChoice=='Community Diabetes Team'){
-            return '#26A69A';
-        }
-        if(colorChoice=='GP'){
-            return '#f4ae5c';
-        }
-        if(colorChoice=='Orthopeadic'){
-            return 'green';
-        }
 
     }
 

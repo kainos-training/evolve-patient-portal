@@ -159,7 +159,7 @@
     height: 16px;
     background-color: rgb(132	193	222	);
     /* safari and chrome compatibility */
-    background: rgb(132,193,222);
+    background: rgb(124, 201, 236);
 }   
 
 .timeline-appointment-header {
@@ -168,7 +168,7 @@
     text-overflow: ellipsis;
     overflow: hidden;
     font-size: 16px;
-    color: white  
+    color: black;  
 }
 
 .timeline-appointment-date {
@@ -176,7 +176,7 @@
     text-overflow: ellipsis;
     overflow: hidden;
     font-size: 15px;
-    color: white;    
+    color: black;    
 }
 
 .timeline-appointment-date::before {
