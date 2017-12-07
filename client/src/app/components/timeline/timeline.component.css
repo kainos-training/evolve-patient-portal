@@ -181,7 +181,7 @@
 
 .timeline-appointment-date::before {
     margin-left: 14px;
-    content: "Due: ";
+    content: "Date: ";
 }    
 
 .collapsed-year {
