@@ -21,7 +21,7 @@ import { FilterPipe } from '../../utils/filter.pipe';
 import { UniquePipe } from '../../utils/unique.pipe';
 import { MyDatePickerModule } from 'mydatepicker';
 import { BsModalService } from 'ngx-bootstrap/modal';
-import { BsModalRef } from 'ngx-bootstrap/modal/modal-options.class';
+import {ComponentLoaderFactory, PositioningService} from "ngx-bootstrap";
 
 describe('DependantViewComponent', () => {
   let component: DependantViewComponent;
@@ -47,15 +47,16 @@ describe('DependantViewComponent', () => {
           UniquePipe,
           PreviousAppointmentsComponent,
           PersonalInfoHeaderComponent,
-          SecondaryInfoHeaderComponent,
-          BsModalRef
+          SecondaryInfoHeaderComponent
         ],
       providers: [
           DataService,
           CookieService,
-           BsModalService,
           SwitchBoardService,
-          {provide: Router, useValue: mockRouter}
+          {provide: Router, useValue: mockRouter},
+          BsModalService,
+          ComponentLoaderFactory,
+          PositioningService
         ],
       imports: [
           MyDatePickerModule,
