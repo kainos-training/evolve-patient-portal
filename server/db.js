@@ -103,7 +103,7 @@ database.updatePrescribedDate = function(medicationUserID, deliveryStatus, colle
     console.log(collectionAddress);
     database.query(
         'UPDATE MedicationUser ' +
-        'SET prescribedDate = curdate(), repeated = 0, delivery = ?, CollectionAddress = ?' +
+        'SET prescribedDate = curdate(), repeated = 0, delivery = ?, collectionAddress = ?' +
         'WHERE medicationUserID in ' + medicationUserID + 'AND medicationID =? ;', [deliveryStatus, collectionAddress, medicationID],
         function(err) {
             console.log(err);
