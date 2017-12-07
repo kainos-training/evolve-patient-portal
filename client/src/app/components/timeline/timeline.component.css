@@ -80,7 +80,7 @@
     border-top-left-radius: 10px;
     border-top-right-radius: 10px;
     height: 30px;
-    color: rgb(102,102,102);    
+   color: rgb(102,102,102);    
 }
 
 .timeline-month-header::before {
@@ -168,7 +168,7 @@
     text-overflow: ellipsis;
     overflow: hidden;
     font-size: 16px;
-    color: rgb(102,102,102);  
+    color: white  
 }
 
 .timeline-appointment-date {
@@ -176,7 +176,7 @@
     text-overflow: ellipsis;
     overflow: hidden;
     font-size: 15px;
-    color: rgb(102,102,102);    
+    color: white;    
 }
 
 .timeline-appointment-date::before {

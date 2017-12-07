@@ -15,11 +15,11 @@
                             <div class="month-spacer"></div>
                             <div class="timeline-month-header">{{month.getMonthName()}}</div>
                             <div *ngFor="let appointmentDetail of month.getAppDetsArray(); let lastAppointment = last">
-                                <div (click)="openAppointmentModal(template,appointmentDetail.getAppID() )" *ngIf="!last" class="timeline-appointment-container">
-                                    <div class="timeline-appointment-header">{{appointmentDetail.getDepName()}}: {{appointmentDetail.getAppType()}}</div>
+                                <div (click)="openAppointmentModal(template,appointmentDetail.getAppID() )" *ngIf="!last" class="timeline-appointment-container" [ngStyle]="{'backgroundColor': getColor(appointmentDetail.getDepName())}" [tooltip]="appointmentDetail.getDepName()">
+                                    <div class="timeline-appointment-header" >{{appointmentDetail.getDepName()}}: {{appointmentDetail.getAppType()}}</div>
                                     <div class="timeline-appointment-date">{{appointmentDetail.getAppDate() | date:'dd/MM/yyyy'}}</div>
                                 </div>
-                                <div (click)="openAppointmentModal(template,appointmentDetail.getAppID())" *ngIf="lastAppointment" class="timeline-appointment-container append-bottom-border">
+                                <div [ngStyle]="{'backgroundColor': getColor(appointmentDetail.getDepName())}" (click)="openAppointmentModal(template,appointmentDetail.getAppID())" *ngIf="lastAppointment" class="timeline-appointment-container append-bottom-border">
                                     <div class="timeline-appointment-header">{{appointmentDetail.getDepName()}}: {{appointmentDetail.getAppType()}}</div>
                                     <div class="timeline-appointment-date">{{appointmentDetail.getAppDate() | date:'dd/MM/yyyy'}}</div>
                                 </div>
