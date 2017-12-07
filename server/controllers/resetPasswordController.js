@@ -8,7 +8,6 @@ var bcrypt = require('bcrypt');
 //the salt to be used to hash the password
 const saltRounds = 10;
 
-
 // Update the user's password
 exports.updatePassword = function(req, res) {
 
@@ -20,15 +19,23 @@ exports.updatePassword = function(req, res) {
         //Creates the hash of the plainTextPassword
         var hash = bcrypt.hashSync(plainTextPassword, salt);
         let password = hash;
-    
-        db.query(
-            "UPDATE User SET `password` = ? WHERE `userID` = ? ", [password, userID],
-            function(err, rows) {
-                if (err) {
-                    console.log(err);
-                } else {
-                    console.log(err, rows);
-                }
-    
-            });
+        resetPass(userID, password).then(function(result){
+            console.log(result);
+        }).catch(function(err){
+            console.log(err);
+        });
     };
+
+   exports.resetPass = function(password, userID){
+         return new Promise(function(resolve, reject){
+            db.query(
+                "UPDATE User SET `password` = ? WHERE `userID` = ? ", [password, userID],
+                function(err, rows) {
+                    if (err) {
+                         reject(err);
+                    } else {
+                         resolve(rows);
+                        }
+                    });
+         });
+        };
