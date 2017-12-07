@@ -1,6 +1,6 @@
 <div  id ="maindiv" *ngIf="!isLoading">
   <label>Enter Postcode:</label>
-  <input id="searchTextField" type="text" placeholder="Postcode" (keyup)="onInputChange($event)" [(ngModel)]="userInput" class="form-control"> <button type="button" class="btn btn-primary" (click)="onSearchClick()">Search</button>
+  <input id="searchTextField" type="text" placeholder="Postcode" (keyup)="onInputChange($event)" [(ngModel)]="userInput" class="form-control formTextBox"> <button type="button" class="btn btn-primary" (click)="onSearchClick()">Search</button>
   <select *ngIf="locations.length > 0" class="form-control"  (change)="locationsChangeDropdown($event.target.value)" [(ngModel)]="selectedLocation">
     <option value="- - Select a Pharmacy - -">- - Select a Pharmacy - -</option>
 
