@@ -491,15 +491,26 @@ export class DataService {
         const options = {
             headers: new HttpHeaders().set('Content-Type', 'application/x-www-form-urlencoded'),
         };
+    }
 
-        this.http.post('/api/password/reset', $.param(body), options)
+    public updateUserDetails(newUserDetails: User){
+        return new Promise((resolve, reject)=>{
+            const body = {
+                "email": newUserDetails.email,
+                "address": newUserDetails.address,
+                "phoneNumber": newUserDetails.phoneNumber,
+                "userID": newUserDetails.userID
+            };
+            const options = {
+                headers: new HttpHeaders().set('Content-Type', 'application/x-www-form-urlencoded'),
+            };
+            this.http.post('/api/user/updateUserDetails', $.param(body), options)
             .subscribe(data => {
-                user.userID = data['userID'];
-                user.message = data['message'];
+                resolve(data);
             }, error => {
-                user.loggedIn = false;
-                user.message = error['message'];
+                reject(error);
             });
+        });
     }
 
     logout() {
