@@ -2,7 +2,6 @@ const request = require('supertest');
 const chai = require('chai');
 var resetPass = require('../../controllers/resetPasswordController');
 
-
 describe('Reset Password', function() {
     describe('POST /password/reset', function() {
         var app;
@@ -11,7 +10,6 @@ describe('Reset Password', function() {
         });
         afterEach(function() {
             app.close();
-        
         });
         it('returns status code 200 with valid data', function() {
             const body = {
