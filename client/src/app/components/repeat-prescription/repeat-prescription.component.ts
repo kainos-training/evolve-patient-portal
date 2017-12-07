@@ -82,6 +82,7 @@ export class RepeatPrescriptionComponent implements OnInit {
         this.ngOnInit()
         this.modalRef.hide();
         this.success = true;
+        this.removeFromList(this.prescriptionList[i]);
         }
     }
 

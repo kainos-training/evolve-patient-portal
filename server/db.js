@@ -98,9 +98,6 @@ database.getMedicationHistory = function(medicationID, userID, callback) {
 };
 
 database.updatePrescribedDate = function(medicationUserID, deliveryStatus, collectionAddress, medicationID, callback) {
-    console.log(medicationUserID);
-    console.log(deliveryStatus);
-    console.log(collectionAddress);
     database.query(
         'UPDATE MedicationUser ' +
         'SET prescribedDate = curdate(), repeated = 0, delivery = ?, collectionAddress = ?' +
