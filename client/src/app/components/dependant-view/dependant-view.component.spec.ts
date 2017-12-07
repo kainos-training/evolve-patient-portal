@@ -20,6 +20,8 @@ import { OrderByPipe } from '../../utils/orderby.pipe';
 import { FilterPipe } from '../../utils/filter.pipe';
 import { UniquePipe } from '../../utils/unique.pipe';
 import { MyDatePickerModule } from 'mydatepicker';
+import { BsModalService } from 'ngx-bootstrap/modal';
+import { BsModalRef } from 'ngx-bootstrap/modal/modal-options.class';
 
 describe('DependantViewComponent', () => {
   let component: DependantViewComponent;
@@ -45,7 +47,9 @@ describe('DependantViewComponent', () => {
           UniquePipe,
           PreviousAppointmentsComponent,
           PersonalInfoHeaderComponent,
-          SecondaryInfoHeaderComponent
+          SecondaryInfoHeaderComponent,
+          BsModalService,
+          BsModalRef
         ],
       providers: [
           DataService,
