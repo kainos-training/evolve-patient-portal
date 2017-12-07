@@ -21,7 +21,7 @@ import { FilterPipe } from '../../utils/filter.pipe';
 import { UniquePipe } from '../../utils/unique.pipe';
 import { MyDatePickerModule } from 'mydatepicker';
 import { BsModalService } from 'ngx-bootstrap/modal';
-import {ComponentLoaderFactory, PositioningService} from "ngx-bootstrap";
+import { ComponentLoaderFactory, PositioningService } from "ngx-bootstrap";
 
 describe('DependantViewComponent', () => {
   let component: DependantViewComponent;

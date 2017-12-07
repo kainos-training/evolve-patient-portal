@@ -69,7 +69,6 @@ export class DependantViewComponent implements OnInit, OnDestroy {
             console.log(result);
         }).catch((err)=>{
             console.log(err);
-            //this.modalRef.hide();
         });
     }
 }
