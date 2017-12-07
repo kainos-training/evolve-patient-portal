@@ -15,10 +15,9 @@ database.connect(function(err) {
 
 database.getMedications = function(userID, callback) {
     database.query(
-        "SELECT userID, medicationID, medicationName, medicationType, startDate, endDate, dosage, instructions, prescribedDate, repeated " + 
+        "SELECT userID, medicationID, medicationName, medicationType, startDate, endDate, dosage, instructions, prescribedDate, repeated " +
         "FROM User NATURAL JOIN MedicationUser NATURAL JOIN Medication NATURAL JOIN MedicationType " +
-        "WHERE userID = ? AND endDate >= NOW();", 
-        [userID],
+        "WHERE userID = ? AND endDate >= NOW();", [userID],
         function(err, rows) {
             callback(err, rows);
         });
@@ -99,13 +98,10 @@ database.getMedicationHistory = function(medicationID, userID, callback) {
 };
 
 database.updatePrescribedDate = function(medicationUserID, deliveryStatus, collectionAddress, medicationID, callback) {
-    console.log(medicationUserID);
-    console.log(deliveryStatus);
-    console.log(collectionAddress);
     database.query(
         'UPDATE MedicationUser ' +
-        'SET prescribedDate = curdate(), repeated = 0, delivery = ?, CollectionAddress = ?' +
-        'WHERE medicationUserID in ' + medicationUserID + 'AND medicationID =? ;', [deliveryStatus, collectionAddress, medicationID], 
+        'SET prescribedDate = curdate(), repeated = 0, delivery = ?, collectionAddress = ?' +
+        'WHERE medicationUserID in ' + medicationUserID + 'AND medicationID =? ;', [deliveryStatus, collectionAddress, medicationID],
         function(err) {
             console.log(err);
             callback(err);
@@ -182,8 +178,7 @@ database.getUserClinicians = function(userID, callback) {
     database.query(
         "SELECT c.clinicianID, c.title, c.firstName, c.lastName, c.jobTitle, c.email " +
         "FROM Clinician AS c JOIN UserClinician AS uc ON c.clinicianID = uc.clinicianID " +
-        "WHERE uc.userID = ?;",
-        [userID],
+        "WHERE uc.userID = ?;", [userID],
         function(err, rows) {
             callback(err, rows);
         });
@@ -192,8 +187,7 @@ database.getUserClinicians = function(userID, callback) {
 database.addAppointmentQuery = function(appointmentID, clinicianID, querySubject, queryText, callback) {
     database.query(
         "INSERT INTO AppointmentQuery(appointmentID, clinicianID, querySubject, queryText) " +
-        "VALUES(?, ?, ?, ?);",
-        [appointmentID, clinicianID, querySubject, queryText],
+        "VALUES(?, ?, ?, ?);", [appointmentID, clinicianID, querySubject, queryText],
         function(err, rows) {
             callback(err)
         });
@@ -201,18 +195,17 @@ database.addAppointmentQuery = function(appointmentID, clinicianID, querySubject
 
 database.getAppointmentQuery = function(clinicianID, callback) {
     database.query(
-        "SELECT email, firstname FROM Clinician WHERE clinicianID = ?;",
-        [clinicianID],
+        "SELECT email, firstname FROM Clinician WHERE clinicianID = ?;", [clinicianID],
         function(err, rows) {
             callback(err, rows);
         });
 };
 
-database.insertAnswer = function(taskID, answer, callback){
+database.insertAnswer = function(taskID, answer, callback) {
     database.query(
-        "INSERT INTO TaskQuestionnaire (taskID, answer, answered, dateSubmitted) "
-        +"VALUES (?, ?, 1, CURRENT_TIMESTAMP);", [taskID, answer],
-        function(err){
+        "INSERT INTO TaskQuestionnaire (taskID, answer, answered, dateSubmitted) " +
+        "VALUES (?, ?, 1, CURRENT_TIMESTAMP);", [taskID, answer],
+        function(err) {
             callback(err);
         }
     )
