@@ -10,7 +10,9 @@ export class User {
     MRIN : string;
     firstName : string;
     lastName : string;
-    phoneNumber : string;
+    mobilePhoneNumber : string;
+    homePhoneNumber : string;
+    workPhoneNumber: string;
     title : string;
     address : string;
     email : string;

@@ -4,7 +4,7 @@ exports.getUserInfoByUserID = function(req, res) {
     let userID = req.body.userID;
     db.query(
         
-        "SELECT userID, firstName, lastName, dateOfBirth, phoneNumber, title, gender, MRIN, address, email " +
+        "SELECT userID, firstName, lastName, dateOfBirth, mobilePhoneNumber, homePhoneNumber, workPhoneNumber, title, gender, MRIN, address, email " +
         "FROM User " +
         "WHERE userID = ? ", 
         [userID],

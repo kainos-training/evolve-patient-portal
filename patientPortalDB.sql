@@ -28,7 +28,10 @@ CREATE TABLE IF NOT EXISTS `User` (
     MRIN char(9) not null,
     firstName varchar(60) not null,
     lastName varchar(60) not null,
-    phoneNumber varchar(20) not null,
+    preferredName varchar(60) null,
+    mobilePhoneNumber varchar(20) not null,
+    homePhoneNumber varchar(20) null,
+    workPhoneNumber varchar(20) null,
     title enum('Mr', 'Mrs', 'Miss', 'Ms', 'Dr') not null,
     address varchar(150) not null,
     email varchar(100) not null,
@@ -224,15 +227,15 @@ VALUES ('Dr. A Cheyne', 'Ormeau Park Surgery', '281 Ormeau Rd, Belfast BT7 3GG, 
 ('Dr. E Glass', 'The Surgery', '1 Church St, Newtownards BT23 4FH'),
 ('Dr. R Kane', 'Springvale Medical Practice', '463 Springfield Rd, Belfast BT12 7DP, UK');
 
-INSERT INTO `User` (username, `password`, dateOfBirth, gender, MRIN, firstName, lastName, phoneNumber, title, address, email, deceased, gpID,pharmacyID, active)
-VALUES ('jsmith', '$2a$10$YqV/YtnOUd62xFSai8gRseO4nU5otTdyDTD7yWwaVquZfo02O2Uee', '1960-01-01', 'Female', '123456789', 'Jane', 'Smith', '07712345678', 'Mrs', '32 Orby Walk, Belfast', 'fakeemail@kainos.com', 'No', 1,1, true),
-('smurray', '$2a$10$YqV/YtnOUd62xFSai8gRseO4nU5otTdyDTD7yWwaVquZfo02O2Uee', '1997-08-08', 'Female', '123456890', 'Shannon', 'Murray', '07912345678', 'Mrs', '23 Grace Avenue, Belfast', 'fakeemail@kainos.com', 'No', 2,1, true),
-('asmith', '$2a$10$YqV/YtnOUd62xFSai8gRseO4nU5otTdyDTD7yWwaVquZfo02O2Uee', '2005-03-01', 'Male', '123458289', 'Andrew', 'Smith', '07856748927', 'Mr', '32 Orby Walk, Belfast', 'fakeemail@kainos.com', 'No', 1,1,false),
-('ksmith', '$2a$10$YqV/YtnOUd62xFSai8gRseO4nU5otTdyDTD7yWwaVquZfo02O2Uee', '2012-03-01', 'Female', '803409789', 'Kate', 'Smith', '07856799927', 'Miss', '32 Orby Walk, Belfast', 'fakeemail@kainos.com', 'No', 1,1, false),
-('csmith', '$2a$10$YqV/YtnOUd62xFSai8gRseO4nU5otTdyDTD7yWwaVquZfo02O2Uee', '2005-03-01', 'Female', '803409789', 'Chloe', 'Smith', '07856799927', 'Ms', '32 Orby Walk, Belfast', 'fakeemail@kainos.com', 'No', 1,1, false),
-('jdaniels', '$2a$10$YqV/YtnOUd62xFSai8gRseO4nU5otTdyDTD7yWwaVquZfo02O2Uee',  '1989-11-09', 'Male', '098765432', 'Jack', 'Daniels', '07745678921', 'Mr', '91 Bangor Road, Newtownards',  'fakeemail@kainos.com', 'No', 3,1, true),
-('ajackson', '$2a$10$YqV/YtnOUd62xFSai8gRseO4nU5otTdyDTD7yWwaVquZfo02O2Uee',  '1995-12-25', 'Male', '543028796', 'Andrew', 'Jackson', '07899137817', 'Dr', '66 Church Street, Antrim',  'fakeemail@kainos.com', 'No', 3,1, true),
-('bsmith', '$2a$10$YqV/YtnOUd62xFSai8gRseO4nU5otTdyDTD7yWwaVquZfo02O2Uee',  '1928-08-04', 'Male', '065756297', 'Bill', 'Smith', '07767584930', 'Mr', '33 Orby Walk, Belfast',  'fakeemail@kainos.com', 'No', 1,1, false);
+INSERT INTO `User` (username, `password`, dateOfBirth, gender, MRIN, firstName, lastName, mobilePhoneNumber, homePhoneNumber, workPhoneNumber, title, address, email, deceased, gpID,pharmacyID, active)
+VALUES ('jsmith', '$2a$10$YqV/YtnOUd62xFSai8gRseO4nU5otTdyDTD7yWwaVquZfo02O2Uee', '1960-01-01', 'Female', '123456789', 'Jane', 'Smith', '07712345678', '02890848567', '02890673645', 'Mrs', '32 Orby Walk, Belfast', 'fakeemail@kainos.com', 'No', 1,1, true),
+('smurray', '$2a$10$YqV/YtnOUd62xFSai8gRseO4nU5otTdyDTD7yWwaVquZfo02O2Uee', '1997-08-08', 'Female', '123456890', 'Shannon', 'Murray', '07912345678', '02890829521', '028905364758', 'Mrs', '23 Grace Avenue, Belfast', 'fakeemail@kainos.com', 'No', 2,1, true),
+('asmith', '$2a$10$YqV/YtnOUd62xFSai8gRseO4nU5otTdyDTD7yWwaVquZfo02O2Uee', '2005-03-01', 'Male', '123458289', 'Andrew', 'Smith', '07856748927', '02890379216', '', 'Mr', '32 Orby Walk, Belfast', 'fakeemail@kainos.com', 'No', 1,1,false),
+('ksmith', '$2a$10$YqV/YtnOUd62xFSai8gRseO4nU5otTdyDTD7yWwaVquZfo02O2Uee', '2012-03-01', 'Female', '803409789', 'Kate', 'Smith', '07856799927', '02890562581', '', 'Miss', '32 Orby Walk, Belfast', 'fakeemail@kainos.com', 'No', 1,1, false),
+('csmith', '$2a$10$YqV/YtnOUd62xFSai8gRseO4nU5otTdyDTD7yWwaVquZfo02O2Uee', '2005-03-01', 'Female', '803409789', 'Chloe', 'Smith', '07856799927', '02890458294', '', 'Ms', '32 Orby Walk, Belfast', 'fakeemail@kainos.com', 'No', 1,1, false),
+('jdaniels', '$2a$10$YqV/YtnOUd62xFSai8gRseO4nU5otTdyDTD7yWwaVquZfo02O2Uee',  '1989-11-09', 'Male', '098765432', 'Jack', 'Daniels', '07745678921', '02890627036', '02890267384', 'Mr', '91 Bangor Road, Newtownards',  'fakeemail@kainos.com', 'No', 3,1, true),
+('ajackson', '$2a$10$YqV/YtnOUd62xFSai8gRseO4nU5otTdyDTD7yWwaVquZfo02O2Uee',  '1995-12-25', 'Male', '543028796', 'Andrew', 'Jackson', '07899137817', '02890736284', '02890579543', 'Dr', '66 Church Street, Antrim',  'fakeemail@kainos.com', 'No', 3,1, true),
+('bsmith', '$2a$10$YqV/YtnOUd62xFSai8gRseO4nU5otTdyDTD7yWwaVquZfo02O2Uee',  '1928-08-04', 'Male', '065756297', 'Bill', 'Smith', '07767584930', '02890173826', '', 'Mr', '33 Orby Walk, Belfast',  'fakeemail@kainos.com', 'No', 1,1, false);
 
 INSERT INTO UserDependant (userID, dependantID)
 VALUES(1, 3), (1, 4), (1, 8);

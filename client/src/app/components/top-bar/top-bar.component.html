@@ -10,7 +10,8 @@
 </div>
 <div id="button-list" class="hidden-xs col-sm-9 col-md-10 col-lg-10 right-item">
     <evolve-personal-info-header class="shift-left top-bar"></evolve-personal-info-header>
-    <div class="settings-button" (click)="openModal(popup)">
+     <div class="btnDiv">
+    <button class="btn btn-primary"  (click)="openModal(popup)"><span class="glyphicon glyphicon-edit" aria-hidden="true"></span></button>
     </div>
     <div class="log-out-button" (click)=this.data.logout()><span class="log-out-button glyphicon glyphicon-log-out"></span></div>
 </div>
@@ -24,13 +25,31 @@
     <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
         <span aria-hidden="true">&times;</span>
     </button>
-
     <div class="modal-body">
-        <div class="perscription-header">
-            <hr>
-        </div>
-        <button id="settings-submit-button" type="submit" class="btn btn-success btn-sm btn-block evolve-modal-btn">
-            Submit
-        </button>
+                
+               
+                
+                   <form onsubmit="event.preventDefault();">
+                    <div class="form-group">
+                        <form class="form">
+                            <label for="address">Address: </label>
+                            <input  style="width: auto; display: inline;" id="address" name="address" type="text" placeholder="Address" [(ngModel)]="address" [(value)]="address" class="form-control formTextBox"> <br>
+
+                            <label for="mobilePhoneNumber" style="margin-top: 20px;">Mobile Number: </label>
+                            <input  style="width: auto; display: inline;" id="mobilePhoneNumber" name="mobilePhoneNumber" type="text" placeholder="Mobile Number" [(ngModel)]="mobilePhoneNumber" [(value)]="mobilePhoneNumber" class="form-control formTextBox"> <br>
+
+                            <label for="homePhoneNumber" style="margin-top: 20px;">Home Number: </label>
+                            <input  style="width: auto; display: inline;" id="homePhoneNumber" name="homePhoneNumber" type="text" placeholder="Home Number" [(ngModel)]="homePhoneNumber" [(value)]="homePhoneNumber" class="form-control formTextBox"> <br>
+
+                            <label for="workPhoneNumber" style="margin-top: 20px;">Work Number: </label>
+                            <input  style="width: auto; display: inline;" id="workPhoneNumber" name="workPhoneNumber" type="text" placeholder="Work Number" [(ngModel)]="workPhoneNumber" [(value)]="workPhoneNumber" class="form-control formTextBox"> <br>
+                            
+                            <label for="email" style="margin-top: 20px;">Email: </label>
+                            <input  style="width: auto; display: inline;" id="email" name="email" type="text" placeholder="Email" [(ngModel)]="email" [(value)]="email" class="form-control formTextBox">
+                        </form>
+                    </div>
+                    <button type="button" class="btn btn-success" (click)="updateUserDetails()">Update Details</button>
+                </form>
+
     </div>
 </ng-template>

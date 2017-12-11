@@ -13,7 +13,9 @@ describe('User Details', function() {
         const body = {
             email: "test@test.com",
             address: "21 No Where Lane",
-            "phoneNumber": "123213",
+            "mobilePhoneNumber": "123213",
+            "homePhoneNumber": "456456",
+            "workPhoneNumber": "789789",
             "userID": 1
         };
 

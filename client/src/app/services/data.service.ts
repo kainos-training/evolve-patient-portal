@@ -498,7 +498,9 @@ export class DataService {
             const body = {
                 "email": newUserDetails.email,
                 "address": newUserDetails.address,
-                "phoneNumber": newUserDetails.phoneNumber,
+                "mobilePhoneNumber": newUserDetails.mobilePhoneNumber,
+                "homePhoneNumber": newUserDetails.homePhoneNumber,
+                "workPhoneNumber": newUserDetails.workPhoneNumber,
                 "userID": newUserDetails.userID
             };
             const options = {

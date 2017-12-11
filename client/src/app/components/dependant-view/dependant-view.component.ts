@@ -22,7 +22,9 @@ export class DependantViewComponent implements OnInit, OnDestroy {
     public newUserDetails: User;
     public address: string;
     public email: string;
-    public phoneNumber: string;
+    public mobilePhoneNumber: string;
+    public homePhoneNumber: string;
+    public workPhoneNumber: string;
     private HTTPService: DataService;
 
     constructor(private data: DataService, private switchboard: SwitchBoardService, private modalService: BsModalService) {
@@ -38,7 +40,9 @@ export class DependantViewComponent implements OnInit, OnDestroy {
                 this.viewingDependant = dependant;
                 this.address = this.viewingDependant.address;
                 this.email = this.viewingDependant.email;
-                this.phoneNumber = this.viewingDependant.phoneNumber;}
+                this.mobilePhoneNumber = this.viewingDependant.mobilePhoneNumber;
+                this.homePhoneNumber = this.viewingDependant.homePhoneNumber;
+                this.workPhoneNumber = this.viewingDependant.workPhoneNumber;}
         );
 
     }
@@ -58,14 +62,18 @@ export class DependantViewComponent implements OnInit, OnDestroy {
             address: this.address,
             userID: this.viewingDependant.userID,
             email: this.email,
-            phoneNumber: this.phoneNumber
+            mobilePhoneNumber: this.mobilePhoneNumber,
+            homePhoneNumber: this.homePhoneNumber,
+            workPhoneNumber: this.workPhoneNumber
         };
 
         this.HTTPService.updateUserDetails(body).then((result)=>{
             this.modalRef.hide();
             this.viewingDependant.address = body.address;
             this.viewingDependant.email = body.email;
-            this.viewingDependant.phoneNumber = body.phoneNumber;
+            this.viewingDependant.mobilePhoneNumber = body.mobilePhoneNumber;
+            this.viewingDependant.homePhoneNumber = body.homePhoneNumber;
+            this.viewingDependant.workPhoneNumber = body.workPhoneNumber;
             console.log(result);
         }).catch((err)=>{
             console.log(err);
