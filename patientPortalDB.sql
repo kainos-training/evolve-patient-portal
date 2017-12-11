@@ -159,7 +159,7 @@ CREATE TABLE IF NOT EXISTS LocationDepartment (
     locationID int not null,
     departmentID int not null,
     departmentURL varchar(900),
-    departmentWards varchar(200),
+    departmentLocation varchar(200),
     primary key (locationDepartmentID),
     foreign key (locationID) references Location (locationID),
     foreign key (departmentID) references Department (departmentID)
@@ -290,7 +290,7 @@ VALUES ('Royal Victoria Hospital, 274 Grosvenor Rd, Belfast, BT12 6BA'),
 INSERT INTO Department (DepartmentName)
 VALUES ('Orthopeadic'), ('Community Diabetes Team'), ('Oncology'), ('GP');
 
-INSERT INTO LocationDepartment (locationID, departmentID, departmentURL, departmentWards)
+INSERT INTO LocationDepartment (locationID, departmentID, departmentURL, departmentLocation)
 VALUES (1, 1, 'http://www.belfasttrust.hscni.net/services/3035.htm', 'Ward 3a'), (2, 1, 'http://www.belfasttrust.hscni.net/services/3035.htm', 'Ward 3a'), (2, 2, 'http://www.belfasttrust.hscni.net/CommunityDiabetesSpecialistTeams.htm', 'Ward 4c'), (3, 3, 'http://www.belfasttrust.hscni.net/services/CommunityOncologyPalliativeCare.htm', 'Ward 1b'),(1,4, 'http://online.hscni.net/family-practitioners/general-practitioners-gps/', 'Ward 4a');
 
 INSERT INTO AppointmentType (`type`)
