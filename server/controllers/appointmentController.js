@@ -24,6 +24,7 @@ exports.getAllAppointmentsByUserID = function(req, res) {
     )
 };
 
+
 exports.getAppointmentFurtherInfo = function(req, res) {
     let appointmentID = req.body.appointmentID;
     db.query(
@@ -123,4 +124,32 @@ exports.getPreviousAppointments = function(req, res) {
             }
         }
     )
+};
+
+exports.addAppointment = function(req, res) {
+    const appointmentID = req.body.appointmentID;
+    const userID = req.body.userID;
+    const LocationDepartmentID = req.body.LocationDepartmentID;
+    const clinicianID = req.body.clinicianID;
+    const dateOfAppointment = req.body.dateOfAppointment;
+    const comment = req.body.comment;
+    const appointmentTypeID = req.body.appointmentTypeID;
+    
+
+    if (!LocationDepartmentID|| !clinicianID || !dateOfAppointment || !comment || !appointmentTypeID) {
+        res.status(400).json({
+            success: false
+        });
+    } else {
+        db.addAppointment(appointmentID, userID, LocationDepartmentID, clinicianID, dateOfAppointment, comment, appointmentTypeID, function(err) {
+            if (err) {
+                console.log(err);
+                res.status(400).json({
+                    success: false
+                });
+            } else {
+                res.status(200).send("success");
+            }
+        });
+    }
 };
