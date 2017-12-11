@@ -13,7 +13,7 @@
                     <div *ngIf="year.getYearNumber()==currentYear" class="expandable">
                         <div *ngFor="let month of year.getAppMonthArray(); let lastMonth = last">
                             <div class="month-spacer"></div>
-                            <div class="timeline-month-header">{{month.getMonthName()}}</div>
+                            <div class="timeline-month-header">{{month.getMonthName()}} Hello</div>
                             <div *ngFor="let appointmentDetail of month.getAppDetsArray(); let lastAppointment = last">
                                 <div (click)="openAppointmentModal(template,appointmentDetail.getAppID() )" *ngIf="!last" class="timeline-appointment-container">
                                     <div class="timeline-appointment-header">{{appointmentDetail.getDepName()}}: {{appointmentDetail.getAppType()}}</div>
