@@ -12,7 +12,6 @@ apt:
         - google-chrome
     packages:
         - google-chrome-stable
-        - google-chrome-beta
 
 services:
     - mysql
