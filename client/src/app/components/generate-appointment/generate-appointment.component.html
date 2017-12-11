@@ -11,6 +11,12 @@
         </select>
             </span>
             <br>
+            <br>
+            <span><select>
+                <option *ngFor="let user of userString">{{user}}</option> 
+            </select>
+                </span>
+                <br>
            <span class="row"><button type="button" class="btn btn-success" (click)="onSubmit()">Submit</button></span>
     </div>
 
