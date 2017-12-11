@@ -5,6 +5,12 @@
     <div class="display-block">
            <span class="row"><input type="date" [(ngModel)]="dateString"/></span>
            <span class="row"><input type="time" [(ngModel)]="timeString"></span>
+           <br>
+           <span><select>
+            <option *ngFor="let appointment of appointmentString">{{appointment}}</option> 
+        </select>
+            </span>
+            <br>
            <span class="row"><button type="button" class="btn btn-success" (click)="onSubmit()">Submit</button></span>
     </div>
 

@@ -10,11 +10,17 @@ export class GenerateAppointmentComponent implements OnInit {
   date:Date;
   dateString:String;
   timeString:String;
+  appointmentString:String[] = [];
 
   constructor(private data: DataService) { }
 
   ngOnInit() {
     this.timeString = '12:00:00';
+    this.appointmentString.push("Pre-Op Assessment");
+    this.appointmentString.push("Emergency Surgery");
+    this.appointmentString.push("GP Appointment");
+    this.appointmentString.push("Check-up");
+    console.log(this.appointmentString);
   }
 
   onSubmit(){
