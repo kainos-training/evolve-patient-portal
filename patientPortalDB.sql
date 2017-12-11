@@ -96,6 +96,16 @@ CREATE TABLE IF NOT EXISTS TaskQuestionnaire (
     foreign key (taskID) references Task (taskID)
 );
 
+CREATE TABLE IF NOT EXISTS Clinician (
+    clinicianID int auto_increment not null,
+    title enum('Mr', 'Mrs', 'Miss', 'Ms', 'Dr'),
+    firstName varchar(60) not null,
+    lastName varchar(60) not null,
+    jobTitle varchar(30) not null,
+    email varchar(100) not null,
+    primary key (clinicianID)
+);
+
 CREATE TABLE IF NOT EXISTS MedicationUser (
 medicationUserID int auto_increment not null,
 userID int not null,
@@ -108,9 +118,11 @@ instructions varchar(200) not null,
 repeated bool not null,
 delivery bool not null,
 collectionAddress varchar(200),
+clinicianID int,
 primary key (medicationUserID),
 foreign key (userID) references `User` (userID),
-foreign key (medicationID) references Medication (medicationID)
+foreign key (medicationID) references Medication (medicationID),
+foreign key (clinicianID) references Clinician (clinicianID)
 );
 
 CREATE TABLE IF NOT EXISTS MedicationUserComment (
@@ -123,16 +135,6 @@ primary key (medicationUserCommentID),
 foreign key (medicationUserID) references MedicationUser (medicationUserID)
 );
 
-CREATE TABLE IF NOT EXISTS Clinician (
-    clinicianID int auto_increment not null,
-    title enum('Mr', 'Mrs', 'Miss', 'Ms', 'Dr'),
-    firstName varchar(60) not null,
-    lastName varchar(60) not null,
-    jobTitle varchar(30) not null,
-    email varchar(100) not null,
-    primary key (clinicianID)
-);
-
 CREATE TABLE IF NOT EXISTS UserClinician (
     userClinicianID int auto_increment not null,
     userID int not null,
@@ -140,6 +142,14 @@ CREATE TABLE IF NOT EXISTS UserClinician (
     primary key (userClinicianID),
     foreign key (userID) references `User` (userID),
     foreign key (clinicianID) references Clinician(clinicianID)
+);
+
+CREATE TABLE IF NOT EXISTS GPClinician (
+  gpID int not null,
+  clinicianID int not null,
+  primary key(gpID, clinicianID),
+  foreign key (gpID) references GP(gpID),
+  foreign key (clinicianID) references Clinician(clinicianID)
 );
 
 CREATE TABLE IF NOT EXISTS Location (
@@ -254,15 +264,38 @@ VALUES('Penicillin', 1, 'https://en.wikipedia.org/wiki/Penicillin'), -- 1
 ('Naproxen',6,'https://en.wikipedia.org/wiki/Naproxen'), -- 11
 ('Insulin',7,'https://en.wikipedia.org/wiki/Insulin'); -- 12
 
-INSERT INTO MedicationUser(userID, medicationID, startDate, endDate, dosage, instructions,prescribedDate,repeated, delivery)
+INSERT INTO Clinician (title, firstName, lastName, jobTitle, email)
+VALUES ('Dr', 'Alex', 'Hyndman', 'Consultant', 'c.mullan@kainos.com'),
+('Dr', 'John', 'Adams', 'Oncologist', 'c.mullan@kainos.com'),
+('Dr', 'Karen', 'Reid', 'Obstetrician',  'c.mullan@kainos.com'),
+('Dr', 'Sally', 'Jones', 'Consultant',  'c.mullan@kainos.com'),
+('Dr', 'Ian', 'Stokes', 'Clinical Nurse Specialist',  'c.mullan@kainos.com'),
+(NULL, 'Clinic', 'Administration', 'Admin team',  'c.mullan@kainos.com'),
+('Dr', 'Anna',  'Cheyne', 'GP', 'test@email.com'),
+('Dr', 'Erin', 'Glass', 'GP', 'test@email.com'),
+('Dr', 'Robert', 'Kane', 'GP', 'test@email.com');
+
+INSERT INTO MedicationUser(userID, medicationID, startDate, endDate, dosage, instructions,prescribedDate,repeated, delivery, clinicianID)
 VALUES
-(1, 12, '2017-06-01', '2019-08-10', '30 units', 'Subcutaneous injection. Take as recommended by your diabetic specialist','2017-09-01',TRUE,TRUE),
-(1, 12, '2016-06-01', '2017-06-01', '20 units', 'Subcutaneous injection. Take as recommended by your diabetic specialist', '2017-09-01',TRUE,TRUE),
-(1, 12, '2015-06-01', '2016-06-01', '20 units', 'Subcutaneous injection. Take as recommended by your diabetic specialist', '2017-04-01',TRUE,TRUE),
-(1,10, (NOW() - INTERVAL 170 DAY),(NOW() + INTERVAL 100 DAY),'60mg','Take 1 tablet every 4 hours as needed. Do not exceed 240mg a day.', (NOW() - INTERVAL 20 DAY), true,TRUE),
-(1,11,(NOW() - INTERVAL 170 DAY),(NOW() + INTERVAL 100 DAY),'220mg','Take 1 caplet every 8-12 hours',(NOW() - INTERVAL 20 DAY),false,TRUE),
-(1,12,(NOW() - INTERVAL 1000 DAY),NULL,'30 Units','Subcutaneous injection. Take as recommended by your diabetic specialist',(NOW() - INTERVAL 12 DAY),true,TRUE),
-(4,9,(NOW() - INTERVAL 2 DAY),(NOW() + INTERVAL 12 DAY),'30mg','Subcutaneous injection. Take as recommended by your diabetic specialist',(NOW() - INTERVAL 12 DAY),true,TRUE);
+(1, 12, '2017-06-01', '2019-08-10', '30 units', 'Subcutaneous injection. Take as recommended by your diabetic specialist','2017-09-01',TRUE,TRUE,2),
+(1, 12, '2016-06-01', '2019-08-10', '20 units', 'Subcutaneous injection. Take as recommended by your diabetic specialist', '2017-09-01',FALSE,TRUE,1),
+(1, 12, '2015-06-01', '2019-08-10', '20 units', 'Subcutaneous injection. Take as recommended by your diabetic specialist', '2017-04-01',TRUE,TRUE,4),
+(1, 12, '2017-06-01', '2019-08-10', '30 units', 'Subcutaneous injection. Take as recommended by your diabetic specialist','2017-09-01',FALSE,TRUE,2),
+(1, 12, '2016-06-01', '2019-08-10', '20 units', 'Subcutaneous injection. Take as recommended by your diabetic specialist', '2017-09-01',FALSE,TRUE,1),
+(1, 10, '2016-06-01', '2019-08-10', '30 units', 'Subcutaneous injection. Take as recommended by your diabetic specialist', '2017-09-01',TRUE,TRUE,4),
+(1, 12, '2015-06-01', '2019-08-10', '10 units', 'Subcutaneous injection. Take as recommended by your diabetic specialist', '2017-04-01',TRUE,TRUE,2),
+(1, 1, '2015-06-01', '2019-08-10', '40 units', 'Subcutaneous injection. Take as recommended by your diabetic specialist', '2017-04-01',FALSE,TRUE,1),
+(1, 6, '2015-06-01', '2019-08-10', '100 units', 'Subcutaneous injection. Take as recommended by your diabetic specialist', '2017-04-01',TRUE,TRUE,4),
+(1, 3, '2015-06-01', '2019-08-10', '15 units', 'Subcutaneous injection. Take as recommended by your diabetic specialist', '2017-04-01',TRUE,TRUE,2),
+(1, 4, '2015-06-01', '2019-08-10', '20 units', 'Subcutaneous injection. Take as recommended by your diabetic specialist', '2017-04-01',TRUE,TRUE,1),
+(1, 10, '2015-06-01', '2019-08-10', '30 units', 'Subcutaneous injection. Take as recommended by your diabetic specialist', '2017-04-01',FALSE,TRUE,4),
+(1, 11, '2015-06-01', '2019-08-10', '20 units', 'Subcutaneous injection. Take as recommended by your diabetic specialist', '2017-04-01',TRUE,TRUE,2),
+(1, 12, '2015-06-01', '2019-08-10', '10 units', 'Subcutaneous injection. Take as recommended by your diabetic specialist', '2017-04-01',TRUE,TRUE,1),
+(1, 7, '2015-06-01', '2019-08-10', '20 units', 'Subcutaneous injection. Take as recommended by your diabetic specialist', '2017-04-01',FALSE,TRUE,4),
+(1,10, (NOW() - INTERVAL 170 DAY),(NOW() + INTERVAL 100 DAY),'60mg','Take 1 tablet every 4 hours as needed. Do not exceed 240mg a day.', (NOW() - INTERVAL 20 DAY), true,TRUE,5),
+(1,11,(NOW() - INTERVAL 170 DAY),(NOW() + INTERVAL 100 DAY),'220mg','Take 1 caplet every 8-12 hours',(NOW() - INTERVAL 20 DAY),false,TRUE,7),
+(1,12,(NOW() - INTERVAL 1000 DAY),NULL,'30 Units','Subcutaneous injection. Take as recommended by your diabetic specialist',(NOW() - INTERVAL 12 DAY),true,TRUE,3),
+(4,9,(NOW() - INTERVAL 2 DAY),(NOW() + INTERVAL 12 DAY),'30mg','Subcutaneous injection. Take as recommended by your diabetic specialist',(NOW() - INTERVAL 12 DAY),true,TRUE,8);
 
 /*INSERT INTO MedicationUserComment(medicationUserID, commentText, deleted)
 VALUES (1, 'Not feeling the benefit after two weeks', false), (2, 'Helping to minimise pain but still exists', false),
@@ -271,16 +304,11 @@ VALUES (1, 'Not feeling the benefit after two weeks', false), (2, 'Helping to mi
 (6, 'Ear pain easing', false),
 (6, 'Eye pain gone', true);*/
 
-INSERT INTO Clinician (title, firstName, lastName, jobTitle, email)
-VALUES ('Dr', 'Alex', 'Hyndman', 'Consultant', 'c.mullan@kainos.com'),
-('Dr', 'John', 'Adams', 'Oncologist', 'c.mullan@kainos.com'),
-('Dr', 'Karen', 'Reid', 'Obstetrician',  'c.mullan@kainos.com'),
-('Dr', 'Sally', 'Jones', 'Consultant',  'c.mullan@kainos.com'),
-('Dr', 'Ian', 'Stokes', 'Clinical Nurse Specialist',  'c.mullan@kainos.com'),
-(NULL, 'Clinic', 'Administration', 'Admin team',  'c.mullan@kainos.com');
-
 INSERT INTO UserClinician (userID, clinicianID)
 VALUES (1, 4), (1, 5), (1, 6), (8, 4);
+
+INSERT INTO GPClinician(gpID, clinicianID)
+VALUES (1,7), (2,8), (3,9);
 
 INSERT INTO Location (locationAddress)
 VALUES ('Royal Victoria Hospital, 274 Grosvenor Rd, Belfast, BT12 6BA'),

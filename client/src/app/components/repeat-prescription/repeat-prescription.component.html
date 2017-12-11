@@ -28,15 +28,57 @@
                 <div class="panel-body" id="medicationDetails">
                     <table class="table table-hover">
                         <tbody>
+                            <tr class="fixed-top">
+                                <td>
+                                    <span class="widget-title-txt">Name</span>
+                                </td>
+                                <td>
+                                    <span class="widget-title-txt">Dosage</span>
+                                </td>
+                                <td>
+                                    <span class="widget-title-txt">Prescribed Date</span>
+                                </td>
+                                <td>
+                                    <span class="widget-title-txt">Prescription Expires</span>
+                                </td>
+                                <td>
+                                    <span class="widget-title-txt">Issued By</span>
+                                </td>
+                                <td>
+                                    <span class="widget-title-txt">Role</span>
+                                </td>
+                                <td>
+                                    <span class="widget-title-txt">Repeat</span>
+                                </td>
+                            </tr>
                             <tr *ngFor="let prescription of prescriptionList">
                                 <td>
-                                    <span class="widget-title-txt">Name: {{prescription.medicationName}}</span><br>
+                                    <span class="widget-body-txt">{{prescription.medicationName}}</span><br>
                                 </td>
                                 <td>
-                                    <span class="widget-body-txt">Dosage: {{prescription.dosage}}</span><br>
+                                    <span class="widget-body-txt">{{prescription.dosage}}</span><br>
                                 </td>
                                 <td>
-                                    <span class="widget-title-txt">Expires: {{prescription.endDate | date}}</span><br>
+                                    <span class="widget-body-txt">{{prescription.prescribedDate | date}}</span>
+                                </td>
+                                <td>
+                                    <span class="widget-body-txt">{{prescription.endDate | date}}</span><br>
+                                </td>
+                                <td>
+                                    <span class="widget-body-txt">{{prescription.title}} {{prescription.firstName}} {{prescription.lastName}}</span>
+                                </td>
+                                <td>
+                                    <span class="widget-body-txt">{{prescription.jobTitle}}</span>
+                                </td>
+                                <td>
+                                    <i *ngIf="prescription.repeated; then repeat else noRepeat"></i>
+                                    <ng-template #repeat>
+                                        <i class="glyphicon glyphicon-ok"></i>
+                                    </ng-template>
+                                    <ng-template #noRepeat>
+                                        <i class="glyphicon glyphicon-ok"></i>
+                                    </ng-template>
+                                    <i class="glyphicon glyphicon-remove"></i>
                                 </td>
                                 <td>
                                     <button class="btn btn-success" (click)="addToList(prescription)">Repeat Prescription</button>
