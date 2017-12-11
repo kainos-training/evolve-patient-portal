@@ -12,7 +12,7 @@ addons:
       - google-chrome
     packages:
       - google-chrome-stable
-      
+
 services:
     - mysql
 
