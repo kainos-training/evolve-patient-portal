@@ -1,1 +1,14 @@
-<button type="button" class="btn btn-success" (click)="onSubmit()">Generate Appointment</button>
+<evolve-top-bar></evolve-top-bar>
+<evolve-left-side-menu></evolve-left-side-menu>
+
+<div id="widgetContainer" class="col-xs-12 col-sm-10">
+    <div [hidden]="!(navigationOption===navigationOptions.MyDashboard)">
+            <button type="button" class="btn btn-success" (click)="onSubmit()">Generate Appointment</button>
+    </div>
+
+    <div [hidden]="!(navigationOption===navigationOptions.RepeatPrescription)">
+    </div>
+
+    <div [hidden]="!(navigationOption===navigationOptions.MyDependants)">
+    </div>
+</div>
