@@ -7,13 +7,19 @@ exports.preOpPrompt = function (req, res) {
     
     
 }
+  
+       
     
     exports.getAppointmentsForNotification = function (callback){
+
+        console.log(getPromptDate(7));
+
+}
+    exports.getAppointmentsFromID = function(callback){
         Date.prototype.addDays = function(days) {
             this.setDate(this.getDate() + parseInt(days));
             return this;
         }
-       
          getPromptDate = function(daysInAdvance) {
             var currentDate = new Date();
             currentDate.addDays(daysInAdvance);
@@ -21,38 +27,25 @@ exports.preOpPrompt = function (req, res) {
             n = n.slice(0, -14);
             return n;
         }
-    
          truncateDbDate = function(dbDate){
             dbDate = dbDate.slice(0, -9);
             return dbDate;
         }
-        
-    db.query(
-        "SELECT *  FROM Task;", [getPromptDate(7)],
-        function (err, rows) {
-            if (err){
-                 throw err;
-            }
-
-            else{ 
-                callback(JSON.stringify(rows[0].userID +'and'+ rows[0].taskID));
-            }
-        }              
-    );
-}
-    exports.getAppointmentsFromDates = function(req, res){
-        return this.getAppointmentsForNotification(req, res);
-        
-        // for(i = 0; i < passedRow.length; i++){
-        //     db.query(
-        //         "SELECT userID  FROM Tasks WHERE dueDate =?", [passedRow[i]],
-        //         function (err, rows) {
-        //             if (err) throw err;
-        //             return res.status(200).send(rows);
-        //         }         
-        //     );
-        // };
+        db.query(
+            "SELECT userID, taskName FROM Task WHERE dueDate = '2017-12-19 00:01:00' ;", [getPromptDate(7)],
+            function (err, rows) {
+                if (err){
+                     throw err;
+                }
+                else{ 
+                    console.log(rows);
+                    callback(JSON.stringify(rows[0].userID+" With "+rows[0].taskName));
+                }
+            }              
+        );
     }
+
+    
 
     exports.getAppointmentInfo = function(){
 

@@ -71,7 +71,7 @@ app.use('/task', publicTaskRoutes);
 var server = app.listen(app.get('port'));
 module.exports = server;
  s = 'Hello';
-var v = notifier.getAppointmentsFromDates(function(res){
+var v = notifier.getAppointmentsFromID(function(res){
     s = res;
     console.log('Here     '+s);
     emailer.sendNotification("m.corr@kainos.com", "Micheal", 1, "reset", "TEST", s, "", "", "");
