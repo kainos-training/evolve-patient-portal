@@ -35,7 +35,7 @@ module.exports = function (config) {
         colors: false,
         logLevel: config.LOG_DEBUG,
         autoWatch: true,
-        browsers: ['Chrome'],
+        browsers: ['ChromeHeadless'],
         singleRun: true,
     };
     config.set(configuration);
