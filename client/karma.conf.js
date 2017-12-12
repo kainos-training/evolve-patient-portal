@@ -2,7 +2,7 @@
 // https://karma-runner.github.io/1.0/config/configuration-file.html
 
 module.exports = function(config) {
-    config.set({
+    var configuration = {
         basePath: '',
         files: ['./google-maps-api.js'],
         frameworks: ['jasmine', '@angular/cli'],
@@ -12,7 +12,8 @@ module.exports = function(config) {
             require('karma-jasmine-html-reporter'),
             require('karma-coverage-istanbul-reporter'),
             require('@angular/cli/plugins/karma'),
-            require('karma-mocha-reporter')
+            require('karma-mocha-reporter'),
+            require('karma-spec-reporter')
         ],
         client: {
             clearContext: false // leave Jasmine Spec Runner output visible in browser
@@ -25,28 +26,26 @@ module.exports = function(config) {
             environment: 'dev'
         },
         // reporters configuration
-        reporters: ['mocha'],
+        reporters: ['mocha', 'spec'],
         mochaReporter: {
             output: 'full'
         },
         terminal: true,
         port: 9876,
-        colors: true,
-        logLevel: config.LOG_INFO,
+        colors: false,
+        logLevel: config.LOG_DEBUG,
         autoWatch: true,
-        browsers: ['ChromeHeadless'],
-        singleRun: false,
+        browsers: ['Chrome'],
+        singleRun: true,
         customLaunchers: {
-            ChromeHeadless: {
+            Chrome_travis_ci: {
                 base: 'Chrome',
-                flags: [
-                    // See https://chromium.googlesource.com/chromium/src/+/lkgr/headless/README.md,
-                    '--headless',
-                    '--disable-gpu',
-                    // Without a remote debugging port, Google Chrome exits immediately.
-                    '--remote-debugging-port=9222',
-                ],
+                flags: ['--no-sandbox']
             }
-        }
-    });
+        },
+    };
+    if (process.env.TRAVIS) {
+        configuration.browsers = ['Chrome_travis_ci'];
+    }
+    config.set(configuration);
 };
