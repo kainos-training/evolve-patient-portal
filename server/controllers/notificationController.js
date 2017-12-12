@@ -3,28 +3,53 @@ const bodyParser = require('body-parser');
 const emailer = require('../emailer');
 
 exports.preOpPrompt = function (req, res) {
-    function addDays(theDate, days) {
-        return new Date(theDate.getTime() + days * 24 * 60 * 60 * 1000);
+   
+    Date.prototype.addDays = function(days) {
+        this.setDate(this.getDate() + parseInt(days));
+        return this;
+    };
+   
+    function getPromptDate(daysInAdvance) {
+        var currentDate = new Date();
+        currentDate.addDays(daysInAdvance);
+        var n = currentDate.toISOString();
+        n = n.slice(0, -14);
+        return n;
     }
-    var prompt7Date = addDays(Date(), 7);
 
+    function truncateDbDate(dbDate){
+        dbDate = dbDate.slice(0, -9);
+        return dbDate;
+    }
+    
+}
+    
+    exports.getAppointmentsForNotification = function (req, res){
     db.query(
-        "SELECT userID  FROM Tasks WHERE dueDate =?", [prompt7Date],
+        "SELECT userID  FROM Tasks WHERE dueDate =?", [this.getPromptDate(7)],
         function (err, rows) {
             if (err) throw err;
-            for(i = 0; i <= )
-            var stringUserId = rows[0].userID.toString();
-            var bufferUserId = new Buffer(stringUserId);
-            var base64UserId = bufferUserId.toString('base64').replace(/[=]/g, '~');
-
-            emailer.sendNotification(rows[0].email, rows[0].name, base64UserId, "notify", "", "", "", "");
-            return res.status(200).json({
-                success: true,
-                userID: rows[0].userID,
-                message: 'Reset Password Email has been sent'
-            });
-        }           
+            return res.status(200).send(rows);
+        }              
+    );
+}
+    exports.getAppointmentsFromDates = function(req, res){
+        var passedRow = getAppointmentsForNotification();
+        // for(i = 0; i < passedRow.length; i++){
+        //     db.query(
+        //         "SELECT userID  FROM Tasks WHERE dueDate =?", [passedRow[i]],
+        //         function (err, rows) {
+        //             if (err) throw err;
+        //             return res.status(200).send(rows);
+        //         }         
+        //     );
+        // };
     }
+
+    exports.getAppointmentInfo = function(){
+
+    }
+
     
     exports.getUser = function (req, res){
         
@@ -62,4 +87,4 @@ exports.preOpPrompt = function (req, res) {
                     }
                 }
             );
-        };
+        }

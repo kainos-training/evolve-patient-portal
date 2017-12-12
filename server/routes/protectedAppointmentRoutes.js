@@ -1,6 +1,7 @@
 const express = require('express');
 const protectedAppointmentRoutes = express.Router();
 const appointmentController = require('../controllers/appointmentController');
+const notificationController = require('../controllers/notificationController');
 
 protectedAppointmentRoutes.post('/getAllAppointmentsByUserID', function(req, res){
     return appointmentController.getAllAppointmentsByUserID(req, res);
