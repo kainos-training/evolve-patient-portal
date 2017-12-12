@@ -2,7 +2,7 @@
 // https://karma-runner.github.io/1.0/config/configuration-file.html
 
 module.exports = function (config) {
-    config.set({
+    var config={
         basePath: '',
         files: ['./google-maps-api.js'],
         frameworks: ['jasmine', '@angular/cli'],
@@ -36,6 +36,16 @@ module.exports = function (config) {
         logLevel: config.LOG_DEBUG,
         autoWatch: true,
         browsers: ['Chrome'],
-        singleRun: true
-    });
+        singleRun: true,
+        customLaunchers: {
+            Chrome_travis_ci: {
+                base: 'Chrome',
+                flags: ['--no-sandbox']
+            }
+        },
+    };
+    if(process.env.TRAVIS){
+        config.browsers = ['Chrome_travis_ci'];
+    }
+    config.set(config);
 };
