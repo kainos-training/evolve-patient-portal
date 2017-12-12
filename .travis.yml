@@ -24,13 +24,9 @@ before_install:
     - npm i -g npm@5.3.0
     - mysql -u root --password="" < patientPortalDB.sql
 
-before_script:
-  - npm install -g angular-cli
-  - npm install -g karma
-  - npm install
-  - ng build
-
 install:
+    - npm install -g angular-cli
+    - npm install -g karma
     # Install Frontend Dependencies
     - cd client
     - npm install
