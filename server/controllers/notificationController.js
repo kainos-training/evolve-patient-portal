@@ -4,37 +4,45 @@ const emailer = require('../emailer');
 
 exports.preOpPrompt = function (req, res) {
    
-    Date.prototype.addDays = function(days) {
-        this.setDate(this.getDate() + parseInt(days));
-        return this;
-    };
-   
-    function getPromptDate(daysInAdvance) {
-        var currentDate = new Date();
-        currentDate.addDays(daysInAdvance);
-        var n = currentDate.toISOString();
-        n = n.slice(0, -14);
-        return n;
-    }
-
-    function truncateDbDate(dbDate){
-        dbDate = dbDate.slice(0, -9);
-        return dbDate;
-    }
+    
     
 }
     
-    exports.getAppointmentsForNotification = function (req, res){
+    exports.getAppointmentsForNotification = function (callback){
+        Date.prototype.addDays = function(days) {
+            this.setDate(this.getDate() + parseInt(days));
+            return this;
+        }
+       
+         getPromptDate = function(daysInAdvance) {
+            var currentDate = new Date();
+            currentDate.addDays(daysInAdvance);
+            var n = currentDate.toISOString();
+            n = n.slice(0, -14);
+            return n;
+        }
+    
+         truncateDbDate = function(dbDate){
+            dbDate = dbDate.slice(0, -9);
+            return dbDate;
+        }
+        
     db.query(
-        "SELECT userID  FROM Tasks WHERE dueDate =?", [this.getPromptDate(7)],
+        "SELECT *  FROM Task;", [getPromptDate(7)],
         function (err, rows) {
-            if (err) throw err;
-            return res.status(200).send(rows);
+            if (err){
+                 throw err;
+            }
+
+            else{ 
+                callback(JSON.stringify(rows));
+            }
         }              
     );
 }
     exports.getAppointmentsFromDates = function(req, res){
-        var passedRow = getAppointmentsForNotification();
+        return this.getAppointmentsForNotification(req, res);
+        
         // for(i = 0; i < passedRow.length; i++){
         //     db.query(
         //         "SELECT userID  FROM Tasks WHERE dueDate =?", [passedRow[i]],
