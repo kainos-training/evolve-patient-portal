@@ -41,6 +41,7 @@ install:
 script:
     # Frontend build
     - cd client
+    - npm run clean
     - npm run ci
     - cd ..
     # Backend build
