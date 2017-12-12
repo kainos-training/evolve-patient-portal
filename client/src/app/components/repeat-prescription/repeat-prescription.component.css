@@ -16,7 +16,7 @@
 }
 
 .panel-body {
-    max-height: inherit !important;
+    max-height: 300px !important;
     overflow: auto;
 }
 
