@@ -7,12 +7,7 @@ const bodyParser = require('body-parser');
 const cors = require('cors');
 const morgan = require('morgan');
 var dotenv = require('dotenv');
-var cron = require('cron');
-var cronJob = cron.job("0 */1 * * * *", function(){
-    notificationController.getAppointmentsFromDates();
-    console.info('cron job completed');
-}); 
-cronJob.start();
+
 
 /**
  * Load environment variables from .env file.

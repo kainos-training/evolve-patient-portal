@@ -35,7 +35,7 @@ exports.preOpPrompt = function (req, res) {
             }
 
             else{ 
-                callback(JSON.stringify(rows));
+                callback(JSON.stringify(rows[0].userID +'and'+ rows[0].taskID));
             }
         }              
     );
