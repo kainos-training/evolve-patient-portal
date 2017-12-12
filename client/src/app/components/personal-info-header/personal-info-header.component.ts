@@ -48,6 +48,7 @@ export class PersonalInfoHeaderComponent implements OnInit, OnChanges {
                     this.userArray.homePhoneNumber = res[0].homePhoneNumber;
                     this.userArray.workPhoneNumber = res[0].workPhoneNumber;
                     this.userArray.title = res[0].title;
+                    this.userArray.gpID = res[0].gpID;
                 },
             );
         }

@@ -29,6 +29,9 @@
                 <form onsubmit="event.preventDefault();">
                     <div class="form-group">
                         <form class="form">
+                            <label for="preferredName">Preferred Name: </label>
+                            <input  style="width: auto; display: inline;" id="preferredName" name="preferredName" type="text" placeholder="Preferred Name" [(ngModel)]="preferredName" [(value)]="preferredName" class="form-control formTextBox"> <br>
+
                             <label for="address">Address: </label>
                             <input  style="width: auto; display: inline;" id="address" name="address" type="text" placeholder="Address" [(ngModel)]="address" [(value)]="address" class="form-control formTextBox"> <br>
 
@@ -42,7 +45,18 @@
                             <input  style="width: auto; display: inline;" id="workPhoneNumber" name="workPhoneNumber" type="text" placeholder="Work Number" [(ngModel)]="workPhoneNumber" [(value)]="workPhoneNumber" class="form-control formTextBox"> <br>
 
                             <label for="email" style="margin-top: 20px;">Email: </label>
-                            <input  style="width: auto; display: inline;" id="email" name="email" type="text" placeholder="Email" [(ngModel)]="email" [(value)]="email" class="form-control formTextBox">
+                            <input  style="width: auto; display: inline;" id="email" name="email" type="text" placeholder="Email" [(ngModel)]="email" [(value)]="email" class="form-control formTextBox"><br>
+                            
+                            <label for="gpFullName" style="margin-top: 20px;">GP Name: </label>
+                            <input  style="width: auto; display: inline;" id="gpFullName" name="gpFullName" type="text" placeholder="gpFullName" [(ngModel)]="gpFullName" [(value)]="gpFullName" class="form-control formTextBox"><br>
+                            
+
+                            <label for="gpPracticeName" style="margin-top: 20px;">GP Practice: </label>
+                            <input  style="width: auto; display: inline;" id="gpPracticeName" name="gpPracticeName" type="text" placeholder="gpPracticeName" [(ngModel)]="gpPracticeName" [(value)]="gpPracticeName" class="form-control formTextBox">
+                          <!--  <select>
+                                <option id="gpPracticeName" name="gpPracticeName" type="text" placeholder="gpPracticeName" [(ngModel)]="gpFullName" [(value)]="gpPracticeName" class="form-control"></option>
+                            </select>-->
+                           
                         </form>
                     </div>
                     <button type="button" class="btn btn-success" (click)="updateUserDetails()">Update Details</button>
@@ -50,3 +64,11 @@
             </div>
         </div>
     </ng-template>
+    <!--<input  style="width: auto; display: inline;" id="gpFullName" name="gpFullName" type="text" placeholder="GP Name" [(ngModel)]="gpFullName" [(value)]="gpFullName" class="form-control formTextBox">-->
+                           <!-- <select *ngIf="locations.length > 0" class="form-control"  (change)="locationsChangeDropdown($event.target.value)" [(ngModel)]="selectedLocation"></select>-->
+
+                     <!--  <select *ngIf="locations.length > 0" class="form-control"  (change)="locationsChangeDropdown($event.target.value)" [(ngModel)]="selectedLocation">
+                                <option value="- - Select a Pharmacy - -">- - Select a Pharmacy - -</option>
+                                <option *ngFor="let location of locations | slice:0:indexLimit;" value="{{toStr(location)}}">{{location.name}} ({{location.vicinity}})</option>
+                                <option value="Display More..." *ngIf="displayMoreAvailable">Display More...</option>
+                              </select> -->

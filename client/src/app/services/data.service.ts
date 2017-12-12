@@ -19,7 +19,7 @@ import { Clinician } from '../class/Clinician';
 import { Pharmacy } from '../class/Pharmacy';
 import { AppointmentCount } from '../class/AppointmentCount';
 import { SearchPharmacyComponent } from '../components/search-pharmacy/search-pharmacy.component';
-
+import { GP } from '../class/GP';
 @Injectable()
 export class DataService {
     private cookieName = 'evolve-cookie';
@@ -378,6 +378,20 @@ export class DataService {
         return this.http.post<Appointment[]>(url, body, options);
     };
 
+    public getGPByID(gpID){
+        let headers = new Headers({'Content-Type': 'application/json'});
+        const body = {
+            'gpID': gpID
+        };
+        const options = {
+            headers: new HttpHeaders().set('Content-Type', 'application/json'),
+        };
+
+        let url = 'api/gp/getGPByID';
+        return this.http.post<GP[]>(url, body, options);
+
+    }
+
     public getAppointmentInformation(appointmentID) {
         let headers = new Headers({ 'Content-Type': 'application/json' });
         const body = {
@@ -497,6 +511,7 @@ export class DataService {
         return new Promise((resolve, reject)=>{
             const body = {
                 "email": newUserDetails.email,
+                "preferredName": newUserDetails.preferredName,
                 "address": newUserDetails.address,
                 "mobilePhoneNumber": newUserDetails.mobilePhoneNumber,
                 "homePhoneNumber": newUserDetails.homePhoneNumber,
@@ -514,6 +529,8 @@ export class DataService {
             });
         });
     }
+
+    
 
     logout() {
         this.removeCookie();

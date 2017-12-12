@@ -94,6 +94,9 @@ export class LeftSideMenuComponent implements OnInit {
                 this.user.homePhoneNumber = res[0].homePhoneNumber;
                 this.user.workPhoneNumber = res[0].workPhoneNumber;
                 this.user.title = res[0].title;
+                this.user.gpID = res[0].gpID;
+                this.user.gpFullName = res[0].gpFullName;
+                this.user.gpPracticeName = res[0].gpPracticeName;
             }
         );
         
