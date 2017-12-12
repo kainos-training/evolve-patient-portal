@@ -26,7 +26,6 @@ install:
     # Install Frontend Dependencies
     - cd client
     - npm install
-    - npm install npm-run-all --save-dev
     - ng build
     # Install Backend Dependencies
     - cd ..
