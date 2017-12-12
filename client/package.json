@@ -10,7 +10,7 @@
         "test:once": "ng test --single-run",
         "lint": "ng lint",
         "e2e": "ng e2e",
-        "ci": "npm run test:once | npm run e2e"
+        "ci": "npm run test:once && npm run e2e"
     },
     "private": true,
     "dependencies": {
