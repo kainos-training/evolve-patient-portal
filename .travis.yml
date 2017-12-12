@@ -17,12 +17,6 @@ before_install:
     - npm i -g npm@5.3.0
     # Run db script file to create and populate database
     - mysql -u root --password="" < patientPortalDB.sql
-    - google-chrome-stable --headless --disable-gpu --remote-debugging-port=9222 http://localhost &
-
-before_script:
-    - "export DISPLAY=:99.0"
-    - "sh -e /etc/init.d/xvfb start"
-    - sleep 3 # give xvfb some time to start
 
 install:
     # Install Frontend Dependencies
