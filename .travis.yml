@@ -30,6 +30,7 @@ before_install:
 install:
     # Install Frontend Dependencies
     - cd client
+    - npm run clean
     - npm install
     - ng build
     # Install Backend Dependencies
@@ -41,7 +42,6 @@ install:
 script:
     # Frontend build
     - cd client
-    - npm run clean
     - npm run ci
     - cd ..
     # Backend build
