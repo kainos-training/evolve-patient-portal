@@ -7,29 +7,29 @@ node_js:
     - 8.9.1
 
 addons:
-    chrome: stable
+  apt:
+    sources:
+      - google-chrome
+    packages:
+      - google-chrome-stable
+      - google-chrome-beta
 
 services:
     - mysql
 
 before_install:
-    # Set npm version to 5.3.0
-    - npm i -g npm@5.5.1
-    # Run db script file to create and populate database
+    - npm i -g npm@5.3.0
     - mysql -u root --password="" < patientPortalDB.sql
-    - google-chrome-stable --headless --disable-gpu --remote-debugging-port=9222 http://localhost/4200
-  
+
 install:
     # Install Frontend Dependencies
     - cd client
     - npm install
-    - npm rebuild
     - ng build
     # Install Backend Dependencies
     - cd ..
     - cd server
     - npm install
-    - npm rebuild
     - cd ..
 
 script:
