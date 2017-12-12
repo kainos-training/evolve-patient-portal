@@ -36,7 +36,7 @@ install:
 script:
     # Frontend build
     - cd client
-    - ng test --single-run
+    - ng run ci
     - cd ..
     # Backend build
     - cd server
