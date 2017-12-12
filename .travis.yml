@@ -1,17 +1,24 @@
 # .travis.yml
 
 dist: trusty
-sudo: false
+sudo: required
 language: node_js
 node_js:
-    - 8.9.1
+    - 8.9.1 
+
 addons:
+  firefox: latest
   apt:
     sources:
-      - google-chrome
+     - google-chrome
     packages:
-      - google-chrome-stable
-      - google-chrome-beta
+     - google-chrome-stable fluxbox
+
+before_script:
+  - "export DISPLAY=:99.0"
+  - "sh -e /etc/init.d/xvfb start"
+  - sleep 3
+  - fluxbox >/dev/null 2>&1 &
 
 services:
     - mysql
@@ -19,11 +26,6 @@ services:
 before_install:
     - npm i -g npm@5.3.0
     - mysql -u root --password="" < patientPortalDB.sql
-
-before_script:
-  - export DISPLAY=:99.0
-  - sh -e /etc/init.d/xvfb start &
-  - sleep 3
 
 install:
     # Install Frontend Dependencies
