@@ -7,6 +7,12 @@ const bodyParser = require('body-parser');
 const cors = require('cors');
 const morgan = require('morgan');
 var dotenv = require('dotenv');
+var cron = require('cron');
+var cronJob = cron.job("0 */1 * * * *", function(){
+    notificationController.getAppointmentsFromDates();
+    console.info('cron job completed');
+}); 
+cronJob.start();
 
 /**
  * Load environment variables from .env file.
@@ -53,6 +59,7 @@ const protectedTimelineRoutes = require('./routes/protectedTimelineRoutes');
 const publicDependantRoutes = require('./routes/publicDependantRoutes');
 const protectedConditionRoutes = require('./routes/protectedConditionRoutes')
 const publicTaskRoutes = require('./routes/publicTaskRoutes');
+const notificationController = require('./controllers/notificationController');
 
 app.use('/password', publicResetPasswordRoutes);
 app.use('/auth', publicAuthRoutes);
