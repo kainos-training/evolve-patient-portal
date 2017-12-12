@@ -1,5 +1,6 @@
 // Karma configuration file, see link for more information
 // https://karma-runner.github.io/1.0/config/configuration-file.html
+process.env.CHROME_BIN = require('puppeteer').executablePath()
 
 module.exports = function (config) {
     var configuration={
@@ -35,17 +36,8 @@ module.exports = function (config) {
         colors: false,
         logLevel: config.LOG_DEBUG,
         autoWatch: true,
-        browsers: ['Chrome'],
+        browsers: ['ChromeHeadless'],
         singleRun: true,
-        customLaunchers: {
-            Chrome_travis_ci: {
-                base: 'Chrome',
-                flags: [' — no-sandbox']
-            }
-        }
     };
-    if (process.env.TRAVIS) {
-        configuration.browsers = ['Chrome_travis_ci'];
-    }
     config.set(configuration);
 };
