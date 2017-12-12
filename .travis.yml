@@ -7,15 +7,16 @@ node_js:
     - 6.11.1
 
 addons:
-  chrome: beta
+  chrome: stable
 
 services:
     - mysql
 
 before_install:
-    # Set npm version to 5.3.0
+    - export CHROME_BIN=chromium-browser
+    - export DISPLAY=:99.0
+    - sh -e /etc/init.d/xvfb start
     - npm i -g npm@5.3.0
-    # Run db script file to create and populate database
     - mysql -u root --password="" < patientPortalDB.sql
 
 install:
