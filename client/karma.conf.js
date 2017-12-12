@@ -2,7 +2,7 @@
 // https://karma-runner.github.io/1.0/config/configuration-file.html
 
 module.exports = function (config) {
-    var config={
+    var configuration={
         basePath: '',
         files: ['./google-maps-api.js'],
         frameworks: ['jasmine', '@angular/cli'],
@@ -45,7 +45,7 @@ module.exports = function (config) {
         },
     };
     if(process.env.TRAVIS){
-        config.browsers = ['Chrome_travis_ci'];
+        configuration.browsers = ['Chrome_travis_ci'];
     }
-    config.set(config);
+    config.set(configuration);
 };
