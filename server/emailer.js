@@ -2,7 +2,7 @@
 // the user who booked into the event
 const nodemailer = require('nodemailer');
 
-exports.sendNotification = function(emailAddress, name, id, type, querySubject, queryText, notificationType, htmlBody) {
+exports.sendNotification = function(emailAddress, name, id, type, querySubject, queryText, notificationType, htmlBody, time) {
     var isTrueSet = (process.env.SECURE == 'true');
     nodemailer.createTestAccount((err, account) => {
         // create reusable transporter object using the default SMTP transport
@@ -34,15 +34,15 @@ exports.sendNotification = function(emailAddress, name, id, type, querySubject, 
                 to: emailAddress, // list of receivers
                 subject: "Notification: " + querySubject, // Subject line
                 text: queryText, // plain text body
-                html: htmlBody
+                //html: htmlBody
             };
-        }else {
+        }else if(type == "preop"){
                 mailOptions = {
                     from: '"Evolve Portal" <kainostdp2017@gmail.com>', // sender address
                     to: emailAddress, // list of receivers
-                    subject: "Notification: " + querySubject, // Subject line
+                    subject: "Reminder: Pre-Op Form", // Subject line
                     text: queryText, // plain text body
-                    html: htmlBody
+                    //html: htmlBody
                 };
             }
 
