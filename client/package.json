@@ -8,9 +8,9 @@
         "build": "ng build",
         "test": "ng test",
         "lint": "ng lint",
-        "singleTestRun": "ng test --single-run",
-        "e2e": "ng e2e",
-        "ci": "npm run test:once"
+        "singleTestRun": "ng test --single-run"
+            //"e2e": "ng e2e",
+            //"ci": "npm run test:once"
     },
     "private": true,
     "dependencies": {
