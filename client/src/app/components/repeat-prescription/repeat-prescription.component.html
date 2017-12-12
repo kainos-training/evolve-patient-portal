@@ -71,17 +71,21 @@
                                     <span class="widget-body-txt">{{prescription.jobTitle}}</span>
                                 </td>
                                 <td>
-                                    <i *ngIf="prescription.repeated; then repeat else noRepeat"></i>
-                                    <ng-template #repeat>
-                                        <i class="glyphicon glyphicon-ok"></i>
-                                    </ng-template>
+                                    <i *ngIf="(prescription.repeated == 1); then Repeat else noRepeat"></i>
                                     <ng-template #noRepeat>
+                                        <i class="glyphicon glyphicon-remove"></i>
+                                    </ng-template>
+                                    <ng-template #Repeat>
                                         <i class="glyphicon glyphicon-ok"></i>
                                     </ng-template>
-                                    <i class="glyphicon glyphicon-remove"></i>
                                 </td>
                                 <td>
-                                    <button class="btn btn-success" (click)="addToList(prescription)">Repeat Prescription</button>
+                                        <i *ngIf="(prescription.repeated == 1); then Access else NoAccess"></i>
+                                    <ng-template #Access>
+                                            <button class="btn btn-success" (click)="addToList(prescription)">Repeat Prescription</button>
+                                        </ng-template>
+                                        <ng-template #NoAccess>
+                                        </ng-template>
                                 </td>
                             </tr>
                         </tbody>

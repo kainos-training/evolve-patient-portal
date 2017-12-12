@@ -14,7 +14,7 @@ exports.requestPasswordReset = function (req, res){
                     var stringUserId = rows[0].userID.toString();
                     var bufferUserId = new Buffer(stringUserId);
                     var base64UserId = bufferUserId.toString('base64').replace(/[=]/g,'~');
-    
+
                     emailer.sendNotification(rows[0].email,rows[0].name, base64UserId,"reset","","");
                     return res.status(200).json({
                         success: true,
