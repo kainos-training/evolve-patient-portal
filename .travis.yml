@@ -27,11 +27,13 @@ install:
     # Install Frontend Dependencies
     - cd client
     - npm install
+    - npm rebuild
     - ng build
     # Install Backend Dependencies
     - cd ..
     - cd server
     - npm install
+    - npm rebuild
     - cd ..
 
 script:
