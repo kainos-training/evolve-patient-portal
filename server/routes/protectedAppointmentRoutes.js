@@ -23,7 +23,6 @@ protectedAppointmentRoutes.post('/addAppointmentQuery', function(req, res) {
     return appointmentController.addAppointmentQuery(req, res);
 });
 
-<<<<<<< HEAD
 protectedAppointmentRoutes.post('/changeAppointment', function(req, res) {
     return appointmentController.changeAppointment(req, res);
 });
@@ -32,9 +31,7 @@ protectedAppointmentRoutes.post('/deleteAppointment', function(req, res) {
     return appointmentController.deleteAppointment(req, res);
 });
 
-=======
 +protectedAppointmentRoutes.post('/addAppointment', function(req, res) {
       return appointmentController.addAppointment(req, res);
     });
->>>>>>> 9667fced132cb56b95b7ab14af57f7ed0d6405ef
 module.exports = protectedAppointmentRoutes;

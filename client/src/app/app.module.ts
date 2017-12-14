@@ -77,7 +77,7 @@ import { GenerateAppointmentComponent } from "./components/generate-appointment/
         SecondaryInfoHeaderComponent,
         DependantViewComponent,
         SearchPharmacyComponent,
-        ChangeAppointmentComponent
+        ChangeAppointmentComponent,
         PreclinicAddComponent,
         GenerateAppointmentComponent
     ],

@@ -124,7 +124,6 @@ exports.getPreviousAppointments = function(req, res) {
         }
     )
 };
-<<<<<<< HEAD
 
 exports.changeAppointment = function(req, res) {
     const dateOfAppointment = req.body.dateOfAppointment;
@@ -152,7 +151,6 @@ exports.deleteAppointment = function(req, res) {
         }
     });
 };
-=======
 exports.addAppointment = function(req, res) {
        const appointmentID = req.body.appointmentID;
        const userID = req.body.userID;
@@ -178,4 +176,3 @@ exports.addAppointment = function(req, res) {
                     });
                 }
         };
->>>>>>> 9667fced132cb56b95b7ab14af57f7ed0d6405ef
