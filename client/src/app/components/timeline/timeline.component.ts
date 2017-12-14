@@ -184,8 +184,5 @@ export class TimelineComponent implements OnInit {
         if(colorChoice=='Oncology'){
             return 'rgb(225,109,182)';
         }
-
-    }
-
-    
+    } 
 }

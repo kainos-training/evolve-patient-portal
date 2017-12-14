@@ -11,5 +11,3 @@ export class AppointmentFurtherInfo {
     showLocalMap: boolean;
     showGoogleMap: boolean;
 }
-
-
