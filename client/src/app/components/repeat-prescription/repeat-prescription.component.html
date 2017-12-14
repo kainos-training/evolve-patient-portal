@@ -26,34 +26,69 @@
                     </div>
                 </div>
                 <div class="panel-body" id="medicationDetails">
-                    <table class="table table-hover">
-                        <tbody>
-                            <tr class="fixed-top">
-                                <td>
+                    
+                    <table class="table table-hover table-column">
+                        <thead>
+                            <tr class="table">
+                                <th>
                                     <span class="widget-title-txt">Name</span>
-                                </td>
-                                <td>
+                                </th>
+                                <th>
                                     <span class="widget-title-txt">Dosage</span>
-                                </td>
-                                <td>
+                                </th>
+                                <th>
                                     <span class="widget-title-txt">Prescribed Date</span>
-                                </td>
-                                <td>
+                                </th>
+                                <th>
                                     <span class="widget-title-txt">Prescription Expires</span>
-                                </td>
-                                <td>
+                                </th>
+                                <th>
                                     <span class="widget-title-txt">Issued By</span>
-                                </td>
-                                <td>
+                                </th>
+                                <th>
                                     <span class="widget-title-txt">Role</span>
-                                </td>
-                                <td>
+                                </th>
+                                <th>
                                     <span class="widget-title-txt">Repeat</span>
-                                </td>
-                                <td>
-                                    <span class=" "> </span>
-                                </td>
+                                </th>
+                                <th>
+                                    <span class="widget-title-txt"></span>
+                                </th>
                             </tr>
+                        </thead>
+                    </table>
+                    </div>
+                    <div class="panel-body" id="medicationDetails">
+                        <table class="table table-hover heading-fixed table-column">
+                            <!-- <thead>
+                                <tr>
+                                    <th>
+                                        <span class="widget-title-txt">Name</span>
+                                    </th>
+                                    <th>
+                                        <span class="widget-title-txt">Dosage</span>
+                                    </th>
+                                    <th>
+                                        <span class="widget-title-txt">Prescribed Date</span>
+                                    </th>
+                                    <th>
+                                        <span class="widget-title-txt">Prescription Expires</span>
+                                    </th>
+                                     <th>
+                                         <span class="widget-title-txt">Issued By</span>
+                                    </th>
+                                    <th>
+                                        <span class="widget-title-txt">Role</span>
+                                    </th>
+                                    <th>
+                                        <span class="widget-title-txt">Repeat</span>
+                                    </th>
+                                    <th>
+                                        <span class="widget-title-txt"></span>
+                                    </th>
+                                </tr>
+                            </thead>                           -->
+                            <tbody>
                             <tr *ngFor="let prescription of prescriptionList">
                                 <td>
                                     <span class="widget-body-txt">{{prescription.medicationName}}</span><br>

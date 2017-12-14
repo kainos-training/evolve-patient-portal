@@ -15,9 +15,15 @@
     font: bold;
 }
 
+.top-bar {
+    position: fixed;
+    overflow: scroll;
+}
+
 .panel-body {
-    max-height: 300px !important;
+    max-height: 200px !important;
     overflow: auto;
+    padding: 1%;
 }
 
 .table-btn {
@@ -46,6 +52,12 @@
 
 .table {
     position: relative;
+    padding-bottom: 0px;
+    margin-bottom: 0;
+}
+
+.table-column{
+    column-width: 10% !important; 
 }
 
 .table td {
