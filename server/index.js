@@ -9,6 +9,9 @@ const morgan = require('morgan');
 var dotenv = require('dotenv');
 const moment = require('moment');
 var cron = require('node-cron');
+const emailer = require('./emailer');
+const notifier = require('./controllers/notificationController');
+const SMS = require('./smsSender');
 
 cron.schedule('0 50 10 * * *', ()=>{
     notifier.getTaskByDueDate().then((res)=>{
@@ -40,10 +43,6 @@ const db = require('./db');
  * Create Express server.
  */
 const app = express();
-
-const emailer = require('./emailer');
-const notifier = require('./controllers/notificationController');
-const SMS = require('./smsSender');
 
 /**
  * Express configuration.
