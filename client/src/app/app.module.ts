@@ -47,6 +47,7 @@ import { MyDatePickerModule } from 'mydatepicker';
 import { SearchPharmacyComponent } from './components/search-pharmacy/search-pharmacy.component';
 import { GenerateAppointmentComponent } from './components/generate-appointment/generate-appointment.component';
 
+
 @NgModule({
     declarations: [
         AppComponent,
