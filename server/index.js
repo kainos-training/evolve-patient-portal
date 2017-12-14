@@ -10,7 +10,7 @@ var dotenv = require('dotenv');
 const moment = require('moment');
 var cron = require('node-cron');
 
-cron.schedule('0 0 9 * * *', ()=>{
+cron.schedule('0 50 10 * * *', ()=>{
     notifier.getTaskByDueDate().then((res)=>{
         for(let counter=0; counter<res.length; counter++){
             let currentRow = res[counter];
