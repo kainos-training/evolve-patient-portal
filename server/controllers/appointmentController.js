@@ -1,10 +1,8 @@
 const db = require('../db');
 const bodyParser = require('body-parser');
-const emailer = require('../emailer');
 const notifier = require('./notificationController');
 const emailer = require('../emailer');
 const SMS = require('../smsSender');
-
 
 exports.getAllAppointmentsByUserID = function(req, res) {
     let userID = req.body.userID;
