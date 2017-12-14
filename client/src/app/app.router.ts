@@ -19,10 +19,9 @@ export const router: Routes = [
     {path: 'reset/:id', component: SettingNewPasswordComponent},
     {path: 'request-reset', component: RequestPasswordResetComponent},
     {path: 'questionnaire', component: QuestionnaireComponent, canActivate: [RouteGuard]},
-    {path: 'changeAppointment', component: ChangeAppointmentComponent},
-    {path: '**', component: LoginComponent},
-    {path: 'preclinic-add', component: PreclinicAddComponent},
     {path: 'genAppointment', component: GenerateAppointmentComponent},
+    {path: 'changeAppointment', component: ChangeAppointmentComponent},
+    {path: 'preclinic-add', component: PreclinicAddComponent},
     {path: '**', component: LoginComponent}
 ];
 export const routes: ModuleWithProviders = RouterModule.forRoot(router);

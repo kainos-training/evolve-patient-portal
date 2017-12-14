@@ -1,6 +1,8 @@
 const db = require('../db');
 const bodyParser = require('body-parser');
+const notifier = require('./notificationController');
 const emailer = require('../emailer');
+const SMS = require('../smsSender');
 
 exports.getAllAppointmentsByUserID = function(req, res) {
     let userID = req.body.userID;
@@ -127,6 +129,7 @@ exports.getPreviousAppointments = function(req, res) {
 
 exports.changeAppointment = function(req, res) {
     const dateOfAppointment = req.body.dateOfAppointment;
+    const userID = req.body.userID;
     db.changeAppointment(dateOfAppointment, function(err) {
         if (err) {
             console.log(err);
@@ -134,12 +137,20 @@ exports.changeAppointment = function(req, res) {
                 success: false
             });
         } else {
-            res.status(200).send("success");
+            notifier.getUserContactDetails(userID).then((res)=> {
+                let phoneNumber = res.phoneNumber;
+                let email = res.email;
+                emailer.sendEmail(email, "Appointment Updated", "Appointment has been made for " + dateOfAppointment + " please check portal.");
+                SMS.sendSms("Appointment has been updated, please check portal.", phoneNumber);
+            }).catch((err)=>{
+                console.log(err);
+            });
         }
     });
 };
 
 exports.deleteAppointment = function(req, res) {
+    let userID = req.body.userID;
     db.deleteAppointment(function(err) {
         if (err) {
             console.log(err);
@@ -147,10 +158,19 @@ exports.deleteAppointment = function(req, res) {
                 success: false
             });
         } else {
+            notifier.getUserContactDetails(userID).then((res)=> {
+                let phoneNumber = res.phoneNumber;
+                let email = res.email;
+                emailer.sendEmail(email, "Appointment Deleted", "Appointment has been deleted,  please check portal.");
+                SMS.sendSms("Appointment has been deleted, please check portal.", phoneNumber);
+            }).catch((err)=>{
+                console.log(err);
+            });
             res.status(200).send("success");
         }
     });
 };
+
 exports.addAppointment = function(req, res) {
        const appointmentID = req.body.appointmentID;
        const userID = req.body.userID;
@@ -171,6 +191,15 @@ exports.addAppointment = function(req, res) {
                                 success: false
                             });
                         } else {
+                            notifier.getUserContactDetails(userID).then((res)=> {
+                                let phoneNumber = res.phoneNumber;
+                                let email = res.email;
+                                emailer.sendEmail(email, "Appointment Added", "Appointment has been made for " + dateOfAppointment + " please check portal.");
+                                SMS.sendSms("Appointment has been made for " + dateOfAppointment + " please check portal.", phoneNumber);
+
+                            }).catch((err)=>{
+                                console.log(err);
+                            });
                             res.status(200).send("success");
                         }
                     });
