@@ -90,14 +90,14 @@ module.exports = server;
 function smsTextBuilder(info){
     let result = "Dear "+info.firstName+" "+info.lastName+", " +
         "This is a reminder for you to complete your "+info.taskName + " " +
-        "This is due on "+moment(info.dueDate).format('DD/MM/YYYY HH:MM');
+        "This is due on "+moment(info.dueDate).format('DD/MM/YYYY HH:MM') + " http://localhost:4200/preclinic-add";
     return result;
 }
 
 function emailBuilder(info){
     let result = "<p>Dear "+info.firstName+" "+info.lastName+",</p>" +
     "<p>This is a reminder for you to complete your "+info.taskName+".</p>" +
-    "<p>This is due on "+moment(info.dueDate).format('DD/MM/YYYY HH:MM')+"</p>" +
+    "<p>This is due on "+moment(info.dueDate).format('DD/MM/YYYY HH:MM')+"</p>" + " http://localhost:4200/preclinic-add" +
     "<br>";
     return result;
 }

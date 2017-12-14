@@ -45,7 +45,7 @@ import { QuestionnaireComponent } from './components/questionnaire/questionnaire
 import { TimelineComponent } from './components/timeline/timeline.component';
 import { MyDatePickerModule } from 'mydatepicker';
 import { SearchPharmacyComponent } from './components/search-pharmacy/search-pharmacy.component';
-import { PreclinicAddComponent } from './preclinic-add/preclinic-add.component';
+import { PreclinicAddComponent } from './components/preclinic-add/preclinic-add.component';
 
 @NgModule({
     declarations: [
