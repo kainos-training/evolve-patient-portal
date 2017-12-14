@@ -94,7 +94,7 @@ exports.addAppointmentQuery = function(req, res) {
                         });
                     } else {
                         emailer.sendNotification(rows[0].email, rows[0].name, 0, "appointment", querySubject, queryText);
-                        
+
                     }
                 })
                 res.status(200).send("success");
