@@ -519,7 +519,7 @@ export class DataService {
                     'appointmentID': appointmentID,
                     'userID' : userID,
                     'locationDepartmentID': locationDepartmentID,
-                   'clinicianID': clinicianID,
+                    'clinicianID': clinicianID,
                     'dateOfAppointment': dateOfAppointment,
                     'comment': comment,
                     'appointmentTypeID': appointmentTypeID

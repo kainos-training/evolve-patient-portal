@@ -19,7 +19,6 @@ export const router: Routes = [
     {path: 'questionnaire', component: QuestionnaireComponent, canActivate: [RouteGuard]},
     {path: 'genAppointment', component: GenerateAppointmentComponent},
     {path: '**', component: LoginComponent},
-    
 ];
 
 export const routes: ModuleWithProviders = RouterModule.forRoot(router);

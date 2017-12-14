@@ -222,5 +222,4 @@ database.addAppointment = function(appointmentID, userID, locationDepartmentID, 
             });
     };
     
-
 module.exports = database;

@@ -22,22 +22,19 @@ export class GenerateAppointmentComponent implements OnInit {
     this.appointmentString.push("GP Appointment");
     this.appointmentString.push("Check-up");
     console.log(this.appointmentString);
-  this.userString.push("Jane Smith");
+    this.userString.push("Jane Smith");
     this.userString.push("Shannon Murray");
     this.userString.push("Andrew Smith");
-      this.userString.push("Kate Smith");
-     this.userString.push("Chloe Smith");
-     this.userString.push("Jack Daniels");
-     this.userString.push("Andrew Jackson");
-     this.userString.push("Bill Smith");
+    this.userString.push("Kate Smith");
+    this.userString.push("Chloe Smith");
+    this.userString.push("Jack Daniels");
+    this.userString.push("Andrew Jackson");
+    this.userString.push("Bill Smith");
     }
   
     onSubmit(){
       this.date = new Date(this.dateString+' '+this.timeString);
-      
-       console.log(this.date);
       this.data.addAppointment(null, 1, 1, 1, '2017-12-25 12:00:00', "Hurt Face", 1);
     }
-  
   }
 
