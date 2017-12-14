@@ -353,3 +353,5 @@ INSERT INTO User VALUES(null,'bmckillop','$2a$10$YqV/YtnOUd62xFSai8gRseO4nU5otTd
 
 INSERT INTO Task VALUES(null, 'Pre-Op Questionnaire', 9, 'Form to be filled prior to operation', '2017-11-19 00:01:00', '2017-12-22 00:01:00');
 INSERT INTO Task VALUES(null, 'Pre Clinic Form', 9, 'Form to be filled prior to arriving at clinic', '2017-11-19 00:01:00', '2017-12-16 00:01:00');
+
+INSERT INTO Appointment VALUES (null,9, 3, 1, '2017-12-29 13:15:00',' Ben expressed issues with migraines and eyesight deterioration', 4);
