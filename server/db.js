@@ -212,6 +212,7 @@ database.insertAnswer = function(taskID, answer, callback) {
     )
 }
 
+<<<<<<< HEAD
 database.changeAppointment = function(dateOfAppointment, callback) {
     database.query(
         "UPDATE Appointment SET dateOfAppointment = ? WHERE appointmentID = 6;", 
@@ -228,4 +229,16 @@ database.deleteAppointment = function(callback) {
             callback(err)
         });
 };
+=======
+database.addAppointment = function(appointmentID, userID, locationDepartmentID, clinicianID, dateOfAppointment, comment, appointmentTypeID, callback) {
+       database.query(
+           "INSERT INTO Appointment(appointmentID, userID, locationDepartmentID, clinicianID, dateOfAppointment, comment, appointmentTypeID) " +
+            "VALUES(?, ?, ?, ?, ?, ?, ?);", [appointmentID, userID, locationDepartmentID, clinicianID, dateOfAppointment, comment, appointmentTypeID],
+            function(err, rows) {
+                
+                callback(err)
+            });
+    };
+    
+>>>>>>> 9667fced132cb56b95b7ab14af57f7ed0d6405ef
 module.exports = database;

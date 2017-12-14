@@ -94,7 +94,7 @@ exports.addAppointmentQuery = function(req, res) {
                         });
                     } else {
                         emailer.sendNotification(rows[0].email, rows[0].name, 0, "appointment", querySubject, queryText);
-                        
+
                     }
                 })
                 res.status(200).send("success");
@@ -124,6 +124,7 @@ exports.getPreviousAppointments = function(req, res) {
         }
     )
 };
+<<<<<<< HEAD
 
 exports.changeAppointment = function(req, res) {
     const dateOfAppointment = req.body.dateOfAppointment;
@@ -151,3 +152,30 @@ exports.deleteAppointment = function(req, res) {
         }
     });
 };
+=======
+exports.addAppointment = function(req, res) {
+       const appointmentID = req.body.appointmentID;
+       const userID = req.body.userID;
+       const LocationDepartmentID = req.body.locationDepartmentID;
+        const clinicianID = req.body.clinicianID;
+        const dateOfAppointment = req.body.dateOfAppointment;
+        const comment = req.body.comment;
+        const appointmentTypeID = req.body.appointmentTypeID;
+            if (!LocationDepartmentID|| !clinicianID || !dateOfAppointment || !comment || !appointmentTypeID) {
+                    res.status(400).json({
+                        success: false
+                    });
+                } else {
+                    db.addAppointment(appointmentID, userID, LocationDepartmentID, clinicianID, dateOfAppointment, comment, appointmentTypeID, function(err) {
+                        if (err) {
+                            console.log(err);
+                            res.status(400).json({
+                                success: false
+                            });
+                        } else {
+                            res.status(200).send("success");
+                        }
+                    });
+                }
+        };
+>>>>>>> 9667fced132cb56b95b7ab14af57f7ed0d6405ef
