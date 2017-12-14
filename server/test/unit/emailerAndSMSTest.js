@@ -7,11 +7,4 @@ var assert = chai.assert;
 
 describe('Emailer', function () {
 
-    it('SMS returns 200', function (done) {
-        SMSsender.sendSms("Hello World", "07854213244").then(function(res){
-            assert.should.not.equal(res, null);
-        });
-
-    });
-
 });
