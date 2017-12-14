@@ -20,6 +20,7 @@ import { Pharmacy } from '../class/Pharmacy';
 import { AppointmentCount } from '../class/AppointmentCount';
 import { SearchPharmacyComponent } from '../components/search-pharmacy/search-pharmacy.component';
 import { GP } from '../class/GP';
+import { GPPractice } from '../class/GPPractice';
 @Injectable()
 export class DataService {
     private cookieName = 'evolve-cookie';
@@ -367,7 +368,7 @@ export class DataService {
     };
 
     public getAllAppointmentsByUserID(userID) {
-        let headers = new Headers({ 'Content-Type': 'application/json' });
+        
         const body = {
             'userID': userID
         };
@@ -378,20 +379,35 @@ export class DataService {
         return this.http.post<Appointment[]>(url, body, options);
     };
 
-    public getGPByID(gpID){
-        let headers = new Headers({'Content-Type': 'application/json'});
-        const body = {
-            'gpID': gpID
-        };
-        const options = {
-            headers: new HttpHeaders().set('Content-Type', 'application/json'),
-        };
+    public getAllGPPractice(){
+        let headers = new Headers({ 'Content-Type': 'application/json' });
+         const body = {
+            
+         };
+         const options = {
+             headers: new HttpHeaders().set('Content-Type', 'application/json'),
+         };
+         let url = '/api/gp/getAllGPPractice';
+         return this.http.post<GPPractice[]>(url, body, options);
 
-        let url = 'api/gp/getGPByID';
-        return this.http.post<GP[]>(url, body, options);
+    
 
-    }
 
+
+}
+public getAllGPbyPracticeID(x){
+    let headers = new Headers({'Content-Type': 'application/json'});
+    const body = {
+        'gpPracticeID': x
+    };
+
+    const options = {
+        headers: new HttpHeaders().set('Content-Type', 'application/json'),
+    };
+    let url = '/api/gp/getAllGPbyPracticeID';
+    return this.http.post<GP[]>(url,body,options);
+}
+     
     public getAppointmentInformation(appointmentID) {
         let headers = new Headers({ 'Content-Type': 'application/json' });
         const body = {

@@ -48,8 +48,9 @@ const publicResetPasswordRoutes = require('./routes/publicResetPasswordRoutes');
 const protectedPrescriptionRoutes = require('./routes/protectedPrescriptionRoutes');
 const protectedTimelineRoutes = require('./routes/protectedTimelineRoutes');
 const publicDependantRoutes = require('./routes/publicDependantRoutes');
-const protectedConditionRoutes = require('./routes/protectedConditionRoutes')
+const protectedConditionRoutes = require('./routes/protectedConditionRoutes');
 const publicTaskRoutes = require('./routes/publicTaskRoutes');
+const protectedGPRoutes = require('./routes/protectedGPRoutes');
 
 app.use('/password', publicResetPasswordRoutes);
 app.use('/auth', publicAuthRoutes);
@@ -62,6 +63,7 @@ app.use('/timeline',protectedTimelineRoutes);
 app.use('/dependants', publicDependantRoutes);
 app.use('/condition', protectedConditionRoutes);
 app.use('/task', publicTaskRoutes);
+app.use('/gp', protectedGPRoutes);
 
 var server = app.listen(app.get('port'));
 module.exports = server;

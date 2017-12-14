@@ -11,13 +11,23 @@ address varchar(100),
 primary key (pharmacyID)
 );
 
+CREATE TABLE IF NOT EXISTS GPPractice (
+    gpPracticeID int auto_increment not null,
+    gpPracticeName varchar(150) not null,
+    gpPracticeAddress varchar(300) not null,
+    primary key (gpPracticeID)
+);
+
 CREATE TABLE IF NOT EXISTS GP (
     gpID int auto_increment not null,
     gpFullName varchar(150) not null,
-    gpPracticeName varchar(150) not null,
-    gpPracticeAddress varchar(300) not null,
-    primary key (gpID)
+    gpPracticeID int not null,
+    primary key (gpID),
+    FOREIGN KEY (gpPracticeID)
+        REFERENCES GPPractice (gpPracticeID)
 );
+
+
 
 CREATE TABLE IF NOT EXISTS `User` (
     userID int auto_increment not null unique,
@@ -222,10 +232,17 @@ CREATE TABLE IF NOT EXISTS AppointmentQuery (
     foreign key (clinicianID) references Clinician(clinicianID)
 );
 
-INSERT INTO GP (gpFullName, gpPracticeName, gpPracticeAddress)
-VALUES ('Dr. A Cheyne', 'Ormeau Park Surgery', '281 Ormeau Rd, Belfast BT7 3GG, UK'),
-('Dr. E Glass', 'The Surgery', '1 Church St, Newtownards BT23 4FH'),
-('Dr. R Kane', 'Springvale Medical Practice', '463 Springfield Rd, Belfast BT12 7DP, UK');
+
+
+INSERT INTO GP (gpFullName, gpPracticeID)
+VALUES ('Dr. A Cheyne', 1),
+('Dr. E Glass', 2),
+('Dr. R Kane', 3),
+('Dr. L Stout', 2),
+('Dr. D Dunlop', 1),
+('Dr. A Harper', 3);
+
+
 
 INSERT INTO `User` (username, `password`, dateOfBirth, gender, MRIN, firstName, lastName, mobilePhoneNumber, homePhoneNumber, workPhoneNumber, title, address, email, deceased, gpID,pharmacyID, active)
 VALUES ('jsmith', '$2a$10$YqV/YtnOUd62xFSai8gRseO4nU5otTdyDTD7yWwaVquZfo02O2Uee', '1960-01-01', 'Female', '123456789', 'Jane', 'Smith', '07712345678', '02890848567', '02890673645', 'Mrs', '32 Orby Walk, Belfast', 'fakeemail@kainos.com', 'No', 1,1, true),
