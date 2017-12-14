@@ -1,23 +1,26 @@
 <evolve-top-bar></evolve-top-bar>
 <evolve-left-side-menu></evolve-left-side-menu>
-<!-- 
+
 <div id="widgetContainer" class="col-xs-12 col-sm-10">
     <div class="display-block">
-        <caption>New Appointment Date:</caption>
+            <div class="prescription-header">
+                    <p>
+                        <img src="/assets/upcomingAppointmentsIcon.png" class="pill-icon-modal" />
+                        <span>
+                            <strong>Department: {{focusedAppointment.departmentName}}</strong>
+                            <a [href]="focusedAppointment.departmentURL" target="_blank"><span class="glyphicon glyphicon-info-sign"></span></a>
+                        </span>
+                        <br>
+                        <span style="padding-left: 70px">{{focusedAppointment.locationAddress}}</span><br>
+                        <span style="padding-left: 70px"><strong>Ward:</strong> {{focusedAppointment.departmentWards}}</span><br>
+                        <span style="padding-left: 70px"><strong>Date:</strong> {{focusedAppointment.dateOfAppointment | date: 'dd/MM/yyyy'}}</span><br>
+                        <span style="padding-left: 70px"><strong>Time:</strong> {{focusedAppointment.dateOfAppointment | date:'h:mm a'}}</span>
+                    </p>
+                    <hr>
+                </div>
            <span class="row"><input type="date" [(ngModel)]="dateString"/></span>
            <span class="row"><input type="time" [(ngModel)]="timeString"></span>
            <br>
-           <span><select>
-            <option *ngFor="let appointment of appointmentString">{{appointment}}</option> 
-        </select>
-            </span>
-            <br>
-            <br>
-            <span><select>
-                <option *ngFor="let user of userString">{{user}}</option> 
-            </select>
-                </span>
-                <br>
            <span class="row"><button type="button" class="btn btn-success" (click)="onSubmit()">Submit</button></span>
            <span class="row"><button type="button" class="btn btn-success" (click)="onDelete()">Delete</button></span>
     </div>
@@ -27,34 +30,6 @@
 
     <div [hidden]="!(navigationOption===navigationOptions.MyDependants)">
     </div>
-</div> -->
+</div>
 
 
-<table>
-        <tr>
-                <td><caption>Patient Name:  </caption></td>
-                <td><span class="row"><input type="text"></span></td>
-                <td><caption class="side-note">(only fill this box in if deleting an appointment) </caption></td>
-                <td></td>
-        </tr>
-        <tr></tr>
-        <tr>
-                <td><caption>New Appointment Date:   </caption></td>
-                <td><span class="row"><input type="date" [(ngModel)]="dateString"/></span></td>
-                <td></td>
-        </tr>
-        <tr></tr>
-        <tr>
-            <td><caption>New Appointment Time:   </caption></td>
-                <span class="row"><input type="time" [(ngModel)]="timeString"></span>
-                <td></td>
-        </tr>
-        <tr>
-          <td> <span class="row"><button type="button" class="btn btn-success" (click)="onSubmit()">Submit</button></span></td>
-          <td><span class="row"><button type="button" class="btn btn-success" (click)="onDelete()">Delete</button></span></td>
-        </tr>
-        <tr>
-           
-          
-        </tr>
-      </table>
