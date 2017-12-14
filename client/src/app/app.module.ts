@@ -45,7 +45,7 @@ import { QuestionnaireComponent } from './components/questionnaire/questionnaire
 import { TimelineComponent } from './components/timeline/timeline.component';
 import { MyDatePickerModule } from 'mydatepicker';
 import { SearchPharmacyComponent } from './components/search-pharmacy/search-pharmacy.component';
-import { GenerateAppointmentComponent } from './generate-appointment/generate-appointment.component';
+import { GenerateAppointmentComponent } from './components/generate-appointment/generate-appointment.component';
 
 @NgModule({
     declarations: [
