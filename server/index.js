@@ -9,7 +9,7 @@ const morgan = require('morgan');
 var dotenv = require('dotenv');
 var cron = require('node-cron');
 
-cron.schedule('* * * * *', function(){
+cron.schedule('0 0 9 * * *', function(){
  console.log('running a task every minute');
 });
 
