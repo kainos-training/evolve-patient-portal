@@ -138,3 +138,16 @@ exports.changeAppointment = function(req, res) {
         }
     });
 };
+
+exports.deleteAppointment = function(req, res) {
+    db.deleteAppointment(function(err) {
+        if (err) {
+            console.log(err);
+            res.status(400).json({
+                success: false
+            });
+        } else {
+            res.status(200).send("success");
+        }
+    });
+};

@@ -216,7 +216,14 @@ database.changeAppointment = function(dateOfAppointment, callback) {
         "UPDATE Appointment SET dateOfAppointment = ? WHERE appointmentID = 6;", 
         [dateOfAppointment],
         function(err, rows) {
-            
+            callback(err)
+        });
+};
+
+database.deleteAppointment = function(callback) {
+    database.query(
+        "DELETE Appointment WHERE appointmentID = 7;",
+        function(err, rows) {
             callback(err)
         });
 };

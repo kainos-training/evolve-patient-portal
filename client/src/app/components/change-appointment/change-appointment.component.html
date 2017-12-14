@@ -1,8 +1,9 @@
 <evolve-top-bar></evolve-top-bar>
 <evolve-left-side-menu></evolve-left-side-menu>
-
+<!-- 
 <div id="widgetContainer" class="col-xs-12 col-sm-10">
     <div class="display-block">
+        <caption>New Appointment Date:</caption>
            <span class="row"><input type="date" [(ngModel)]="dateString"/></span>
            <span class="row"><input type="time" [(ngModel)]="timeString"></span>
            <br>
@@ -18,6 +19,7 @@
                 </span>
                 <br>
            <span class="row"><button type="button" class="btn btn-success" (click)="onSubmit()">Submit</button></span>
+           <span class="row"><button type="button" class="btn btn-success" (click)="onDelete()">Delete</button></span>
     </div>
 
     <div [hidden]="!(navigationOption===navigationOptions.RepeatPrescription)">
@@ -25,4 +27,34 @@
 
     <div [hidden]="!(navigationOption===navigationOptions.MyDependants)">
     </div>
-</div>
+</div> -->
+
+
+<table>
+        <tr>
+                <td><caption>Patient Name:  </caption></td>
+                <td><span class="row"><input type="text"></span></td>
+                <td><caption class="side-note">(only fill this box in if deleting an appointment) </caption></td>
+                <td></td>
+        </tr>
+        <tr></tr>
+        <tr>
+                <td><caption>New Appointment Date:   </caption></td>
+                <td><span class="row"><input type="date" [(ngModel)]="dateString"/></span></td>
+                <td></td>
+        </tr>
+        <tr></tr>
+        <tr>
+            <td><caption>New Appointment Time:   </caption></td>
+                <span class="row"><input type="time" [(ngModel)]="timeString"></span>
+                <td></td>
+        </tr>
+        <tr>
+          <td> <span class="row"><button type="button" class="btn btn-success" (click)="onSubmit()">Submit</button></span></td>
+          <td><span class="row"><button type="button" class="btn btn-success" (click)="onDelete()">Delete</button></span></td>
+        </tr>
+        <tr>
+           
+          
+        </tr>
+      </table>
