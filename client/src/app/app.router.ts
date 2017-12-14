@@ -20,5 +20,4 @@ export const router: Routes = [
     {path: 'changeAppointment', component: ChangeAppointmentComponent},
     {path: '**', component: LoginComponent}
 ];
-
 export const routes: ModuleWithProviders = RouterModule.forRoot(router);
