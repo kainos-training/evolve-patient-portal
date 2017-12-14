@@ -9,6 +9,8 @@ import { BsModalService } from 'ngx-bootstrap/modal';
 import { BsModalRef } from 'ngx-bootstrap/modal/modal-options.class';
 import { GP } from '../../class/GP';
 import { GPPractice } from '../../class/GPPractice';
+import { element } from 'protractor';
+import { document } from 'ngx-bootstrap/utils/facade/browser';
 
 @Component({
   selector: 'evolve-personal-info-header',

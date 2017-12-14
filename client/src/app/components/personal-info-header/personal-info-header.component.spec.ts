@@ -6,6 +6,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { CookieService } from 'ngx-cookie-service';
 import { SwitchBoardService } from '../../services/switch-board.service';
 import { Router } from '@angular/router';
+import { FormsModule } from '@angular/forms';
 
 describe('PersonalInfoHeaderComponent', () => {
     let component: PersonalInfoHeaderComponent;
@@ -23,7 +24,8 @@ describe('PersonalInfoHeaderComponent', () => {
                 { provide: Router, useValue: mockRouter }
             ],
             imports: [
-                HttpClientModule
+                HttpClientModule,
+                FormsModule
             ]
 
         })
