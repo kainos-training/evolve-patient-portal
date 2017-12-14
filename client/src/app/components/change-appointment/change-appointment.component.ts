@@ -19,7 +19,7 @@ export class ChangeAppointmentComponent implements OnInit {
 
   ngOnInit() {
     this.timeString = '12:00:00';
-    this.dateString = '2017-12-25';
+    this.dateString = '2017-12-30';
 
     this.data.getAppointmentInformation(7).subscribe(
       res => {
@@ -31,7 +31,7 @@ export class ChangeAppointmentComponent implements OnInit {
 
   onSubmit(){
     console.log(this.date);
-    this.data.changeAppointment('2017-12-25 13:15:00');
+    this.data.changeAppointment('2017-12-30 12:00:00');
   }
 
   onDelete(){
@@ -39,7 +39,7 @@ export class ChangeAppointmentComponent implements OnInit {
   }
 
   getAppointmentsForUser() {
-    this.data.getAllAppointmentsByUserID(7).subscribe(
+    this.data.getAllAppointmentsByUserID(19).subscribe(
         res => this.appointments = res
     );
 }
