@@ -27,6 +27,8 @@ export class TimelineComponent implements OnInit {
     private appointmentCount: AppointmentCount;
     private loadFuture:boolean;
     private loadPrevious:boolean;
+    private focusedAppointmentArrayLocation: string;
+    private focusedAppointmentForLoop: AppointmentFurtherInfo;
 
     //appointment modal 
     private modalRef: BsModalRef;
@@ -164,4 +166,23 @@ export class TimelineComponent implements OnInit {
     private toggle(name):void {
         this.focusedAppointment[name] = !this.focusedAppointment[name];
     }
+
+    getTooltip(id:any){
+        console.log(this.timelineStructure);
+    }
+
+    getColor(colorChoice:String){
+        if(colorChoice=='Community Diabetes Team'){
+            return '#f47738';
+        }
+        if(colorChoice=='GP'){
+            return 'rgb(109,182,255)';
+        }
+        if(colorChoice=='Orthopeadic'){
+            return 'rgb(255,255,109)';
+        }
+        if(colorChoice=='Oncology'){
+            return 'rgb(225,109,182)';
+        }
+    } 
 }
