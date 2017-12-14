@@ -38,8 +38,12 @@ exports.preOpPrompt = function (req, res) {
                      throw err;
                 }
                 else{ 
-                    console.log(rows);
-                    callback(JSON.stringify(rows[0].userID+" With "+rows[0].taskName));
+                    var r = [];
+                    console.log(rows[0].userID);
+                    for(i = 0; i<rows.length; i++){
+                        r.push(rows[i].userID);
+                    }
+                    callback(r);
                 }
             }              
         );
