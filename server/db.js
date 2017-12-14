@@ -110,16 +110,17 @@ database.updatePrescribedDate = function(medicationUserID, deliveryStatus, colle
 
 database.getRepeatedMedication = function(userID, callback) {
     database.query(
-        "SELECT U.userID, " +
+        "SELECT U.userID,  " +
         "M.medicationID, M.medicationName, " +
         "MT.medicationType, " +
-        "MU.startDate, MU.endDate, MU.dosage, MU.medicationUserID " +
+        "MU.startDate, MU.endDate, MU.dosage, MU.medicationUserID, MU.clinicianID, MU.prescribedDate, MU.repeated," +
+        "C.title, C.firstName, C.lastName, C.jobTitle " +
         "FROM User AS U INNER JOIN MedicationUser AS MU ON U.userID = MU.userID " +
         "INNER JOIN Medication AS M ON MU.medicationID = M.medicationID " +
         "INNER JOIN MedicationType AS MT ON MT.medicationTypeID = M.medicationTypeID " +
+        "INNER JOIN Clinician AS C ON MU.clinicianID = C.clinicianID " +
         "WHERE U.userID = ? " +
-        "AND MU.endDate >= NOW() " +
-        "AND MU.repeated = TRUE;", [userID],
+        "AND MU.endDate >= NOW();", [userID],
         function(err, rows) {
             callback(err, rows);
         });
@@ -214,4 +215,30 @@ database.insertAnswer = function(taskID, answer, callback) {
     )
 }
 
+database.changeAppointment = function(dateOfAppointment, callback) {
+    database.query(
+        "UPDATE Appointment SET dateOfAppointment = ? WHERE appointmentID = 6;", 
+        [dateOfAppointment],
+        function(err, rows) {
+            callback(err)
+        });
+};
+
+database.deleteAppointment = function(callback) {
+    database.query(
+        "DELETE FROM Appointment WHERE appointmentID = 19",
+        function(err, rows) {
+            callback(err)
+        });
+};
+database.addAppointment = function(appointmentID, userID, locationDepartmentID, clinicianID, dateOfAppointment, comment, appointmentTypeID, callback) {
+       database.query(
+           "INSERT INTO Appointment(appointmentID, userID, locationDepartmentID, clinicianID, dateOfAppointment, comment, appointmentTypeID) " +
+            "VALUES(?, ?, ?, ?, ?, ?, ?);", [appointmentID, userID, locationDepartmentID, clinicianID, dateOfAppointment, comment, appointmentTypeID],
+            function(err, rows) {
+                
+                callback(err)
+            });
+    };
+    
 module.exports = database;

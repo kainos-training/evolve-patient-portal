@@ -548,7 +548,47 @@ public getAllGPbyPracticeID(x){
         });
     }
 
-    
+
+    public changeAppointment(dateOfAppointment) {
+        let headers = new Headers({ 'Content-Type': 'application/json' });
+        const body = {
+            'dateOfAppointment': dateOfAppointment,
+        };
+        const options = {
+            headers: new HttpHeaders().set('Content-Type', 'application/json'),
+        };
+        let url = '/api/appointment/changeAppointment';
+        this.http.post(url, body, options).subscribe();
+    }
+
+    public deleteAppointment() {
+        let headers = new Headers({ 'Content-Type': 'application/json' });
+        const body = {
+        };
+        const options = {
+            headers: new HttpHeaders().set('Content-Type', 'application/json'),
+        };
+        let url = '/api/appointment/deleteAppointment';
+        this.http.post(url, body, options).subscribe();
+    }
+    public addAppointment(appointmentID, userID, locationDepartmentID, clinicianID, dateOfAppointment, comment, appointmentTypeID) {
+                let headers = new Headers({ 'Content-Type': 'application/json' });
+                const body = {
+                    'appointmentID': appointmentID,
+                    'userID' : userID,
+                    'locationDepartmentID': locationDepartmentID,
+                    'clinicianID': clinicianID,
+                    'dateOfAppointment': dateOfAppointment,
+                    'comment': comment,
+                    'appointmentTypeID': appointmentTypeID
+                };
+                const options = {
+                    headers: new HttpHeaders().set('Content-Type', 'application/json'),
+                };
+                let url = '/api/appointment/addAppointment';
+                this.http.post(url, body, options).subscribe();
+            }
+
 
     logout() {
         this.removeCookie();

@@ -1,0 +1,38 @@
+{
+  "name": "express-seed",
+  "version": "0.0.0",
+  "main": "index.js",
+  "scripts": {
+    "start": "npm run intTest -s && npm run build -s",
+    "build": "concurrently 'nodemon index.js' 'npm run unitTestWatch'",
+    "intTest": "echo 'Starting Integration Tests\n' && mocha -R spec test/* && echo 'Finished Integration Tests\n'",
+    "unitTestWatch": "mocha -R spec test/unit --watch",
+    "unitTest": "mocha -R spec test/unit"
+  },
+  "license": "MIT",
+  "dependencies": {
+    "bcrypt": "^1.0.3",
+    "body-parser": "^1.18.1",
+    "concurrently": "^3.5.0",
+    "cors": "^2.8.4",
+    "dotenv": "^4.0.0",
+    "errorhandler": "^1.5.0",
+    "express": "^4.16.2",
+    "jsonwebtoken": "^7.4.3",
+    "moment": "^2.19.4",
+    "morgan": "^1.8.2",
+    "mysql": "^2.14.1",
+    "node-cron": "^1.2.1",
+    "node-schedule": "^1.2.5",
+    "node-xml-lite": "0.0.7",
+    "nodemailer": "^4.4.1",
+    "request": "^2.81.0",
+    "twilio": "^3.10.1"
+  },
+  "devDependencies": {
+    "chai": "^4.1.2",
+    "mocha": "^3.5.0",
+    "rewire": "^2.5.2",
+    "supertest": "^3.0.0"
+  }
+}

@@ -80,7 +80,7 @@
     border-top-left-radius: 10px;
     border-top-right-radius: 10px;
     height: 30px;
-    color: rgb(102,102,102);    
+   color: rgb(102,102,102);    
 }
 
 .timeline-month-header::before {
@@ -159,7 +159,7 @@
     height: 16px;
     background-color: rgb(132	193	222	);
     /* safari and chrome compatibility */
-    background: rgb(132,193,222);
+    background: rgb(124, 201, 236);
 }   
 
 .timeline-appointment-header {
@@ -168,7 +168,7 @@
     text-overflow: ellipsis;
     overflow: hidden;
     font-size: 16px;
-    color: rgb(102,102,102);  
+    color: black;  
 }
 
 .timeline-appointment-date {
@@ -176,12 +176,12 @@
     text-overflow: ellipsis;
     overflow: hidden;
     font-size: 15px;
-    color: rgb(102,102,102);    
+    color: black;    
 }
 
 .timeline-appointment-date::before {
     margin-left: 14px;
-    content: "Due: ";
+    content: "Date: ";
 }    
 
 .collapsed-year {
@@ -341,3 +341,12 @@ input[data-expanded="true"]:active, input[data-expanded="false"]:active {
     background-color: #067fbb;
     outline: none;
 }
+
+.dot {
+    height: 15px;
+    width: 15px;
+    background-color: #bbb;
+    border-radius: 50%;
+    display: inline-block;
+    margin-left: 70px;
+  }

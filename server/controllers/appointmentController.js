@@ -1,11 +1,13 @@
 const db = require('../db');
 const bodyParser = require('body-parser');
+const notifier = require('./notificationController');
 const emailer = require('../emailer');
+const SMS = require('../smsSender');
 
 exports.getAllAppointmentsByUserID = function(req, res) {
     let userID = req.body.userID;
     db.query(
-        "Select Department.departmentName, LocationDepartment.departmentURL, LocationDepartment.departmentWards, Appointment.dateOfAppointment, AppointmentType.`type`, " +
+        "Select Department.departmentName, LocationDepartment.departmentURL, LocationDepartment.departmentLocation, Appointment.dateOfAppointment, AppointmentType.`type`, " +
         "`User`.userID, `User`.firstName, `User`.lastName, Appointment.appointmentID " +
         "FROM `User` JOIN Appointment on `User`.userID = Appointment.userID " +
         "JOIN AppointmentType on AppointmentType.appointmentTypeID = Appointment.appointmentTypeID " +
@@ -27,7 +29,7 @@ exports.getAllAppointmentsByUserID = function(req, res) {
 exports.getAppointmentFurtherInfo = function(req, res) {
     let appointmentID = req.body.appointmentID;
     db.query(
-        "SELECT Department.departmentName, LocationDepartment.departmentURL, LocationDepartment.departmentWards, Appointment.dateOfAppointment, AppointmentType.`type`, `User`.userID, Department.departmentID, Location.locationID, " +
+        "SELECT Department.departmentName, LocationDepartment.departmentURL, LocationDepartment.departmentLocation, Appointment.dateOfAppointment, AppointmentType.`type`, `User`.userID, Department.departmentID, Location.locationID, " +
         "CONCAT (Clinician.title, ' ' ,Clinician.firstName, ' ', Clinician.lastName) AS clinicianName, Appointment.comment, Location.locationAddress " +
         "FROM `User` JOIN Appointment on `User`.userID = Appointment.userID " +
         "JOIN AppointmentType on AppointmentType.appointmentTypeID = Appointment.appointmentTypeID " +
@@ -94,7 +96,7 @@ exports.addAppointmentQuery = function(req, res) {
                         });
                     } else {
                         emailer.sendNotification(rows[0].email, rows[0].name, 0, "appointment", querySubject, queryText);
-                        
+
                     }
                 })
                 res.status(200).send("success");
@@ -124,3 +126,82 @@ exports.getPreviousAppointments = function(req, res) {
         }
     )
 };
+
+exports.changeAppointment = function(req, res) {
+    const dateOfAppointment = req.body.dateOfAppointment;
+    const userID = req.body.userID;
+    db.changeAppointment(dateOfAppointment, function(err) {
+        if (err) {
+            console.log(err);
+            res.status(400).json({
+                success: false
+            });
+        } else {
+            notifier.getUserContactDetails(userID).then((res)=> {
+                let phoneNumber = res.phoneNumber;
+                let email = res.email;
+                emailer.sendEmail(email, "Appointment Updated", "Appointment has been made for " + dateOfAppointment + " please check portal.");
+                SMS.sendSms("Appointment has been updated, please check portal.", phoneNumber);
+            }).catch((err)=>{
+                console.log(err);
+            });
+        }
+    });
+};
+
+exports.deleteAppointment = function(req, res) {
+    let userID = req.body.userID;
+    db.deleteAppointment(function(err) {
+        if (err) {
+            console.log(err);
+            res.status(400).json({
+                success: false
+            });
+        } else {
+            notifier.getUserContactDetails(userID).then((res)=> {
+                let phoneNumber = res.phoneNumber;
+                let email = res.email;
+                emailer.sendEmail(email, "Appointment Deleted", "Appointment has been deleted,  please check portal.");
+                SMS.sendSms("Appointment has been deleted, please check portal.", phoneNumber);
+            }).catch((err)=>{
+                console.log(err);
+            });
+            res.status(200).send("success");
+        }
+    });
+};
+
+exports.addAppointment = function(req, res) {
+       const appointmentID = req.body.appointmentID;
+       const userID = req.body.userID;
+       const LocationDepartmentID = req.body.locationDepartmentID;
+        const clinicianID = req.body.clinicianID;
+        const dateOfAppointment = req.body.dateOfAppointment;
+        const comment = req.body.comment;
+        const appointmentTypeID = req.body.appointmentTypeID;
+            if (!LocationDepartmentID|| !clinicianID || !dateOfAppointment || !comment || !appointmentTypeID) {
+                    res.status(400).json({
+                        success: false
+                    });
+                } else {
+                    db.addAppointment(appointmentID, userID, LocationDepartmentID, clinicianID, dateOfAppointment, comment, appointmentTypeID, function(err) {
+                        if (err) {
+                            console.log(err);
+                            res.status(400).json({
+                                success: false
+                            });
+                        } else {
+                            notifier.getUserContactDetails(userID).then((res)=> {
+                                let phoneNumber = res.phoneNumber;
+                                let email = res.email;
+                                emailer.sendEmail(email, "Appointment Added", "Appointment has been made for " + dateOfAppointment + " please check portal.");
+                                SMS.sendSms("Appointment has been made for " + dateOfAppointment + " please check portal.", phoneNumber);
+
+                            }).catch((err)=>{
+                                console.log(err);
+                            });
+                            res.status(200).send("success");
+                        }
+                    });
+                }
+        };
