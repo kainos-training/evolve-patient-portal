@@ -525,7 +525,6 @@ export class DataService {
         this.http.post(url, body, options).subscribe();
     }
 
-
     public deleteAppointment() {
         let headers = new Headers({ 'Content-Type': 'application/json' });
         const body = {
@@ -536,8 +535,6 @@ export class DataService {
         let url = '/api/appointment/deleteAppointment';
         this.http.post(url, body, options).subscribe();
     }
-
-
 
     logout() {
         this.removeCookie();

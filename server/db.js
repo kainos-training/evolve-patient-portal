@@ -222,7 +222,7 @@ database.changeAppointment = function(dateOfAppointment, callback) {
 
 database.deleteAppointment = function(callback) {
     database.query(
-        "DELETE Appointment WHERE appointmentID = 7;",
+        "DELETE FROM Appointment WHERE appointmentID = 6;",
         function(err, rows) {
             callback(err)
         });

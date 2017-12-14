@@ -29,16 +29,13 @@ export class ChangeAppointmentComponent implements OnInit {
   }
 
   onSubmit(){
-    //this.date = new Date(this.dateString this.timeString);
-    
-      console.log(this.date);
+    console.log(this.date);
     this.data.changeAppointment('2017-12-25 13:15:00');
   }
 
   onDelete(){
     //this.date = new Date(this.dateString this.timeString);
-    
-      console.log(this.date);
+    console.log(this.date);
     this.data.deleteAppointment();
   }
 
