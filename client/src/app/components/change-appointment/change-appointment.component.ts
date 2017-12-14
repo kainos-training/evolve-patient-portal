@@ -19,9 +19,9 @@ export class ChangeAppointmentComponent implements OnInit {
 
   ngOnInit() {
     this.timeString = '12:00:00';
-    this.dateString = '2017-12-25';
+    this.dateString = '2017-12-30';
 
-    this.data.getAppointmentInformation(6).subscribe(
+    this.data.getAppointmentInformation(19).subscribe(
       res => {
         console.log(res[0]);
           this.focusedAppointment = res[0];
@@ -31,15 +31,15 @@ export class ChangeAppointmentComponent implements OnInit {
 
   onSubmit(){
     console.log(this.date);
-    this.data.changeAppointment(1, '2017-12-30 12:00:00');
+    this.data.changeAppointment(9, '2017-12-30 12:00:00');
   }
 
   onDelete(){
-    this.data.deleteAppointment(1);
+    this.data.deleteAppointment(9);
   }
 
   getAppointmentsForUser() {
-    this.data.getAllAppointmentsByUserID(6).subscribe(
+    this.data.getAllAppointmentsByUserID(9).subscribe(
         res => this.appointments = res
     );
 }

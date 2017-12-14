@@ -7,6 +7,25 @@ const bodyParser = require('body-parser');
 const cors = require('cors');
 const morgan = require('morgan');
 var dotenv = require('dotenv');
+const moment = require('moment');
+var cron = require('node-cron');
+const emailer = require('./emailer');
+const notifier = require('./controllers/notificationController');
+const SMS = require('./smsSender');
+
+cron.schedule('0 50 10 * * *', ()=>{
+    notifier.getTaskByDueDate().then((res)=>{
+        for(let counter=0; counter<res.length; counter++){
+            let currentRow = res[counter];
+            let emailText = emailBuilder(res[counter]);
+            let smsText = smsTextBuilder(res[counter]);
+            emailer.sendEmail(currentRow.email, currentRow.taskName, emailText);
+            SMS.sendSms(smsText, currentRow.phoneNumber);
+        }
+    }).catch((err)=>{
+        console.log(err);
+    });
+});
 
 /**
  * Load environment variables from .env file.
@@ -50,6 +69,7 @@ const protectedTimelineRoutes = require('./routes/protectedTimelineRoutes');
 const publicDependantRoutes = require('./routes/publicDependantRoutes');
 const protectedConditionRoutes = require('./routes/protectedConditionRoutes')
 const publicTaskRoutes = require('./routes/publicTaskRoutes');
+const notificationController = require('./controllers/notificationController');
 
 app.use('/password', publicResetPasswordRoutes);
 app.use('/auth', publicAuthRoutes);
@@ -65,3 +85,18 @@ app.use('/task', publicTaskRoutes);
 
 var server = app.listen(app.get('port'));
 module.exports = server;
+
+function smsTextBuilder(info){
+    let result = "Dear "+info.firstName+" "+info.lastName+", " +
+        "This is a reminder for you to complete your "+info.taskName + " " +
+        "This is due on "+moment(info.dueDate).format('DD/MM/YYYY HH:MM') + " http://localhost:4200/preclinic-add";
+    return result;
+}
+
+function emailBuilder(info){
+    let result = "<p>Dear "+info.firstName+" "+info.lastName+",</p>" +
+    "<p>This is a reminder for you to complete your "+info.taskName+".</p>" +
+    "<p>This is due on "+moment(info.dueDate).format('DD/MM/YYYY HH:MM')+"</p>" + " http://localhost:4200/preclinic-add" +
+    "<br>";
+    return result;
+}

@@ -348,3 +348,10 @@ VALUES (1, 'I get a sore head after I take my meds in the morning', false),
 INSERT INTO Task(taskName, userID, taskSummary, recievedDate, dueDate)
 VALUES('Pre-op questionnaire', 1, 'Questionnaire to be filled out before surgery. Includes allergies and general health questions.', (NOW() - INTERVAL 4 DAY), (NOW() + INTERVAL 30 DAY)),
 ('Pre-op Assessment: Olanzapine', 1, 'Form used to assess your suitibility for Olanzapine which will be used post surgery.', (NOW() - INTERVAL 12 DAY), (NOW() - INTERVAL 2 DAY));
+
+INSERT INTO User VALUES(null,'bmckillop','$2a$10$YqV/YtnOUd62xFSai8gRseO4nU5otTdyDTD7yWwaVquZfo02O2Uee', '1998-06-16','Male','987654321','Ben', 'McKillop', '+447854213244', 'Mr', '48 John Bell House','b.mckillop@kainos.com','No',null,1,1,1);
+
+INSERT INTO Task VALUES(null, 'Pre-Op Questionnaire', 9, 'Form to be filled prior to operation', '2017-11-19 00:01:00', '2017-12-22 00:01:00');
+INSERT INTO Task VALUES(null, 'Pre Clinic Form', 9, 'Form to be filled prior to arriving at clinic', '2017-11-19 00:01:00', '2017-12-16 00:01:00');
+
+INSERT INTO Appointment VALUES (null,9, 3, 1, '2017-12-29 13:15:00',' Ben expressed issues with migraines and eyesight deterioration', 4);

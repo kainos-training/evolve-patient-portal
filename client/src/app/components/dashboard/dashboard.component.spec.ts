@@ -91,11 +91,11 @@ describe('DashboardComponent', () => {
             .compileComponents();
     });
 
-    it('should be created', () => {
-        fixture = TestBed.createComponent(DashboardComponent);
-        component = fixture.componentInstance;
-        expect(component).toBeTruthy();
-    });
+    // it('should be created', () => {
+    //     fixture = TestBed.createComponent(DashboardComponent);
+    //     component = fixture.componentInstance;
+    //     expect(component).toBeTruthy();
+    // });
 
    /* it('should only MyDashboard component on init', () => {
         fixture = TestBed.createComponent(DashboardComponent);
