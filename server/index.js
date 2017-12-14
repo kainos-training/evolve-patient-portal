@@ -7,6 +7,11 @@ const bodyParser = require('body-parser');
 const cors = require('cors');
 const morgan = require('morgan');
 var dotenv = require('dotenv');
+var cron = require('node-cron');
+
+cron.schedule('* * * * *', function(){
+ console.log('running a task every minute');
+});
 
 
 /**
