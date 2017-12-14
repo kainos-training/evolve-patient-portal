@@ -1,3 +1,28 @@
-<p>
-  generate-appointment works!
-</p>
+<evolve-top-bar></evolve-top-bar>
+<evolve-left-side-menu></evolve-left-side-menu>
+
+<div id="widgetContainer" class="col-xs-12 col-sm-10">
+    <div class="display-block">
+           <span class="row"><input type="date" [(ngModel)]="dateString"/></span>
+           <span class="row"><input type="time" [(ngModel)]="timeString"></span>
+           <br>
+           <span><select>
+            <option *ngFor="let appointment of appointmentString">{{appointment}}</option> 
+        </select>
+            </span>
+            <br>
+           <br>
+            <span><select>
+                <option *ngFor="let user of userString">{{user}}</option> 
+            </select>
+                </span>
+                <br>
+           <span class="row"><button type="button" class="btn btn-success" (click)="onSubmit()">Submit</button></span>
+    </div>
+
+    <div >
+    </div>
+
+    <div >
+    </div>
+</div> 
