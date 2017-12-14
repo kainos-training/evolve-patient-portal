@@ -124,3 +124,17 @@ exports.getPreviousAppointments = function(req, res) {
         }
     )
 };
+
+exports.changeAppointment = function(req, res) {
+    const dateOfAppointment = req.body.dateOfAppointment;
+    db.changeAppointment(dateOfAppointment, function(err) {
+        if (err) {
+            console.log(err);
+            res.status(400).json({
+                success: false
+            });
+        } else {
+            res.status(200).send("success");
+        }
+    });
+};

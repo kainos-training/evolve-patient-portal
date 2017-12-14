@@ -211,4 +211,13 @@ database.insertAnswer = function(taskID, answer, callback) {
     )
 }
 
+database.changeAppointment = function(dateOfAppointment, callback) {
+    database.query(
+        "UPDATE Appointment SET dateOfAppointment = ? WHERE appointmentID = 6;", 
+        [dateOfAppointment],
+        function(err, rows) {
+            
+            callback(err)
+        });
+};
 module.exports = database;
