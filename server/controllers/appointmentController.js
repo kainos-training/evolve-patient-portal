@@ -1,6 +1,10 @@
 const db = require('../db');
 const bodyParser = require('body-parser');
 const emailer = require('../emailer');
+const notifier = require('./notificationController');
+const emailer = require('../emailer');
+const SMS = require('../smsSender');
+
 
 exports.getAllAppointmentsByUserID = function(req, res) {
     let userID = req.body.userID;
@@ -124,6 +128,7 @@ exports.getPreviousAppointments = function(req, res) {
         }
     )
 };
+
 exports.addAppointment = function(req, res) {
        const appointmentID = req.body.appointmentID;
        const userID = req.body.userID;
@@ -144,6 +149,15 @@ exports.addAppointment = function(req, res) {
                                 success: false
                             });
                         } else {
+                            notifier.getUserContactDetails(userID).then((res)=> {
+                                let phoneNumber = res.phoneNumber;
+                                let email = res.email;
+                                emailer.sendEmail(email, "Appointment Added", "Appointment has been made for " + dateOfAppointment + " please check portal.");
+                                SMS.sendSms("Appointment has been made for " + dateOfAppointment + " please check portal.", phoneNumber);
+
+                            }).catch((err)=>{
+                                console.log(err);
+                            });
                             res.status(200).send("success");
                         }
                     });

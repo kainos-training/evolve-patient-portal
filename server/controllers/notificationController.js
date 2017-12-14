@@ -20,6 +20,22 @@ exports.getTaskByDueDate = function (dueDate) {
     });
 };
 
+exports.getUserContactDetails = function(userID){
+    return new Promise((resolve, reject) => {
+        db.query(
+            "SELECT phoneNumber, email FROM User WHERE userID=?", [userID],
+            (err, rows) => {
+                if (err) {
+                    reject(err);
+                }
+                else {
+                    resolve(rows);
+                }
+            }
+        );
+    });
+};
+
 exports.getUser = function (req, res) {
     var userID = req.body.userID;
     var decryptedUserID = userID.replace(/[~]/g, '=');
