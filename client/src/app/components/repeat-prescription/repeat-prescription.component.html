@@ -83,12 +83,12 @@
                                     </ng-template>
                                 </td>
                                 <td>
-                                        <i *ngIf="(prescription.repeated == 1); then Access else NoAccess"></i>
+                                    <i *ngIf="(prescription.repeated == 1); then Access else NoAccess"></i>
                                     <ng-template #Access>
-                                            <button class="btn btn-success" (click)="addToList(prescription)">Repeat Prescription</button>
-                                        </ng-template>
-                                        <ng-template #NoAccess>
-                                        </ng-template>
+                                        <button class="btn btn-success" (click)="addToList(prescription)">Repeat Prescription</button>
+                                    </ng-template>
+                                    <ng-template #NoAccess>
+                                    </ng-template>
                                 </td>
                             </tr>
                         </tbody>
@@ -167,3 +167,4 @@
         </div>
     </ng-template>
 </div>
+<!--Testing-->
