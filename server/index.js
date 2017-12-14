@@ -8,6 +8,21 @@ const cors = require('cors');
 const morgan = require('morgan');
 var dotenv = require('dotenv');
 const moment = require('moment');
+var cron = require('node-cron');
+
+cron.schedule('0 0 9 * * *', ()=>{
+    notifier.getTaskByDueDate().then((res)=>{
+        for(let counter=0; counter<res.length; counter++){
+            let currentRow = res[counter];
+            let emailText = emailBuilder(res[counter]);
+            let smsText = smsTextBuilder(res[counter]);
+            emailer.sendEmail(currentRow.email, currentRow.taskName, emailText);
+            SMS.sendSms(smsText, currentRow.phoneNumber);
+        }
+    }).catch((err)=>{
+        console.log(err);
+    });
+});
 
 /**
  * Load environment variables from .env file.
@@ -71,18 +86,6 @@ app.use('/task', publicTaskRoutes);
 
 var server = app.listen(app.get('port'));
 module.exports = server;
-
-notifier.getTaskByDueDate().then((res)=>{
-    for(let counter=0; counter<res.length; counter++){
-        let currentRow = res[counter];
-        let emailText = emailBuilder(res[counter]);
-        let smsText = smsTextBuilder(res[counter]);
-        emailer.sendEmail(currentRow.email, currentRow.taskName, emailText);
-        SMS.sendSms(smsText, currentRow.phoneNumber);
-    }
-}).catch((err)=>{
-    console.log(err);
-});
 
 function smsTextBuilder(info){
     let result = "Dear "+info.firstName+" "+info.lastName+", " +
