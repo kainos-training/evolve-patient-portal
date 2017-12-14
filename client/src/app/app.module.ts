@@ -75,7 +75,7 @@ import { ChangeAppointmentComponent } from './components/change-appointment/chan
         SecondaryInfoHeaderComponent,
         DependantViewComponent,
         SearchPharmacyComponent,
-        ChangeAppointmentComponent,
+        ChangeAppointmentComponent
     ],
     imports: [
         MyDatePickerModule,
