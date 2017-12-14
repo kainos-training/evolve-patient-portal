@@ -24,6 +24,7 @@ before_install:
 install:
     # Install Frontend Dependencies
     - cd client
+    - rm -rf node_modules
     - npm install
     - ng build
     # Install Backend Dependencies
