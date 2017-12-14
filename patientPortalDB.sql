@@ -232,7 +232,10 @@ CREATE TABLE IF NOT EXISTS AppointmentQuery (
     foreign key (clinicianID) references Clinician(clinicianID)
 );
 
-
+INSERT INTO GPPractice (gpPracticeName, gpPracticeAddress)
+VALUES('Ormeau Park Surgery', '281 Ormeau Rd, Belfast BT7 3GG, UK'),
+('The Surgery', '1 Church St, Newtownards BT23 4FH'),
+('Springvale Medical Practice', '463 Springfield Rd, Belfast BT12 7DP, UK');
 
 INSERT INTO GP (gpFullName, gpPracticeID)
 VALUES ('Dr. A Cheyne', 1),

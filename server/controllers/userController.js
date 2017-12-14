@@ -7,10 +7,13 @@ exports.updateUserDetails = function(req, res) {
     var mobilePhoneNumber = req.body.mobilePhoneNumber;
     var homePhoneNumber = req.body.homePhoneNumber;
     var workPhoneNumber = req.body.workPhoneNumber;
+    var gpID = req.body.gpID;
     var userID = req.body.userID;
+    console.log("gpID: "+gpID);
+    console.log("user ID:" + userID);
 
-    db.query('Update User SET email=?, preferredName=?, address=?, mobilePhoneNumber=?, homePhoneNumber=?, workPhoneNumber=? where userID=?',
-        [email, preferredName, address, mobilePhoneNumber, homePhoneNumber, workPhoneNumber, userID],
+    db.query('Update User SET email=?, preferredName=?, address=?, mobilePhoneNumber=?, homePhoneNumber=?, workPhoneNumber=?, gpID=? WHERE userID=?;',
+        [email, preferredName, address, mobilePhoneNumber, homePhoneNumber, workPhoneNumber, gpID, userID],
         function(err, rows) {
             if (err) {
                 console.log(err);

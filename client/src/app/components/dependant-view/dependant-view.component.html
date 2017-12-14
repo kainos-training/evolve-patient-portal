@@ -6,7 +6,7 @@
     </div>
     
     <div class="btnDiv">
-    <button class="btn btn-primary"  (click)="openModal(template)"><span class="glyphicon glyphicon-edit" aria-hidden="true"></span></button>
+    <!--<button class="btn btn-primary"  (click)="openModal(template)"><span class="glyphicon glyphicon-edit" aria-hidden="true"></span></button>-->
     </div>
     <evolve-appointment [dependantID]="viewingDependant.userID"></evolve-appointment>
     <evolve-previous-appointments [dependantID]="viewingDependant.userID"></evolve-previous-appointments>
@@ -14,7 +14,7 @@
     <evolve-repeat-prescription [dependantID]="viewingDependant.userID"></evolve-repeat-prescription>
 
 </div>
- <ng-template #template>
+ <!--<ng-template #template>
         <div>
             <div class="med-modal">
                 <div class="modal-header">
@@ -54,7 +54,7 @@
                                 </select>
                                 
                             <label for="gpFullName" style="margin-top: 20px;">GP Name: </label>
-                            <select class="form-control" (change)="gpChangeDropdown($event.target.value)" [(ngModel)]="gpName" [ngModelOptions]="{standalone: true}">
+                            <select class="form-control" [id]="gpName" (change)="gpChangeDropdown($event.target.value)" [(ngModel)]="gpName" [ngModelOptions]="{standalone: true}">
                                 <option value="--Select a GP--">--Select a GP--</option>
                                 <option *ngFor="let x of gp" [id]="x.gpFullName.charAt(4)"[value]="x.gpFullName">{{x.gpFullName}}</option>
                             </select>
@@ -64,4 +64,4 @@
                 </form>
             </div>
         </div>
-    </ng-template>
+    </ng-template>-->

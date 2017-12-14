@@ -532,8 +532,10 @@ public getAllGPbyPracticeID(x){
                 "mobilePhoneNumber": newUserDetails.mobilePhoneNumber,
                 "homePhoneNumber": newUserDetails.homePhoneNumber,
                 "workPhoneNumber": newUserDetails.workPhoneNumber,
-                "userID": newUserDetails.userID
+                "userID": newUserDetails.userID,
+                "gpID": newUserDetails.gpID
             };
+
             const options = {
                 headers: new HttpHeaders().set('Content-Type', 'application/x-www-form-urlencoded'),
             };

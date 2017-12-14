@@ -31,7 +31,8 @@ export class DependantViewComponent implements OnInit, OnDestroy {
     public mobilePhoneNumber: string;
     public homePhoneNumber: string;
     public workPhoneNumber: string;
-    private gp: GP[];
+    public gp: GP[];
+    //public gpInstance: GP;
     public gpPractice: GPPractice[];
     public gpID: number;
     public gpName: string;
@@ -39,15 +40,18 @@ export class DependantViewComponent implements OnInit, OnDestroy {
     public gpPracName: string;
     private HTTPService: DataService;
     public toStr= JSON.stringify;
+    
 
     constructor(private data: DataService, private switchboard: SwitchBoardService, private modalService: BsModalService) {
         this.HTTPService = data;
+        
     }
 
-    ngOnInit() {
+   ngOnInit() {
         //Called after the constructor, initializing input properties, and the first call to ngOnChanges.
         //Add 'implements O nInit' to the class.
         this.newUserDetails = new User();
+
         
         this.dependantSubscription = this.switchboard.viewingDependant$.subscribe(
             dependant => {
@@ -58,19 +62,30 @@ export class DependantViewComponent implements OnInit, OnDestroy {
                 this.mobilePhoneNumber = this.viewingDependant.mobilePhoneNumber;
                 this.homePhoneNumber = this.viewingDependant.homePhoneNumber;
                 this.workPhoneNumber = this.viewingDependant.workPhoneNumber;
-                this.gpID = this.viewingDependant.gpID;
-                this.gpName = this.viewingDependant.gpFullName;
-                this.gpPracName = this.viewingDependant.gpPracticeName;
                 this.gp = [];
-                this.gpPractice = [];
-                console.log(this.gpPracName);
-                console.log(this.gpName);
+                this.gpID = this.viewingDependant.gpID;
+
+                //this.gpName = this.viewingDependant.gpFullName;
+                console.log("gpName"+this.gpName);
                 
+                this.gpPracName = this.viewingDependant.gpPracticeName;
+                this.gpPractice = [];
+                //this.gpInstance.gpFullName = this.viewingDependant.gpFullName;
+                //console.log("gpIntance"+this.gpInstance.gpFullName);
+                //this.gpInstance.gpID = this.gpID;
+                //this.gpInstance.gpPracticeID = null;
+                //this.gp.push(this.gpInstance);
+                console.log("GP - "+this.gp);
+                console.log();
+                this.getAllGPPractice();
+
                 
             }
+            
                 
         );
-
+        
+    
     }
 
     ngOnDestroy() {
@@ -81,7 +96,8 @@ export class DependantViewComponent implements OnInit, OnDestroy {
 
     public openModal(template: TemplateRef<any>){
         this.modalRef = this.modalService.show(template);
-        this.getAllGPPractice();
+       
+    
     }
 
     //public getUserInfoByUserID(){
@@ -95,6 +111,11 @@ export class DependantViewComponent implements OnInit, OnDestroy {
 
 
  public getAllGPPractice(){
+     if(this.gpPractice.length=0){
+         this.gp = [];
+         this.gp[0].gpID = this.gpID;
+         this.gp[0].gpFullName = this.gpName;
+     }
      for(var i=0;i<this.gpPractice.length;i++){
          var elem = document.querySelector('#'+this.gpPractice[i].gpPracticeName)
          elem.parentNode.removeChild(elem);
@@ -119,8 +140,8 @@ public getAllGP(practiceName){
     for(var i = 0; i<this.gpPractice.length;i++){
         console.log("for loop called");
         if(this.gpPractice[i].gpPracticeName ==practiceName){
-            console.log(i);
-            this.getAllGPbyPracticeID(i+1);
+            console.log(this.gpPractice[i].gpPracticeID);
+            this.getAllGPbyPracticeID(this.gpPractice[i].gpPracticeID);
         }
     }
     
@@ -137,16 +158,21 @@ public getAllGPbyPracticeID(x){
 public gpPracticeChangeDropdown(x){
     this.gpPracName = x;
     console.log(this.gpPracName)
-    this.getAllGP(this.gpPracName);
+    //this.getAllGP(this.gpPracName);
 }
 
 public gpChangeDropdown(x){
     this.gpName = x;
     console.log(this.gpName)
-    this.getAllGP(this.gpName);
 }
 
     public updateUserDetails(){
+        for(var i = 0; i < this.gp.length; i++) {
+            if(this.gp[i].gpFullName == this.gpName) {
+                this.gpID = this.gp[i].gpID;
+            }
+        }
+
         const body = {
             preferredName: this.preferredName,
             address: this.address,
@@ -154,7 +180,8 @@ public gpChangeDropdown(x){
             email: this.email,
             mobilePhoneNumber: this.mobilePhoneNumber,
             homePhoneNumber: this.homePhoneNumber,
-            workPhoneNumber: this.workPhoneNumber
+            workPhoneNumber: this.workPhoneNumber,
+            gpID: this.gpID
         };
 
         this.HTTPService.updateUserDetails(body).then((result)=>{
@@ -165,9 +192,10 @@ public gpChangeDropdown(x){
             this.viewingDependant.mobilePhoneNumber = body.mobilePhoneNumber;
             this.viewingDependant.homePhoneNumber = body.homePhoneNumber;
             this.viewingDependant.workPhoneNumber = body.workPhoneNumber;
-            console.log(result);
+            this.viewingDependant.gpID = body.gpID;
         }).catch((err)=>{
             console.log(err);
         });
     }
 }
+
