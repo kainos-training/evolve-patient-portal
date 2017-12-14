@@ -513,12 +513,12 @@ export class DataService {
         });
     }
 
-    public addAppointment(appointmentID, userID, LocationDepartmentID, clinicianID, dateOfAppointment, comment, appointmentTypeID) {
+    public addAppointment(appointmentID, userID, locationDepartmentID, clinicianID, dateOfAppointment, comment, appointmentTypeID) {
                 let headers = new Headers({ 'Content-Type': 'application/json' });
                 const body = {
                     'appointmentID': appointmentID,
                     'userID' : userID,
-                    'LocationDepartmentID': LocationDepartmentID,
+                    'locationDepartmentID': locationDepartmentID,
                    'clinicianID': clinicianID,
                     'dateOfAppointment': dateOfAppointment,
                     'comment': comment,
