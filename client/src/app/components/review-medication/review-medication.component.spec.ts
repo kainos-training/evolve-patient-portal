@@ -31,13 +31,13 @@ export class MockDataService {
     getMedicationList(userID: number) {
         let toReturn: Array<Medication> = [];
         if (userID == 1) {
-            toReturn.push(new Medication(1, 'Mood Stabilizer', new Date(2017, 2, 12), new Date(2017, 3, 12), 'Take 1 daily','Be Very Careful', new Date(2017, 4, 11), false));
-            toReturn.push(new Medication(1, 'Antibiotics', new Date(2017, 3, 13), new Date(2017, 4, 11), 'Take 2 daily', 'Be Careful', new Date(2017, 4, 11), false));
+            toReturn.push(new Medication(1, 'Mood Stabilizer', new Date(2017, 2, 12), new Date(2017, 3, 12), 'Take 1 daily','Be Very Careful', new Date(2017, 4, 11), true, 1, 'Dr', 'Alex', 'Hyndman', 'Consultant'));
+            toReturn.push(new Medication(1, 'Antibiotics', new Date(2017, 3, 13), new Date(2017, 4, 11), 'Take 2 daily', 'Be Careful', new Date(2017, 4, 11), true, 1, 'Dr', 'Alex', 'Hyndman', 'Consultant'));
         }
         if (userID == 2) {
-            toReturn.push(new Medication(2, 'Analgesics ', new Date(2017, 2, 12), new Date(2017, 3, 12), 'Take 1 daily','Be Very Careful', new Date(2017, 4, 11), false));
+            toReturn.push(new Medication(2, 'Analgesics ', new Date(2017, 2, 12), new Date(2017, 3, 12), 'Take 1 daily','Be Very Careful', new Date(2017, 4, 11), true, 1, 'Dr', 'Alex', 'Hyndman', 'Consultant'));
             console.log('Analgesics');
-            toReturn.push(new Medication(2, 'Antipyretics', new Date(2017, 3, 13), new Date(2017, 4, 11), 'Take 2 daily', 'Be Careful', new Date(2017, 4, 11), false));
+            toReturn.push(new Medication(2, 'Antipyretics', new Date(2017, 3, 13), new Date(2017, 4, 11), 'Take 2 daily', 'Be Careful', new Date(2017, 4, 11), true, 1, 'Dr', 'Alex', 'Hyndman', 'Consultant'));
             console.log('Antipyretics');
         }
         console.log(toReturn);
