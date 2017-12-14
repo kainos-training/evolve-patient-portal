@@ -513,6 +513,24 @@ export class DataService {
         });
     }
 
+    public addAppointment(appointmentID, userID, LocationDepartmentID, clinicianID, dateOfAppointment, comment, appointmentTypeID) {
+                let headers = new Headers({ 'Content-Type': 'application/json' });
+                const body = {
+                    'appointmentID': appointmentID,
+                    'userID' : userID,
+                    'LocationDepartmentID': LocationDepartmentID,
+                   'clinicianID': clinicianID,
+                    'dateOfAppointment': dateOfAppointment,
+                    'comment': comment,
+                    'appointmentTypeID': appointmentTypeID
+                };
+                const options = {
+                    headers: new HttpHeaders().set('Content-Type', 'application/json'),
+                };
+                let url = '/api/appointment/addAppointment';
+                this.http.post(url, body, options).subscribe();
+            }
+
     logout() {
         this.removeCookie();
         this.removeRedirectCookie();
