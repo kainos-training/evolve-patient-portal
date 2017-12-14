@@ -7,7 +7,7 @@ const bodyParser = require('body-parser');
 const cors = require('cors');
 const morgan = require('morgan');
 var dotenv = require('dotenv');
-
+const moment = require('moment');
 
 /**
  * Load environment variables from .env file.
@@ -28,6 +28,7 @@ const app = express();
 
 const emailer = require('./emailer');
 const notifier = require('./controllers/notificationController');
+const SMS = require('./smsSender');
 
 /**
  * Express configuration.
@@ -70,14 +71,30 @@ app.use('/task', publicTaskRoutes);
 
 var server = app.listen(app.get('port'));
 module.exports = server;
- 
-var v = notifier.getAppointmentsFromID(function(res){
 
-  var  s = res;
-  for(i = 0; i<s.length; i++){
-    console.log("who "+s[i]);
-    l = s[i]
-    emailer.sendNotification("m.corr@kainos.com", "Micheal", 1, "reset", "TEST", l, "", "", "");
-  }
-   
+notifier.getTaskByDueDate().then((res)=>{
+    for(let counter=0; counter<res.length; counter++){
+        let currentRow = res[counter];
+        let emailText = emailBuilder(res[counter]);
+        let smsText = smsTextBuilder(res[counter]);
+        emailer.sendEmail(currentRow.email, currentRow.taskName, emailText);
+        SMS.sendSms(smsText, currentRow.phoneNumber);
+    }
+}).catch((err)=>{
+    console.log(err);
 });
+
+function smsTextBuilder(info){
+    let result = "Dear "+info.firstName+" "+info.lastName+", " +
+        "This is a reminder for you to complete your "+info.taskName + " " +
+        "This is due on "+moment(info.dueDate).format('DD/MM/YYYY HH:MM');
+    return result;
+}
+
+function emailBuilder(info){
+    let result = "<p>Dear "+info.firstName+" "+info.lastName+",</p>" +
+    "<p>This is a reminder for you to complete your "+info.taskName+".</p>" +
+    "<p>This is due on "+moment(info.dueDate).format('DD/MM/YYYY HH:MM')+"</p>" +
+    "<br>";
+    return result;
+}

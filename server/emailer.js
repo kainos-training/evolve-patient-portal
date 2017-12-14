@@ -17,8 +17,8 @@ exports.sendNotification = function(emailAddress, name, id, type, querySubject, 
                 pass: process.env.EMAIL_PASSWORD // generated ethereal password
             }
         });
-        let mailOptions = {}
-        if(type == "reset"){
+        let mailOptions = {};
+            if(type == "reset"){
             // setup email data with unicode symbols
             mailOptions = {
                 from: '"Evolve Patient" <kainostdp2017@gmail.com>', // sender address
@@ -42,7 +42,7 @@ exports.sendNotification = function(emailAddress, name, id, type, querySubject, 
         }else if(type == "preop"){
                 mailOptions = {
                     from: '"Evolve Portal" <kainostdp2017@gmail.com>', // sender address
-                    to: 'm.corr@kainos.com', // list of receivers
+                    to: 'johnd@kainos.com', // list of receivers
                     subject: "Reminder: Pre-Op Form", // Subject line
                     text: queryText, // plain text body
                     //html: htmlBody
@@ -56,4 +56,34 @@ exports.sendNotification = function(emailAddress, name, id, type, querySubject, 
             }
         });
     });
-}
+};
+
+exports.sendEmail = function(email, taskName, mailBody){
+    return new Promise((resolve, reject)=> {
+        let transporter = nodemailer.createTransport({
+            host: process.env.EMAIL_HOST,
+            port: parseInt(process.env.EMAIL_PORT),
+            secure: false, // true for 465, false for other ports,
+            requireTLS: true,
+            auth: {
+                user: process.env.EMAIL, // generated ethereal user
+                pass: process.env.EMAIL_PASSWORD // generated ethereal password
+            }
+        });
+
+        mailOptions = {
+            from: '"Evolve Portal" <kainostdp2017@gmail.com>', // sender address
+            to: email, // list of receivers
+            subject: "Reminder: " + taskName, // Subject line
+            html: mailBody, // plain text body
+        };
+
+        transporter.sendMail(mailOptions, (error, info) => {
+            if (error) {
+                reject(error);
+            }else {
+                resolve(info);
+            }
+        });
+    });
+};

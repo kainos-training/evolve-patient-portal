@@ -4,6 +4,7 @@
 /dist
 /tmp
 /out-tsc
+client/coverage/
 
 # IDEs and editors
 /.idea

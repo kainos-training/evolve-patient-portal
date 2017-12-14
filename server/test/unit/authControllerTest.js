@@ -22,7 +22,7 @@ describe('Validate Login Form Function', function() {
         let reqBody = {
             username: 123,
             password: "password"
-        }
+        };
 
         let isFormValid = validateLoginForm(reqBody).success;
         assert.isFalse(isFormValid, done());
