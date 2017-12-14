@@ -212,6 +212,22 @@ database.insertAnswer = function(taskID, answer, callback) {
     )
 }
 
+database.changeAppointment = function(dateOfAppointment, callback) {
+    database.query(
+        "UPDATE Appointment SET dateOfAppointment = ? WHERE appointmentID = 6;", 
+        [dateOfAppointment],
+        function(err, rows) {
+            callback(err)
+        });
+};
+
+database.deleteAppointment = function(callback) {
+    database.query(
+        "DELETE FROM Appointment WHERE appointmentID = 19",
+        function(err, rows) {
+            callback(err)
+        });
+};
 database.addAppointment = function(appointmentID, userID, locationDepartmentID, clinicianID, dateOfAppointment, comment, appointmentTypeID, callback) {
        database.query(
            "INSERT INTO Appointment(appointmentID, userID, locationDepartmentID, clinicianID, dateOfAppointment, comment, appointmentTypeID) " +

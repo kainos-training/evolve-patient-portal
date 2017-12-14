@@ -23,6 +23,14 @@ protectedAppointmentRoutes.post('/addAppointmentQuery', function(req, res) {
     return appointmentController.addAppointmentQuery(req, res);
 });
 
+protectedAppointmentRoutes.post('/changeAppointment', function(req, res) {
+    return appointmentController.changeAppointment(req, res);
+});
+
+protectedAppointmentRoutes.post('/deleteAppointment', function(req, res) {
+    return appointmentController.deleteAppointment(req, res);
+});
+
 +protectedAppointmentRoutes.post('/addAppointment', function(req, res) {
       return appointmentController.addAppointment(req, res);
     });
