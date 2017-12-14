@@ -17,6 +17,7 @@ import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { APP_BASE_HREF } from '@angular/common';
 import { MedicationUser } from '../../class/MedicationUser';
 import { QuestionnaireComponent } from '../../components/questionnaire/questionnaire.component';
+import {PreclinicAddComponent} from "../preclinic-add/preclinic-add.component";
 
 export class MockDataService {
     getRepeatMedication(userID: number) {
@@ -55,13 +56,13 @@ describe('RepeatPrescriptionComponent', () => {
     let component: RepeatPrescriptionComponent;
     let fixture: ComponentFixture<RepeatPrescriptionComponent>;
     let mockDataService: MockDataService;
-    let medicationUser: MedicationUser
+    let medicationUser: MedicationUser;
 
     beforeEach(async(() => {
         mockDataService = new MockDataService();
         TestBed.configureTestingModule({
             declarations: [RepeatPrescriptionComponent, LoginComponent, ErrorPageComponent, DashboardComponent,
-                RequestPasswordResetComponent, SettingNewPasswordComponent, QuestionnaireComponent],
+                RequestPasswordResetComponent, SettingNewPasswordComponent, QuestionnaireComponent, PreclinicAddComponent],
             providers: [DataService, HttpClient, HttpHandler, CookieService, SwitchBoardService, RouterModule, { provide: APP_BASE_HREF, useValue: '/' }],
             imports: [
                 routes,
