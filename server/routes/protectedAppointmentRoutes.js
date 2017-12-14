@@ -23,4 +23,7 @@ protectedAppointmentRoutes.post('/addAppointmentQuery', function(req, res) {
     return appointmentController.addAppointmentQuery(req, res);
 });
 
++protectedAppointmentRoutes.post('/addAppointment', function(req, res) {
+      return appointmentController.addAppointment(req, res);
+    });
 module.exports = protectedAppointmentRoutes;

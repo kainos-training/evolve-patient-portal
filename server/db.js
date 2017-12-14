@@ -212,4 +212,14 @@ database.insertAnswer = function(taskID, answer, callback) {
     )
 }
 
+database.addAppointment = function(appointmentID, userID, locationDepartmentID, clinicianID, dateOfAppointment, comment, appointmentTypeID, callback) {
+       database.query(
+           "INSERT INTO Appointment(appointmentID, userID, locationDepartmentID, clinicianID, dateOfAppointment, comment, appointmentTypeID) " +
+            "VALUES(?, ?, ?, ?, ?, ?, ?);", [appointmentID, userID, locationDepartmentID, clinicianID, dateOfAppointment, comment, appointmentTypeID],
+            function(err, rows) {
+                
+                callback(err)
+            });
+    };
+    
 module.exports = database;

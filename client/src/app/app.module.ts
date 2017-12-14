@@ -46,6 +46,7 @@ import { TimelineComponent } from './components/timeline/timeline.component';
 import { MyDatePickerModule } from 'mydatepicker';
 import { SearchPharmacyComponent } from './components/search-pharmacy/search-pharmacy.component';
 import { PreclinicAddComponent } from './components/preclinic-add/preclinic-add.component';
+import {GenerateAppointmentComponent} from "./components/generate-appointment/generate-appointment.component";
 
 @NgModule({
     declarations: [
@@ -75,7 +76,8 @@ import { PreclinicAddComponent } from './components/preclinic-add/preclinic-add.
         SecondaryInfoHeaderComponent,
         DependantViewComponent,
         SearchPharmacyComponent,
-        PreclinicAddComponent
+        PreclinicAddComponent,
+        GenerateAppointmentComponent
     ],
     imports: [
         MyDatePickerModule,

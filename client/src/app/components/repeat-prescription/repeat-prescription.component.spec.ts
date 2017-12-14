@@ -18,6 +18,7 @@ import { APP_BASE_HREF } from '@angular/common';
 import { MedicationUser } from '../../class/MedicationUser';
 import { QuestionnaireComponent } from '../../components/questionnaire/questionnaire.component';
 import { PreclinicAddComponent } from "../preclinic-add/preclinic-add.component";
+import {GenerateAppointmentComponent} from '../../components/generate-appointment/generate-appointment.component';
 
 export class MockDataService {
     getRepeatMedication(userID: number) {
@@ -62,7 +63,7 @@ describe('RepeatPrescriptionComponent', () => {
         mockDataService = new MockDataService();
         TestBed.configureTestingModule({
             declarations: [RepeatPrescriptionComponent, LoginComponent, ErrorPageComponent, DashboardComponent,
-                RequestPasswordResetComponent, SettingNewPasswordComponent, QuestionnaireComponent, PreclinicAddComponent],
+                RequestPasswordResetComponent, SettingNewPasswordComponent, QuestionnaireComponent, PreclinicAddComponent, GenerateAppointmentComponent],
             providers: [DataService, HttpClient, HttpHandler, CookieService, SwitchBoardService, RouterModule, { provide: APP_BASE_HREF, useValue: '/' }],
             imports: [
                 routes,
