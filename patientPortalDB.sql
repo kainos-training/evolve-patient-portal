@@ -277,25 +277,9 @@ VALUES ('Dr', 'Alex', 'Hyndman', 'Consultant', 'c.mullan@kainos.com'),
 
 INSERT INTO MedicationUser(userID, medicationID, startDate, endDate, dosage, instructions,prescribedDate,repeated, delivery, clinicianID)
 VALUES
-(1, 12, '2017-06-01', '2019-08-10', '30 units', 'Subcutaneous injection. Take as recommended by your diabetic specialist','2017-09-01',TRUE,TRUE,2),
-(1, 12, '2016-06-01', '2019-08-10', '20 units', 'Subcutaneous injection. Take as recommended by your diabetic specialist', '2017-09-01',FALSE,TRUE,1),
-(1, 12, '2015-06-01', '2019-08-10', '20 units', 'Subcutaneous injection. Take as recommended by your diabetic specialist', '2017-04-01',TRUE,TRUE,4),
-(1, 12, '2017-06-01', '2019-08-10', '30 units', 'Subcutaneous injection. Take as recommended by your diabetic specialist','2017-09-01',FALSE,TRUE,2),
-(1, 12, '2016-06-01', '2019-08-10', '20 units', 'Subcutaneous injection. Take as recommended by your diabetic specialist', '2017-09-01',FALSE,TRUE,1),
-(1, 10, '2016-06-01', '2019-08-10', '30 units', 'Subcutaneous injection. Take as recommended by your diabetic specialist', '2017-09-01',TRUE,TRUE,4),
-(1, 12, '2015-06-01', '2019-08-10', '10 units', 'Subcutaneous injection. Take as recommended by your diabetic specialist', '2017-04-01',TRUE,TRUE,2),
-(1, 1, '2015-06-01', '2019-08-10', '40 units', 'Subcutaneous injection. Take as recommended by your diabetic specialist', '2017-04-01',FALSE,TRUE,1),
-(1, 6, '2015-06-01', '2019-08-10', '100 units', 'Subcutaneous injection. Take as recommended by your diabetic specialist', '2017-04-01',TRUE,TRUE,4),
-(1, 3, '2015-06-01', '2019-08-10', '15 units', 'Subcutaneous injection. Take as recommended by your diabetic specialist', '2017-04-01',TRUE,TRUE,2),
-(1, 4, '2015-06-01', '2019-08-10', '20 units', 'Subcutaneous injection. Take as recommended by your diabetic specialist', '2017-04-01',TRUE,TRUE,1),
-(1, 10, '2015-06-01', '2019-08-10', '30 units', 'Subcutaneous injection. Take as recommended by your diabetic specialist', '2017-04-01',FALSE,TRUE,4),
-(1, 11, '2015-06-01', '2019-08-10', '20 units', 'Subcutaneous injection. Take as recommended by your diabetic specialist', '2017-04-01',TRUE,TRUE,2),
-(1, 12, '2015-06-01', '2019-08-10', '10 units', 'Subcutaneous injection. Take as recommended by your diabetic specialist', '2017-04-01',TRUE,TRUE,1),
-(1, 7, '2015-06-01', '2019-08-10', '20 units', 'Subcutaneous injection. Take as recommended by your diabetic specialist', '2017-04-01',FALSE,TRUE,4),
 (1,10, (NOW() - INTERVAL 170 DAY),(NOW() + INTERVAL 100 DAY),'60mg','Take 1 tablet every 4 hours as needed. Do not exceed 240mg a day.', (NOW() - INTERVAL 20 DAY), true,TRUE,5),
-(1,11,(NOW() - INTERVAL 170 DAY),(NOW() + INTERVAL 100 DAY),'220mg','Take 1 caplet every 8-12 hours',(NOW() - INTERVAL 20 DAY),false,TRUE,7),
-(1,12,(NOW() - INTERVAL 1000 DAY),NULL,'30 Units','Subcutaneous injection. Take as recommended by your diabetic specialist',(NOW() - INTERVAL 12 DAY),true,TRUE,3),
-(4,9,(NOW() - INTERVAL 2 DAY),(NOW() + INTERVAL 12 DAY),'30mg','Subcutaneous injection. Take as recommended by your diabetic specialist',(NOW() - INTERVAL 12 DAY),true,TRUE,8);
+(1,12, (NOW() - INTERVAL 170 DAY),(NOW() + INTERVAL 100 DAY),'60mg','Take 1 tablet every 4 hours as needed. Do not exceed 240mg a day.', (NOW() - INTERVAL 20 DAY), true,TRUE,5),
+(1,9,(NOW() - INTERVAL 170 DAY),(NOW() + INTERVAL 100 DAY),'220mg','Take 1 caplet every 8-12 hours',(NOW() - INTERVAL 20 DAY),false,TRUE,7);
 
 /*INSERT INTO MedicationUserComment(medicationUserID, commentText, deleted)
 VALUES (1, 'Not feeling the benefit after two weeks', false), (2, 'Helping to minimise pain but still exists', false),
