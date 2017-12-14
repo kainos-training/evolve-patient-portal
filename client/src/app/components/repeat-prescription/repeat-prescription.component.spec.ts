@@ -18,7 +18,7 @@ import { APP_BASE_HREF } from '@angular/common';
 import { MedicationUser } from '../../class/MedicationUser';
 import { QuestionnaireComponent } from '../../components/questionnaire/questionnaire.component';
 import { PreclinicAddComponent } from "../preclinic-add/preclinic-add.component";
-import {GenerateAppointmentComponent} from '../../components/generate-appointment/generate-appointment.component';
+import { GenerateAppointmentComponent } from '../../components/generate-appointment/generate-appointment.component';
 
 export class MockDataService {
     getRepeatMedication(userID: number) {
