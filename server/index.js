@@ -7,12 +7,7 @@ const bodyParser = require('body-parser');
 const cors = require('cors');
 const morgan = require('morgan');
 var dotenv = require('dotenv');
-var cron = require('cron');
-var cronJob = cron.job("0 */1 * * * *", function(){
-    notificationController.getAppointmentsFromDates();
-    console.info('cron job completed');
-}); 
-cronJob.start();
+
 
 /**
  * Load environment variables from .env file.
@@ -75,9 +70,14 @@ app.use('/task', publicTaskRoutes);
 
 var server = app.listen(app.get('port'));
 module.exports = server;
- s = 'Hello';
-var v = notifier.getAppointmentsFromDates(function(res){
-    s = res;
-    console.log('Here     '+s);
-    emailer.sendNotification("m.corr@kainos.com", "Micheal", 1, "reset", "TEST", s, "", "", "");
+ 
+var v = notifier.getAppointmentsFromID(function(res){
+
+  var  s = res;
+  for(i = 0; i<s.length; i++){
+    console.log("who "+s[i]);
+    l = s[i]
+    emailer.sendNotification("m.corr@kainos.com", "Micheal", 1, "reset", "TEST", l, "", "", "");
+  }
+   
 });

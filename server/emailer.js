@@ -5,7 +5,6 @@ const notifier = require('./controllers/notificationController');
 
 exports.sendNotification = function(emailAddress, name, id, type, querySubject, queryText, notificationType, htmlBody, time) {
     var isTrueSet = (process.env.SECURE == 'true');
-    console.log('m'+queryText);
     nodemailer.createTestAccount((err, account) => {
         // create reusable transporter object using the default SMTP transport
         let transporter = nodemailer.createTransport({
