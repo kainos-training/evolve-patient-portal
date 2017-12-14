@@ -4,6 +4,8 @@ var client = require('twilio')(
 );
 
 exports.sendSms = function(messageBody, sendTo){
+    console.log(process.env.TWILIO_SID);
+    console.log(process.env.TWILIO_TOKEN);
     return new Promise(function(resolve, reject){
         client.messages.create({
             from: process.env.TWILIO_PHONE_NUMBER,
