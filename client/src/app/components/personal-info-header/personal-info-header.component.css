@@ -13,7 +13,22 @@
     width: 90%;
   } 
 
+  .btn-primary{
+    background-color: #00579f;
+    border-color: #00579f;
+    position: absolute; 
+    left: 270px;
+    height: 50px;
+    width: 50px;
+}
 
+.btnDiv{
+    
+    margin-left: 0px; 
+    margin-top: 20px;
+    position: absolute;
+    float: right;
+}
 
 .flex-item1 {
     background-color: white;
