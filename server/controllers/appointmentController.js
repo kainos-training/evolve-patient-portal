@@ -12,8 +12,7 @@ exports.getAllAppointmentsByUserID = function(req, res) {
         "JOIN LocationDepartment ON LocationDepartment.locationDepartmentID = Appointment.locationDepartmentID " +
         "JOIN Department ON Department.departmentID = LocationDepartment.departmentID " +
         "WHERE `User`.userID = ? AND Appointment.dateOfAppointment > NOW()" +
-        "ORDER BY Appointment.dateOfAppointment DESC; ", 
-        [userID],
+        "ORDER BY Appointment.dateOfAppointment DESC; ", [userID],
         function(err, rows) {
             if (err) {
                 console.log(err);
@@ -35,8 +34,7 @@ exports.getAppointmentFurtherInfo = function(req, res) {
         "JOIN Department ON Department.departmentID = LocationDepartment.departmentID " +
         "JOIN Clinician ON Clinician.clinicianID = Appointment.clinicianID " +
         "JOIN Location ON Location.locationID = LocationDepartment.locationID " +
-        "WHERE Appointment.appointmentID = ?; ",
-        [appointmentID],
+        "WHERE Appointment.appointmentID = ?; ", [appointmentID],
         function(err, rows) {
             if (err) {
                 console.log(err);
@@ -86,7 +84,7 @@ exports.addAppointmentQuery = function(req, res) {
                     success: false
                 });
             } else {
-                db.getAppointmentQuery(clinicianID, function(err, rows){
+                db.getAppointmentQuery(clinicianID, function(err, rows) {
                     if (err) {
                         console.log(err);
                         res.status(400).json({
@@ -94,7 +92,7 @@ exports.addAppointmentQuery = function(req, res) {
                         });
                     } else {
                         emailer.sendNotification(rows[0].email, rows[0].name, 0, "appointment", querySubject, queryText);
-                        
+
                     }
                 })
                 res.status(200).send("success");
@@ -113,8 +111,7 @@ exports.getPreviousAppointments = function(req, res) {
         "JOIN LocationDepartment ON LocationDepartment.locationDepartmentID = Appointment.locationDepartmentID " +
         "JOIN Department ON Department.departmentID = LocationDepartment.departmentID " +
         "WHERE `User`.userID = ? AND Appointment.dateOfAppointment < NOW()" +
-        "ORDER BY Appointment.dateOfAppointment DESC; ", 
-        [userID],
+        "ORDER BY Appointment.dateOfAppointment DESC; ", [userID],
         function(err, rows) {
             if (err) {
                 console.log(err);
@@ -127,27 +124,22 @@ exports.getPreviousAppointments = function(req, res) {
 
 exports.changeAppointment = function(req, res) {
     const dateOfAppointment = req.body.dateOfAppointment;
-    db.changeAppointment(dateOfAppointment, function(err) {
+    db.changeAppointment(dateOfAppointment, function(err, result) {
         if (err) {
-            console.log(err);
-            res.status(400).json({
-                success: false
-            });
+            res.send(err);
         } else {
-            res.status(200).send("success");
+            res.send(result);
         }
     });
 };
 
 exports.deleteAppointment = function(req, res) {
-    db.deleteAppointment(function(err) {
+    db.deleteAppointment(function(err, result) {
         if (err) {
             console.log(err);
-            res.status(400).json({
-                success: false
-            });
+            res.send(err);
         } else {
-            res.status(200).send("success");
+            res.send(result);
         }
     });
 };

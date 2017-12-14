@@ -513,10 +513,11 @@ export class DataService {
         });
     }
 
-    public changeAppointment(dateOfAppointment) {
+    public changeAppointment(userID, dateOfAppointment) {
         let headers = new Headers({ 'Content-Type': 'application/json' });
         const body = {
             'dateOfAppointment': dateOfAppointment,
+            'userID': userID
         };
         const options = {
             headers: new HttpHeaders().set('Content-Type', 'application/json'),
@@ -525,9 +526,10 @@ export class DataService {
         this.http.post(url, body, options).subscribe();
     }
 
-    public deleteAppointment() {
+    public deleteAppointment(userID) {
         let headers = new Headers({ 'Content-Type': 'application/json' });
         const body = {
+            'userID': userID
         };
         const options = {
             headers: new HttpHeaders().set('Content-Type', 'application/json'),

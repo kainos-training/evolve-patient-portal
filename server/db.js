@@ -214,10 +214,11 @@ database.insertAnswer = function(taskID, answer, callback) {
 
 database.changeAppointment = function(dateOfAppointment, callback) {
     database.query(
-        "UPDATE Appointment SET dateOfAppointment = ? WHERE appointmentID = 6;", 
-        [dateOfAppointment],
+        "UPDATE Appointment SET dateOfAppointment = ? WHERE appointmentID = 6;", [dateOfAppointment],
         function(err, rows) {
-            callback(err)
+            console.log(err);
+            console.log(rows);
+            callback(err, rows);
         });
 };
 
@@ -225,7 +226,9 @@ database.deleteAppointment = function(callback) {
     database.query(
         "DELETE FROM Appointment WHERE appointmentID = 6",
         function(err, rows) {
-            callback(err)
+            console.log(err);
+            console.log(rows);
+            callback(err, rows);
         });
 };
 module.exports = database;

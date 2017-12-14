@@ -21,7 +21,7 @@ export class ChangeAppointmentComponent implements OnInit {
     this.timeString = '12:00:00';
     this.dateString = '2017-12-25';
 
-    this.data.getAppointmentInformation(7).subscribe(
+    this.data.getAppointmentInformation(6).subscribe(
       res => {
         console.log(res[0]);
           this.focusedAppointment = res[0];
@@ -31,15 +31,15 @@ export class ChangeAppointmentComponent implements OnInit {
 
   onSubmit(){
     console.log(this.date);
-    this.data.changeAppointment('2017-12-25 13:15:00');
+    this.data.changeAppointment(1, '2017-12-30 12:00:00');
   }
 
   onDelete(){
-    this.data.deleteAppointment();
+    this.data.deleteAppointment(1);
   }
 
   getAppointmentsForUser() {
-    this.data.getAllAppointmentsByUserID(7).subscribe(
+    this.data.getAllAppointmentsByUserID(6).subscribe(
         res => this.appointments = res
     );
 }
