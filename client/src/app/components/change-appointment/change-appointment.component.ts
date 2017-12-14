@@ -13,7 +13,7 @@ export class ChangeAppointmentComponent implements OnInit {
   dateString:String;
   timeString:String;
   private appointments: Appointment[];
-  private focusedAppointment: AppointmentFurtherInfo;
+  public focusedAppointment: AppointmentFurtherInfo;
 
   constructor(private data: DataService) { }
 
@@ -23,6 +23,7 @@ export class ChangeAppointmentComponent implements OnInit {
 
     this.data.getAppointmentInformation(7).subscribe(
       res => {
+        console.log(res[0]);
           this.focusedAppointment = res[0];
       }
     );
@@ -34,8 +35,6 @@ export class ChangeAppointmentComponent implements OnInit {
   }
 
   onDelete(){
-    //this.date = new Date(this.dateString this.timeString);
-    console.log(this.date);
     this.data.deleteAppointment();
   }
 

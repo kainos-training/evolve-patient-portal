@@ -26,8 +26,8 @@ protectedAppointmentRoutes.post('/changeAppointment', function(req, res) {
     return appointmentController.changeAppointment(req, res);
 });
 
-protectedAppointmentRoutes.post('/deleteAppointment'), function(req, res){
+protectedAppointmentRoutes.post('/deleteAppointment', function(req, res) {
     return appointmentController.deleteAppointment(req, res);
-}
+});
 
 module.exports = protectedAppointmentRoutes;
