@@ -14,8 +14,7 @@ exports.getAllAppointmentsByUserID = function(req, res) {
         "JOIN LocationDepartment ON LocationDepartment.locationDepartmentID = Appointment.locationDepartmentID " +
         "JOIN Department ON Department.departmentID = LocationDepartment.departmentID " +
         "WHERE `User`.userID = ? AND Appointment.dateOfAppointment > NOW()" +
-        "ORDER BY Appointment.dateOfAppointment DESC; ", 
-        [userID],
+        "ORDER BY Appointment.dateOfAppointment DESC; ", [userID],
         function(err, rows) {
             if (err) {
                 console.log(err);
@@ -37,8 +36,7 @@ exports.getAppointmentFurtherInfo = function(req, res) {
         "JOIN Department ON Department.departmentID = LocationDepartment.departmentID " +
         "JOIN Clinician ON Clinician.clinicianID = Appointment.clinicianID " +
         "JOIN Location ON Location.locationID = LocationDepartment.locationID " +
-        "WHERE Appointment.appointmentID = ?; ",
-        [appointmentID],
+        "WHERE Appointment.appointmentID = ?; ", [appointmentID],
         function(err, rows) {
             if (err) {
                 console.log(err);
@@ -88,7 +86,7 @@ exports.addAppointmentQuery = function(req, res) {
                     success: false
                 });
             } else {
-                db.getAppointmentQuery(clinicianID, function(err, rows){
+                db.getAppointmentQuery(clinicianID, function(err, rows) {
                     if (err) {
                         console.log(err);
                         res.status(400).json({
@@ -115,8 +113,7 @@ exports.getPreviousAppointments = function(req, res) {
         "JOIN LocationDepartment ON LocationDepartment.locationDepartmentID = Appointment.locationDepartmentID " +
         "JOIN Department ON Department.departmentID = LocationDepartment.departmentID " +
         "WHERE `User`.userID = ? AND Appointment.dateOfAppointment < NOW()" +
-        "ORDER BY Appointment.dateOfAppointment DESC; ", 
-        [userID],
+        "ORDER BY Appointment.dateOfAppointment DESC; ", [userID],
         function(err, rows) {
             if (err) {
                 console.log(err);
@@ -137,12 +134,17 @@ exports.changeAppointment = function(req, res) {
                 success: false
             });
         } else {
-            notifier.getUserContactDetails(userID).then((res)=> {
-                let phoneNumber = res.phoneNumber;
-                let email = res.email;
-                emailer.sendEmail(email, "Appointment Updated", "Appointment has been made for " + dateOfAppointment + " please check portal.");
-                SMS.sendSms("Appointment has been updated, please check portal.", phoneNumber);
-            }).catch((err)=>{
+            notifier.getUserContactDetails(userID).then((res) => {
+                let phoneNumber = res[0].phoneNumber;
+                let email = res[0].email;
+                console.log(phoneNumber);
+                emailer.sendEmail(email, "Appointment Updated", "Appointment has been made for " + dateOfAppointment + " please check portal.").catch(function(err) {
+                    console.log(err);
+                });;
+                SMS.sendSms("Appointment has been updated, please check portal.", phoneNumber).catch(function(err) {
+                    console.log(err);
+                });
+            }).catch((err) => {
                 console.log(err);
             });
         }
@@ -158,12 +160,16 @@ exports.deleteAppointment = function(req, res) {
                 success: false
             });
         } else {
-            notifier.getUserContactDetails(userID).then((res)=> {
-                let phoneNumber = res.phoneNumber;
-                let email = res.email;
-                emailer.sendEmail(email, "Appointment Deleted", "Appointment has been deleted,  please check portal.");
-                SMS.sendSms("Appointment has been deleted, please check portal.", phoneNumber);
-            }).catch((err)=>{
+            notifier.getUserContactDetails(userID).then((res) => {
+                let phoneNumber = res[0].phoneNumber;
+                let email = res[0].email;
+                emailer.sendEmail(email, "Appointment Deleted", "Appointment has been deleted,  please check portal.").catch(function(err) {
+                    console.log(err);
+                });
+                SMS.sendSms("Appointment has been deleted, please check portal.", phoneNumber).catch(function(err) {
+                    console.log(err);
+                });
+            }).catch((err) => {
                 console.log(err);
             });
             res.status(200).send("success");
@@ -172,36 +178,36 @@ exports.deleteAppointment = function(req, res) {
 };
 
 exports.addAppointment = function(req, res) {
-       const appointmentID = req.body.appointmentID;
-       const userID = req.body.userID;
-       const LocationDepartmentID = req.body.locationDepartmentID;
-        const clinicianID = req.body.clinicianID;
-        const dateOfAppointment = req.body.dateOfAppointment;
-        const comment = req.body.comment;
-        const appointmentTypeID = req.body.appointmentTypeID;
-            if (!LocationDepartmentID|| !clinicianID || !dateOfAppointment || !comment || !appointmentTypeID) {
-                    res.status(400).json({
-                        success: false
-                    });
-                } else {
-                    db.addAppointment(appointmentID, userID, LocationDepartmentID, clinicianID, dateOfAppointment, comment, appointmentTypeID, function(err) {
-                        if (err) {
-                            console.log(err);
-                            res.status(400).json({
-                                success: false
-                            });
-                        } else {
-                            notifier.getUserContactDetails(userID).then((res)=> {
-                                let phoneNumber = res.phoneNumber;
-                                let email = res.email;
-                                emailer.sendEmail(email, "Appointment Added", "Appointment has been made for " + dateOfAppointment + " please check portal.");
-                                SMS.sendSms("Appointment has been made for " + dateOfAppointment + " please check portal.", phoneNumber);
+    const appointmentID = req.body.appointmentID;
+    const userID = req.body.userID;
+    const LocationDepartmentID = req.body.locationDepartmentID;
+    const clinicianID = req.body.clinicianID;
+    const dateOfAppointment = req.body.dateOfAppointment;
+    const comment = req.body.comment;
+    const appointmentTypeID = req.body.appointmentTypeID;
+    if (!LocationDepartmentID || !clinicianID || !dateOfAppointment || !comment || !appointmentTypeID) {
+        res.status(400).json({
+            success: false
+        });
+    } else {
+        db.addAppointment(appointmentID, userID, LocationDepartmentID, clinicianID, dateOfAppointment, comment, appointmentTypeID, function(err) {
+            if (err) {
+                console.log(err);
+                res.status(400).json({
+                    success: false
+                });
+            } else {
+                notifier.getUserContactDetails(userID).then((res) => {
+                    let phoneNumber = res.phoneNumber;
+                    let email = res.email;
+                    emailer.sendEmail(email, "Appointment Added", "Appointment has been made for " + dateOfAppointment + " please check portal.");
+                    SMS.sendSms("Appointment has been made for " + dateOfAppointment + " please check portal.", phoneNumber);
 
-                            }).catch((err)=>{
-                                console.log(err);
-                            });
-                            res.status(200).send("success");
-                        }
-                    });
-                }
-        };
+                }).catch((err) => {
+                    console.log(err);
+                });
+                res.status(200).send("success");
+            }
+        });
+    }
+};
