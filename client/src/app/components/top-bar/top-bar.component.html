@@ -10,27 +10,6 @@
 </div>
 <div id="button-list" class="hidden-xs col-sm-9 col-md-10 col-lg-10 right-item">
     <evolve-personal-info-header class="shift-left top-bar"></evolve-personal-info-header>
-    <div class="settings-button" (click)="openModal(popup)">
-    </div>
+    
     <div class="log-out-button" (click)=this.data.logout()><span class="log-out-button glyphicon glyphicon-log-out"></span></div>
 </div>
-<ng-template #popup>
-    <div class="modal-header">
-        <h3 class="modal-title pull-left">Personal Information</h3>
-        <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
-            <span aria-hidden="true">&times;</span>
-        </button>
-    </div>
-    <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
-        <span aria-hidden="true">&times;</span>
-    </button>
-
-    <div class="modal-body">
-        <div class="perscription-header">
-            <hr>
-        </div>
-        <button id="settings-submit-button" type="submit" class="btn btn-success btn-sm btn-block evolve-modal-btn">
-            Submit
-        </button>
-    </div>
-</ng-template>

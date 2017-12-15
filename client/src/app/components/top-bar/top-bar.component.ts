@@ -4,6 +4,11 @@ import { BsModalRef } from 'ngx-bootstrap/modal/modal-options.class';
 import { MenuStateService } from '../../services/menu-state.service';
 import { DataService } from '../../services/data.service';
 import { Router } from '@angular/router';
+import { User } from '../../class/User';
+import { Subscription } from 'rxjs/Rx';
+import { GP } from '../../class/GP';
+import { GPPractice } from '../../class/GPPractice';
+import { SwitchBoardService } from '../../services/switch-board.service';
 
 @Component({
     selector: 'evolve-top-bar',
@@ -16,12 +21,26 @@ export class TopBarComponent {
     private menuStateService: MenuStateService;
     private menuState: string;
     private readonly MDSCREENSIZE: number = 768;
-
-    public openModal(template: TemplateRef<any>) {
-        this.modalRef = this.modalService.show(template);
-    }
-
-    constructor(private data: DataService, private router: Router, private pMenuStateService: MenuStateService, private modalService: BsModalService) {
+        
+    private topBarViewingUser: User;
+    private userSubscription: Subscription;
+    public newUserDetails: User;
+    public preferredName: string;
+    public address: string;
+    public email: string;
+    public mobilePhoneNumber: string;
+    public homePhoneNumber: string;
+    public workPhoneNumber: string;
+    private gp: GP[];
+    public gpPractice: GPPractice[];
+    public gpID: number;
+    public gpName: string;
+    public gpPracticNames: string [];
+    public gpPracName: string;
+    private HTTPService: DataService;
+    public toStr= JSON.stringify;
+        
+    constructor(private data: DataService, private switchboard: SwitchBoardService, private router: Router, private pMenuStateService: MenuStateService, private modalService: BsModalService) {
         this.menuStateService = pMenuStateService;
         this.determineMenuState();
     }

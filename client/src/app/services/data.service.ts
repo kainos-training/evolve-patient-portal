@@ -19,7 +19,8 @@ import { Clinician } from '../class/Clinician';
 import { Pharmacy } from '../class/Pharmacy';
 import { AppointmentCount } from '../class/AppointmentCount';
 import { SearchPharmacyComponent } from '../components/search-pharmacy/search-pharmacy.component';
-
+import { GP } from '../class/GP';
+import { GPPractice } from '../class/GPPractice';
 @Injectable()
 export class DataService {
     private cookieName = 'evolve-cookie';
@@ -367,7 +368,7 @@ export class DataService {
     };
 
     public getAllAppointmentsByUserID(userID) {
-        let headers = new Headers({ 'Content-Type': 'application/json' });
+        
         const body = {
             'userID': userID
         };
@@ -378,6 +379,31 @@ export class DataService {
         return this.http.post<Appointment[]>(url, body, options);
     };
 
+    public getAllGPPractice(){
+        let headers = new Headers({ 'Content-Type': 'application/json' });
+         const body = {
+            
+         };
+         const options = {
+             headers: new HttpHeaders().set('Content-Type', 'application/json'),
+         };
+         let url = '/api/gp/getAllGPPractice';
+         return this.http.post<GPPractice[]>(url, body, options);
+}
+
+    public getAllGPbyPracticeID(x){
+        let headers = new Headers({'Content-Type': 'application/json'});
+        const body = {
+            'gpPracticeID': x
+        };
+
+        const options = {
+            headers: new HttpHeaders().set('Content-Type', 'application/json'),
+        };
+        let url = '/api/gp/getAllGPbyPracticeID';
+        return this.http.post<GP[]>(url,body,options);
+    }
+     
     public getAppointmentInformation(appointmentID) {
         let headers = new Headers({ 'Content-Type': 'application/json' });
         const body = {
@@ -497,10 +523,15 @@ export class DataService {
         return new Promise((resolve, reject)=>{
             const body = {
                 "email": newUserDetails.email,
+                "preferredName": newUserDetails.preferredName,
                 "address": newUserDetails.address,
-                "phoneNumber": newUserDetails.phoneNumber,
-                "userID": newUserDetails.userID
+                "mobilePhoneNumber": newUserDetails.mobilePhoneNumber,
+                "homePhoneNumber": newUserDetails.homePhoneNumber,
+                "workPhoneNumber": newUserDetails.workPhoneNumber,
+                "userID": newUserDetails.userID,
+                "gpID": newUserDetails.gpID
             };
+
             const options = {
                 headers: new HttpHeaders().set('Content-Type', 'application/x-www-form-urlencoded'),
             };
@@ -513,7 +544,9 @@ export class DataService {
         });
     }
 
+
     public changeAppointment(userID, dateOfAppointment) {
+
         let headers = new Headers({ 'Content-Type': 'application/json' });
         const body = {
             'dateOfAppointment': dateOfAppointment,
@@ -554,7 +587,7 @@ export class DataService {
                 let url = '/api/appointment/addAppointment';
                 this.http.post(url, body, options).subscribe();
             }
-
+            
     logout() {
         this.removeCookie();
         this.removeRedirectCookie();

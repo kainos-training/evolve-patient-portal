@@ -142,7 +142,9 @@ exports.createUserAccount = function(req, res) {
     let MRIN = req.body.MRIN.trim();
     let firstName = req.body.firstName.trim();
     let lastName = req.body.lastName.trim();
-    let phoneNumber = req.body.phoneNumber.trim();
+    let mobilePhoneNumber = req.body.mobilePhoneNumber.trim();
+    let homePhoneNumber = req.body.homePhoneNumber.trim();
+    let workPhoneNumber = req.body.workPhoneNumber.trim();
     let title = req.body.title.trim();
     let address = req.body.address.trim();
     let email = req.body.email.trim();
@@ -150,8 +152,8 @@ exports.createUserAccount = function(req, res) {
     let gpID = req.body.gpID.trim()
 
     db.query(
-        "INSERT INTO User(username, `password`, dateOfBirth, gender, MRIN, firstName, lastName, phoneNumber, title, address, email, deceased, gpID)" +
-        "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);", [username, password, dateOfBirth, gender, MRIN, firstName, lastName, phoneNumber, title, address, email, deceased, gpID],
+        "INSERT INTO User(username, `password`, dateOfBirth, gender, MRIN, firstName, lastName, mobilePhoneNumber, homePhoneNumber, workPhoneNumber, title, address, email, deceased, gpID)" +
+        "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);", [username, password, dateOfBirth, gender, MRIN, firstName, lastName, mobilePhoneNumber, homePhoneNumber, workPhoneNumber, title, address, email, deceased, gpID],
         function(err, rows) {
             if (err) {
                 return res.status(400).json({

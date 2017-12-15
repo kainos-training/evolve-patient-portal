@@ -24,6 +24,9 @@ export class SwitchBoardService {
     private viewingDependantWatcher = new Subject<User>();
     public viewingDependant$ = this.viewingDependantWatcher.asObservable();
 
+    private topBarViewingUserWatcher = new Subject<User>();
+    public topBarViewingUser$ = this.topBarViewingUserWatcher.asObservable();
+
     public switchUser(user: User) {
         if (user) {
             this.userWatcher.next(user);
@@ -44,5 +47,9 @@ export class SwitchBoardService {
 
     public updateViewingDependant(dependant: User) {
         this.viewingDependantWatcher.next(dependant);
+    }
+
+    public updateTopBarViewingUser(loggedInUser: User) {
+        this.topBarViewingUserWatcher.next(loggedInUser);
     }
 }
