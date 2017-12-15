@@ -32,7 +32,6 @@ export class DependantViewComponent implements OnInit, OnDestroy {
     public homePhoneNumber: string;
     public workPhoneNumber: string;
     public gp: GP[];
-    //public gpInstance: GP;
     public gpPractice: GPPractice[];
     public gpID: number;
     public gpName: string;
@@ -52,7 +51,6 @@ export class DependantViewComponent implements OnInit, OnDestroy {
         //Add 'implements O nInit' to the class.
         this.newUserDetails = new User();
 
-        
         this.dependantSubscription = this.switchboard.viewingDependant$.subscribe(
             dependant => {
                 this.viewingDependant = dependant;
@@ -65,27 +63,12 @@ export class DependantViewComponent implements OnInit, OnDestroy {
                 this.gp = [];
                 this.gpID = this.viewingDependant.gpID;
 
-                //this.gpName = this.viewingDependant.gpFullName;
-                console.log("gpName"+this.gpName);
-                
                 this.gpPracName = this.viewingDependant.gpPracticeName;
                 this.gpPractice = [];
-                //this.gpInstance.gpFullName = this.viewingDependant.gpFullName;
-                //console.log("gpIntance"+this.gpInstance.gpFullName);
-                //this.gpInstance.gpID = this.gpID;
-                //this.gpInstance.gpPracticeID = null;
-                //this.gp.push(this.gpInstance);
-                console.log("GP - "+this.gp);
-                console.log();
-                this.getAllGPPractice();
-
                 
-            }
-            
-                
+                this.getAllGPPractice();                
+            }    
         );
-        
-    
     }
 
     ngOnDestroy() {
@@ -96,19 +79,7 @@ export class DependantViewComponent implements OnInit, OnDestroy {
 
     public openModal(template: TemplateRef<any>){
         this.modalRef = this.modalService.show(template);
-       
-    
-    }
-
-    //public getUserInfoByUserID(){
-      //  this.data.getUserInfoByUserID(this.viewingDependant.userID).subscribe(
-        //    res =>{
-          //      this.viewingDependant.g
-            //}
-        //)
-;   // }
-
-
+    };   
 
  public getAllGPPractice(){
      if(this.gpPractice.length=0){
@@ -125,10 +96,8 @@ export class DependantViewComponent implements OnInit, OnDestroy {
       this.HTTPService.getAllGPPractice().subscribe(
           res => this.gpPractice = res
           
-      )
-      console.log(this.gpPractice)
+      )   
 }
-
 
 public getAllGP(practiceName){
   for(i=0;i<this.gp.length;i++){
@@ -136,29 +105,22 @@ public getAllGP(practiceName){
       elem.parentNode.removeChild(elem);
   }
   this.gp =[];
-    console.log(this.gp.length);
     for(var i = 0; i<this.gpPractice.length;i++){
-        console.log("for loop called");
         if(this.gpPractice[i].gpPracticeName ==practiceName){
-            console.log(this.gpPractice[i].gpPracticeID);
             this.getAllGPbyPracticeID(this.gpPractice[i].gpPracticeID);
         }
     }
-    
 }
     
 public getAllGPbyPracticeID(x){
     this.HTTPService.getAllGPbyPracticeID(x).subscribe(
         res => this.gp = res
     )
-
-
 }
 
 public gpPracticeChangeDropdown(x){
     this.gpPracName = x;
     console.log(this.gpPracName)
-    //this.getAllGP(this.gpPracName);
 }
 
 public gpChangeDropdown(x){
@@ -198,4 +160,3 @@ public gpChangeDropdown(x){
         });
     }
 }
-

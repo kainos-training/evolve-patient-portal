@@ -72,7 +72,6 @@ const publicTaskRoutes = require('./routes/publicTaskRoutes');
 const protectedGPRoutes = require('./routes/protectedGPRoutes');
 const notificationController = require('./controllers/notificationController');
 
-
 app.use('/password', publicResetPasswordRoutes);
 app.use('/auth', publicAuthRoutes);
 app.use('/appointment', protectedAppointmentRoutes);

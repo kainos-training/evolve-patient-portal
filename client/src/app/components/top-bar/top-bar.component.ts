@@ -43,7 +43,6 @@ export class TopBarComponent {
     constructor(private data: DataService, private switchboard: SwitchBoardService, private router: Router, private pMenuStateService: MenuStateService, private modalService: BsModalService) {
         this.menuStateService = pMenuStateService;
         this.determineMenuState();
-       
     }
 
     getMenuState(): string {

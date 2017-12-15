@@ -389,24 +389,20 @@ export class DataService {
          };
          let url = '/api/gp/getAllGPPractice';
          return this.http.post<GPPractice[]>(url, body, options);
-
-    
-
-
-
 }
-public getAllGPbyPracticeID(x){
-    let headers = new Headers({'Content-Type': 'application/json'});
-    const body = {
-        'gpPracticeID': x
-    };
 
-    const options = {
-        headers: new HttpHeaders().set('Content-Type', 'application/json'),
-    };
-    let url = '/api/gp/getAllGPbyPracticeID';
-    return this.http.post<GP[]>(url,body,options);
-}
+    public getAllGPbyPracticeID(x){
+        let headers = new Headers({'Content-Type': 'application/json'});
+        const body = {
+            'gpPracticeID': x
+        };
+
+        const options = {
+            headers: new HttpHeaders().set('Content-Type', 'application/json'),
+        };
+        let url = '/api/gp/getAllGPbyPracticeID';
+        return this.http.post<GP[]>(url,body,options);
+    }
      
     public getAppointmentInformation(appointmentID) {
         let headers = new Headers({ 'Content-Type': 'application/json' });
@@ -591,8 +587,7 @@ public getAllGPbyPracticeID(x){
                 let url = '/api/appointment/addAppointment';
                 this.http.post(url, body, options).subscribe();
             }
-
-
+            
     logout() {
         this.removeCookie();
         this.removeRedirectCookie();

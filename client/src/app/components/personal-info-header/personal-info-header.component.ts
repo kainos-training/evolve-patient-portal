@@ -137,37 +137,35 @@ export class PersonalInfoHeaderComponent implements OnInit, OnChanges {
        console.log(this.userArray.gpFullName);
    }
    
-       public updateUserDetails(){
-           console.log("updateUserDetails");
-           for(var i = 0; i < this.gp.length; i++) {
-               console.log("for loop called");
-               if(this.gp[i].gpFullName == this.userArray.gpFullName) {
-                   this.userArray.gpID = this.gp[i].gpID;
-               }
-           }
-   
-           const body = {
-               preferredName: this.userArray.preferredName,
-               address: this.userArray.address,
-               userID: this.userArray.userID,
-               email: this.userArray.email,
-               mobilePhoneNumber: this.userArray.mobilePhoneNumber,
-               homePhoneNumber: this.userArray.homePhoneNumber,
-               workPhoneNumber: this.userArray.workPhoneNumber,
-               gpID: this.userArray.gpID
-                };
-
-           this.HTTPService.updateUserDetails(body).then((result)=>{
-               this.modalRef.hide();
-               this.userArray.preferredName = body.preferredName;
-               this.userArray.address = body.address;
-               this.userArray.email = body.email;
-               this.userArray.mobilePhoneNumber = body.mobilePhoneNumber;
-               this.userArray.homePhoneNumber = body.homePhoneNumber;
-               this.userArray.workPhoneNumber = body.workPhoneNumber;
-               this.userArray.gpID = body.gpID;
-           }).catch((err)=>{
-               console.log(err);
-           });
+    public updateUserDetails(){
+        for(var i = 0; i < this.gp.length; i++) {
+            if(this.gp[i].gpFullName == this.userArray.gpFullName) {
+                this.userArray.gpID = this.gp[i].gpID;
+            }
         }
+   
+        const body = {
+            preferredName: this.userArray.preferredName,
+            address: this.userArray.address,
+            userID: this.userArray.userID,
+            email: this.userArray.email,
+            mobilePhoneNumber: this.userArray.mobilePhoneNumber,
+            homePhoneNumber: this.userArray.homePhoneNumber,
+            workPhoneNumber: this.userArray.workPhoneNumber,
+            gpID: this.userArray.gpID
+        };
+
+        this.HTTPService.updateUserDetails(body).then((result)=>{
+            this.modalRef.hide();
+            this.userArray.preferredName = body.preferredName;
+            this.userArray.address = body.address;
+            this.userArray.email = body.email;
+            this.userArray.mobilePhoneNumber = body.mobilePhoneNumber;
+            this.userArray.homePhoneNumber = body.homePhoneNumber;
+            this.userArray.workPhoneNumber = body.workPhoneNumber;
+            this.userArray.gpID = body.gpID;
+        }).catch((err)=>{
+            console.log(err);
+        });
+    }
 }

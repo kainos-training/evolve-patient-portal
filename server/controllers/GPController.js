@@ -14,7 +14,6 @@ exports.getAllGPPractice = function(req, res) {
     )
 };
 
-
 exports.getAllGPbyPracticeID = function(req, res) {
     let gpPracticeID = req.body.gpPracticeID;
     db.query( 'SELECT gpID, gpFullName FROM GP WHERE gpPracticeID = ?',
