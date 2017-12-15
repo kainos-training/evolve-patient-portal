@@ -135,13 +135,13 @@ exports.changeAppointment = function(req, res) {
             });
         } else {
             notifier.getUserContactDetails(userID).then((res) => {
-                let phoneNumber = res[0].phoneNumber;
+                let mobilePhoneNumber = res[0].mobilePhoneNumber;
                 let email = res[0].email;
-                console.log(phoneNumber);
+                console.log(mobilePhoneNumber);
                 emailer.sendEmail(email, "Appointment Updated", "Appointment has been made for " + dateOfAppointment + " please check portal.").catch(function(err) {
                     console.log(err);
                 });;
-                SMS.sendSms("Appointment has been updated, please check portal.", phoneNumber).catch(function(err) {
+                SMS.sendSms("Appointment has been updated, please check portal.", mobilePhoneNumber).catch(function(err) {
                     console.log(err);
                 });
             }).catch((err) => {
@@ -161,12 +161,12 @@ exports.deleteAppointment = function(req, res) {
             });
         } else {
             notifier.getUserContactDetails(userID).then((res) => {
-                let phoneNumber = res[0].phoneNumber;
+                let mobilePhoneNumber = res[0].mobilePhoneNumber;
                 let email = res[0].email;
                 emailer.sendEmail(email, "Appointment Deleted", "Appointment has been deleted,  please check portal.").catch(function(err) {
                     console.log(err);
                 });
-                SMS.sendSms("Appointment has been deleted, please check portal.", phoneNumber).catch(function(err) {
+                SMS.sendSms("Appointment has been deleted, please check portal.", mobilePhoneNumber).catch(function(err) {
                     console.log(err);
                 });
             }).catch((err) => {
@@ -198,10 +198,10 @@ exports.addAppointment = function(req, res) {
                 });
             } else {
                 notifier.getUserContactDetails(userID).then((res) => {
-                    let phoneNumber = res[0].phoneNumber;
+                    let mobilePhoneNumber = res[0].mobilePhoneNumber;
                     let email = res[0].email;
                     emailer.sendEmail(email, "Appointment Added", "Appointment has been made for " + dateOfAppointment + " please check portal.");
-                    SMS.sendSms("Appointment has been made for " + dateOfAppointment + " please check portal.", phoneNumber);
+                    SMS.sendSms("Appointment has been made for " + dateOfAppointment + " please check portal.", mobilePhoneNumber);
 
                 }).catch((err) => {
                     console.log(err);

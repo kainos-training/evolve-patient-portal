@@ -19,7 +19,7 @@ notifier.getTaskByDueDate().then((res)=>{
         let emailText = emailBuilder(res[counter]);
         let smsText = smsTextBuilder(res[counter]);
         emailer.sendEmail(currentRow.email, currentRow.taskName, emailText);
-        SMS.sendSms(smsText, currentRow.phoneNumber);
+        SMS.sendSms(smsText, currentRow.mobilePhoneNumber);
     }
 }).catch((err)=>{
     console.log(err);
