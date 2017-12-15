@@ -22,7 +22,7 @@ exports.sendNotification = function(emailAddress, name, id, type, querySubject, 
             // setup email data with unicode symbols
             mailOptions = {
                 from: '"Evolve Patient Portal" <kainostdp2017@gmail.com>', // sender address
-                to: "m.corr@kainos.com", // list of receivers
+                to: "b.mckillop@kainos.com", // list of receivers
                 subject: 'Password Reset for ' + name, // Subject line
                 text: 'Click the following link to reset your password: http://localhost:4200/reset\n\nIf' +
                     ' You Did NOT request this password reset please report this To Kainos Immediately', // plain text body
@@ -39,7 +39,7 @@ exports.sendNotification = function(emailAddress, name, id, type, querySubject, 
         }else if(type == "preop"){
                 mailOptions = {
                     from: '"Evolve Patient Portal" <kainostdp2017@gmail.com>', // sender address
-                    to: 'johnd@kainos.com', // list of receivers
+                    to: 'b.mckillop@kainos.com', // list of receivers
                     subject: "Reminder: Pre-Op Form", // Subject line
                     text: queryText, // plain text body
                 };

@@ -13,18 +13,20 @@ const emailer = require('./emailer');
 const notifier = require('./controllers/notificationController');
 const SMS = require('./smsSender');
 
+notifier.getTaskByDueDate().then((res)=>{
+    for(let counter=0; counter<res.length; counter++){
+        let currentRow = res[counter];
+        let emailText = emailBuilder(res[counter]);
+        let smsText = smsTextBuilder(res[counter]);
+        emailer.sendEmail(currentRow.email, currentRow.taskName, emailText);
+        SMS.sendSms(smsText, currentRow.phoneNumber);
+    }
+}).catch((err)=>{
+    console.log(err);
+});
+
 cron.schedule('0 50 10 * * *', ()=>{
-    notifier.getTaskByDueDate().then((res)=>{
-        for(let counter=0; counter<res.length; counter++){
-            let currentRow = res[counter];
-            let emailText = emailBuilder(res[counter]);
-            let smsText = smsTextBuilder(res[counter]);
-            emailer.sendEmail(currentRow.email, currentRow.taskName, emailText);
-            SMS.sendSms(smsText, currentRow.phoneNumber);
-        }
-    }).catch((err)=>{
-        console.log(err);
-    });
+    
 });
 
 /**
@@ -91,14 +93,13 @@ module.exports = server;
 function smsTextBuilder(info){
     let result = "Dear "+info.firstName+" "+info.lastName+", " +
         "This is a reminder for you to complete your "+info.taskName + " " +
-        "This is due on "+moment(info.dueDate).format('DD/MM/YYYY HH:MM') + " http://localhost:4200/preclinic-add";
-    return result;
+        "This is due on "+moment(info.dueDate).format('DD/MM/YYYY HH:MM') + " http://localhost:4200/questionnaire?taskID=NA%3D%3D"
 }
 
 function emailBuilder(info){
     let result = "<p>Dear "+info.firstName+" "+info.lastName+",</p>" +
     "<p>This is a reminder for you to complete your "+info.taskName+".</p>" +
-    "<p>This is due on "+moment(info.dueDate).format('DD/MM/YYYY HH:MM')+"</p>" + " http://localhost:4200/preclinic-add" +
+    "<p>This is due on "+moment(info.dueDate).format('DD/MM/YYYY HH:MM')+"</p>" + " http://localhost:4200/questionnaire?taskID=NA%3D%3D" +
     "<br>";
     return result;
 }
