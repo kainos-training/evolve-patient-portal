@@ -7,7 +7,7 @@ exports.getTaskByDueDate = function (dueDate) {
     let dayPlusSeven = moment().add(7, 'days').toDate();
     return new Promise((resolve, reject) => {
         db.query(
-            "SELECT Task.taskName, Task.dueDate, User.firstName, User.lastName, User.email, User.phoneNumber FROM Task INNER JOIN User ON Task.userID = User.userID WHERE DATE(Task.dueDate) = DATE(?) OR DATE(Task.dueDate) = DATE(?);", [dayPlusOne, dayPlusSeven],
+            "SELECT Task.taskName, Task.dueDate, User.firstName, User.lastName, User.email, User.mobilePhoneNumber FROM Task INNER JOIN User ON Task.userID = User.userID WHERE DATE(Task.dueDate) = DATE(?) OR DATE(Task.dueDate) = DATE(?);", [dayPlusOne, dayPlusSeven],
             (err, rows) => {
                 if (err) {
                     reject(err);
@@ -23,7 +23,7 @@ exports.getTaskByDueDate = function (dueDate) {
 exports.getUserContactDetails = function(userID){
     return new Promise((resolve, reject) => {
         db.query(
-            "SELECT phoneNumber, email FROM User WHERE userID=?", [userID],
+            "SELECT mobilePhoneNumber, email FROM User WHERE userID=?", [userID],
             (err, rows) => {
                 if (err) {
                     reject(err);
