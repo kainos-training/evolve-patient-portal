@@ -198,8 +198,8 @@ exports.addAppointment = function(req, res) {
                 });
             } else {
                 notifier.getUserContactDetails(userID).then((res) => {
-                    let phoneNumber = res.phoneNumber;
-                    let email = res.email;
+                    let phoneNumber = res[0].phoneNumber;
+                    let email = res[0].email;
                     emailer.sendEmail(email, "Appointment Added", "Appointment has been made for " + dateOfAppointment + " please check portal.");
                     SMS.sendSms("Appointment has been made for " + dateOfAppointment + " please check portal.", phoneNumber);
 
