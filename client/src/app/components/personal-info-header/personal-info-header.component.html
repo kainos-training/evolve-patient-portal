@@ -1,18 +1,67 @@
 <body>
-
-<div class="hidden-xs col-sm-9 flex-container">
+<div class="hidden-xs col-sm-8 flex-container">
     <img src="../../../assets/user.png" id="patientPicMobile">
     <div class="patientName"> {{userArray.firstName}} {{userArray.lastName}} ({{userArray.title}}) </div>
+    <div class="btnDiv">
+            <button class="btn btn-primary"  (click)="openModal(popup)"><span class="glyphicon glyphicon-edit" aria-hidden="true"></span></button>
+            </div>
     <div class="patientBirthday"><span class="patientInfoTextTitle">DOB: </span>{{userArray.dateOfBirth| date: 'dd/MM/yyyy'}}</div>
     <div class="patientGender"><span class="patientInfoTextTitle">Gender: </span>{{userArray.gender}}</div>
     <div class="patientMrin"><span class="patientInfoTextTitle">MRIN: </span>{{userArray.MRIN}}</div>
+    <ng-template #popup>
+            <div class="modal-header">
+                <h3 class="modal-title pull-left">Personal Information</h3>
+                <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+                <span aria-hidden="true">&times;</span>
+            </button>
+            <div class="modal-body">
+                    <form onsubmit="event.preventDefault();">
+                            <div class="form-group">
+                                <form class="form">
+                                    <label for="preferredName">Preferred Name: </label>
+                                    <input  style="width: auto; display: inline;" id="preferredName" name="preferredName" type="text" placeholder="Preferred Name" [(ngModel)]="userArray.preferredName" [(value)]="userArray.preferredName" class="form-control formTextBox"> <br>
+        
+                                    <label for="address">Address: </label>
+                                    <input  style="width: auto; display: inline;" id="address" name="address" type="text" placeholder="Address" [(ngModel)]="userArray.address" [(value)]="userArray.address" class="form-control formTextBox"> <br>
+        
+                                    <label for="mobilePhoneNumber" style="margin-top: 20px;">Mobile Number: </label>
+                                    <input  style="width: auto; display: inline;" id="mobilePhoneNumber" name="mobilePhoneNumber" type="text" placeholder="Mobile Number" [(ngModel)]="userArray.mobilePhoneNumber" [(value)]="userArray.mobilePhoneNumber" class="form-control formTextBox"> <br>
+        
+                                    <label for="homePhoneNumber" style="margin-top: 20px;">Home Number: </label>
+                                    <input  style="width: auto; display: inline;" id="homePhoneNumber" name="homePhoneNumber" type="text" placeholder="Home Number" [(ngModel)]="userArray.homePhoneNumber" [(value)]="userArray.homePhoneNumber" class="form-control formTextBox"> <br>
+        
+                                    <label for="workPhoneNumber" style="margin-top: 20px;">Work Number: </label>
+                                    <input  style="width: auto; display: inline;" id="workPhoneNumber" name="workPhoneNumber" type="text" placeholder="Work Number" [(ngModel)]="userArray.workPhoneNumber" [(value)]="userArray.workPhoneNumber" class="form-control formTextBox"> <br>
+        
+                                    <label for="email" style="margin-top: 20px;">Email: </label>
+                                    <input  style="width: auto; display: inline;" id="email" name="email" type="text" placeholder="Email" [(ngModel)]="userArray.email" [(value)]="userArray.email" class="form-control formTextBox"><br>
+        
+                                    <label for="gpPracticeName" style="margin-top: 20px;">GP Practice: </label>
+                                    <select class="form-control" (change)="gpPracticeChangeDropdown($event.target.value)"   [(ngModel)]="this.userArray.gpPracticeName" [ngModelOptions]="{standalone: true}">
+                                            <option value="--Select a GP Practice--">--Select a GP Practice--</option>
+                                            <option *ngFor="let g of gpPractice" [id]="g.gpPracticeName"  [value]="g.gpPracticeName">{{g.gpPracticeName}}, {{g.gpPracticeAddress}}</option>
+                                        </select>
+                                        
+                                    <label for="gpFullName" style="margin-top: 20px;">GP Name: </label>
+                                    <select class="form-control" (change)="gpChangeDropdown($event.target.value)" [(ngModel)]="this.userArray.gpFullName" [ngModelOptions]="{standalone: true}">
+                                        <option [id]="userArray.gpFullName.charAt(4)" [value]="userArray.gpFullName">{{userArray.gpFullName}} (Current GP)</option>
+                                        <option *ngFor="let x of gp" [id]="x.gpFullName.charAt(4)"[value]="x.gpFullName">{{x.gpFullName}}</option>
+                                    </select>
+                                </form>
+                            </div>
+                            <button type="button" class="btn btn-success" (click)="updateUserDetails()">Update Details</button>
+                        </form>
+            </div>
+        </ng-template>
 </div>
-
-<div class="visible-xs col-xs-12">
+<div class="visible-xs col-xs-8">
     <div class="patientName"> {{userArray.firstName}} {{userArray.lastName}} ({{userArray.title}}) </div>
     <div class="patientBirthday-small"><span class="patientInfoTextTitle">DOB: </span>{{userArray.dateOfBirth| date: 'dd/MM/yyyy'}}</div>
     <div class="patientGender-small"><span class="patientInfoTextTitle">Gender: </span>{{userArray.gender}}</div>
     <div class="patientMrin-small"><span class="patientInfoTextTitle">MRIN: </span>{{userArray.MRIN}}</div>
 </div>
-
 </body>

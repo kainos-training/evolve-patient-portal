@@ -15,10 +15,9 @@ database.connect(function(err) {
 
 database.getMedications = function(userID, callback) {
     database.query(
-        "SELECT userID, medicationID, medicationName, medicationType, startDate, endDate, dosage, instructions, prescribedDate, repeated " + 
+        "SELECT userID, medicationID, medicationName, medicationType, startDate, endDate, dosage, instructions, prescribedDate, repeated " +
         "FROM User NATURAL JOIN MedicationUser NATURAL JOIN Medication NATURAL JOIN MedicationType " +
-        "WHERE userID = ? AND endDate >= NOW();", 
-        [userID],
+        "WHERE userID = ? AND endDate >= NOW();", [userID],
         function(err, rows) {
             callback(err, rows);
         });
@@ -98,11 +97,11 @@ database.getMedicationHistory = function(medicationID, userID, callback) {
         });
 };
 
-database.updatePrescribedDate = function(medicationUserID, deliveryStatus, callback) {
+database.updatePrescribedDate = function(medicationUserID, deliveryStatus, collectionAddress, medicationID, callback) {
     database.query(
         'UPDATE MedicationUser ' +
-        'SET prescribedDate = curdate(), repeated = 0, delivery = ? ' +
-        'WHERE medicationUserID in ' + medicationUserID + ' ;', [deliveryStatus],
+        'SET prescribedDate = curdate(), repeated = 0, delivery = ?, collectionAddress = ?' +
+        'WHERE medicationUserID in ' + medicationUserID + 'AND medicationID =? ;', [deliveryStatus, collectionAddress, medicationID],
         function(err) {
             console.log(err);
             callback(err);
@@ -111,16 +110,17 @@ database.updatePrescribedDate = function(medicationUserID, deliveryStatus, callb
 
 database.getRepeatedMedication = function(userID, callback) {
     database.query(
-        "SELECT U.userID, " +
+        "SELECT U.userID,  " +
         "M.medicationID, M.medicationName, " +
         "MT.medicationType, " +
-        "MU.startDate, MU.endDate, MU.dosage, MU.medicationUserID " +
+        "MU.startDate, MU.endDate, MU.dosage, MU.medicationUserID, MU.clinicianID, MU.prescribedDate, MU.repeated," +
+        "C.title, C.firstName, C.lastName, C.jobTitle " +
         "FROM User AS U INNER JOIN MedicationUser AS MU ON U.userID = MU.userID " +
         "INNER JOIN Medication AS M ON MU.medicationID = M.medicationID " +
         "INNER JOIN MedicationType AS MT ON MT.medicationTypeID = M.medicationTypeID " +
+        "INNER JOIN Clinician AS C ON MU.clinicianID = C.clinicianID " +
         "WHERE U.userID = ? " +
-        "AND MU.endDate >= NOW() " +
-        "AND MU.repeated = TRUE;", [userID],
+        "AND MU.endDate >= NOW();", [userID],
         function(err, rows) {
             callback(err, rows);
         });
@@ -179,8 +179,7 @@ database.getUserClinicians = function(userID, callback) {
     database.query(
         "SELECT c.clinicianID, c.title, c.firstName, c.lastName, c.jobTitle, c.email " +
         "FROM Clinician AS c JOIN UserClinician AS uc ON c.clinicianID = uc.clinicianID " +
-        "WHERE uc.userID = ?;",
-        [userID],
+        "WHERE uc.userID = ?;", [userID],
         function(err, rows) {
             callback(err, rows);
         });
@@ -189,8 +188,7 @@ database.getUserClinicians = function(userID, callback) {
 database.addAppointmentQuery = function(appointmentID, clinicianID, querySubject, queryText, callback) {
     database.query(
         "INSERT INTO AppointmentQuery(appointmentID, clinicianID, querySubject, queryText) " +
-        "VALUES(?, ?, ?, ?);",
-        [appointmentID, clinicianID, querySubject, queryText],
+        "VALUES(?, ?, ?, ?);", [appointmentID, clinicianID, querySubject, queryText],
         function(err, rows) {
             callback(err)
         });
@@ -198,21 +196,45 @@ database.addAppointmentQuery = function(appointmentID, clinicianID, querySubject
 
 database.getAppointmentQuery = function(clinicianID, callback) {
     database.query(
-        "SELECT email, firstname FROM Clinician WHERE clinicianID = ?;",
-        [clinicianID],
+        "SELECT email, firstname FROM Clinician WHERE clinicianID = ?;", [clinicianID],
         function(err, rows) {
             callback(err, rows);
         });
 };
 
-database.insertAnswer = function(taskID, answer, callback){
+database.insertAnswer = function(taskID, answer, callback) {
     database.query(
-        "INSERT INTO TaskQuestionnaire (taskID, answer, answered, dateSubmitted) "
-        +"VALUES (?, ?, 1, CURRENT_TIMESTAMP);", [taskID, answer],
-        function(err){
+        "INSERT INTO TaskQuestionnaire (taskID, answer, answered, dateSubmitted) " +
+        "VALUES (?, ?, 1, CURRENT_TIMESTAMP);", [taskID, answer],
+        function(err) {
             callback(err);
         }
     )
 }
 
+database.changeAppointment = function(dateOfAppointment, callback) {
+    database.query(
+        "UPDATE Appointment SET dateOfAppointment = ? WHERE appointmentID = 19;", [dateOfAppointment],
+        function(err, rows) {
+            callback(err, rows);
+        });
+};
+
+database.deleteAppointment = function(callback) {
+    database.query(
+        "DELETE FROM Appointment WHERE appointmentID = 19",
+        function(err, rows) {
+            callback(err, rows);
+        });
+};
+
+database.addAppointment = function(appointmentID, userID, LocationDepartmentID, clinicianID, dateOfAppointment, comment, appointmentTypeID, callback) {
+    database.query(
+        "INSERT INTO Appointment(appointmentID, userID, locationDepartmentID, clinicianID, dateOfAppointment, comment, appointmentTypeID) " +
+        "VALUES(?, ?, ?, ?, ?, ?, ?);", [appointmentID, userID, LocationDepartmentID, clinicianID, dateOfAppointment, comment, appointmentTypeID],
+        function(err, rows) {
+            
+            callback(err)
+        });
+};
 module.exports = database;

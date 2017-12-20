@@ -1,0 +1,40 @@
+<evolve-top-bar></evolve-top-bar>
+<evolve-left-side-menu></evolve-left-side-menu>
+
+<div id="widgetContainer" class="col-xs-12 col-sm-10">
+    <div class="display-block">
+        <div class="prescription-header">
+            <p>
+                <img src="/assets/upcomingAppointmentsIcon.png" class="pill-icon-modal" />
+                <span>
+                    <strong>Department: {{focusedAppointment.departmentName}}</strong>
+                    <a [href]="focusedAppointment.departmentURL" target="_blank"><span class="glyphicon glyphicon-info-sign"></span></a>
+                </span>
+                <br>
+                <span style="padding-left: 70px;"><strong>Name:</strong> Ben McKillop</span><br>
+                <span style="padding-left: 70px">{{focusedAppointment.locationAddress}}</span><br>
+                <span style="padding-left: 70px"><strong>Date:</strong> {{focusedAppointment.dateOfAppointment | date: 'dd/MM/yyyy'}}</span><br>
+                <span style="padding-left: 70px"><strong>Time:</strong> {{focusedAppointment.dateOfAppointment | date:'h:mm a'}}</span>
+            </p>
+            <hr>
+        </div>
+
+        <span class="row">
+            <label>Update Appointment Date: </label><input type="date"/>
+        </span>
+        <span class="row">
+            <label>Update Appointment Time: </label><input type="time">
+        </span>
+        <br>
+        <span class="row">
+            <button type="button" class="btn btn-success" (click)="onSubmit()">Submit</button><span class="col-md-1"></span>
+        <button type="button" class="btn btn-success" (click)="onDelete()">Delete</button>
+        </span>
+    </div>
+
+    <div [hidden]="!(navigationOption===navigationOptions.RepeatPrescription)">
+    </div>
+
+    <div [hidden]="!(navigationOption===navigationOptions.MyDependants)">
+    </div>
+</div>

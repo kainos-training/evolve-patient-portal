@@ -10,8 +10,15 @@ export class User {
     MRIN : string;
     firstName : string;
     lastName : string;
-    phoneNumber : string;
+    preferredName : string;
+    mobilePhoneNumber : string;
+    homePhoneNumber : string;
+    workPhoneNumber: string;
     title : string;
     address : string;
     email : string;
+    gpID: number;
+    gpFullName: string;
+    gpPracticeName: string;
+    gpPracticeAddress: string;
 }

@@ -4,36 +4,91 @@
         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 " id="">
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    <h1 class="panel-title" id="widget-header">Your current prescriptions</h1>
+                    <h1 *ngIf="dependantID;then dependant else user"></h1>
+                    <ng-template #user>
+                        <h1 class="panel-title" id="widget-header">Your current prescriptions</h1>
+                    </ng-template>
+                    <ng-template #dependant>
+                        <h1 class="panel-title" id="widget-header">Dependant's current prescriptions</h1>
+                    </ng-template>
                 </div>
 
                 <div *ngIf="success" class="callout-message spaced col-xs-12">
-                        <div class="bs-callout bs-callout-success">
-                                <a (click)="closeAlert()" class="close" data-dismiss="alert" aria-label="close">x</a>
-                            <p><span>Success:</span> Your request for a repeat prescription has been processed.</p>
-                        </div>
+                    <div class="bs-callout bs-callout-success">
+                        <a (click)="closeAlert()" class="close" data-dismiss="alert" aria-label="close">x</a>
+                        <p><span>Success:</span> Your request for a repeat prescription has been processed.</p>
                     </div>
+                </div>
                 <div *ngIf="warning" class="callout-message spaced col-xs-12">
-                        <div class="bs-callout bs-callout-danger">
-                                <a (click)="closeAlert()" class="close" data-dismiss="alert" aria-label="close">x</a>
-                            <p><span>Error:</span> You have already selected this medication.</p>
-                        </div>
+                    <div class="bs-callout bs-callout-danger">
+                        <a (click)="closeAlert()" class="close" data-dismiss="alert" aria-label="close">x</a>
+                        <p><span>Error:</span> You have already selected this medication.</p>
                     </div>
+                </div>
                 <div class="panel-body" id="medicationDetails">
                     <table class="table table-hover">
                         <tbody>
+                            <tr class="fixed-top">
+                                <td>
+                                    <span class="widget-title-txt">Name</span>
+                                </td>
+                                <td>
+                                    <span class="widget-title-txt">Dosage</span>
+                                </td>
+                                <td>
+                                    <span class="widget-title-txt">Prescribed Date</span>
+                                </td>
+                                <td>
+                                    <span class="widget-title-txt">Prescription Expires</span>
+                                </td>
+                                <td>
+                                    <span class="widget-title-txt">Issued By</span>
+                                </td>
+                                <td>
+                                    <span class="widget-title-txt">Role</span>
+                                </td>
+                                <td>
+                                    <span class="widget-title-txt">Repeat</span>
+                                </td>
+                                <td>
+                                    <span class=" "> </span>
+                                </td>
+                            </tr>
                             <tr *ngFor="let prescription of prescriptionList">
                                 <td>
-                                    <span class="widget-title-txt">Name: {{prescription.medicationName}}</span><br>
+                                    <span class="widget-body-txt">{{prescription.medicationName}}</span><br>
                                 </td>
                                 <td>
-                                    <span class="widget-body-txt">Dosage: {{prescription.dosage}}</span><br>
+                                    <span class="widget-body-txt">{{prescription.dosage}}</span><br>
                                 </td>
                                 <td>
-                                    <span class="widget-title-txt">Expires: {{prescription.endDate | date}}</span><br>
+                                    <span class="widget-body-txt">{{prescription.prescribedDate | date}}</span>
                                 </td>
                                 <td>
-                                    <button class="btn btn-success" (click)="addToList(prescription)">Repeat Prescription</button>
+                                    <span class="widget-body-txt">{{prescription.endDate | date}}</span><br>
+                                </td>
+                                <td>
+                                    <span class="widget-body-txt">{{prescription.title}} {{prescription.firstName}} {{prescription.lastName}}</span>
+                                </td>
+                                <td>
+                                    <span class="widget-body-txt">{{prescription.jobTitle}}</span>
+                                </td>
+                                <td>
+                                    <i *ngIf="(prescription.repeated == 1); then Repeat else noRepeat"></i>
+                                    <ng-template #noRepeat>
+                                        <i class="glyphicon glyphicon-remove"></i>
+                                    </ng-template>
+                                    <ng-template #Repeat>
+                                        <i class="glyphicon glyphicon-ok"></i>
+                                    </ng-template>
+                                </td>
+                                <td>
+                                        <i *ngIf="(prescription.repeated == 1); then Access else NoAccess"></i>
+                                    <ng-template #Access>
+                                            <button class="btn btn-success" (click)="addToList(prescription)">Repeat Prescription</button>
+                                        </ng-template>
+                                        <ng-template #NoAccess>
+                                        </ng-template>
                                 </td>
                             </tr>
                         </tbody>
@@ -82,23 +137,30 @@
                 </div>
             </div>
             <div class="modal-body">
-                <div class="perscription-header">
+                <div class="prescription-header">
                     <label><strong>You have chosen to repeat the following prescription(s).</strong></label>
                     <li *ngFor="let finalPrescriptionList of renewPrescriptionList">{{finalPrescriptionList.medicationName}}
                     </li>
                     <hr>
                 </div>
-                <div class="perscription-form">
+                <div class="prescription-form">
                     <label><strong>Please select which method of delivery you wish to use:</strong></label>
-                    <form>
+                    <form onsubmit="event.preventDefault();">
                         <div class="form-group">
                             <form class="form">
-                                <input type="radio" name="delivery" [(ngModel)]="collectionType.status" value="true"> Home
-                                Delivery &nbsp;&nbsp;&nbsp;&nbsp;
-                                <input type="radio" name="delivery" [(ngModel)]="collectionType.status" value="false"> <span [(ngModel)]="pharmacy.pharmacyName" name="pharmacy" > {{ pharmacy.pharmacyName }}</span>
+                                <input type="radio" name="delivery" id="delivery" [(ngModel)]="collectionType.status" value="false" (change)="collectionSelected = false">
+                                <label for="delivery" style="margin-right: 20px;">Home Delivery</label>
+
+                                <input type="radio" name="delivery" id="collection" value="false" (change)="collectionSelected = true">
+                                <label for="collection">Collection</label>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <evolve-search-pharmacy *ngIf="collectionSelected"></evolve-search-pharmacy>
+                                    </div>
+                                </div>
                             </form>
                         </div>
-                        <button type="submit" class="btn btn-success" (click)="requestPrescription(renewPrescriptionList)">Request Prescription</button>
+                        <button type="button" class="btn btn-success" (click)="requestPrescription(renewPrescriptionList)">Confirm Prescription</button>
                     </form>
                 </div>
             </div>

@@ -1,26 +1,30 @@
-<div class=" col-xs-12 col-sm-12 col-md-6 col-lg-4">
-    <div class="panel panel-default">
-        <div class="panel-heading">
-            <h1 id="appointment-header" class="panel-title">Upcoming Appointments</h1>
-        </div>
-        <div class="panel-body" id="information-display">
-            <table class="table table-hover" id="information-table">
-                <tbody>
-                    <tr *ngFor="let appointment of appointments">
-                        <td>
-                            <button type="button" class="btn table-btn" (click)="openModal(template,appointment)">
-                                <span class="medium-location-text">{{appointment.type}}: {{appointment.departmentName}}</span><br>
-                                <span class="sml-location-txt">Due: {{appointment.dateOfAppointment | date:'dd/MM/yyyy'}}</span><br>
-                                <span class="sml-location-txt">Time: {{appointment.dateOfAppointment | date:'h:mm a'}}</span><br>
-                            </button>
-                            <button type="button" class="btn btn-primary" (click)="openModal(query,appointment)">Query Appointment</button>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
+<body>
+    <div class="col-xs-12 col-sm-12 col-md-6 col-lg-4" id="">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h1 class="panel-title" id="appointment-header">
+                    Upcoming Appointments
+                </h1>
+            </div>
+            <div class="panel-body" id="information-display">
+                <table class="table table-hover" id="information-table">
+                    <tbody>
+                        <tr *ngFor="let appointment of appointments">
+                            <td id="">
+                                <p class="prescription-item" (click)="openModal(template,appointment)">
+                                    <span class="medium-location-text">{{appointment.type}}: {{appointment.departmentName}}</span><br>
+                                    <span class="sml-location-txt">Due: {{appointment.dateOfAppointment | date:'dd/MM/yyyy'}}</span><br>
+                                    <span class="sml-location-txt">Time: {{appointment.dateOfAppointment | date:'h:mm a'}}</span><br>
+                                </p>
+                                <button type="button" class="btn btn-primary" (click)="openModal(query,appointment)">Query Appointment</button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
         </div>
     </div>
-</div>
+</body>
 
 <ng-template #template>
     <div>
@@ -31,23 +35,26 @@
                 </button>
         </div>
         <div class="modal-body">
-            <div class="perscription-header">
+            <div class="prescription-header">
                 <p>
                     <img src="/assets/upcomingAppointmentsIcon.png" class="pill-icon-modal" />
-                    <strong>Department: {{focusedAppointment.departmentName}}</strong><br>
+                    <span>
+                        <strong>Department: {{focusedAppointment.departmentName}}</strong>
+                        <a [href]="focusedAppointment.departmentURL" target="_blank"><span class="glyphicon glyphicon-info-sign"></span></a>
+                    </span>
+                    <br>
                     <span style="padding-left: 70px">{{focusedAppointment.locationAddress}}</span><br>
-                    <span style="padding-left: 90px"><strong>Due:</strong> {{focusedAppointment.dateOfAppointment | date: 'dd/MM/yyyy'}}</span><br>
-                    <span style="padding-left: 110px"><strong>Time:</strong> {{focusedAppointment.dateOfAppointment | date:'h:mm a'}}</span>
+                    <span style="padding-left: 70px"><strong>Location:</strong> {{focusedAppointment.departmentLocation}}</span><br>
+                    <span style="padding-left: 70px"><strong>Date:</strong> {{focusedAppointment.dateOfAppointment | date: 'dd/MM/yyyy'}}</span><br>
+                    <span style="padding-left: 70px"><strong>Time:</strong> {{focusedAppointment.dateOfAppointment | date:'h:mm a'}}</span>
                 </p>
                 <hr>
             </div>
-            <!-- <button class="btn btn-primary btn-sm btn-block" id="submit-Button" type="submit" (click)="toggleSecondVisible()">Submit Query</button> -->
-
-            <div class="perscription-form">
+            <div class="prescription-form">
                 <form>
                     <div class="form-group">
                         <label><strong>Clinician Name:</strong></label>
-                        <textarea disabled type="text" class="form-control input-disabled" id="perscription-input" rows="1">{{focusedAppointment.clinicianName}}</textarea>
+                        <textarea disabled type="text" class="form-control input-disabled" id="prescription-input" rows="1">{{focusedAppointment.clinicianName}}</textarea>
                     </div>
                     <div class="form-group">
                         <label><strong>Clinician comments:</strong></label>
@@ -55,15 +62,13 @@
                     </div>
                 </form>
             </div>
-            <input type="submit" *ngIf="userLocation" [attr.data-expanded]="focusedAppointment.showGoogleMap" (click)="toggle('showGoogleMap'); showMap=true"
-                class="btn btn-primary btn-sm btn-block" value="{{!!focusedAppointment.showGoogleMap ? 'Collapse' : 'Expand'}} Google map"
+            <input type="submit" *ngIf="userLocation" [attr.data-expanded]="focusedAppointment.showGoogleMap" (click)="toggle('showGoogleMap'); showMap=true" class="btn btn-primary btn-sm btn-block" value="{{!!focusedAppointment.showGoogleMap ? 'Collapse' : 'Expand'}} Google map"
             />
             <div class="map-container" *ngIf="userLocation">
                 <evolve-map-view *ngIf="showMap" [userLocation]="userLocation" [hidden]="!focusedAppointment.showGoogleMap" [departmentAddress]="focusedAppointment.locationAddress"></evolve-map-view>
             </div>
             <div class="local-map-container" *ngIf="mapPath">
-                <input type="submit" [attr.data-expanded]="focusedAppointment.showLocalMap" (click)="toggle('showLocalMap'); showLocalMap=true"
-                    class="btn btn-primary btn-sm btn-block" value="{{!!focusedAppointment.showLocalMap ? 'Collapse' : 'Expand'}} hospital map"
+                <input type="submit" [attr.data-expanded]="focusedAppointment.showLocalMap" (click)="toggle('showLocalMap'); showLocalMap=true" class="btn btn-primary btn-sm btn-block" value="{{!!focusedAppointment.showLocalMap ? 'Collapse' : 'Expand'}} hospital map"
                 />
                 <img *ngIf="showLocalMap" [hidden]="!focusedAppointment.showLocalMap" [src]=mapPath />
             </div>
@@ -81,7 +86,7 @@
                 </button>
         </div>
         <div class="modal-body">
-            <div class="perscription-header">
+            <div class="prescription-header">
                 <div *ngIf="invalidInput" class="callout-message col-xs-12">
                     <div class="bs-callout bs-callout-danger">
                         <p><span>Error:</span> Please fill out all fields and select a clinician

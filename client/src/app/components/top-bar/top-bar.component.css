@@ -48,6 +48,7 @@
     background-color: #00579f;
     height: 80px;
     margin: 0px;
+    
 }
 
 #menu-button {  
@@ -78,7 +79,7 @@
     color:white;
     background: transparent;
     float: right;
-    margin-top: 25px;
+    margin-top: 5%;
     border: none;
     width: 30px;
     height: 30px;
@@ -98,6 +99,12 @@
     height: 30px;
     padding-right: 5px;
     cursor: pointer;    
+}
+.log-out-button{
+    position: absolute;
+    right: 0px;
+    top: -15px;
+    z-index: 1;
 }
 
 .settings-button:hover {
@@ -127,4 +134,39 @@ h4 {
 
 .debugBlue {
     outline: 1px solid blue;
+}
+
+.btn-primary{
+    background-color: #00579f;
+    border-color: #00579f;
+    position: absolute; 
+    left: 0;
+    height: 50px;
+    width: 50px;
+}
+
+.btnDiv{
+    z-index: 2;
+    margin-left: 290px; 
+    margin-top: 20px;
+    position: absolute;
+    float: right;
+}
+
+.glyphicon-info-sign{
+    margin-left: 5px;
+    font-size: 20px;
+    color:white;
+    background: transparent;
+    float: right;
+    margin-top: 5%;
+    border: none;
+    width: 20px;
+    height: 20px;
+    margin-right: 5px;
+    cursor: pointer;   
+}
+
+#button-list {
+    z-index: 1;
 }

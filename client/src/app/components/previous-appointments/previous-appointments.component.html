@@ -15,11 +15,11 @@
                 <tbody>
                     <tr *ngFor="let appointment of appointments|filter:this.filter|orderby:this.order">
                         <td>
-                            <button type="button" class="btn table-btn" (click)="openModal(appointment,template)">
+                            <p class="prescription-item" (click)="openModal(template,appointment)">
                                 <span class="medium-location-text">{{appointment.type}}: {{appointment.departmentName}}</span><br>
                                 <span class="sml-location-txt">Due: {{appointment.dateOfAppointment | date:'dd/MM/yyyy'}}</span><br>
                                 <span class="sml-location-txt">Time: {{appointment.dateOfAppointment | date:'h:mm a'}}</span><br>
-                            </button>
+                            </p>
                         </td>
                     </tr>
                 </tbody>
@@ -89,8 +89,7 @@
                 </div>
                 <div class="form-group">
                     <label><strong>Clinician comments:</strong></label>
-                    <code *ngIf='focusedAppointment.comment!="null"' class="form-control input-disabled" id="comment-input" [innerHTML]="focusedAppointment.comment|ellipsis:200:collapsedComment"
-                        (click)=toggleCollapse()></code>
+                    <code *ngIf='focusedAppointment.comment!="null"' class="form-control input-disabled" id="comment-input" [innerHTML]="focusedAppointment.comment|ellipsis:200:collapsedComment" (click)=toggleCollapse()></code>
                 </div>
             </form>
         </div>

@@ -18,7 +18,9 @@ import { Condition } from '../class/Condition';
 import { Clinician } from '../class/Clinician';
 import { Pharmacy } from '../class/Pharmacy';
 import { AppointmentCount } from '../class/AppointmentCount';
-
+import { SearchPharmacyComponent } from '../components/search-pharmacy/search-pharmacy.component';
+import { GP } from '../class/GP';
+import { GPPractice } from '../class/GPPractice';
 @Injectable()
 export class DataService {
     private cookieName = 'evolve-cookie';
@@ -85,18 +87,20 @@ export class DataService {
         return this.http.post<Medication[]>('api/prescription/repeatedMedication', body, options);
     };
 
-    public updatePrescriptionDate(medicationUserIDs: number[], deliveryStatus: boolean) {
+    public updatePrescriptionDate(medicationUserIDs: number[], deliveryStatus: boolean, medicationIDs: number[]) {
         const body = {
             medicationUserIDs: '',
-            deliveryStatus: deliveryStatus
+            deliveryStatus: deliveryStatus,
+            collectionAddress: SearchPharmacyComponent.currentlySelectedLocation,
+            medicationID: medicationIDs
         };
         console.log(body.deliveryStatus);
             body.medicationUserIDs = '(';
         for (var i = 0; i < medicationUserIDs.length; i++) {
             body.medicationUserIDs += medicationUserIDs[i] + ',';
         }
-        body.medicationUserIDs = body.medicationUserIDs.substring(0, body.medicationUserIDs.length - 1);
-        body.medicationUserIDs += ')';
+        body.medicationUserIDs = body.medicationUserIDs.substring(0, body.medicationUserIDs.length - 1)+')';
+        
         const options = {
             headers: new HttpHeaders().set('Content-Type', 'application/json'),
         };
@@ -364,7 +368,7 @@ export class DataService {
     };
 
     public getAllAppointmentsByUserID(userID) {
-        let headers = new Headers({ 'Content-Type': 'application/json' });
+        
         const body = {
             'userID': userID
         };
@@ -375,6 +379,31 @@ export class DataService {
         return this.http.post<Appointment[]>(url, body, options);
     };
 
+    public getAllGPPractice(){
+        let headers = new Headers({ 'Content-Type': 'application/json' });
+         const body = {
+            
+         };
+         const options = {
+             headers: new HttpHeaders().set('Content-Type', 'application/json'),
+         };
+         let url = '/api/gp/getAllGPPractice';
+         return this.http.post<GPPractice[]>(url, body, options);
+}
+
+    public getAllGPbyPracticeID(x){
+        let headers = new Headers({'Content-Type': 'application/json'});
+        const body = {
+            'gpPracticeID': x
+        };
+
+        const options = {
+            headers: new HttpHeaders().set('Content-Type', 'application/json'),
+        };
+        let url = '/api/gp/getAllGPbyPracticeID';
+        return this.http.post<GP[]>(url,body,options);
+    }
+     
     public getAppointmentInformation(appointmentID) {
         let headers = new Headers({ 'Content-Type': 'application/json' });
         const body = {
@@ -488,17 +517,77 @@ export class DataService {
         const options = {
             headers: new HttpHeaders().set('Content-Type', 'application/x-www-form-urlencoded'),
         };
-
-        this.http.post('/api/password/reset', $.param(body), options)
-            .subscribe(data => {
-                user.userID = data['userID'];
-                user.message = data['message'];
-            }, error => {
-                user.loggedIn = false;
-                user.message = error['message'];
-            });
     }
 
+    public updateUserDetails(newUserDetails: any){
+        return new Promise((resolve, reject)=>{
+            const body = {
+                "email": newUserDetails.email,
+                "preferredName": newUserDetails.preferredName,
+                "address": newUserDetails.address,
+                "mobilePhoneNumber": newUserDetails.mobilePhoneNumber,
+                "homePhoneNumber": newUserDetails.homePhoneNumber,
+                "workPhoneNumber": newUserDetails.workPhoneNumber,
+                "userID": newUserDetails.userID,
+                "gpID": newUserDetails.gpID
+            };
+
+            const options = {
+                headers: new HttpHeaders().set('Content-Type', 'application/x-www-form-urlencoded'),
+            };
+            this.http.post('/api/user/updateUserDetails', $.param(body), options)
+            .subscribe(data => {
+                resolve(data);
+            }, error => {
+                reject(error);
+            });
+        });
+    }
+
+
+    public changeAppointment(userID, dateOfAppointment) {
+
+        let headers = new Headers({ 'Content-Type': 'application/json' });
+        const body = {
+            'dateOfAppointment': dateOfAppointment,
+            'userID': userID
+        };
+        const options = {
+            headers: new HttpHeaders().set('Content-Type', 'application/json'),
+        };
+        let url = '/api/appointment/changeAppointment';
+        this.http.post(url, body, options).subscribe();
+    }
+
+    public deleteAppointment(userID) {
+        let headers = new Headers({ 'Content-Type': 'application/json' });
+        const body = {
+            'userID': userID
+        };
+        const options = {
+            headers: new HttpHeaders().set('Content-Type', 'application/json'),
+        };
+        let url = '/api/appointment/deleteAppointment';
+        this.http.post(url, body, options).subscribe();
+    }
+    public addAppointment(appointmentID, userID, locationDepartmentID, clinicianID, dateOfAppointment, comment, appointmentTypeID) {
+                let headers = new Headers({ 'Content-Type': 'application/json' });
+                const body = {
+                    'appointmentID': appointmentID,
+                    'userID' : userID,
+                    'locationDepartmentID': locationDepartmentID,
+                    'clinicianID': clinicianID,
+                    'dateOfAppointment': dateOfAppointment,
+                    'comment': comment,
+                    'appointmentTypeID': appointmentTypeID
+                };
+                const options = {
+                    headers: new HttpHeaders().set('Content-Type', 'application/json'),
+                };
+                let url = '/api/appointment/addAppointment';
+                this.http.post(url, body, options).subscribe();
+            }
+            
     logout() {
         this.removeCookie();
         this.removeRedirectCookie();

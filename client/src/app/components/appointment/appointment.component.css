@@ -18,11 +18,12 @@
 .table-btn {
     background-color: transparent;
     border: none;
+    border-radius: 1px;
     width: 100%;
     text-align: left;
     outline: none;
     overflow: hidden;
-    text-overflow: none;
+    margin: 0;
 }
 
 .pill-icon-modal {
@@ -89,8 +90,12 @@ h1::before {
 }
 
 #information-display {
-    overflow: auto;
     max-height: 300px;
+    overflow: auto;
+}
+
+.table td {
+    width: 400px;
 }
 
 .debugRed {
@@ -127,15 +132,20 @@ input.btn.btn-block:last-of-type {
     margin-top: 20px;
 }
 
-input[data-expanded="true"], input[data-expanded="false"],
-input[data-expanded="true"]:visited, input[data-expanded="false"]:visited {
+input[data-expanded="true"],
+input[data-expanded="false"],
+input[data-expanded="true"]:visited,
+input[data-expanded="false"]:visited {
     background-color: #067fbb;
     outline: none;
 }
 
-input[data-expanded="true"]:hover, input[data-expanded="false"]:hover,
-input[data-expanded="true"]:focus, input[data-expanded="false"]:focus,
-input[data-expanded="true"]:active, input[data-expanded="false"]:active {
+input[data-expanded="true"]:hover,
+input[data-expanded="false"]:hover,
+input[data-expanded="true"]:focus,
+input[data-expanded="false"]:focus,
+input[data-expanded="true"]:active,
+input[data-expanded="false"]:active {
     background-color: #00579f;
     outline: none;
 }
@@ -146,14 +156,14 @@ input[data-expanded="true"]:active, input[data-expanded="false"]:active {
     margin-right: 10px;
 }
 
-.btn-primary{
+.btn-primary {
     width: 100%;
     background-color: #067fbb;
     font: white;
-    margin-top: 20px; 
+    margin-top: 20px;
 }
 
-.btn-primary:hover{
+.btn-primary:hover {
     background-color: #00579f;
 }
 
@@ -173,7 +183,7 @@ input[data-expanded="true"]:active, input[data-expanded="false"]:active {
 
 .bs-callout-danger {
     background-color: white;
-    border-color: #EC0211 
+    border-color: #EC0211
 }
 
 .callout-message {
@@ -185,29 +195,43 @@ input[data-expanded="true"]:active, input[data-expanded="false"]:active {
     display: block;
 }
 
-.bs-callout-danger, .input-group, .loginPage form h5, header div span {
-    color: #666666 ;
+.bs-callout-danger,
+.input-group,
+.loginPage form h5,
+header div span {
+    color: #666666;
     font-family: Helvetica, sans-serif;
 }
 
 .successMessageTitle {
-    color: #666666 ;
+    color: #666666;
     font-family: Helvetica, sans-serif;
     text-align: center;
     font-size: 1.5em;
 }
 
 #querySuccessMessage {
-    color: #666666 ;
+    color: #666666;
     font-family: Helvetica, sans-serif;
     text-align: center;
     padding-top: 10px;
 }
 
-.btn-block{
+.btn-block {
     text-transform: capitalize;
 }
-    
-#submit-Button{
+
+#submit-Button {
     margin-bottom: 20px;
+}
+
+.infoIcon {
+    margin-right: 30%;
+    margin-top: 0%;
+    display: inline;
+}
+
+#departmentName {
+    margin-left: 0%;
+    padding-left: 5%;
 }

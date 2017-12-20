@@ -44,7 +44,9 @@ export class SecondaryInfoHeaderComponent implements OnInit, OnChanges {
                     this.userArray.firstName = res[0].firstName;
                     this.userArray.gender = res[0].gender;
                     this.userArray.lastName = res[0].lastName;
-                    this.userArray.phoneNumber = res[0].phoneNumber;
+                    this.userArray.mobilePhoneNumber = res[0].mobilePhoneNumber;
+                    this.userArray.homePhoneNumber = res[0].homePhoneNumber;
+                    this.userArray.workPhoneNumber = res[0].workPhoneNumber;
                     this.userArray.title = res[0].title;
                 },
             );

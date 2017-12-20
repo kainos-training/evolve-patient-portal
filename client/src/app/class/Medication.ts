@@ -9,6 +9,11 @@ export class Medication {
     instructions: String;
     prescribedDate: Date;
     repeated: boolean;
+    clinicianID: number;
+    title: String;
+    firstName: String;
+    lastName: String;
+    jobTitle: String;
 
     constructor(medicationUserID: number,
         medicationType: String,
@@ -17,7 +22,12 @@ export class Medication {
         dosage : String,
         instructions: String,
         prescribedDate: Date,
-        repeated: boolean) {
+        repeated: boolean,
+        clinicianID: number,
+        title: String,
+        firstName: String,
+        lastName: String,
+        jobTitle: String) {
             this.medicationUserID = medicationUserID,
             this.medicationType = medicationType,
             this.startDate = startDate,
@@ -25,6 +35,11 @@ export class Medication {
             this.dosage = dosage,
             this.instructions = instructions,
             this.prescribedDate = prescribedDate,
-            this.repeated = repeated
+            this.repeated = repeated,
+            this.clinicianID = clinicianID,
+            this.title = title,
+            this.firstName = firstName,
+            this.lastName = lastName,
+            this.jobTitle = jobTitle
     }
 }
